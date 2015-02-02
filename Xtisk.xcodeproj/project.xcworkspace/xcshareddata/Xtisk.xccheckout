@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4FDC70CF-9F73-4816-957D-4F52D8C04DC8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Xtisk</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3D8F83752403CE95AEFD636568D2A9E69A3DE1AF</key>
+		<string>github.com:ernestluy/Xtisk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Xtisk.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3D8F83752403CE95AEFD636568D2A9E69A3DE1AF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:ernestluy/Xtisk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3D8F83752403CE95AEFD636568D2A9E69A3DE1AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3D8F83752403CE95AEFD636568D2A9E69A3DE1AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Xtisk</string>
+		</dict>
+	</array>
+</dict>
+</plist>

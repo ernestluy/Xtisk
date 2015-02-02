@@ -31,6 +31,12 @@
 		ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587451A7D1B4A008EB344 /* FMResultSet.m */; };
 		ED25874C1A7D1B95008EB344 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED25874B1A7D1B95008EB344 /* libsqlite3.0.dylib */; };
 		ED25874F1A7D1C34008EB344 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25874E1A7D1C34008EB344 /* DBManager.m */; };
+		ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587541A7FA9D8008EB344 /* LoginViewController.m */; };
+		ED25875A1A7FAA0C008EB344 /* ExtendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587571A7FAA0C008EB344 /* ExtendsView.m */; };
+		ED25875B1A7FAA0C008EB344 /* LevelTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587591A7FAA0C008EB344 /* LevelTwoViewController.m */; };
+		ED25875E1A7FAA2C008EB344 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25875D1A7FAA2C008EB344 /* Person.m */; };
+		ED2587621A7FABF7008EB344 /* login_expend.png in Resources */ = {isa = PBXBuildFile; fileRef = ED2587611A7FABF7008EB344 /* login_expend.png */; };
+		ED2587651A7FB1DA008EB344 /* ColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587641A7FB1DA008EB344 /* ColorTools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,17 @@
 		ED25874B1A7D1B95008EB344 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED25874D1A7D1C34008EB344 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		ED25874E1A7D1C34008EB344 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		ED2587531A7FA9D8008EB344 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		ED2587541A7FA9D8008EB344 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		ED2587561A7FAA0C008EB344 /* ExtendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendsView.h; sourceTree = "<group>"; };
+		ED2587571A7FAA0C008EB344 /* ExtendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendsView.m; sourceTree = "<group>"; };
+		ED2587581A7FAA0C008EB344 /* LevelTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelTwoViewController.h; sourceTree = "<group>"; };
+		ED2587591A7FAA0C008EB344 /* LevelTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelTwoViewController.m; sourceTree = "<group>"; };
+		ED25875C1A7FAA2C008EB344 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		ED25875D1A7FAA2C008EB344 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		ED2587611A7FABF7008EB344 /* login_expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_expend.png; sourceTree = "<group>"; };
+		ED2587631A7FB1DA008EB344 /* ColorTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTools.h; sourceTree = "<group>"; };
+		ED2587641A7FB1DA008EB344 /* ColorTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +154,7 @@
 		ED2586DD1A7D14A1008EB344 /* Xtisk */ = {
 			isa = PBXGroup;
 			children = (
+				ED25875F1A7FABF7008EB344 /* res */,
 				ED2587041A7D15C9008EB344 /* class */,
 				ED2586E21A7D14A1008EB344 /* AppDelegate.h */,
 				ED2586E31A7D14A1008EB344 /* AppDelegate.m */,
@@ -179,6 +197,8 @@
 		ED2587041A7D15C9008EB344 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				ED2587501A7FA98C008EB344 /* view */,
+				ED2587511A7FA98C008EB344 /* viewcontroller */,
 				ED25870C1A7D166D008EB344 /* Util */,
 				ED2587051A7D15C9008EB344 /* base */,
 			);
@@ -199,6 +219,8 @@
 		ED25870C1A7D166D008EB344 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				ED2587631A7FB1DA008EB344 /* ColorTools.h */,
+				ED2587641A7FB1DA008EB344 /* ColorTools.m */,
 				ED25874D1A7D1C34008EB344 /* DBManager.h */,
 				ED25874E1A7D1C34008EB344 /* DBManager.m */,
 				ED25873A1A7D1B4A008EB344 /* fmdb */,
@@ -246,6 +268,52 @@
 				ED2587451A7D1B4A008EB344 /* FMResultSet.m */,
 			);
 			path = fmdb;
+			sourceTree = "<group>";
+		};
+		ED2587501A7FA98C008EB344 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		ED2587511A7FA98C008EB344 /* viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				ED2587521A7FA98C008EB344 /* login */,
+			);
+			path = viewcontroller;
+			sourceTree = "<group>";
+		};
+		ED2587521A7FA98C008EB344 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				ED25875C1A7FAA2C008EB344 /* Person.h */,
+				ED25875D1A7FAA2C008EB344 /* Person.m */,
+				ED2587561A7FAA0C008EB344 /* ExtendsView.h */,
+				ED2587571A7FAA0C008EB344 /* ExtendsView.m */,
+				ED2587581A7FAA0C008EB344 /* LevelTwoViewController.h */,
+				ED2587591A7FAA0C008EB344 /* LevelTwoViewController.m */,
+				ED2587531A7FA9D8008EB344 /* LoginViewController.h */,
+				ED2587541A7FA9D8008EB344 /* LoginViewController.m */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		ED25875F1A7FABF7008EB344 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				ED2587601A7FABF7008EB344 /* img */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		ED2587601A7FABF7008EB344 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				ED2587611A7FABF7008EB344 /* login_expend.png */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +399,7 @@
 				ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */,
 				ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */,
 				ED2586EC1A7D14A1008EB344 /* Images.xcassets in Resources */,
+				ED2587621A7FABF7008EB344 /* login_expend.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,11 +418,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED25872F1A7D185D008EB344 /* NSData+AES256.m in Sources */,
+				ED25875B1A7FAA0C008EB344 /* LevelTwoViewController.m in Sources */,
+				ED25875E1A7FAA2C008EB344 /* Person.m in Sources */,
 				ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */,
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,
+				ED2587651A7FB1DA008EB344 /* ColorTools.m in Sources */,
 				ED25874F1A7D1C34008EB344 /* DBManager.m in Sources */,
 				ED25872E1A7D185D008EB344 /* GTMBase64.mm in Sources */,
 				ED2587171A7D1857008EB344 /* GDataXMLNode.m in Sources */,
+				ED25875A1A7FAA0C008EB344 /* ExtendsView.m in Sources */,
 				ED2587471A7D1B4A008EB344 /* FMDatabaseAdditions.m in Sources */,
 				ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
@@ -363,6 +436,7 @@
 				ED2587301A7D185D008EB344 /* NSData+Base64.mm in Sources */,
 				ED2586E11A7D14A1008EB344 /* main.m in Sources */,
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
+				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
 				ED2587081A7D15D8008EB344 /* SecondaryViewController.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ColorTools.h"
 #define DEBUG 0
 #define kNeedCheckAuthentication 1 // 授权开关
 
