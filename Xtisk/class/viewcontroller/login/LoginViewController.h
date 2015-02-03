@@ -3,7 +3,8 @@
 #import <UIKit/UIKit.h>
 #import "ExtendsView.h"
 #import "Person.h"
-@interface LoginViewController : UITableViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource,ExtendsViewDelegate>
+#import "PublicDefine.h"
+@interface LoginViewController : UITableViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource,ExtendsViewDelegate,AsyncHttpRequestDelegate>
 {
 //    UITableView *lTableView;
     UITextField *tf_name;

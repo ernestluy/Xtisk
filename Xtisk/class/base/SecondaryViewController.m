@@ -17,8 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(0, 0, 60, 36);
+    [backBtn setImage:[UIImage imageNamed:@"base_back.png"] forState:UIControlStateNormal];
+    backBtn.imageEdgeInsets = UIEdgeInsetsMake(9, 0, 9, 42);
+    
+    [backBtn addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * back = [[UIBarButtonItem alloc] initWithCustomView:backBtn] ;
+    [self.navigationItem setLeftBarButtonItem:back];
 }
-
+-(void)onBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

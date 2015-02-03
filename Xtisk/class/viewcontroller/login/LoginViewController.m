@@ -3,6 +3,13 @@
 #import "LoginViewController.h"
 #import "MainTabBarViewController.h"
 #import "PublicDefine.h"
+#import "RegViewController.h"
+#import "HttpService.h"
+#import "LostPsdViewController.h"
+#import "GDataXMLNode.h"
+#import "MainTabBarViewController.h"
+#import "AppDelegate.h"
+#import "CustomNavigationController.h"
 //RGB color macro
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -17,6 +24,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     UITextField *nowTextField;
     int fontSize;
     UIFont *nFont;
+    
+    BOOL isRemPsd;
 }
 
 
@@ -40,10 +49,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         nowTextField = nil;
         fontSize = 14;
         nFont = [UIFont systemFontOfSize:15];
+        isRemPsd = YES;
     }
     return self;
 }
 
+-(void)dealloc{
+    NSLog(@"login dealloc");
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -102,17 +119,39 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 }
 -(void)login:(id)sender{
     NSLog(@"login");
+    [[[HttpService sharedInstance] getRequestLogin:self name:@"13418884362" psd:@"12345678"]startAsynchronous];
+    
+    
+    
+    
+//    [self.navigationController popViewControllerAnimated:YES];
+//    
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
+//    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
+//    nav.interactivePopGestureRecognizer.enabled = NO;
+//    
+//    appDelegate.window.rootViewController = nav;
 }
+
+
 
 -(void)reg:(id)sender{
     NSLog(@"reg");
+    RegViewController *rvc = [[RegViewController alloc]init];
+    [self.navigationController pushViewController:rvc animated:YES];
 }
 
 -(void)forgotAction:(id)sender{
     NSLog(@"forgotAction");
+    LostPsdViewController *lp = [[LostPsdViewController alloc]init];
+    [self.navigationController pushViewController:lp animated:YES];
 }
 -(void)rememberSwitchAction:(id)sender{
     NSLog(@"rememberSwitchAction");
+    UISwitch *sw = (UISwitch *)sender;
+    isRemPsd = sw.on;
+    NSLog(@"on:%d",isRemPsd);
 }
 - (void)didReceiveMemoryWarning
 {
@@ -279,7 +318,56 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     return YES;
 }
 
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_XT_LOGIN:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                //成功
+                NSString *xmlStr = [request getResponseStr];
+                //NSLog(@"xmlStr-->%@",xmlStr);
+                //解析xml
+                NSError *error;
+                NSString *_returnValue;
 
+                GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
+                if (xmlDoc == nil) return;
+                NSLog(@"LOG=%@",[[NSString alloc] initWithData:xmlDoc.XMLData encoding:NSUTF8StringEncoding]);
+                NSArray *returnMembers = [xmlDoc.rootElement nodesForXPath:@"/result" error:nil];
+                //遍历节点
+                if (returnMembers.count>0)
+                {
+                    GDataXMLElement *returnMember = (GDataXMLElement *)[returnMembers objectAtIndex:0];
+                    //取ErrorCode值`
+                    NSArray *arrayValues = [returnMember elementsForName:@"ErrorCode"];
+                    GDataXMLElement *returnCode = (GDataXMLElement *) [arrayValues objectAtIndex:0];
+                    NSString *errorCode = returnCode.stringValue;
+                    NSLog(@"errorCode-->%@",errorCode);
+                    if (![errorCode isEqualToString:@"0"]) {
+                        //登录失败，显示失败原因
+                        int tTag = [errorCode intValue];
+                        switch (tTag) {
+                            case 6:{
+                                NSLog(@"不存在该账户");
+                                [[[UIAlertView alloc]initWithTitle:nil message:@"不存在该账户" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil]show];
+                                break;
+                            }
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+            }else{
+                //失败
+            }
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
 #pragma mark -
 #pragma mark view touches
 
