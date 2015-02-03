@@ -60,6 +60,8 @@
 		ED25875E1A7FAA2C008EB344 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25875D1A7FAA2C008EB344 /* Person.m */; };
 		ED2587621A7FABF7008EB344 /* login_expend.png in Resources */ = {isa = PBXBuildFile; fileRef = ED2587611A7FABF7008EB344 /* login_expend.png */; };
 		ED2587651A7FB1DA008EB344 /* ColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587641A7FB1DA008EB344 /* ColorTools.m */; };
+		ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED2587671A80F961008EB344 /* SVProgressHUD.bundle */; };
+		ED25876B1A80F961008EB344 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587691A80F961008EB344 /* SVProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +173,9 @@
 		ED2587611A7FABF7008EB344 /* login_expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_expend.png; sourceTree = "<group>"; };
 		ED2587631A7FB1DA008EB344 /* ColorTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTools.h; sourceTree = "<group>"; };
 		ED2587641A7FB1DA008EB344 /* ColorTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTools.m; sourceTree = "<group>"; };
+		ED2587671A80F961008EB344 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		ED2587681A80F961008EB344 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		ED2587691A80F961008EB344 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +391,7 @@
 		ED25870C1A7D166D008EB344 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				ED2587661A80F961008EB344 /* SVProgressHUD */,
 				767812BA1A80BCC700CB4B08 /* socket */,
 				7678126D1A808F1D00CB4B08 /* CSIHttp */,
 				ED2587631A7FB1DA008EB344 /* ColorTools.h */,
@@ -497,6 +503,16 @@
 			path = img;
 			sourceTree = "<group>";
 		};
+		ED2587661A80F961008EB344 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				ED2587671A80F961008EB344 /* SVProgressHUD.bundle */,
+				ED2587681A80F961008EB344 /* SVProgressHUD.h */,
+				ED2587691A80F961008EB344 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -584,6 +600,7 @@
 				ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */,
 				ED2586EC1A7D14A1008EB344 /* Images.xcassets in Resources */,
 				7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */,
+				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
 				767812961A80A02D00CB4B08 /* ServiceTabViewController.xib in Resources */,
 				767812911A80A00F00CB4B08 /* MessageTabViewController.xib in Resources */,
 				7678127E1A8096FC00CB4B08 /* LostPsdViewController.xib in Resources */,
@@ -614,6 +631,7 @@
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,
 				ED2587651A7FB1DA008EB344 /* ColorTools.m in Sources */,
 				ED25874F1A7D1C34008EB344 /* DBManager.m in Sources */,
+				ED25876B1A80F961008EB344 /* SVProgressHUD.m in Sources */,
 				ED25872E1A7D185D008EB344 /* GTMBase64.mm in Sources */,
 				767812681A806C3200CB4B08 /* RegViewController.m in Sources */,
 				767812791A80939A00CB4B08 /* HttpService.m in Sources */,
