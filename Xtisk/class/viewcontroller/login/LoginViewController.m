@@ -76,20 +76,41 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.bounces = NO;
     
+    
+    
     UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 200)];
     tView.backgroundColor = [UIColor yellowColor];
     self.tableView.tableHeaderView = tView;
     
-    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self.tableView addGestureRecognizer:pan];
+    UIButton *ddd = [UIButton buttonWithType:UIButtonTypeCustom];
+    ddd.frame = CGRectMake(100, 100, 100, 100);
+    ddd.backgroundColor = [UIColor lightGrayColor];
+    [ddd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [ddd setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [ddd setTitle:@"OK" forState:UIControlStateNormal];
+    [ddd addTarget:self action:@selector(setData) forControlEvents:UIControlEventTouchUpInside];
+    [tView addSubview:ddd];
     
-    UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
-    [self.view addGestureRecognizer:pan2];
+    UIView *tView2 = [[UIView alloc]initWithFrame:tView.bounds];
+    tView2.backgroundColor = [UIColor blueColor];
+    tView2.alpha = 0.4;
+    tView2.userInteractionEnabled = NO;//NO可以穿透过去
+    [tView addSubview:tView2];
+    
+    
+    
+    
+//    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    [self.tableView addGestureRecognizer:pan];
+//    
+//    UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
+//    [self.view addGestureRecognizer:pan2];
     
     [self performSelector:@selector(setData) withObject:nil afterDelay:1];
 }
 
 -(void)setData{
+    NSLog(@"setData");
     tf_name.text = @"test1";
     tf_password.text = @"888888";
 }
@@ -114,9 +135,10 @@
 }
 -(void)login:(id)sender{
     NSLog(@"login");
-    [SVProgressHUD showWithStatus:@"请等待"];
+    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
+//    [SVProgressHUD showWithStatus:@"请等待" ];
     [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
-    
+
 }
 -(void)loginSucInto{
     [self.navigationController popViewControllerAnimated:YES];
@@ -268,6 +290,8 @@
             btnOrder.backgroundColor = _rgb2uic(0x1bbbfe, 1);
             [btnOrder addTarget:self action:@selector(reg:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btnOrder];
+            
+            btnOrder.userInteractionEnabled = NO;
             
         }
     }

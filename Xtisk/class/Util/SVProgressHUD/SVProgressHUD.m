@@ -355,7 +355,7 @@
         if(self.maskType != SVProgressHUDMaskTypeNone) {
             self.overlayWindow.userInteractionEnabled = YES;
         } else {
-            self.overlayWindow.userInteractionEnabled = NO;
+            self.overlayWindow.userInteractionEnabled = YES;
         }
         
         [self.overlayWindow makeKeyAndVisible];
