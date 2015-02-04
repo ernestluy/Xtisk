@@ -8,9 +8,11 @@
 
 #import "SecondaryViewController.h"
 #import "CirculaScrollView.h"
+#import "GridMainView.h"
 @interface IndexTabViewController : SecondaryViewController
 
 {
     CirculaScrollView *circulaScrollView;
+    GridMainView *gridMainView;
 }
 @end

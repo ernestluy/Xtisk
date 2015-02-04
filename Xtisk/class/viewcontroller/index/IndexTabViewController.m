@@ -18,9 +18,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
-    circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
+    CGRect rect = [UIScreen mainScreen].bounds;
+    circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 200)];
     [self.view addSubview:circulaScrollView];
+    
+    gridMainView = [[GridMainView alloc]initWithFrame:CGRectMake(0, 200, rect.size.width, rect.size.height - 64 - 49 - 200)];
+    [self.view addSubview:gridMainView];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
