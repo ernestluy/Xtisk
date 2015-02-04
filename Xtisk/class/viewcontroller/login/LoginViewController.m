@@ -10,11 +10,8 @@
 #import "MainTabBarViewController.h"
 #import "AppDelegate.h"
 #import "CustomNavigationController.h"
-//RGB color macro
-#define UIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#import "SVProgressHUD.h"
+#import "SettingService.h"
 
 #define EXTENDS_HEIGHT  100
 #define LOGIN_CELL_HEIGHT 50
@@ -75,13 +72,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         
     }
     
-//    lTableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 80, 300, 340) style:UITableViewStyleGrouped];
-//    lTableView.delegate = self;
-//    lTableView.dataSource = self;
-//    lTableView.scrollEnabled = NO;
-//    lTableView.backgroundView=nil;
-//    lTableView.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:lTableView];
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.bounces = NO;
     
@@ -95,9 +86,13 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
     [self.view addGestureRecognizer:pan2];
     
+    [self performSelector:@selector(setData) withObject:nil afterDelay:1];
 }
 
-
+-(void)setData{
+    tf_name.text = @"test1";
+    tf_password.text = @"888888";
+}
 
 - (void)back{
     [self.navigationController popViewControllerAnimated:YES];
@@ -119,21 +114,21 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 }
 -(void)login:(id)sender{
     NSLog(@"login");
-    [[[HttpService sharedInstance] getRequestLogin:self name:@"13418884362" psd:@"12345678"]startAsynchronous];
+    [SVProgressHUD showWithStatus:@"请等待"];
+    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
     
-    
-    
-    
-//    [self.navigationController popViewControllerAnimated:YES];
-//    
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
-//    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
-//    nav.interactivePopGestureRecognizer.enabled = NO;
-//    
-//    appDelegate.window.rootViewController = nav;
 }
+-(void)loginSucInto{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
+    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
+    nav.interactivePopGestureRecognizer.enabled = NO;
+    
+    appDelegate.window.rootViewController = nav;
 
+}
 
 
 -(void)reg:(id)sender{
@@ -190,7 +185,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         int row = (int)indexPath.row;
         if (row == 0) {
             cell.textLabel.text = @"账号:";
-            cell.textLabel.textColor=UIColorFromRGB(0x767676);
+            cell.textLabel.textColor=_rgb2uic(0x767676, 1);
             tf_name = [[UITextField alloc] initWithFrame:CGRectMake(65, 0, 200, LOGIN_CELL_HEIGHT)];
             tf_name.returnKeyType=UIReturnKeyNext;
             tf_name.placeholder = @"请输入账号";
@@ -200,7 +195,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         else if (row == 1) {
  
             cell.textLabel.text = @"密码:";
-            cell.textLabel.textColor=UIColorFromRGB(0x767676);
+            cell.textLabel.textColor= _rgb2uic(0x767676, 1);
             tf_password = [[UITextField alloc] initWithFrame:CGRectMake(65,0, 200, LOGIN_CELL_HEIGHT)];
             tf_password.secureTextEntry = YES;
             tf_password.returnKeyType=UIReturnKeyGo;
@@ -226,7 +221,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
             UIButton *btnForgon = [UIButton buttonWithType:UIButtonTypeCustom];
             [btnForgon setTitle:@"忘记密码?" forState:UIControlStateNormal];
-            btnForgon.font = nFont;
+            btnForgon.titleLabel.font = nFont;
             [btnForgon sizeToFit];
             [btnForgon setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
             [btnForgon addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -296,20 +291,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 {
     
     [textField resignFirstResponder];
-    //becomeFirstResponder
-    /*
-    if(textField==tf_name){
-        [tf_password becomeFirstResponder];
-    }else if(textField==tf_password){
-        [textField resignFirstResponder];
-        CGRect frame=notificationView.frame;
-        frame.origin.y=0;
-        notificationView.frame=frame;
-        
-        [self login];
-        
-    }
-     */
     return YES;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -328,7 +309,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                 //NSLog(@"xmlStr-->%@",xmlStr);
                 //解析xml
                 NSError *error;
-                NSString *_returnValue;
 
                 GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
                 if (xmlDoc == nil) return;
@@ -345,21 +325,92 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                     NSLog(@"errorCode-->%@",errorCode);
                     if (![errorCode isEqualToString:@"0"]) {
                         //登录失败，显示失败原因
+                        NSString *strError = @"系统异常";
                         int tTag = [errorCode intValue];
                         switch (tTag) {
+                            case 0:{
+                                //成功
+                                break;
+                            }
+                            case 1:{
+                                strError = @"系统账号数量超出许可，无法使用";
+                                break;
+                            }
+                            case 2:{
+                                strError = @"账号与密码不符";
+                                break;
+                            }
+                            case 3:
                             case 6:{
                                 NSLog(@"不存在该账户");
-                                [[[UIAlertView alloc]initWithTitle:nil message:@"不存在该账户" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil]show];
+                                strError = @"不存在该账户";
+                                break;
+                            }
+                            case 4:{
+                                strError = @"发送令牌失败";
+                                break;
+                            }
+                            case 5:{
+                                strError = @"获取系统参数异常";
+                                break;
+                            }
+                            case 7:{
+                                strError = @"账号未开通";
+                                break;
+                            }
+                            case 8:{
+                                strError = @"账号暂停使用";
+                                break;
+                            }
+                            case 9:{
+                                strError = @"获取用户登录参数异常";
+                                break;
+                            }
+                            case 10:{
+                                strError = @"账号没有业务权限";
+                                break;
+                            }
+                            case 11:{
+                                strError = @"许可期限已到，无法使用";
                                 break;
                             }
                             default:
                                 break;
                         }
+                        [SVProgressHUD showErrorWithStatus:strError duration:2];
+                        return;
                     }
+                    
+                    //登录成功，读取信息
+                    
+                    //account
+                    NSArray *keyArr = [returnMember elementsForName:@"Key"];
+                    GDataXMLElement *keyElement = (GDataXMLElement *) [keyArr objectAtIndex:0];
+                    [SettingService sharedInstance].key = keyElement.stringValue;
+                    
+                    NSArray *orgArr = [returnMember elementsForName:@"OrgId"];
+                    GDataXMLElement *orgElement = (GDataXMLElement *) [orgArr objectAtIndex:0];
+                    [SettingService sharedInstance].orgId = orgElement.stringValue;
+                    
+                    NSArray *accountArr = [returnMember elementsForName:@"Account"];
+                    GDataXMLElement *accElement = (GDataXMLElement *) [accountArr objectAtIndex:0];
+                    [SettingService sharedInstance].account = accElement.stringValue;
+                    
+                    NSArray *userArr = [returnMember elementsForName:@"User"];
+                    GDataXMLElement *userElement = (GDataXMLElement *) [userArr objectAtIndex:0];
+                    [SettingService sharedInstance].user = userElement.stringValue;
+                    
+                    NSArray *tokenArr = [returnMember elementsForName:@"Token"];
+                    GDataXMLElement *tokenElement = (GDataXMLElement *) [tokenArr objectAtIndex:0];
+                    [SettingService sharedInstance].token = tokenElement.stringValue;
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1];
+                    [self loginSucInto];
                 }
 
             }else{
                 //失败
+                [SVProgressHUD showErrorWithStatus:@"请求失败" duration:2];
             }
             break;
         }

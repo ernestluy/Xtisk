@@ -7,7 +7,10 @@
 //
 
 #import "SecondaryViewController.h"
-
+#import "CirculaScrollView.h"
 @interface IndexTabViewController : SecondaryViewController
 
+{
+    CirculaScrollView *circulaScrollView;
+}
 @end

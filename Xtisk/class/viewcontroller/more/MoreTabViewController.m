@@ -7,7 +7,9 @@
 //
 
 #import "MoreTabViewController.h"
-
+#import "AppDelegate.h"
+#import "CustomNavigationController.h"
+#import "LoginViewController.h"
 @interface MoreTabViewController ()
 
 @end
@@ -17,22 +19,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.tabBarController.title = @"更多";
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(IBAction)logout:(id)sender{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    CustomNavigationController *nav = [[CustomNavigationController alloc]init];
+    nav.interactivePopGestureRecognizer.enabled = NO;
+    [nav pushViewController:[[LoginViewController alloc]init] animated:NO];
+    appDelegate.window.rootViewController = nav;
 }
-*/
 
 @end

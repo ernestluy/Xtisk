@@ -10,6 +10,8 @@
 
 @interface LostPsdViewController ()
 
+
+@property(nonatomic,weak)IBOutlet UIButton *btnTest;
 @end
 
 @implementation LostPsdViewController
@@ -22,6 +24,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    [self performSelector:@selector(showUI) withObject:nil afterDelay:1];
+}
+
+-(void)showUI{
+    CGRect bRect = self.btnTest.frame;
+    NSLog(@"");
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

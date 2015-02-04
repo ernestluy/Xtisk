@@ -10,4 +10,6 @@
 
 @interface MoreTabViewController : SecondaryViewController
 
+
+-(IBAction)logout:(id)sender;
 @end

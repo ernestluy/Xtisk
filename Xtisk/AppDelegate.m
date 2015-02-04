@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "CustomNavigationController.h"
+#import "MainTabBarViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -19,10 +20,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     CustomNavigationController *nav = [[CustomNavigationController alloc]init];
     nav.interactivePopGestureRecognizer.enabled = NO;
     [nav pushViewController:[[LoginViewController alloc]init] animated:NO];
     self.window.rootViewController = nav;
+    
+    
+//    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
+//    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
+//    nav.interactivePopGestureRecognizer.enabled = NO;
+//    self.window.rootViewController = nav;
+    
+    
     [self.window makeKeyAndVisible];
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     return YES;

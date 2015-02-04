@@ -31,7 +31,6 @@ typedef enum {
     self = [super init];
     if (self) {
      
-        //Custom initialization
         m_selectedIndex=-1;
 
     }
@@ -40,14 +39,14 @@ typedef enum {
 -(void)viewDidUnload{
     [super viewDidUnload];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
 - (void)viewDidLoad
 {
 
     [super viewDidLoad];
-    int btnWidth = 32;
-    int btnHeight = 32;
-//    CGSize imageSize = CGSizeMake(btnWidth, btnHeight);
-	// Do any additional setup after loading the view.
     NSMutableArray *baritems = [NSMutableArray array];
 
     NSArray *xibArray = [NSArray arrayWithObjects:@"IndexTabViewController",@"MessageTabViewController",@"ServiceTabViewController",@"MoreTabViewController", nil];
@@ -67,34 +66,39 @@ typedef enum {
             ctl = [[MoreTabViewController alloc] initWithNibName:[xibArray objectAtIndex:i] bundle:nil];
         }
         
-        ctl.title = [tabBarItemBg objectAtIndex:i];
+//        ctl.title = [tabBarItemBg objectAtIndex:i];
         UIImage *imageBg = [UIImage imageNamed:[tabBarItemBg objectAtIndex:i]];
-        //imageBg = [imageBg imageByScalingToSize:imageSize];
-        //imageBg.size = imageSize;
-        UITabBarItem *item = [[UITabBarItem alloc] init] ;
-        item.tag = i;
-        item.title = [btnName objectAtIndex:i];
-        UIImage *imageSelectedBg = [UIImage imageNamed:[tabBarItemSelectedBg objectAtIndex:i]];//[[UIImage imageNamed:[tabBarItemSelectedBg objectAtIndex:i]] imageByScalingToSize:imageSize];
-        [item setFinishedSelectedImage:imageSelectedBg withFinishedUnselectedImage:imageBg];
-        UIColor *selectedColor = [UIColor colorWithRed:71.0/255.0 green:94.0/255.0 blue:136.0/255.0 alpha:1.0];
-        [item setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor redColor] } forState:UIControlStateNormal];
-        [item setTitleTextAttributes:@{ UITextAttributeTextColor : selectedColor } forState:UIControlStateHighlighted];
-        ctl.tabBarItem  = item;
-         
+//        UIImage *imageSelectedBg = [UIImage imageNamed:[tabBarItemSelectedBg objectAtIndex:i]];
+//        UITabBarItem *item = [[UITabBarItem alloc] init] ;
+//        item.tag = i;
+//        item.title = [btnName objectAtIndex:i];
+//        [item setFinishedSelectedImage:imageSelectedBg withFinishedUnselectedImage:imageBg];
+//        UIColor *selectedColor = [UIColor colorWithRed:71.0/255.0 green:94.0/255.0 blue:136.0/255.0 alpha:1.0];
+//        [item setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor redColor] } forState:UIControlStateNormal];
+//        [item setTitleTextAttributes:@{ UITextAttributeTextColor : selectedColor } forState:UIControlStateHighlighted];
+//        ctl.tabBarItem  = item;
+        
+        ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg tag:i];
+        
         [baritems addObject:ctl];
+        
     }
     
-//    self.tabBar.backgroundImage = bbbimage;
+
+    
+    
     self.delegate = self;
     self.viewControllers = baritems;
-    
-    
-
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [self.tabBar setTintColor:headerColor];
+    }else{
+        [self.tabBar setTintColor:_rgb2uic(0xFFFFFF, 1)];
+        [self.tabBar setSelectedImageTintColor:headerColor];
+        self.tabBar.shadowImage = nil;
+    }
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
+
 
 
 -(void)doubleClick:(UIViewController *)controller{
@@ -107,38 +111,22 @@ typedef enum {
     m_selectedIndex = index;
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    int index = (int)viewController.tabBarItem.tag;
-    //NSLog(@"didSelectViewController:%d",index);
-    [self doubleClick:viewController];
-//    [self setSelectedImagePositon:index+1];
+    NSLog(@"didSelectViewController");
+//    [self doubleClick:viewController];
 }
 
 #pragma mark -
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
-    //NSLog(@"shouldSelectViewController");
+    NSLog(@"shouldSelectViewController");
+    if((int)viewController.tabBarItem.tag == 1){
+        return NO;
+    }
     return YES;
 }
 
 
-- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)viewControllers NS_AVAILABLE_IOS(3_0){
-    //NSLog(@"willBeginCustomizingViewControllers");
-}
-- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed NS_AVAILABLE_IOS(3_0){
-    //NSLog(@"willEndCustomizingViewControllers");
-}
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed{
-    //NSLog(@"didEndCustomizingViewControllers");
-}
 #pragma mark -
-
--(void)setSelectedFirst{
-//    [self setSelectedImagePositon:0];
-}
--(void)setSelectedImagePositon:(int)pos{
-    int btnwidth = 320/5;
-    m_posImage.frame = CGRectMake( btnwidth*pos -btnwidth/2 -20/2, 0, 20, 8);
-}
 
 - (void)didReceiveMemoryWarning
 {
