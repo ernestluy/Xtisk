@@ -22,7 +22,7 @@ static SettingService *settingServiceInstance = nil;
 }
 
 -(BOOL)isLogin{
-    if (self.account && self.account.length>0 && self.token && self.token.length>0) {
+    if (self.account && self.account.length>0) {
         return YES;
     }
     return NO;

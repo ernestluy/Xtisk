@@ -7,7 +7,7 @@
 //
 
 #import "MessageTabViewController.h"
-
+#define MSG_TAB_HEIGHT 44.0
 @interface MessageTabViewController ()
 
 @end
@@ -27,14 +27,49 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDataSource
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
-*/
 
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+
+-(UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString *identifier = @"cell";
+    UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
+    if (cell ==nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+    }
+    
+    cell.imageView.image = [UIImage imageNamed:@"1-1.jpg"];
+//    CGRect tRect = cell.imageView.frame;
+    cell.textLabel.text = @"cell";//[titleArr objectAtIndex:(int)indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return MSG_TAB_HEIGHT;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 1.0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"didSelect");
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
 @end

@@ -11,6 +11,12 @@
 		764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF81A83345F00B186A5 /* MainTabBarViewController.m */; };
 		764D5FFD1A83345F00B186A5 /* SecondaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FFA1A83345F00B186A5 /* SecondaryViewController.m */; };
 		764D60011A83349C00B186A5 /* CTLCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60001A83349C00B186A5 /* CTLCustom.m */; };
+		764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60061A8343C400B186A5 /* ServiceItemCell.m */; };
+		764D60091A8343C400B186A5 /* ServiceItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60071A8343C400B186A5 /* ServiceItemCell.xib */; };
+		764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D600B1A83441500B186A5 /* ServiceMainView.m */; };
+		764D600F1A835F1F00B186A5 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D600E1A835F1F00B186A5 /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		764D60131A8360B900B186A5 /* TicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60111A8360B900B186A5 /* TicketQueryViewController.m */; };
+		764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60121A8360B900B186A5 /* TicketQueryViewController.xib */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -94,6 +100,16 @@
 		764D5FFA1A83345F00B186A5 /* SecondaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondaryViewController.m; sourceTree = "<group>"; };
 		764D5FFF1A83349C00B186A5 /* CTLCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTLCustom.h; sourceTree = "<group>"; };
 		764D60001A83349C00B186A5 /* CTLCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTLCustom.m; sourceTree = "<group>"; };
+		764D60051A8343C400B186A5 /* ServiceItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemCell.h; sourceTree = "<group>"; };
+		764D60061A8343C400B186A5 /* ServiceItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemCell.m; sourceTree = "<group>"; };
+		764D60071A8343C400B186A5 /* ServiceItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceItemCell.xib; sourceTree = "<group>"; };
+		764D600A1A83441500B186A5 /* ServiceMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMainView.h; sourceTree = "<group>"; };
+		764D600B1A83441500B186A5 /* ServiceMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMainView.m; sourceTree = "<group>"; };
+		764D600D1A835F1F00B186A5 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		764D600E1A835F1F00B186A5 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		764D60101A8360B900B186A5 /* TicketQueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketQueryViewController.h; sourceTree = "<group>"; };
+		764D60111A8360B900B186A5 /* TicketQueryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketQueryViewController.m; sourceTree = "<group>"; };
+		764D60121A8360B900B186A5 /* TicketQueryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryViewController.xib; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -241,10 +257,38 @@
 		764D5FFE1A83347C00B186A5 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				764D600D1A835F1F00B186A5 /* PopoverView.h */,
+				764D600E1A835F1F00B186A5 /* PopoverView.m */,
 				764D5FFF1A83349C00B186A5 /* CTLCustom.h */,
 				764D60001A83349C00B186A5 /* CTLCustom.m */,
 			);
 			path = base;
+			sourceTree = "<group>";
+		};
+		764D60021A833C5C00B186A5 /* login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		764D60031A833C5C00B186A5 /* message */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = message;
+			sourceTree = "<group>";
+		};
+		764D60041A833C5C00B186A5 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				764D60051A8343C400B186A5 /* ServiceItemCell.h */,
+				764D60061A8343C400B186A5 /* ServiceItemCell.m */,
+				764D60071A8343C400B186A5 /* ServiceItemCell.xib */,
+				764D600A1A83441500B186A5 /* ServiceMainView.h */,
+				764D600B1A83441500B186A5 /* ServiceMainView.m */,
+			);
+			path = service;
 			sourceTree = "<group>";
 		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
@@ -315,6 +359,9 @@
 				767812921A80A02D00CB4B08 /* ServiceTabViewController.h */,
 				767812931A80A02D00CB4B08 /* ServiceTabViewController.m */,
 				767812941A80A02D00CB4B08 /* ServiceTabViewController.xib */,
+				764D60101A8360B900B186A5 /* TicketQueryViewController.h */,
+				764D60111A8360B900B186A5 /* TicketQueryViewController.m */,
+				764D60121A8360B900B186A5 /* TicketQueryViewController.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -352,6 +399,9 @@
 		767812C81A81F9E000CB4B08 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				764D60021A833C5C00B186A5 /* login */,
+				764D60031A833C5C00B186A5 /* message */,
+				764D60041A833C5C00B186A5 /* service */,
 				764D5FFE1A83347C00B186A5 /* base */,
 				767812E61A83323500CB4B08 /* more */,
 				ED25876C1A824088008EB344 /* index */,
@@ -673,9 +723,11 @@
 				7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */,
 				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
 				767812961A80A02D00CB4B08 /* ServiceTabViewController.xib in Resources */,
+				764D60091A8343C400B186A5 /* ServiceItemCell.xib in Resources */,
 				767812911A80A00F00CB4B08 /* MessageTabViewController.xib in Resources */,
 				7678127E1A8096FC00CB4B08 /* LostPsdViewController.xib in Resources */,
 				ED2587621A7FABF7008EB344 /* login_expend.png in Resources */,
+				764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */,
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
 				7678129B1A80A04600CB4B08 /* MoreTabViewController.xib in Resources */,
 				767812EB1A83328500CB4B08 /* MoreTableViewHeaderView.xib in Resources */,
@@ -701,6 +753,7 @@
 				764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */,
 				ED25875B1A7FAA0C008EB344 /* LevelTwoViewController.m in Sources */,
 				ED25875E1A7FAA2C008EB344 /* Person.m in Sources */,
+				764D600F1A835F1F00B186A5 /* PopoverView.m in Sources */,
 				ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */,
 				ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */,
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,
@@ -730,6 +783,7 @@
 				ED2586E11A7D14A1008EB344 /* main.m in Sources */,
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
 				767812721A808F1D00CB4B08 /* AsyncHttpRequest.m in Sources */,
+				764D60131A8360B900B186A5 /* TicketQueryViewController.m in Sources */,
 				7678127D1A8096FC00CB4B08 /* LostPsdViewController.m in Sources */,
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
@@ -737,6 +791,8 @@
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
+				764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */,
+				764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */,
 				767812811A80981000CB4B08 /* SettingService.m in Sources */,
 				767812C71A80BDED00CB4B08 /* UcmHandleDataCenter.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,

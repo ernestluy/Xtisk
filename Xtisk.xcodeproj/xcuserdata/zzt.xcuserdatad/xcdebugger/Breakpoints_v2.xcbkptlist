@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/index/IndexTabViewController.m"
-            timestampString = "444794832.15147"
+            timestampString = "444820005.920882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>

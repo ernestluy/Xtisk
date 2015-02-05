@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class GridMainView;
+@protocol GridMainViewDelegate <NSObject>
+- (void)gridMainView:(GridMainView *)mainView;
+@end
 @interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     UICollectionView *tCollectionView;
@@ -15,6 +18,7 @@
 }
 @property(nonatomic,strong) UICollectionView *tCollectionView;
 @property(nonatomic,weak)UIButton *btn;
-
+@property(nonatomic,strong) NSIndexPath *tIndexPath;
+@property(nonatomic,weak)id<GridMainViewDelegate> delegate;
 -(void)setHeaderView:(UIView *)headerView;
 @end

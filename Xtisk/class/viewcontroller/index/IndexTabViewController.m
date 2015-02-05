@@ -23,12 +23,20 @@
 //    [self.view addSubview:circulaScrollView];
     
     gridMainView = [[GridMainView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height - 64 - 49)];
+    gridMainView.delegate = self;
     [self.view addSubview:gridMainView];
     [gridMainView setHeaderView:circulaScrollView];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"首页";
+}
+
+#pragma mark - GridMainViewDelegate
+- (void)gridMainView:(GridMainView *)mainView{
+    
+//    [self.navigationController pushViewController:[[TicketQueryViewController alloc]init] animated:YES];
+    NSLog(@"GridMainViewDelegate");
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

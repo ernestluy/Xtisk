@@ -1,46 +1,31 @@
 //
-//  GridMainView.m
+//  ServiceMainView.m
 //  Xtisk
 //
-//  Created by 卢一 on 15-2-4.
+//  Created by zzt on 15/2/5.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
-#import "GridMainView.h"
-#import "PosterCollectionViewCell.h"
-/*
- 具体用法：查看MJRefresh.h
- */
-NSString *const ttCollectionViewCellIdentifier = @"Cell";
-
-/**
- *  随机颜色
- */
-#define MJRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
-
-@interface GridMainView(){
+#import "ServiceMainView.h"
+#import "ServiceItemCell.h"
+NSString *const ServiceMainViewCellIdentifier = @"Cell";
+@interface ServiceMainView(){
+    
     int cInset ;
     UIView *cHeader;
 }
 
 @end
-@implementation GridMainView
-@synthesize tCollectionView,btn,tIndexPath;
+@implementation ServiceMainView
+@synthesize tCollectionView,tIndexPath,delegate;
 /**
  *  初始化
  */
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    cInset = 10;
+    cInset = 8;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //    layout.itemSize = CGSizeMake(80, 80);
-    //    layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
-    //    layout.minimumInteritemSpacing = 20;
-    //    layout.minimumLineSpacing = 20;
-    //
-    //    layout.headerReferenceSize = CGSizeMake(320, 30);
-    //    layout.footerReferenceSize = CGSizeMake(320, 50);
     CGRect rt = self.bounds;
     self.tCollectionView = [[UICollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
     
@@ -67,9 +52,9 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 
 - (void)addHeader
 {
-//    UIView *outHeaderView  = [[UIView alloc]initWithFrame:CGRectMake(0, -50, self.frame.size.width, 50)];
-//    outHeaderView.backgroundColor = [UIColor lightGrayColor];
-//    [self.collectionView addSubview:outHeaderView];
+    //    UIView *outHeaderView  = [[UIView alloc]initWithFrame:CGRectMake(0, -50, self.frame.size.width, 50)];
+    //    outHeaderView.backgroundColor = [UIColor lightGrayColor];
+    //    [self.collectionView addSubview:outHeaderView];
 }
 
 - (void)addFooter
@@ -87,20 +72,14 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 {
     self.tCollectionView.backgroundColor = [UIColor whiteColor];
     self.tCollectionView.alwaysBounceVertical = YES;
-//    [self.tCollectionView registerClass:[PosterCollectionViewCell class] forCellWithReuseIdentifier:ttCollectionViewCellIdentifier];
-    [self.tCollectionView registerNib:[UINib nibWithNibName:@"PosterCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:ttCollectionViewCellIdentifier];
+    [self.tCollectionView registerNib:[UINib nibWithNibName:@"ServiceItemCell" bundle:nil] forCellWithReuseIdentifier:ServiceMainViewCellIdentifier];
 }
 -(void)deleteItem{
     NSLog(@"delete");
     
-//    [self.tCollectionView deleteItemsAtIndexPaths:@[tIndexPath]];
+    [self.tCollectionView deleteItemsAtIndexPaths:@[tIndexPath]];
     
     
-    
-    //    [self.collectionView performBatchUpdates:^{
-    //        [self.fakeColors removeObjectAtIndex:tIndexPath.row];
-    //        [self.collectionView deleteItemsAtIndexPaths:@[tIndexPath]];
-    //    } completion:nil];
 }
 
 -(IBAction)btnAction:(id)sender{
@@ -119,8 +98,8 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ttCollectionViewCellIdentifier forIndexPath:indexPath];
-//    NSLog(@"row:%d",indexPath.row);
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ServiceMainViewCellIdentifier forIndexPath:indexPath];
+    //    NSLog(@"row:%d",indexPath.row);
     return cell;
 }
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -131,26 +110,11 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    MJTestViewController *test = [[MJTestViewController alloc] init];
-    //    [self.navigationController pushViewController:test animated:YES];
-    
-    //    [self.collectionView performBatchUpdates:^{
-    //        NSLog(@"delete");
-    //        [self.fakeColors removeObjectAtIndex:indexPath.row];
-    //        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-    //    } completion:nil];
-    
-    //    NSLog(@"delete");
-    //    [self.fakeColors removeObjectAtIndex:indexPath.row];
-    //    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     tIndexPath = indexPath;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(gridMainView:)]) {
-        [self.delegate gridMainView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceMainView:)]) {
+        [self.delegate serviceMainView:self];
     }
-    //    [self performSelector:@selector(deleteItem) withObject:nil afterDelay:1];
-//    [self.fakeColors addObject:MJRandomColor];
-//    [self.tCollectionView reloadData];
-//    [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+    NSLog(@"didSelect");
 }
 
 //collectionView:layout:referenceSizeForHeaderInSection:
@@ -158,7 +122,6 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     UICollectionReusableView * v = nil;
     if([kind isEqual:UICollectionElementKindSectionHeader]){
         v = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-        v.backgroundColor = [UIColor redColor];
         for (UIView *view in v.subviews) {
             [view removeFromSuperview];
         }
@@ -168,7 +131,6 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
         
     }else{
         v = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
-        v.backgroundColor = [UIColor blackColor];
     }
     
     
@@ -176,10 +138,10 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 }
 #pragma  mark -  UICollectionViewLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row%5 == 0) {
-//        return CGSizeMake(160, 100);
-//    }
-    return CGSizeMake(145, 145);
+    //    if (indexPath.row%5 == 0) {
+    //        return CGSizeMake(160, 100);
+    //    }
+    return CGSizeMake(70, 70);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
@@ -191,14 +153,15 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return cInset;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    if (cHeader) {
-        return cHeader.frame.size;
-    }
-    return CGSizeMake(320, 30);
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+//    if (cHeader) {
+//        return cHeader.frame.size;
+//    }
+//    return CGSizeMake(320, 30);
+//}
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
 //    return CGSizeMake(320, 50);
 //}
+
 
 @end

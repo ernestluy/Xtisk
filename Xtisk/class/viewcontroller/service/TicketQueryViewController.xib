@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageTabViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TicketQueryViewController">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -15,21 +15,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Vwq-we-s5i">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="7cU-pf-Wqx">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="rax-uW-ovz"/>
-                        <outlet property="delegate" destination="-1" id="s9C-LO-sYr"/>
+                        <outlet property="dataSource" destination="-1" id="QWv-0C-BNU"/>
+                        <outlet property="delegate" destination="-1" id="Q8T-6Y-yI7"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Vwq-we-s5i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6xv-v8-LO2"/>
-                <constraint firstAttribute="trailing" secondItem="Vwq-we-s5i" secondAttribute="trailing" id="fUr-NA-hJa"/>
-                <constraint firstItem="Vwq-we-s5i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rRG-KT-iMA"/>
-                <constraint firstAttribute="bottom" secondItem="Vwq-we-s5i" secondAttribute="bottom" constant="49" id="sXE-ub-5Bs"/>
+                <constraint firstItem="7cU-pf-Wqx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DFv-bB-J8k"/>
+                <constraint firstAttribute="trailing" secondItem="7cU-pf-Wqx" secondAttribute="trailing" id="Z00-wl-YeV"/>
+                <constraint firstItem="7cU-pf-Wqx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aYA-h7-vJ6"/>
+                <constraint firstAttribute="bottom" secondItem="7cU-pf-Wqx" secondAttribute="bottom" id="mew-Xd-TkW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

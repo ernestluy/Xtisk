@@ -121,7 +121,7 @@ typedef enum {
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
 //    NSLog(@"shouldSelectViewController");
-    if((int)viewController.tabBarItem.tag == 1){
+    if((int)viewController.tabBarItem.tag == TAB_BAR_MSG){
         if([[SettingService sharedInstance] isLogin]){
             return YES;
         }else{

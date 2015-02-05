@@ -7,7 +7,9 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface ServiceTabViewController : SecondaryViewController
-
+#import "ServiceMainView.h"
+@interface ServiceTabViewController : SecondaryViewController<ServiceMainViewDelegate>
+{
+    
+}
 @end

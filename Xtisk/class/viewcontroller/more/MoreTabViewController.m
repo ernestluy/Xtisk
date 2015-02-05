@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "MoreTableViewHeaderView.h"
 #import "CTLCustom.h"
+#import "SettingService.h"
 #define MORE_HEIGHT 44.0
 @interface MoreTabViewController ()
 {
@@ -46,6 +47,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"更多";
+    
+    if ([[SettingService sharedInstance] isLogin]) {
+        headerView.btnLogin.hidden = YES;
+    }else{
+        headerView.btnLogin.hidden = NO;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

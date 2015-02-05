@@ -11,4 +11,5 @@
 @interface CTLCustom : NSObject
 +(UIButton *)getButtonRadiusWithRect:(CGRect )rect;
 +(void)setButtonRadius:(UIButton *)btn;
++(UIButton *)getButtonSubmitWithRect:(CGRect )rect;
 @end

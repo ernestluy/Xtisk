@@ -42,7 +42,7 @@
     
     // 定时器 循环
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
     // 初始化 scrollview
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     [self addSubview:scrollView];

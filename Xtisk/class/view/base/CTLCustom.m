@@ -30,4 +30,12 @@
     btn.layer.borderWidth = 1;
     btn.layer.cornerRadius = 4;
 }
+
++(UIButton *)getButtonSubmitWithRect:(CGRect )rect{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 4;
+    btn.backgroundColor = _rgb2uic(0x1bbbfe, 1);
+    return btn;
+}
 @end

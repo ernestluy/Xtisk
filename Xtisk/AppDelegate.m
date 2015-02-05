@@ -35,6 +35,8 @@
     
     [self.window makeKeyAndVisible];
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
 }
 

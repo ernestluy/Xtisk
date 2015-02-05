@@ -101,11 +101,11 @@
     
 //    self.tableView.tableFooterView;
     
-//    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-//    [self.tableView addGestureRecognizer:pan];
-//    
-//    UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
-//    [self.view addGestureRecognizer:pan2];
+    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self.tableView addGestureRecognizer:pan];
+    
+    UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
+    [self.view addGestureRecognizer:pan2];
     
     [self performSelector:@selector(setData) withObject:nil afterDelay:1];
 }

@@ -9,7 +9,7 @@
 #import "SecondaryViewController.h"
 #import "CirculaScrollView.h"
 #import "GridMainView.h"
-@interface IndexTabViewController : SecondaryViewController
+@interface IndexTabViewController : SecondaryViewController<GridMainViewDelegate>
 
 {
     CirculaScrollView *circulaScrollView;
