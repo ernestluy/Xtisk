@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "CustomNavigationController.h"
 #import "MainTabBarViewController.h"
+#import "XTFileManager.h"
+#import "DBManager.h"
 @interface AppDelegate ()
 
 @end
@@ -37,6 +39,8 @@
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [XTFileManager shareInstance];
+    [DBManager initDB];
     return YES;
 }
 

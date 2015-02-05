@@ -4,7 +4,7 @@
 #import "PublicDefine.h"
 
 @implementation UcmDispatchCenter
-
+@synthesize m_timeStamp;
 
 -(void)dealloc{
     

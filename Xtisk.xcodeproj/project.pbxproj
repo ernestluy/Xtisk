@@ -17,6 +17,8 @@
 		764D600F1A835F1F00B186A5 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D600E1A835F1F00B186A5 /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		764D60131A8360B900B186A5 /* TicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60111A8360B900B186A5 /* TicketQueryViewController.m */; };
 		764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60121A8360B900B186A5 /* TicketQueryViewController.xib */; };
+		764D60191A836DD600B186A5 /* XTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60181A836DD600B186A5 /* XTFileManager.m */; };
+		764D601B1A83765600B186A5 /* ubox.sql in Resources */ = {isa = PBXBuildFile; fileRef = 764D601A1A83765600B186A5 /* ubox.sql */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -110,6 +112,9 @@
 		764D60101A8360B900B186A5 /* TicketQueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketQueryViewController.h; sourceTree = "<group>"; };
 		764D60111A8360B900B186A5 /* TicketQueryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketQueryViewController.m; sourceTree = "<group>"; };
 		764D60121A8360B900B186A5 /* TicketQueryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryViewController.xib; sourceTree = "<group>"; };
+		764D60171A836DD600B186A5 /* XTFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTFileManager.h; sourceTree = "<group>"; };
+		764D60181A836DD600B186A5 /* XTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTFileManager.m; sourceTree = "<group>"; };
+		764D601A1A83765600B186A5 /* ubox.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ubox.sql; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -514,6 +519,8 @@
 				ED2587161A7D1857008EB344 /* PublicDefine.h */,
 				ED25870D1A7D1686008EB344 /* Util.h */,
 				ED25870E1A7D1686008EB344 /* Util.m */,
+				764D60171A836DD600B186A5 /* XTFileManager.h */,
+				764D60181A836DD600B186A5 /* XTFileManager.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -587,6 +594,7 @@
 		ED25875F1A7FABF7008EB344 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				764D601A1A83765600B186A5 /* ubox.sql */,
 				ED2587601A7FABF7008EB344 /* img */,
 			);
 			path = res;
@@ -714,6 +722,7 @@
 				ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */,
 				767812D21A81F9FC00CB4B08 /* 1-3.jpg in Resources */,
 				7678128C1A809FE700CB4B08 /* IndexTabViewController.xib in Resources */,
+				764D601B1A83765600B186A5 /* ubox.sql in Resources */,
 				7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */,
 				ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */,
 				767812D31A81F9FC00CB4B08 /* 1-4.jpg in Resources */,
@@ -750,6 +759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED25872F1A7D185D008EB344 /* NSData+AES256.m in Sources */,
+				764D60191A836DD600B186A5 /* XTFileManager.m in Sources */,
 				764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */,
 				ED25875B1A7FAA0C008EB344 /* LevelTwoViewController.m in Sources */,
 				ED25875E1A7FAA2C008EB344 /* Person.m in Sources */,

@@ -93,6 +93,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define PathDocumentsHeadIcon				[NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/headicon"]
 //头像路径
 #define PathLogo(logo)			[NSString stringWithFormat:@"%@/%@",PathDocumentsHeadIcon,logo]
+#define PathTmpFile(tpath)			[NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),tpath]
 
 #define PUBLIC_UCM_END  @"PUBLIC"
 #define PRIVATE_UCM_END @"PRIVATE"
@@ -102,14 +103,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define FRIEND_DEFAULT_GROUP_NAME @"未分组"
 #define FRIEND_DEFAULT_GROUP_ID @"default"
 
-#define FRIEND_CELL_HEIGHT   50
-#define DIAL_CELL_EXPEND_HEIGHT 2*FRIEND_CELL_HEIGHT
-#define MAIN_TAB_BAR_HEIGHT  49
-#define MAIN_BODY_HEIGHT     460
+
 
 #define SEARCH_FONT_SIZE  14
 
-#define DATABASE_PATH                   @"ubox"
+#define DATABASE_PATH                   @"xt"
 #define DATABASE_TYPE                   @"db"
 
 #define kDateTimeFormat                 @"yyyy-MM-dd HH:mm:ss"  
