@@ -10,9 +10,11 @@
 
 @interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
-    UICollectionView *collectionView;
+    UICollectionView *tCollectionView;
     __weak UIButton *btn;
 }
-@property(nonatomic,strong) UICollectionView *collectionView;
+@property(nonatomic,strong) UICollectionView *tCollectionView;
 @property(nonatomic,weak)UIButton *btn;
+
+-(void)setHeaderView:(UIView *)headerView;
 @end

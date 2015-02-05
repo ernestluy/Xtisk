@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoreTabViewController">
             <connections>
+                <outlet property="tTableView" destination="fdP-Mn-c6K" id="6Q9-mv-jfn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upt-UI-BLB">
-                    <rect key="frame" x="112" y="222" width="44" height="30"/>
+                    <rect key="frame" x="93" y="414" width="44" height="30"/>
                     <state key="normal" title="logout">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -24,8 +25,22 @@
                         <action selector="logout:" destination="-1" eventType="touchUpInside" id="XVd-UX-7hN"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="fdP-Mn-c6K">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ydl-xu-Wxj"/>
+                        <outlet property="delegate" destination="-1" id="PLp-qU-ggt"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fdP-Mn-c6K" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LOa-iI-3gV"/>
+                <constraint firstItem="fdP-Mn-c6K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hK5-3K-WwZ"/>
+                <constraint firstAttribute="bottom" secondItem="fdP-Mn-c6K" secondAttribute="bottom" constant="49" id="jMZ-G9-dI6"/>
+                <constraint firstAttribute="trailing" secondItem="fdP-Mn-c6K" secondAttribute="trailing" id="n3a-5J-Ul7"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

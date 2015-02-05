@@ -20,10 +20,11 @@
     
     CGRect rect = [UIScreen mainScreen].bounds;
     circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 200)];
-    [self.view addSubview:circulaScrollView];
+//    [self.view addSubview:circulaScrollView];
     
-    gridMainView = [[GridMainView alloc]initWithFrame:CGRectMake(0, 200, rect.size.width, rect.size.height - 64 - 49 - 200)];
+    gridMainView = [[GridMainView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height - 64 - 49)];
     [self.view addSubview:gridMainView];
+    [gridMainView setHeaderView:circulaScrollView];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

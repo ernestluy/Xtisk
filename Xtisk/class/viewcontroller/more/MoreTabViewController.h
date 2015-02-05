@@ -10,6 +10,6 @@
 
 @interface MoreTabViewController : SecondaryViewController
 
-
+@property(nonatomic,weak)IBOutlet UITableView *tTableView;
 -(IBAction)logout:(id)sender;
 @end

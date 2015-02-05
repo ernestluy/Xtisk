@@ -56,7 +56,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+    self.title = @"登录";
 }
 - (void)viewDidLoad
 {
@@ -98,7 +99,7 @@
     [tView addSubview:tView2];
     
     
-    
+//    self.tableView.tableFooterView;
     
 //    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
 //    [self.tableView addGestureRecognizer:pan];
@@ -143,12 +144,12 @@
 -(void)loginSucInto{
     [self.navigationController popViewControllerAnimated:YES];
     
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
-    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
-    nav.interactivePopGestureRecognizer.enabled = NO;
-    
-    appDelegate.window.rootViewController = nav;
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
+//    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
+//    nav.interactivePopGestureRecognizer.enabled = NO;
+//    
+//    appDelegate.window.rootViewController = nav;
 
 }
 
@@ -204,6 +205,7 @@
 	if (cell == nil)
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIndentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         int row = (int)indexPath.row;
         if (row == 0) {
             cell.textLabel.text = @"账号:";

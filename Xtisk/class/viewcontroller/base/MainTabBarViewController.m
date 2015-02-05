@@ -13,6 +13,8 @@
 #import "MessageTabViewController.h"
 #import "ServiceTabViewController.h"
 #import "MoreTabViewController.h"
+#import "SettingService.h"
+#import "LoginViewController.h"
 typedef enum {
     TAB_BAR_INDEX = 0,
     TAB_BAR_MSG,
@@ -111,16 +113,23 @@ typedef enum {
     m_selectedIndex = index;
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    NSLog(@"didSelectViewController");
+//    NSLog(@"didSelectViewController");
 //    [self doubleClick:viewController];
 }
 
 #pragma mark -
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
-    NSLog(@"shouldSelectViewController");
+//    NSLog(@"shouldSelectViewController");
     if((int)viewController.tabBarItem.tag == 1){
-        return NO;
+        if([[SettingService sharedInstance] isLogin]){
+            return YES;
+        }else{
+            LoginViewController *lv = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:lv animated:YES];
+            return NO;
+        }
+        
     }
     return YES;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "GridMainView.h"
+#import "PosterCollectionViewCell.h"
 /*
  具体用法：查看MJRefresh.h
  */
@@ -19,6 +20,8 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 
 @interface GridMainView(){
     NSIndexPath *tIndexPath;
+    int cInset ;
+    UIView *cHeader;
 }
 /**
  *  存放假数据
@@ -26,13 +29,14 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 @property (strong, nonatomic) NSMutableArray *fakeColors;
 @end
 @implementation GridMainView
-@synthesize collectionView,btn;
+@synthesize tCollectionView,btn;
 /**
  *  初始化
  */
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    cInset = 10;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     //    layout.itemSize = CGSizeMake(80, 80);
     //    layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
@@ -43,19 +47,21 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     //    layout.footerReferenceSize = CGSizeMake(320, 50);
     CGRect rt = self.bounds;
     [self fakeColors];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
-    [self addSubview:self.collectionView];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
+    self.tCollectionView = [[UICollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
+    
+    self.tCollectionView.bounces = NO;
+    [self addSubview:self.tCollectionView];
+    self.tCollectionView.delegate = self;
+    self.tCollectionView.dataSource = self;
     //    self.collectionView.collectionViewLayout = layout;
     
     
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+    [self.tCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    [self.tCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
     // 1.初始化collectionView
     [self setupCollectionView];
     self.backgroundColor = [UIColor whiteColor];
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.tCollectionView.backgroundColor = [UIColor clearColor];
     
     
     // 2.集成刷新控件
@@ -63,31 +69,37 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     [self addFooter];
     return self;
 }
+
 - (void)addHeader
 {
-    UIView *outHeaderView  = [[UIView alloc]initWithFrame:CGRectMake(0, -50, self.frame.size.width, 50)];
-    outHeaderView.backgroundColor = [UIColor lightGrayColor];
-    [self.collectionView addSubview:outHeaderView];
+//    UIView *outHeaderView  = [[UIView alloc]initWithFrame:CGRectMake(0, -50, self.frame.size.width, 50)];
+//    outHeaderView.backgroundColor = [UIColor lightGrayColor];
+//    [self.collectionView addSubview:outHeaderView];
 }
 
 - (void)addFooter
 {
     
 }
+-(void)setHeaderView:(UIView *)headerView{
+    cHeader = headerView;
+    [self.tCollectionView reloadData];
+}
 /**
  *  初始化collectionView
  */
 - (void)setupCollectionView
 {
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.collectionView.alwaysBounceVertical = YES;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ttCollectionViewCellIdentifier];
+    self.tCollectionView.backgroundColor = [UIColor whiteColor];
+    self.tCollectionView.alwaysBounceVertical = YES;
+    [self.tCollectionView registerClass:[PosterCollectionViewCell class] forCellWithReuseIdentifier:ttCollectionViewCellIdentifier];
+    [self.tCollectionView registerNib:[UINib nibWithNibName:@"PosterCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:ttCollectionViewCellIdentifier];
 }
 -(void)deleteItem{
     NSLog(@"delete");
     
     [self.fakeColors removeObjectAtIndex:tIndexPath.row];
-    [self.collectionView deleteItemsAtIndexPaths:@[tIndexPath]];
+    [self.tCollectionView deleteItemsAtIndexPaths:@[tIndexPath]];
     
     
     
@@ -118,18 +130,16 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 #pragma mark - collection数据源代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    int a = self.fakeColors.count;
+    int a = (int)self.fakeColors.count;
     NSLog(@"all:%d",a);
     return a;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int ddd = 0;
-    ddd = 2;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ttCollectionViewCellIdentifier forIndexPath:indexPath];
 //    NSLog(@"row:%d",indexPath.row);
     cell.backgroundColor = self.fakeColors[indexPath.row];
@@ -158,8 +168,8 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     //    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     tIndexPath = indexPath;
     //    [self performSelector:@selector(deleteItem) withObject:nil afterDelay:1];
-    [self.fakeColors addObject:MJRandomColor];
-    [self.collectionView reloadData];
+//    [self.fakeColors addObject:MJRandomColor];
+//    [self.tCollectionView reloadData];
 //    [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
 }
 
@@ -169,6 +179,13 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     if([kind isEqual:UICollectionElementKindSectionHeader]){
         v = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
         v.backgroundColor = [UIColor redColor];
+        for (UIView *view in v.subviews) {
+            [view removeFromSuperview];
+        }
+        if (cHeader) {
+            [v addSubview:cHeader];
+        }
+        
     }else{
         v = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
         v.backgroundColor = [UIColor blackColor];
@@ -179,26 +196,29 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 }
 #pragma  mark -  UICollectionViewLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row%5 == 0) {
-        return CGSizeMake(160, 100);
-    }
-    return CGSizeMake(80, 80);
+//    if (indexPath.row%5 == 0) {
+//        return CGSizeMake(160, 100);
+//    }
+    return CGSizeMake(145, 145);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
-    return UIEdgeInsetsMake(20, 20, 20, 20);
+    return UIEdgeInsetsMake(cInset, cInset, cInset, cInset);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 20;
+    return cInset;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 20;
+    return cInset;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    if (cHeader) {
+        return cHeader.frame.size;
+    }
     return CGSizeMake(320, 30);
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    return CGSizeMake(320, 50);
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+//    return CGSizeMake(320, 50);
+//}
 
 @end
