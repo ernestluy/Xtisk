@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MainTabBarViewController : UITabBarController<UITabBarControllerDelegate>
+#import "LoginViewController.h"
+@interface MainTabBarViewController : UITabBarController<UITabBarControllerDelegate,LoginViewControllerDelegate>
 {
     UIImageView *m_posImage;
     int         m_selectedIndex;

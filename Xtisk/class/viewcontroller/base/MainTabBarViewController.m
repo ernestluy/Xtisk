@@ -117,7 +117,12 @@ typedef enum {
 //    [self doubleClick:viewController];
 }
 
-#pragma mark -
+#pragma mark - LoginViewControllerDelegate
+- (void)loginSucBack:(LoginViewController *)loginVc{
+    if (loginVc.tType == INTO_TAB_MSG) {
+        [self setSelectedIndex:TAB_BAR_MSG];
+    }
+}
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
 //    NSLog(@"shouldSelectViewController");
@@ -126,6 +131,7 @@ typedef enum {
             return YES;
         }else{
             LoginViewController *lv = [[LoginViewController alloc]init];
+            lv.delegate = self;
             [self.navigationController pushViewController:lv animated:YES];
             return NO;
         }

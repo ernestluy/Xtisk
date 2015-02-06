@@ -18,6 +18,9 @@
 		764D60131A8360B900B186A5 /* TicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60111A8360B900B186A5 /* TicketQueryViewController.m */; };
 		764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60121A8360B900B186A5 /* TicketQueryViewController.xib */; };
 		764D60191A836DD600B186A5 /* XTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60181A836DD600B186A5 /* XTFileManager.m */; };
+		764D601D1A8449CF00B186A5 /* xt.sql in Resources */ = {isa = PBXBuildFile; fileRef = 764D601C1A8449CF00B186A5 /* xt.sql */; };
+		764D60221A84A58500B186A5 /* HisAccSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60211A84A58500B186A5 /* HisAccSelectView.m */; };
+		764D60261A84A6CE00B186A5 /* HisLoginAcc.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60251A84A6CE00B186A5 /* HisLoginAcc.m */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -113,6 +116,11 @@
 		764D60121A8360B900B186A5 /* TicketQueryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryViewController.xib; sourceTree = "<group>"; };
 		764D60171A836DD600B186A5 /* XTFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTFileManager.h; sourceTree = "<group>"; };
 		764D60181A836DD600B186A5 /* XTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTFileManager.m; sourceTree = "<group>"; };
+		764D601C1A8449CF00B186A5 /* xt.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xt.sql; sourceTree = "<group>"; };
+		764D60201A84A58500B186A5 /* HisAccSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HisAccSelectView.h; sourceTree = "<group>"; };
+		764D60211A84A58500B186A5 /* HisAccSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HisAccSelectView.m; sourceTree = "<group>"; };
+		764D60241A84A6CE00B186A5 /* HisLoginAcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HisLoginAcc.h; sourceTree = "<group>"; };
+		764D60251A84A6CE00B186A5 /* HisLoginAcc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HisLoginAcc.m; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -271,6 +279,8 @@
 		764D60021A833C5C00B186A5 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				764D60201A84A58500B186A5 /* HisAccSelectView.h */,
+				764D60211A84A58500B186A5 /* HisAccSelectView.m */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -294,6 +304,15 @@
 			path = service;
 			sourceTree = "<group>";
 		};
+		764D60231A84A6B200B186A5 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				764D60241A84A6CE00B186A5 /* HisLoginAcc.h */,
+				764D60251A84A6CE00B186A5 /* HisLoginAcc.m */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +328,7 @@
 		767812751A80933500CB4B08 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				764D60231A84A6B200B186A5 /* login */,
 				767812BE1A80BCD100CB4B08 /* ucm */,
 				767812761A80933500CB4B08 /* model */,
 				767812771A80939A00CB4B08 /* HttpService.h */,
@@ -592,6 +612,7 @@
 		ED25875F1A7FABF7008EB344 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				764D601C1A8449CF00B186A5 /* xt.sql */,
 				ED2587601A7FABF7008EB344 /* img */,
 			);
 			path = res;
@@ -736,6 +757,7 @@
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
 				7678129B1A80A04600CB4B08 /* MoreTabViewController.xib in Resources */,
 				767812EB1A83328500CB4B08 /* MoreTableViewHeaderView.xib in Resources */,
+				764D601D1A8449CF00B186A5 /* xt.sql in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -800,8 +822,10 @@
 				764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */,
 				764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */,
 				767812811A80981000CB4B08 /* SettingService.m in Sources */,
+				764D60261A84A6CE00B186A5 /* HisLoginAcc.m in Sources */,
 				767812C71A80BDED00CB4B08 /* UcmHandleDataCenter.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,
+				764D60221A84A58500B186A5 /* HisAccSelectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

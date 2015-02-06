@@ -8,9 +8,10 @@
 
 #import "SecondaryViewController.h"
 
-@interface TicketQueryViewController : SecondaryViewController
+@interface TicketQueryViewController : SecondaryViewController<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIDatePicker * startPicker;
     UIDatePicker * endPicker;
 }
+@property(nonatomic,weak)IBOutlet UITableView *tTableView;
 @end

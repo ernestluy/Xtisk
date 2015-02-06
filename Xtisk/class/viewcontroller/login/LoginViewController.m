@@ -12,17 +12,32 @@
 #import "CustomNavigationController.h"
 #import "SVProgressHUD.h"
 #import "SettingService.h"
-
-#define EXTENDS_HEIGHT  100
+#import "HisAccSelectView.h"
+#import "HisLoginAcc.h"
+#define EXTENDS_HEIGHT  70
 #define LOGIN_CELL_HEIGHT 50
+
+typedef enum  {
+    CELL_LOGIN_NAME = 0,
+    CELL_LOGIN_HIS_ACC,
+    CELL_LOGIN_PSD,
+    CELL_LOGIN_RMB,
+    CELL_LOGIN_SUBMIT,
+    CELL_LOGIN_LAB_REG,
+    CELL_LOGIN_REG
+}LoginCellTag;
+
+
 @interface LoginViewController ()
 {
     CGPoint touchBeganPoint;
     UITextField *nowTextField;
     int fontSize;
     UIFont *nFont;
-    
+    UIButton *btnExtend;
     BOOL isRemPsd;
+    BOOL isExtend;
+    
 }
 
 
@@ -34,9 +49,28 @@
 
 @implementation LoginViewController
 //@synthesize lTableView;
+@synthesize tType,delegate;
+-(id)initWithType:(IntoLoginType)type{
+    self = [super init];
+    if (self) {
+        tType = type;
+        isExtends = NO;
+        rows = 2;
+        person = [[Person alloc] init];
+        person.name = @"61";
+        person.add = @"douan";
+        person.age = 27;
+        nowTextField = nil;
+        fontSize = 14;
+        nFont = [UIFont systemFontOfSize:15];
+        isRemPsd = YES;
+    }
+    return self;
+}
 -(id)init{
     self = [super init];
     if (self) {
+        tType = INTO_TAB_OTHER;
         isExtends = NO;
         rows = 2;
         person = [[Person alloc] init];
@@ -65,7 +99,7 @@
     #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
     NSLog(@"asdasdf");
     #endif
-	
+    isExtend = NO;
     CGRect bounds = [[UIScreen mainScreen] applicationFrame];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
         bounds = [[UIScreen mainScreen] bounds];
@@ -117,6 +151,7 @@
 }
 
 - (void)back{
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -136,12 +171,15 @@
 }
 -(void)login:(id)sender{
     NSLog(@"login");
-    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
-//    [SVProgressHUD showWithStatus:@"请等待" ];
-    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
+//    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
+////    [SVProgressHUD showWithStatus:@"请等待" ];
+//    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
 
 }
 -(void)loginSucInto{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
+        [self.delegate loginSucBack:self];
+    }
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -171,6 +209,32 @@
     isRemPsd = sw.on;
     NSLog(@"on:%d",isRemPsd);
 }
+
+-(void)extendAction:(id)sender{
+    NSLog(@"extendAction");
+    isExtend = !isExtend;
+    NSIndexPath *indexPath= [NSIndexPath indexPathForRow:CELL_LOGIN_HIS_ACC inSection:0];
+    UIImageView *accessoryView=(UIImageView*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:CELL_LOGIN_NAME inSection:0]].accessoryView;
+    if (isExtend) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            //第一帧要执行的动画
+            accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+        }completion:^(BOOL finished){
+            //动画结束后执行的代码块
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+    }else{
+
+        [UIView animateWithDuration:0.25 animations:^{
+            //第一帧要执行的动画
+            accessoryView.transform = CGAffineTransformMakeRotation(0);
+        }completion:^(BOOL finished){
+            //动画结束后执行的代码块
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -184,9 +248,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (2 == indexPath.row) {
+    if (CELL_LOGIN_HIS_ACC == indexPath.row) {
+        if (isExtend) {
+            return EXTENDS_HEIGHT;
+        }else{
+            return 0.0;
+        }
+    }
+	if (CELL_LOGIN_RMB == indexPath.row) {
         return  40.0;
-    }else if(4 ==indexPath.row){
+    }else if(CELL_LOGIN_LAB_REG ==indexPath.row){
         return 30;
     }
 	return LOGIN_CELL_HEIGHT;
@@ -194,7 +265,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-	return 6;
+	return 7;
 }
 
 
@@ -206,17 +277,44 @@
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIndentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.clipsToBounds = YES;
         int row = (int)indexPath.row;
-        if (row == 0) {
+        if (row == CELL_LOGIN_NAME) {
             cell.textLabel.text = @"账号:";
             cell.textLabel.textColor=_rgb2uic(0x767676, 1);
             tf_name = [[UITextField alloc] initWithFrame:CGRectMake(65, 0, 200, LOGIN_CELL_HEIGHT)];
-            tf_name.returnKeyType=UIReturnKeyNext;
             tf_name.placeholder = @"请输入账号";
+            tf_name.returnKeyType = UIReturnKeyNext;
+            tf_name.clearButtonMode = YES;
             tf_name.delegate = self;
             [cell addSubview:tf_name];
+            
+            
+            btnExtend = [UIButton buttonWithType:UIButtonTypeCustom];
+            btnExtend.frame = CGRectMake(self.tableView.frame.size.width - 40, 0, 40, LOGIN_CELL_HEIGHT);
+            [btnExtend setBackgroundImage:[UIImage imageNamed:@"login_expend.png"] forState:UIControlStateNormal];
+            [btnExtend addTarget:self action:@selector(extendAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell.accessoryView = btnExtend;
         }
-        else if (row == 1) {
+        else if(row == CELL_LOGIN_HIS_ACC){
+            
+//            UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 2, self.tableView.frame.size.width, EXTENDS_HEIGHT -2)];
+//            tView.backgroundColor = [UIColor redColor];
+//            [cell addSubview:tView];
+            
+            cell.backgroundColor = [UIColor lightGrayColor];
+            HisAccSelectView *as = [[HisAccSelectView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, EXTENDS_HEIGHT )];
+            [cell addSubview:as];
+            NSMutableArray *ma = [NSMutableArray array];
+            for (int i = 0; i<5; i++) {
+                HisLoginAcc *ha = [[HisLoginAcc alloc]init];
+                ha.account = @"luyi";
+                ha.headerIcon = [UIImage imageNamed:@"1-1.jpg"];
+                [ma addObject:ha];
+            }
+            [as setHisArr:ma];
+        }
+        else if (row == CELL_LOGIN_PSD) {
  
             cell.textLabel.text = @"密码:";
             cell.textLabel.textColor= _rgb2uic(0x767676, 1);
@@ -224,10 +322,11 @@
             tf_password.secureTextEntry = YES;
             tf_password.returnKeyType=UIReturnKeyGo;
             tf_password.placeholder = @"请输入密码";
+            tf_password.clearButtonMode = YES;
             tf_password.delegate = self;
             [cell addSubview:tf_password];
             
-        }else if (row == 2) {
+        }else if (row == CELL_LOGIN_RMB) {
             cell.backgroundColor = [UIColor clearColor];
             // frame = (15 10; 51 31)
             UISwitch *rememberSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(15, 5, 50, 31)];
@@ -251,7 +350,7 @@
             [btnForgon addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchUpInside];
             cell.accessoryView = btnForgon;
             
-        }else if (row == 3) {
+        }else if (row == CELL_LOGIN_SUBMIT) {
             cell.backgroundColor = [UIColor clearColor];
             
             UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -267,7 +366,7 @@
 
             
         }
-        else if (row == 4) {
+        else if (row == CELL_LOGIN_LAB_REG) {
             cell.backgroundColor = [UIColor clearColor];
             
             UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 90, 30)];
@@ -279,7 +378,7 @@
             
             
         }
-        else if (row == 5) {
+        else if (row == CELL_LOGIN_REG) {
             cell.backgroundColor = [UIColor clearColor];
             
             UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -294,6 +393,10 @@
             [cell addSubview:btnOrder];
             
             btnOrder.userInteractionEnabled = NO;
+            
+        }
+    }else{
+        if (indexPath.row == CELL_LOGIN_HIS_ACC) {
             
         }
     }
@@ -317,6 +420,12 @@
 {
     
     [textField resignFirstResponder];
+    if (tf_name == textField) {
+        [tf_password becomeFirstResponder];
+    }
+    if (tf_password == textField) {
+        [self login:nil];
+    }
     return YES;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{

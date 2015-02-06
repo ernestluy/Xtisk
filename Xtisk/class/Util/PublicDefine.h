@@ -147,3 +147,9 @@ typedef enum  {
     ADD_MESSAGE_TYPE_SINGLE, //单人
     ADD_MESSAGE_TYPE_GROUP_DISCUSSION_ROOM,// 讨论组
 } ADD_MESSAGE_TYPE;
+
+//搜索方向（单程、往返）
+typedef enum  {
+    TICKET_QUERY_ONE = 0,
+    TICKET_QUERY_RETURN
+} TicketQueryDirType;
