@@ -171,9 +171,9 @@ typedef enum  {
 }
 -(void)login:(id)sender{
     NSLog(@"login");
-//    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
-////    [SVProgressHUD showWithStatus:@"请等待" ];
-//    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
+    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
+//    [SVProgressHUD showWithStatus:@"请等待" ];
+    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
 
 }
 -(void)loginSucInto{

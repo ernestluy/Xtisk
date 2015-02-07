@@ -30,6 +30,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"首页";
+    [gridMainView initFlushCtl];
 }
 
 #pragma mark - GridMainViewDelegate

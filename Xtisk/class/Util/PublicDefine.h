@@ -153,3 +153,15 @@ typedef enum  {
     TICKET_QUERY_ONE = 0,
     TICKET_QUERY_RETURN
 } TicketQueryDirType;
+
+
+#define LY_DOWN_FLUSH_HEIGHT 64.0
+#define DOWN_DRAG_FLUSH_NORMAL @"上拉刷新"
+#define DOWN_DRAG_FLUSH_WILL_START @"上拉刷新"
+#define DOWN_DRAG_FLUSH_DOING @"正在刷新中"
+
+#define RELEASE_DRAG_TO_FLUSH @"放开刷新"
+
+#define UP_DRAG_FLUSH_NORMAL @"下拉刷新"
+#define UP_DRAG_FLUSH_WILL_START @"下拉刷新"
+#define UP_DRAG_FLUSH_DOING @"正在刷新中"

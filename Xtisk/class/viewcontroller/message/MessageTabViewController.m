@@ -7,17 +7,26 @@
 //
 
 #import "MessageTabViewController.h"
+#import "LYTableView.h"
 #define MSG_TAB_HEIGHT 44.0
 @interface MessageTabViewController ()
+{
+    BOOL isCanFlushCtl;
+    int tCount;
+}
 
 @end
+
 
 @implementation MessageTabViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    tCount= 5;
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"消息";
@@ -35,7 +44,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return tCount;
 }
 
 
@@ -69,7 +78,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"didSelect");
+    tCount +=2;
+    [self.tTableView reloadData];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+
+    LYTableView *lyt = (LYTableView *)self.tTableView;
+    [lyt setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    LYTableView *lyt = (LYTableView *)self.tTableView;
+    [lyt judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSLog(@"drag end");
+    LYTableView *lyt = (LYTableView *)self.tTableView;
+    [lyt judgeDragEnd];
+
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
 }
 @end

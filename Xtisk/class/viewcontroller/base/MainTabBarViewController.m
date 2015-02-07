@@ -126,17 +126,17 @@ typedef enum {
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
 //    NSLog(@"shouldSelectViewController");
-    if((int)viewController.tabBarItem.tag == TAB_BAR_MSG){
-        if([[SettingService sharedInstance] isLogin]){
-            return YES;
-        }else{
-            LoginViewController *lv = [[LoginViewController alloc]init];
-            lv.delegate = self;
-            [self.navigationController pushViewController:lv animated:YES];
-            return NO;
-        }
-        
-    }
+//    if((int)viewController.tabBarItem.tag == TAB_BAR_MSG){
+//        if([[SettingService sharedInstance] isLogin]){
+//            return YES;
+//        }else{
+//            LoginViewController *lv = [[LoginViewController alloc]init];
+//            lv.delegate = self;
+//            [self.navigationController pushViewController:lv animated:YES];
+//            return NO;
+//        }
+//        
+//    }
     return YES;
 }
 

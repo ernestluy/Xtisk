@@ -8,6 +8,9 @@
 
 #import "SecondaryViewController.h"
 
-@interface MessageTabViewController : SecondaryViewController
-
+@interface MessageTabViewController : SecondaryViewController<UITableViewDelegate>
+{
+    
+}
+@property(nonatomic,weak)IBOutlet UITableView * tTableView;
 @end

@@ -7,18 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LYCollectionView.h"
+#import "LYFlushDefine.h"
 @class GridMainView;
 @protocol GridMainViewDelegate <NSObject>
 - (void)gridMainView:(GridMainView *)mainView;
 @end
-@interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LYFlushViewDelegate>
 {
-    UICollectionView *tCollectionView;
+    LYCollectionView *tCollectionView;
     __weak UIButton *btn;
 }
-@property(nonatomic,strong) UICollectionView *tCollectionView;
+@property(nonatomic,strong) LYCollectionView *tCollectionView;
 @property(nonatomic,weak)UIButton *btn;
 @property(nonatomic,strong) NSIndexPath *tIndexPath;
 @property(nonatomic,weak)id<GridMainViewDelegate> delegate;
 -(void)setHeaderView:(UIView *)headerView;
+-(void)initFlushCtl;
 @end

@@ -13,6 +13,7 @@
  */
 NSString *const ttCollectionViewCellIdentifier = @"Cell";
 
+
 /**
  *  随机颜色
  */
@@ -26,6 +27,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 @end
 @implementation GridMainView
 @synthesize tCollectionView,btn,tIndexPath;
+
 /**
  *  初始化
  */
@@ -42,12 +44,13 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     //    layout.headerReferenceSize = CGSizeMake(320, 30);
     //    layout.footerReferenceSize = CGSizeMake(320, 50);
     CGRect rt = self.bounds;
-    self.tCollectionView = [[UICollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
+    self.tCollectionView = [[LYCollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
     
-    self.tCollectionView.bounces = NO;
+//    self.tCollectionView.bounces = NO;
     [self addSubview:self.tCollectionView];
     self.tCollectionView.delegate = self;
     self.tCollectionView.dataSource = self;
+    self.tCollectionView.lyDelegate = self;
     //    self.collectionView.collectionViewLayout = layout;
     
     
@@ -75,6 +78,10 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 - (void)addFooter
 {
     
+}
+
+-(void)initFlushCtl{
+    NSLog(@"initFlushCtl");
 }
 -(void)setHeaderView:(UIView *)headerView{
     cHeader = headerView;
@@ -106,7 +113,30 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 -(IBAction)btnAction:(id)sender{
     NSLog(@"asddf");
 }
-
+#pragma mark - LYFlushViewDelegate
+- (void)startToFlushUp:(NSObject *)ly{
+    NSLog(@"startToFlushUp");
+}
+- (void)startToFlushDown:(NSObject *)ly{
+    NSLog(@"startToFlushUp");
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [self.tCollectionView setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    [self.tCollectionView judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSLog(@"drag end");
+    [self.tCollectionView judgeDragEnd];
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+}
 #pragma mark - collection数据源代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
