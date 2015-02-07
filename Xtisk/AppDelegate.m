@@ -12,6 +12,7 @@
 #import "MainTabBarViewController.h"
 #import "XTFileManager.h"
 #import "DBManager.h"
+#import "PosterItem.h"
 @interface AppDelegate ()
 
 @end
@@ -41,6 +42,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [XTFileManager shareInstance];
     [DBManager initDB];
+    
+    [PosterItem getPosterData];
     return YES;
 }
 

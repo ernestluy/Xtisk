@@ -35,4 +35,5 @@
 - (void)setGetFileMode:(NSString *)serviceAPI;
 -(NSString *)getResponseJsonStr;
 -(NSString *)getResponseStr;
+- (NSData *)getResponseData;
 @end

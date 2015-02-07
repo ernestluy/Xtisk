@@ -148,7 +148,9 @@
     }
     return [[[NSString alloc] initWithData:[self responseData] encoding:NSUTF8StringEncoding]autorelease];
 }
-
+- (NSData *)getResponseData{
+    return [super responseData];
+}
 - (void)setGetFileMode:(NSString *)serviceAPI
 {
 	[self setRequestMethod:@"GET"];

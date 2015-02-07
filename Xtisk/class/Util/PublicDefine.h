@@ -94,6 +94,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 //头像路径
 #define PathLogo(logo)			[NSString stringWithFormat:@"%@/%@",PathDocumentsHeadIcon,logo]
 #define PathTmpFile(tpath)			[NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),tpath]
+#define PathDocFile(tpath)      [NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),tpath]
 
 #define PUBLIC_UCM_END  @"PUBLIC"
 #define PRIVATE_UCM_END @"PRIVATE"

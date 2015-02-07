@@ -33,6 +33,16 @@
     }
     return self;
 }
++(BOOL)isExistFile:(NSString *)file{
+    BOOL isDir = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL existed = [fileManager fileExistsAtPath:file isDirectory:&isDir];
+    if (existed) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 +(BOOL)createDirAtPath:(NSString *)dir{
     BOOL isDir = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];

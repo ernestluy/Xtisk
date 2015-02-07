@@ -41,7 +41,6 @@
 
 - (id)initWithURL:(NSURL *)newURL;
 - (void) startAsynchronous;
-
 -(void)setRequestMethod:(NSString *)method;
 -(void)addRequestHeader:(NSString *)key value:(NSString *)value;
 -(void)appendPostData:(NSData*)sData;

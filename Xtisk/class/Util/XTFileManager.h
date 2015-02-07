@@ -13,7 +13,7 @@
 
 +(XTFileManager *)shareInstance;
 
-
++(BOOL)isExistFile:(NSString *)file;
 +(BOOL)createDirAtPath:(NSString *)dir;
 +(BOOL)writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath;
 @end

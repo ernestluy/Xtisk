@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PublicDefine.h"
+#import "AsyncImgDownLoadRequest.h"
 @interface HttpService : NSObject
 {
     

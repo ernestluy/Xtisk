@@ -94,7 +94,7 @@
         }
     }else{//上拉
         if (self.contentSize.height<=self.frame.size.height) {
-            NSLog(@"单页已经显示完，不需要刷新，返回");
+//            NSLog(@"单页已经显示完，不需要刷新，返回");
             return;
         }
         if (self.contentOffset.y >=(self.contentSize.height - self.frame.size.height + LY_DOWN_FLUSH_HEIGHT)) {

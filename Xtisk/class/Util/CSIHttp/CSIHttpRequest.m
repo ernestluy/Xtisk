@@ -90,7 +90,7 @@ NSOperationQueue *tQueue = nil;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
 
-    NSLog(@"线程：%@", [NSThread currentThread]);
+//    NSLog(@"线程：%@", [NSThread currentThread]);
     if (self.delegate) {
         if ([self.delegate respondsToSelector:self.didFinishSelector]) {
             [self.delegate performSelector:self.didFinishSelector withObject:self];
@@ -107,7 +107,7 @@ NSOperationQueue *tQueue = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)er{
-    NSLog(@"线程：%@", [NSThread currentThread]);
+//    NSLog(@"线程：%@", [NSThread currentThread]);
     self.error = er;
     if ([er code] == -1001){ //-1001 is Timeout #warning time out message
         if (self.delegate) {

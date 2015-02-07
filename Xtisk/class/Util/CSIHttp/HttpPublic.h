@@ -21,6 +21,11 @@ typedef enum HttpRequestType{
     //【交易】请求sessionID
     HttpRequestType_XT_LOGIN = 0,
     
+    
+    
+    
+    HttpRequestType_Img_LoadDown,
+    
 }HttpRequestType;
 
 // HTTP返回类型

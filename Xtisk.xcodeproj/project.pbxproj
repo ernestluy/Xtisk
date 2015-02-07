@@ -87,6 +87,8 @@
 		ED8C779B1A8617D5009C8286 /* LYCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C779A1A8617D5009C8286 /* LYCollectionView.m */; };
 		ED8C779D1A861EFB009C8286 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C779C1A861EFB009C8286 /* grayArrow@2x.png */; };
 		ED8C77A01A861F52009C8286 /* LYFlushDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C779F1A861F52009C8286 /* LYFlushDefine.m */; };
+		ED8C77A31A8625AB009C8286 /* AsyncImgDownLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C77A21A8625AB009C8286 /* AsyncImgDownLoadRequest.m */; };
+		ED8C77A71A862779009C8286 /* PosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C77A61A862779009C8286 /* PosterItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +243,10 @@
 		ED8C779C1A861EFB009C8286 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		ED8C779E1A861F52009C8286 /* LYFlushDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYFlushDefine.h; sourceTree = "<group>"; };
 		ED8C779F1A861F52009C8286 /* LYFlushDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYFlushDefine.m; sourceTree = "<group>"; };
+		ED8C77A11A8625AB009C8286 /* AsyncImgDownLoadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImgDownLoadRequest.h; sourceTree = "<group>"; };
+		ED8C77A21A8625AB009C8286 /* AsyncImgDownLoadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImgDownLoadRequest.m; sourceTree = "<group>"; };
+		ED8C77A51A862779009C8286 /* PosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterItem.h; sourceTree = "<group>"; };
+		ED8C77A61A862779009C8286 /* PosterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PosterItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +344,8 @@
 				7678126F1A808F1D00CB4B08 /* AsyncHttpRequest.m */,
 				767812701A808F1D00CB4B08 /* CSIHttpRequest.h */,
 				767812711A808F1D00CB4B08 /* CSIHttpRequest.m */,
+				ED8C77A11A8625AB009C8286 /* AsyncImgDownLoadRequest.h */,
+				ED8C77A21A8625AB009C8286 /* AsyncImgDownLoadRequest.m */,
 			);
 			path = CSIHttp;
 			sourceTree = "<group>";
@@ -345,6 +353,7 @@
 		767812751A80933500CB4B08 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				ED8C77A41A862752009C8286 /* index */,
 				764D60231A84A6B200B186A5 /* login */,
 				767812BE1A80BCD100CB4B08 /* ucm */,
 				767812761A80933500CB4B08 /* model */,
@@ -674,6 +683,15 @@
 			path = index;
 			sourceTree = "<group>";
 		};
+		ED8C77A41A862752009C8286 /* index */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C77A51A862779009C8286 /* PosterItem.h */,
+				ED8C77A61A862779009C8286 /* PosterItem.m */,
+			);
+			path = index;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -821,10 +839,12 @@
 				7678128B1A809FE700CB4B08 /* IndexTabViewController.m in Sources */,
 				ED2587471A7D1B4A008EB344 /* FMDatabaseAdditions.m in Sources */,
 				ED7791E91A85CE40003ADF27 /* LYTableView.m in Sources */,
+				ED8C77A31A8625AB009C8286 /* AsyncImgDownLoadRequest.m in Sources */,
 				ED8C779B1A8617D5009C8286 /* LYCollectionView.m in Sources */,
 				767812731A808F1D00CB4B08 /* CSIHttpRequest.m in Sources */,
 				ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */,
 				767812901A80A00F00CB4B08 /* MessageTabViewController.m in Sources */,
+				ED8C77A71A862779009C8286 /* PosterItem.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
 				ED2587491A7D1B4A008EB344 /* FMDatabaseQueue.m in Sources */,
 				ED2587181A7D1857008EB344 /* NSDate+utils.m in Sources */,
