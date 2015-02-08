@@ -286,6 +286,7 @@
                 NSData *data = [request getResponseData];
                 if (!data || data.length <2000) {
                     NSLog(@"请求图片失败");
+                    ir.isNeedRequestAgain  = YES;
                     return;
                 }
                 NSLog(@"img.len:%d",(int)data.length);
@@ -302,6 +303,7 @@
                     iv.image = rImage;
                 }
             }else{
+                request.isNeedRequestAgain  = YES;
                 NSLog(@"请求图片失败");
             }
             break;

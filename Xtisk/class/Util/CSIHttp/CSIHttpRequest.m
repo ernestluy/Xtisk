@@ -1,9 +1,9 @@
 //
-//  CSIHttpRequest.m
-//  StockMobile
+//  AsyncImgDownLoadRequest.h
+//  Xtisk
 //
-//  Created by zzt on 15/1/8.
-//  Copyright (c) 2015年 zzt. All rights reserved.
+//  Created by 卢一 on 15/2/7.
+//  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
 #import "CSIHttpRequest.h"
@@ -16,7 +16,7 @@ NSOperationQueue *tQueue = nil;
 @implementation CSIHttpRequest
 @synthesize error,receviedData,connection,urlRequest;
 @synthesize didFailSelector,didFinishSelector;
-@synthesize delegate;
+@synthesize delegate,cRequestMethod,isNeedRequestAgain;
 
 
 +(NSOperationQueue *)getSingleQueue{
@@ -36,6 +36,7 @@ NSOperationQueue *tQueue = nil;
     [receviedData release];
     [urlRequest release];
     [sendData release];
+    [cRequestMethod release];
     [super dealloc];
 }
 
@@ -43,7 +44,8 @@ NSOperationQueue *tQueue = nil;
     self = [self init];
     self.urlRequest = [NSMutableURLRequest requestWithURL: newURL];
     sendData = [[NSMutableData alloc] init];
-    
+    postTimer = nil;
+    isNeedRequestAgain = NO;
     return self;
 }
 
@@ -53,8 +55,17 @@ NSOperationQueue *tQueue = nil;
     self.connection = [ NSURLConnection connectionWithRequest:self.urlRequest delegate:self];
 }
 
+
+-(void)timeOutAction{
+    if (self.connection) {
+        [self.connection cancel];
+    }
+    [self connection:self.connection didFailWithError:nil];
+}
+
 -(void)setRequestMethod:(NSString *)method{
-    [self.urlRequest setHTTPMethod:@"POST"];
+    self.cRequestMethod = method;
+    [self.urlRequest setHTTPMethod:method];
     self.urlRequest.HTTPBody = sendData;
 }
 
@@ -73,7 +84,11 @@ NSOperationQueue *tQueue = nil;
 -(void)setTimeOutSeconds:(int)time{
     self.urlRequest.timeoutInterval = time;
 }
-
+-(void)startRequestAgain{
+    NSLog(@"再次请求");
+    isNeedRequestAgain = NO;
+    [self startAsynchronous];
+}
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
@@ -101,6 +116,11 @@ NSOperationQueue *tQueue = nil;
         }
         
     }
+    
+    if (isNeedRequestAgain) {
+        [self startRequestAgain];
+        return;
+    }
     self.connection = nil;
     self.delegate = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -109,32 +129,35 @@ NSOperationQueue *tQueue = nil;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)er{
 //    NSLog(@"线程：%@", [NSThread currentThread]);
     self.error = er;
-    if ([er code] == -1001){ //-1001 is Timeout #warning time out message
-        if (self.delegate) {
-            if ([self.delegate respondsToSelector:self.didFailSelector]) {
-                [self.delegate performSelector:self.didFailSelector withObject:self];
-            }else{
-                if ([self.delegate respondsToSelector:@selector(requestFailed:)]) {
-                    [self.delegate requestFailed:self];
-                }
-            }
-            
-        }
-    }
-    else{
-
-        if (self.delegate) {
-            if ([self.delegate respondsToSelector:self.didFailSelector]) {
-                [self.delegate performSelector:self.didFailSelector withObject:self];
-            }else{
-                if ([self.delegate respondsToSelector:@selector(requestFailed:)]) {
-                    [self.delegate requestFailed:self];
-                }
-            }
-            
-        }
-    }
+//    if ([er code] == -1001){ //-1001 is Timeout #warning time out message
+//        if (self.delegate) {
+//            if ([self.delegate respondsToSelector:self.didFailSelector]) {
+//                [self.delegate performSelector:self.didFailSelector withObject:self];
+//            }else{
+//                if ([self.delegate respondsToSelector:@selector(requestFailed:)]) {
+//                    [self.delegate requestFailed:self];
+//                }
+//            }
+//            
+//        }
+//    }
+//    else{
+//    }
     
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:self.didFailSelector]) {
+            [self.delegate performSelector:self.didFailSelector withObject:self];
+        }else{
+            if ([self.delegate respondsToSelector:@selector(requestFailed:)]) {
+                [self.delegate requestFailed:self];
+            }
+        }
+        
+    }
+    if (isNeedRequestAgain) {
+        [self startRequestAgain];
+        return;
+    }
     self.delegate = nil;
     self.connection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

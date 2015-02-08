@@ -1,9 +1,9 @@
 //
-//  CSIHttpRequest.h
-//  StockMobile
+//  AsyncImgDownLoadRequest.h
+//  Xtisk
 //
-//  Created by zzt on 15/1/8.
-//  Copyright (c) 2015年 zzt. All rights reserved.
+//  Created by 卢一 on 15/2/7.
+//  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -29,12 +29,17 @@
     
 
     id<CSIHTTPRequestDelegate> delegate;
+    NSTimer *postTimer;
+    NSString *cRequestMethod;
+    BOOL isNeedRequestAgain;
 }
 @property (atomic, retain) NSError *error;
 @property (atomic, retain) NSMutableURLRequest *urlRequest;
 @property (nonatomic, retain) NSMutableData* receviedData;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) id<CSIHTTPRequestDelegate> delegate;
+@property (nonatomic, copy) NSString *cRequestMethod;
+@property (nonatomic) BOOL isNeedRequestAgain;
 
 @property (atomic, assign) SEL didFinishSelector;
 @property (atomic, assign) SEL didFailSelector;

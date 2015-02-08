@@ -1,9 +1,9 @@
 //
-//  SecondaryViewController.h
-//  StockMobile
+//  AsyncImgDownLoadRequest.h
+//  Xtisk
 //
-//  Created by 信息技术部中投证券 on 14-12-25.
-//  Copyright (c) 2014年 信息技术部中投证券. All rights reserved.
+//  Created by 卢一 on 15/2/7.
+//  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
 #import "AsyncHttpRequest.h"
