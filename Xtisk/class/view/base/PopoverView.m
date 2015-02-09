@@ -10,6 +10,11 @@
 
 @implementation PopoverView
 @synthesize delegate;
+
+-(void)dealloc{
+    NSLog(@"PopoverView dealloc");
+    [super dealloc];
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -23,7 +28,7 @@
 
 + (PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withContentView:(UIView *)cView
 {
-    PopoverView *popView = [[PopoverView alloc] initWithFrame:CGRectZero];
+    PopoverView *popView = [[[PopoverView alloc] initWithFrame:CGRectZero]autorelease];
     [popView showPopoverAtPoint:point inView:view withContentView:cView];
     return popView;
 }

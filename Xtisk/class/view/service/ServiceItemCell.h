@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ServiceItem.h"
 @interface ServiceItemCell : UICollectionViewCell
 
+
+@property(nonatomic,weak)IBOutlet UILabel *title;
+@property(nonatomic,weak)IBOutlet UIImageView *imageBg;
+
+-(void)setItemData:(ServiceItem *)sItem;
 @end

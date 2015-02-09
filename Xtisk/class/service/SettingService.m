@@ -9,7 +9,7 @@
 #import "SettingService.h"
 static SettingService *settingServiceInstance = nil;
 @implementation SettingService
-@synthesize account,user,token,psd,key,orgId;
+@synthesize account,user,token,psd,key,orgId,JSESSIONID;
 +(SettingService *)sharedInstance{
     if (!settingServiceInstance) {
         @synchronized([SettingService class]){
@@ -22,18 +22,19 @@ static SettingService *settingServiceInstance = nil;
 }
 
 -(BOOL)isLogin{
-    if (self.account && self.account.length>0) {
+    if (self.JSESSIONID && self.JSESSIONID.length>0) {
         return YES;
     }
     return NO;
 }
 
 -(void)logout{
-    self.account = nil;
-    self.user = nil;
-    self.account = nil;
-    self.token = nil;
-    self.key = nil;
-    self.orgId = nil;
+//    self.account = nil;
+//    self.user = nil;
+//    self.account = nil;
+//    self.token = nil;
+//    self.key = nil;
+//    self.orgId = nil;
+    self.JSESSIONID = nil;
 }
 @end

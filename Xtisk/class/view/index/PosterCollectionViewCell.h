@@ -16,5 +16,5 @@
 @property(nonatomic,weak)IBOutlet UILabel *labelContent;
 @property(nonatomic,weak)IBOutlet UIView *viewAlphe;
 
--(void)setData;
+//-(void)setData;
 @end

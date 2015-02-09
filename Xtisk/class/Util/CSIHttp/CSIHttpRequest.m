@@ -9,7 +9,10 @@
 #import "CSIHttpRequest.h"
 
 NSOperationQueue *tQueue = nil;
-@interface CSIHttpRequest ()
+@interface CSIHttpRequest (){
+    int  requestsLimit;
+    int requestAllTimes;
+}
 +(NSOperationQueue *)getSingleQueue;
 @end
 
@@ -17,7 +20,7 @@ NSOperationQueue *tQueue = nil;
 @synthesize error,receviedData,connection,urlRequest;
 @synthesize didFailSelector,didFinishSelector;
 @synthesize delegate,cRequestMethod,isNeedRequestAgain;
-
+@synthesize requestTimes;
 
 +(NSOperationQueue *)getSingleQueue{
     if (nil == tQueue) {
@@ -46,11 +49,15 @@ NSOperationQueue *tQueue = nil;
     sendData = [[NSMutableData alloc] init];
     postTimer = nil;
     isNeedRequestAgain = NO;
+    requestTimes = 1;
+    requestsLimit = 3;
+    requestAllTimes = 0;
     return self;
 }
 
 - (void) startAsynchronous{
-    
+    self.requestTimes -=1;
+    requestAllTimes ++;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     self.connection = [ NSURLConnection connectionWithRequest:self.urlRequest delegate:self];
 }
@@ -84,10 +91,22 @@ NSOperationQueue *tQueue = nil;
 -(void)setTimeOutSeconds:(int)time{
     self.urlRequest.timeoutInterval = time;
 }
--(void)startRequestAgain{
+
+-(void)requestAgain{
+    self.requestTimes +=1;
+}
+-(BOOL)isRequestAgain{
+    
+    if (requestAllTimes >= requestsLimit) {
+        //已经请求3次了，不允许再请求，返回false
+        return NO;
+    }
+    if (self.requestTimes ==0) {
+        return NO;
+    }
     NSLog(@"再次请求");
-    isNeedRequestAgain = NO;
     [self startAsynchronous];
+    return YES;
 }
 #pragma mark - NSURLConnectionDelegate
 
@@ -117,8 +136,7 @@ NSOperationQueue *tQueue = nil;
         
     }
     
-    if (isNeedRequestAgain) {
-        [self startRequestAgain];
+    if ([self isRequestAgain]) {
         return;
     }
     self.connection = nil;
@@ -154,8 +172,7 @@ NSOperationQueue *tQueue = nil;
         }
         
     }
-    if (isNeedRequestAgain) {
-        [self startRequestAgain];
+    if ([self isRequestAgain]) {
         return;
     }
     self.delegate = nil;

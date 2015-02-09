@@ -30,6 +30,7 @@
 @property(nonatomic,copy)NSString *user;
 @property(nonatomic,copy)NSString *token;
 @property(nonatomic,copy)NSString *psd;
+@property(nonatomic,copy)NSString *JSESSIONID;
 +(SettingService *)sharedInstance;
 
 -(BOOL)isLogin;

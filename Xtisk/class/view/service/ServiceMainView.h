@@ -18,4 +18,6 @@
 @property(nonatomic,strong) UICollectionView *tCollectionView;
 @property(nonatomic,strong) NSIndexPath *tIndexPath;
 @property(nonatomic,weak)id<ServiceMainViewDelegate> delegate;
+@property(nonatomic,strong) NSArray *mData;
+-(void)setData:(NSArray *)arr;
 @end

@@ -15,4 +15,6 @@
     CirculaScrollView *circulaScrollView;
     GridMainView *gridMainView;
 }
+
+-(void)selectAction:(id)sender;
 @end

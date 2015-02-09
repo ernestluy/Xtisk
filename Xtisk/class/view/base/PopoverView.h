@@ -15,7 +15,7 @@
 {
     id<PopoverViewDelegate> delegate;
 }
-@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, assign) UIView *contentView;
 @property (nonatomic, assign) CGRect boxFrame;
 @property (nonatomic, assign) id<PopoverViewDelegate> delegate;
 

@@ -14,17 +14,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="船票" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Da4-He-UPi">
-                        <rect key="frame" x="0.0" y="50" width="70" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="0.0" y="39" width="70" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JOX-sc-eGh">
-                        <rect key="frame" x="13" y="0.0" width="45" height="45"/>
+                        <rect key="frame" x="15" y="2" width="40" height="40"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <connections>
+                <outlet property="imageBg" destination="JOX-sc-eGh" id="HfC-Lx-EfT"/>
+                <outlet property="title" destination="Da4-He-UPi" id="DML-fM-YZv"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

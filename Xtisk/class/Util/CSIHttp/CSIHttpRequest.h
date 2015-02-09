@@ -32,6 +32,7 @@
     NSTimer *postTimer;
     NSString *cRequestMethod;
     BOOL isNeedRequestAgain;
+    int requestTimes;
 }
 @property (atomic, retain) NSError *error;
 @property (atomic, retain) NSMutableURLRequest *urlRequest;
@@ -40,12 +41,14 @@
 @property (nonatomic, retain) id<CSIHTTPRequestDelegate> delegate;
 @property (nonatomic, copy) NSString *cRequestMethod;
 @property (nonatomic) BOOL isNeedRequestAgain;
+@property (nonatomic) int requestTimes;
 
 @property (atomic, assign) SEL didFinishSelector;
 @property (atomic, assign) SEL didFailSelector;
 
 - (id)initWithURL:(NSURL *)newURL;
 - (void) startAsynchronous;
+-(void)requestAgain;
 -(void)setRequestMethod:(NSString *)method;
 -(void)addRequestHeader:(NSString *)key value:(NSString *)value;
 -(void)appendPostData:(NSData*)sData;

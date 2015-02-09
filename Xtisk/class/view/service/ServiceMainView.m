@@ -8,6 +8,7 @@
 
 #import "ServiceMainView.h"
 #import "ServiceItemCell.h"
+#import "ServiceItem.h"
 NSString *const ServiceMainViewCellIdentifier = @"Cell";
 @interface ServiceMainView(){
     
@@ -65,6 +66,11 @@ NSString *const ServiceMainViewCellIdentifier = @"Cell";
     cHeader = headerView;
     [self.tCollectionView reloadData];
 }
+
+-(void)setData:(NSArray *)arr{
+    self.mData = arr;
+    [self.tCollectionView reloadData];
+}
 /**
  *  初始化collectionView
  */
@@ -89,8 +95,10 @@ NSString *const ServiceMainViewCellIdentifier = @"Cell";
 #pragma mark - collection数据源代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
-    return 6;
+    if (self.mData) {
+        return self.mData.count;
+    }
+    return 0;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -100,6 +108,9 @@ NSString *const ServiceMainViewCellIdentifier = @"Cell";
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ServiceMainViewCellIdentifier forIndexPath:indexPath];
     //    NSLog(@"row:%d",indexPath.row);
+    ServiceItem *si = [self.mData objectAtIndex:indexPath.row];
+    ServiceItemCell *siCell = (ServiceItemCell *)cell;
+    [siCell setItemData:si];
     return cell;
 }
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath{

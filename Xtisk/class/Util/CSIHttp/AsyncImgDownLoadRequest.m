@@ -8,7 +8,7 @@
 
 #import "AsyncImgDownLoadRequest.h"
 @interface AsyncImgDownLoadRequest(){
-    int requestTimes;
+    
 }
 @end
 @implementation AsyncImgDownLoadRequest
@@ -20,7 +20,7 @@
     self.urlRequest.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     // this will make sure the request always returns the cached image
     
-    requestTimes = 1;
+    
     self.urlRequest.HTTPShouldHandleCookies = NO;
     
     

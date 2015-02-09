@@ -58,7 +58,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     [self.tCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
     // 1.初始化collectionView
     [self setupCollectionView];
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     self.tCollectionView.backgroundColor = [UIColor clearColor];
     
     
@@ -188,7 +188,6 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     UICollectionReusableView * v = nil;
     if([kind isEqual:UICollectionElementKindSectionHeader]){
         v = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-        v.backgroundColor = [UIColor redColor];
         for (UIView *view in v.subviews) {
             [view removeFromSuperview];
         }
