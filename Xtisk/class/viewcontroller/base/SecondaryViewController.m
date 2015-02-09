@@ -25,6 +25,11 @@
     [backBtn addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * back = [[UIBarButtonItem alloc] initWithCustomView:backBtn] ;
     [self.navigationItem setLeftBarButtonItem:back];
+    
+//    UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 50, 44)];
+//    tView.backgroundColor = [UIColor redColor];
+//    self.navigationItem.titleView = tView;
+////    [self.navigationItem.titleView addSubview:tView];
 }
 -(void)onBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];

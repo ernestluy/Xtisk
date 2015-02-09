@@ -23,7 +23,10 @@ typedef enum {
 }TabBarIndex;
 
 @interface MainTabBarViewController ()
-
+{
+    UIView *tTitleView;
+    UIImageView *tImgView;
+}
 @end
 
 @implementation MainTabBarViewController
@@ -45,10 +48,21 @@ typedef enum {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    tTitleView = self.navigationController.navigationBar.topItem.titleView;
+    [self.navigationController.navigationBar.topItem setTitleView:tImgView];
+}
 - (void)viewDidLoad
 {
 
     [super viewDidLoad];
+    
+    UIImage *hImg = [UIImage imageNamed:@"index_header_icon"];
+    tImgView = [[UIImageView alloc]initWithImage:hImg];
+    tImgView.frame = CGRectMake(0, 0, hImg.size.width, hImg.size.height);
+    
+    
     NSMutableArray *baritems = [NSMutableArray array];
 
     NSArray *xibArray = [NSArray arrayWithObjects:@"IndexTabViewController",@"MessageTabViewController",@"ServiceTabViewController",@"MoreTabViewController", nil];
@@ -98,6 +112,9 @@ typedef enum {
         [self.tabBar setSelectedImageTintColor:headerColor];
         self.tabBar.shadowImage = nil;
     }
+    
+    
+    
 }
 
 
@@ -113,8 +130,15 @@ typedef enum {
     m_selectedIndex = index;
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-//    NSLog(@"didSelectViewController");
+    NSLog(@"didSelectViewController");
 //    [self doubleClick:viewController];
+    if((int)viewController.tabBarItem.tag == TAB_BAR_INDEX){
+        
+        tTitleView = self.navigationController.navigationBar.topItem.titleView;
+        [self.navigationController.navigationBar.topItem setTitleView:tImgView];
+    }else{
+        [self.navigationController.navigationBar.topItem setTitleView:tTitleView];
+    }
 }
 
 #pragma mark - LoginViewControllerDelegate
