@@ -42,7 +42,7 @@
     CGFloat x = 0;
     CGFloat y = 0;
     CGFloat w = bounds.size.width;
-    CGFloat h = bounds.size.height - y;
+    CGFloat h = bounds.size.height - 64;
 
     webView = [[UIWebView alloc] initWithFrame:CGRectMake(x, y, w, h)];
 //    webView.scalesPageToFit = YES;

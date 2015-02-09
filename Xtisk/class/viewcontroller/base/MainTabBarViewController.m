@@ -37,7 +37,7 @@ typedef enum {
     if (self) {
      
         m_selectedIndex=-1;
-
+        tTitleView = nil;
     }
     return self;
 }
@@ -50,7 +50,9 @@ typedef enum {
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    tTitleView = self.navigationController.navigationBar.topItem.titleView;
+    if (tTitleView == nil) {
+        tTitleView = self.navigationController.navigationBar.topItem.titleView;
+    }
     [self.navigationController.navigationBar.topItem setTitleView:tImgView];
 }
 - (void)viewDidLoad
@@ -134,7 +136,6 @@ typedef enum {
 //    [self doubleClick:viewController];
     if((int)viewController.tabBarItem.tag == TAB_BAR_INDEX){
         
-        tTitleView = self.navigationController.navigationBar.topItem.titleView;
         [self.navigationController.navigationBar.topItem setTitleView:tImgView];
     }else{
         [self.navigationController.navigationBar.topItem setTitleView:tTitleView];
