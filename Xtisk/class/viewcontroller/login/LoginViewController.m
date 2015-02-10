@@ -32,6 +32,7 @@ typedef enum  {
 {
     CGPoint touchBeganPoint;
     UITextField *nowTextField;
+    UISwitch *rmbSwith;
     int fontSize;
     UIFont *nFont;
     UIButton *btnExtend;
@@ -92,6 +93,20 @@ typedef enum  {
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBarHidden = YES;
     self.title = @"登录";
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    HisLoginAcc *la = [HisLoginAcc getLastAccLoginInfo];
+    if (la) {
+        tf_name.text = la.account;
+        rmbSwith.on = la.isRmbPsd;
+        if (la.isRmbPsd) {
+            tf_password.text = la.psd;
+        }else{
+            
+        }
+    }
 }
 - (void)viewDidLoad
 {
@@ -142,7 +157,7 @@ typedef enum  {
     
     [self.view addGestureRecognizer:pan2];
     
-    [self performSelector:@selector(setData) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(setData) withObject:nil afterDelay:1];
 }
 
 -(void)setData{
@@ -181,6 +196,11 @@ typedef enum  {
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
         [self.delegate loginSucBack:self];
     }
+    HisLoginAcc *la = [[HisLoginAcc alloc]init];
+    la.account = tf_name.text;
+    la.psd = tf_password.text;
+    la.isRmbPsd = isRemPsd;
+    [HisLoginAcc saveLastAccLoginInfo:la];
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -290,12 +310,12 @@ typedef enum  {
             tf_name.delegate = self;
             [cell addSubview:tf_name];
             
-            
-            btnExtend = [UIButton buttonWithType:UIButtonTypeCustom];
-            btnExtend.frame = CGRectMake(self.tableView.frame.size.width - 40, 0, 40, LOGIN_CELL_HEIGHT);
-            [btnExtend setBackgroundImage:[UIImage imageNamed:@"login_expend.png"] forState:UIControlStateNormal];
-            [btnExtend addTarget:self action:@selector(extendAction:) forControlEvents:UIControlEventTouchUpInside];
-            cell.accessoryView = btnExtend;
+//            去掉可选历史登录账户
+//            btnExtend = [UIButton buttonWithType:UIButtonTypeCustom];
+//            btnExtend.frame = CGRectMake(self.tableView.frame.size.width - 40, 0, 40, LOGIN_CELL_HEIGHT);
+//            [btnExtend setBackgroundImage:[UIImage imageNamed:@"login_expend.png"] forState:UIControlStateNormal];
+//            [btnExtend addTarget:self action:@selector(extendAction:) forControlEvents:UIControlEventTouchUpInside];
+//            cell.accessoryView = btnExtend;
         }
         else if(row == CELL_LOGIN_HIS_ACC){
             
@@ -334,6 +354,7 @@ typedef enum  {
             rememberSwitch.on = YES;
             [cell addSubview:rememberSwitch];
             [rememberSwitch addTarget:self action:@selector(rememberSwitchAction:) forControlEvents:UIControlEventValueChanged];
+            rmbSwith = rememberSwitch;
             
             UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(rememberSwitch.frame)+4, 0, 90, 40)];
             tLabel.font = nFont;

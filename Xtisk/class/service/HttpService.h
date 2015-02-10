@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PublicDefine.h"
 #import "AsyncImgDownLoadRequest.h"
+#import "BaseResponse.h"
 @interface HttpService : NSObject
 {
     
@@ -17,6 +18,51 @@
 
 
 +(HttpService *)sharedInstance;
+#pragma mark - 返回数据处理
+-(BaseResponse *)dealResponseData:(NSData *)data;
+#pragma mark - 4.3.1.1	获取海报
+-(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate ;
+#pragma mark - 4.3.1.2	获取推荐位
+-(AsyncHttpRequest *)getRequestRecomList:(id<AsyncHttpRequestDelegate>)delegate;
 
+#pragma mark - 4.3.2.1	获取活动列表 页码，默认为1
+-(AsyncHttpRequest *)getRequestActivityList:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize;
+
+#pragma mark - 4.3.2.2	获取活动详情
+-(AsyncHttpRequest *)getRequestActivityDetail:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId;
+
+#pragma mark - 4.3.2.3	获取活动评论 页码，默认为1
+-(AsyncHttpRequest *)getRequestactivityCommentsList:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId pageNo:(int)pageNo pageSize:(int)pageSize;
+
+#pragma mark - 4.3.2.4	评论活动
+-(AsyncHttpRequest *)getRequestActivityComments:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId content:(NSString *)content;
+
+#pragma mark - 4.3.2.5	活动点赞/取消点赞
+-(AsyncHttpRequest *)getRequestFavoriteActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId ;
+
+#pragma mark - 4.3.2.6	活动报名
+-(AsyncHttpRequest *)getRequestJoinActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail;
+#pragma mark - 4.3.2.7	查看活动报名信息
+-(AsyncHttpRequest *)getRequestQueryActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId;
+#pragma mark - 4.3.2.8	修改活动报名信息
+-(AsyncHttpRequest *)getRequestUpdateActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail;
+#pragma mark - 4.3.2.9	取消报名
+-(AsyncHttpRequest *)getRequestCancelActivityJoin:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId;
+
+
+#pragma mark - 4.3.3	周边
+#pragma mark - 4.3.3.1	获取周边的分类（含根据父分类获取子分类）
+-(AsyncHttpRequest *)getRequestCategoryTypeList:(id<AsyncHttpRequestDelegate>)delegate parentCategoryId:(NSString *)parentCategoryId;
+#pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
+-(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId;
+#pragma mark - 4.3.3.3	获取店家详情
+-(AsyncHttpRequest *)getRequestQueryStoreDetail:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
+
+
+#pragma mark - 4.3.4.9	登录
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd;
+#pragma mark - 4.3.4.10	注册
+-(AsyncHttpRequest *)getRequestReg:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account psd:(NSString *)psd authCode:(NSString *)authCode;
+#pragma mark - 4.3.4.11	获取/验证短信验证码
+-(AsyncHttpRequest *)getRequestSmsCode:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account method:(NSString *)method smsCode:(NSString *)smsCode;
 @end

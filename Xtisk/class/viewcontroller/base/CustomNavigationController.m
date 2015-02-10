@@ -18,12 +18,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.navigationBar setTintColor:_rgb2uic(0xF9F9F9, 1)];
-    self.navigationBar.barTintColor = headerColor;
+//    [self.navigationBar setTintColor:_rgb2uic(0xF9F9F9, 1)];
+//    self.navigationBar.barTintColor = headerColor;
     
     self.navigationBar.translucent = NO;
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor whiteColor], UITextAttributeTextColor,
+                                    _rgb2uic(0x0095f1, 1), UITextAttributeTextColor,
                                     nil]];
     
 

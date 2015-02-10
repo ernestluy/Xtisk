@@ -11,22 +11,77 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h8e-g5-v2A">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P4i-sK-ztc">
-                    <rect key="frame" x="120" y="105" width="80" height="30"/>
+                    <rect key="frame" x="110" y="94" width="90" height="40"/>
                     <state key="normal" title="登录/注册">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1-2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IwB-Es-x81">
-                    <rect key="frame" x="120" y="17" width="80" height="80"/>
+                    <rect key="frame" x="120" y="17" width="70" height="70"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnLogin" destination="P4i-sK-ztc" id="Lcn-SW-G5z"/>
+                <outlet property="imageBg" destination="h8e-g5-v2A" id="udH-11-Yb0"/>
                 <outlet property="imageHead" destination="IwB-Es-x81" id="adF-hh-gDV"/>
             </connections>
+        </view>
+        <view tag="1" contentMode="scaleToFill" id="SZq-QC-2EA" customClass="MoreTableViewHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnk-w2-B5a" userLabel="bg Image View">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyR-Ya-3xH" userLabel="header Image View">
+                    <rect key="frame" x="27" y="20" width="70" height="70"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="丛丛" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHt-IS-qgP">
+                    <rect key="frame" x="121" y="24" width="113" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0Q-V1-sOT">
+                    <rect key="frame" x="248" y="24" width="46" height="30"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="个性签名：每过一天都是精彩的一天" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIy-fH-LTQ">
+                    <rect key="frame" x="27" y="103" width="267" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-7K-CxZ">
+                    <rect key="frame" x="27" y="100" width="267" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="13418884362" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUl-4E-iqT">
+                    <rect key="frame" x="116" y="64" width="113" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="inBtnReset" destination="n0Q-V1-sOT" id="lu5-WA-SWL"/>
+                <outlet property="inImageBg" destination="fnk-w2-B5a" id="vdH-kB-TDL"/>
+                <outlet property="inImageHead" destination="YyR-Ya-3xH" id="kGn-xl-kTp"/>
+                <outlet property="inLabAccount" destination="qUl-4E-iqT" id="xkP-mf-eIW"/>
+                <outlet property="inLabName" destination="cHt-IS-qgP" id="HST-Ht-sqS"/>
+                <outlet property="inLabSign" destination="JIy-fH-LTQ" id="Ckm-Bb-BtW"/>
+            </connections>
+            <point key="canvasLocation" x="263" y="515"/>
         </view>
     </objects>
     <resources>

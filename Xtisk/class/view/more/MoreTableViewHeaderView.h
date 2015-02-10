@@ -12,5 +12,19 @@
 
 
 @property(nonatomic,weak)IBOutlet UIButton *btnLogin;
+@property(nonatomic,weak)IBOutlet UIImageView *imageBg;
 @property(nonatomic,weak)IBOutlet UIImageView *imageHead;
+
+
+
+@property(nonatomic,weak)IBOutlet UIButton *inBtnReset;
+@property(nonatomic,weak)IBOutlet UIImageView *inImageBg;
+@property(nonatomic,weak)IBOutlet UIImageView *inImageHead;
+
+@property(nonatomic,weak)IBOutlet UILabel *inLabName;
+@property(nonatomic,weak)IBOutlet UILabel *inLabAccount;
+@property(nonatomic,weak)IBOutlet UILabel *inLabSign;
+
+
+//-(void)inSetData
 @end

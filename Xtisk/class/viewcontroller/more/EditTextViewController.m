@@ -15,8 +15,9 @@
 @implementation EditTextViewController
 
 
--(id)initWithType:(int)type{
+-(id)initWithType:(int)type delegate:(id<EditTextViewDelegate>) delegate{
     self = [super init];
+    self.tDelegate = delegate;
     tType = type;
     return self;
 }
@@ -55,6 +56,9 @@
 -(void)submit:(id)sender{
     NSLog(@"submit");
     [self.tTextView resignFirstResponder];
+    if (self.tDelegate &&  [self.tDelegate respondsToSelector:@selector(editTextDone:type:)]) {
+        [self.tDelegate editTextDone:self.tTextView.text type:tType];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

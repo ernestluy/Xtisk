@@ -20,7 +20,8 @@
 {
     NSArray *titleArr;
     NSArray *imgArr;
-    MoreTableViewHeaderView *headerView;
+    MoreTableViewHeaderView *outHeaderView;
+    MoreTableViewHeaderView *inHeaderView;
 }
 @end
 
@@ -33,14 +34,23 @@
     titleArr = @[@"船票订单",@"推荐给好友",@"扫一扫",@"设置"];
     
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"MoreTableViewHeaderView" owner:self options:nil];
-    
-    UIView *tmpCustomView = [nib objectAtIndex:0];
-    self.tTableView.tableHeaderView = tmpCustomView;
-    if (tmpCustomView && [tmpCustomView isKindOfClass:[MoreTableViewHeaderView class]]) {
-        headerView = (MoreTableViewHeaderView*)tmpCustomView;
-        [CTLCustom setButtonRadius:headerView.btnLogin];
-        [headerView.btnLogin addTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
+    for (UIView *tmpCustomView in nib) {
+        
+        if (tmpCustomView && tmpCustomView.tag == 0 && [tmpCustomView isKindOfClass:[MoreTableViewHeaderView class]]) {
+            outHeaderView = (MoreTableViewHeaderView*)tmpCustomView;
+            [CTLCustom setButtonRadius:outHeaderView.btnLogin];
+            [outHeaderView.btnLogin addTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
+        }else if (tmpCustomView && tmpCustomView.tag == 1 && [tmpCustomView isKindOfClass:[MoreTableViewHeaderView class]]) {
+            inHeaderView = (MoreTableViewHeaderView*)tmpCustomView;
+            inHeaderView.backgroundColor = [UIColor lightGrayColor];
+        }
     }
+    if ([[SettingService sharedInstance] isLogin]) {
+        self.tTableView.tableHeaderView = inHeaderView;
+    }else{
+        self.tTableView.tableHeaderView = outHeaderView;
+    }
+    
 }
 -(void)toLogin:(id)sender{
     LoginViewController *lv = [[LoginViewController alloc]init];
@@ -51,9 +61,9 @@
     self.tabBarController.title = @"更多";
     
     if ([[SettingService sharedInstance] isLogin]) {
-        headerView.btnLogin.hidden = YES;
+        self.tTableView.tableHeaderView = inHeaderView;
     }else{
-        headerView.btnLogin.hidden = NO;
+        self.tTableView.tableHeaderView = outHeaderView;
     }
 }
 - (void)didReceiveMemoryWarning {

@@ -53,7 +53,10 @@ typedef enum {
     if (tTitleView == nil) {
         tTitleView = self.navigationController.navigationBar.topItem.titleView;
     }
-    [self.navigationController.navigationBar.topItem setTitleView:tImgView];
+    if (self.selectedIndex == 0) {
+        [self.navigationController.navigationBar.topItem setTitleView:tImgView];
+    }
+    
 }
 - (void)viewDidLoad
 {
@@ -107,15 +110,15 @@ typedef enum {
     
     self.delegate = self;
     self.viewControllers = baritems;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        [self.tabBar setTintColor:headerColor];
-    }else{
-        [self.tabBar setTintColor:_rgb2uic(0xFFFFFF, 1)];
-        [self.tabBar setSelectedImageTintColor:headerColor];
-        self.tabBar.shadowImage = nil;
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+//        [self.tabBar setTintColor:headerColor];
+//    }else{
+//        [self.tabBar setTintColor:_rgb2uic(0xFFFFFF, 1)];
+//        [self.tabBar setSelectedImageTintColor:headerColor];
+//        self.tabBar.shadowImage = nil;
+//    }
     
-    
+    [self.tabBar setTintColor:_rgb2uic(0x0095f1, 1)];
     
 }
 
@@ -132,7 +135,7 @@ typedef enum {
     m_selectedIndex = index;
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    NSLog(@"didSelectViewController");
+//    NSLog(@"didSelectViewController");
 //    [self doubleClick:viewController];
     if((int)viewController.tabBarItem.tag == TAB_BAR_INDEX){
         

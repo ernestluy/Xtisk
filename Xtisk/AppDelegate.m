@@ -13,6 +13,7 @@
 #import "XTFileManager.h"
 #import "DBManager.h"
 #import "PosterItem.h"
+#import "PublicDefine.h"
 @interface AppDelegate ()
 
 @end
@@ -39,11 +40,17 @@
     [self.window makeKeyAndVisible];
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [XTFileManager shareInstance];
     [DBManager initDB];
     
     [PosterItem getPosterData];
+    
+//    NSData *dd = [Util strToData:@"12345"];
+//    NSLog(@"%d",dd.length);
+//    NSDictionary *dic = @{@"luyi":@"He is a good man.",@"age":[NSNumber numberWithInt:29]};
+//    NSString *jsonStr= [Util getJsonStrWithObj:dic];
+//    NSLog(@"%@",jsonStr);
     return YES;
 }
 

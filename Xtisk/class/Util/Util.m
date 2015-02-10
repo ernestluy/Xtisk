@@ -51,5 +51,28 @@
 
 @end
 @implementation Util
++(NSData *)strToData:(NSString *)str{
+    char *cStr = (char *)[str cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cStr length:(strlen(cStr))];//+1
+    return data;
+}
++(NSString*)getJsonStrWithObj:(id)obj{
+    NSError *err;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:obj options:NSJSONWritingPrettyPrinted error:&err];
+    NSString *str = [[NSString alloc]initWithBytes:[data bytes] length:data.length encoding:NSUTF8StringEncoding];
+    return str;
+}
 
++(id)getObjWithJsonStr:(NSString *)jsonStr{
+    NSError *err;
+    char *buffer = ( char *)[jsonStr cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:buffer length:strlen(buffer)];
+    id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
+    return obj;
+}
++(id)getObjWithJsonData:(NSData *)jsonData{
+    NSError *err;
+    id obj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&err];
+    return obj;
+}
 @end

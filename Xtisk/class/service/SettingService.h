@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "IUser.h"
 @interface SettingService : NSObject
 {
     
@@ -24,6 +24,7 @@
  Capacity：业务id list
  ResultInfo:结果信息
  */
+@property(nonatomic,copy)IUser *iUser;
 @property(nonatomic,copy)NSString *key;
 @property(nonatomic,copy)NSString *orgId;
 @property(nonatomic,copy)NSString *account;

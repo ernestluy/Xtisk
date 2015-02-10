@@ -20,9 +20,21 @@ typedef enum HttpRequestType{
     
     //【交易】请求sessionID
     HttpRequestType_XT_LOGIN = 0,
+    HttpRequestType_XT_POSTERLIST,
+    HttpRequestType_XT_RECOMMENDLIST,
+    HttpRequestType_XT_ACTIVITYLIST,
+    HttpRequestType_XT_ACTIVITYDETAIL,
+    HttpRequestType_XT_ACTIVITYCOMMENTSLIST,
+    HttpRequestType_XT_ACTIVITYCOMMENTS,
+    HttpRequestType_XT_FAVORITEACTIVITY,//此处有一样的，待定
     
+    HttpRequestType_XT_QUERYACTIVITYJOININFO,
+    HttpRequestType_XT_UPDATEACTIVITYJOININFO,
+    HttpRequestType_XT_CANCELACTIVITYJOIN,
     
-    
+    HttpRequestType_XT_QUERYCATEGORY,
+    HttpRequestType_XT_QUERYSTOREBYCATEGORY,//此处接口不健全，需要注意
+    HttpRequestType_XT_QUERYSTOREDETAIL,
     
     HttpRequestType_Img_LoadDown,
     

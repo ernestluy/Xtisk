@@ -11,6 +11,7 @@
 #import "PopoverView.h"
 #import "CTLCustom.h"
 #import "EditTextViewController.h"
+
 @interface PrivateViewController ()
 {
     NSArray *titleArr;
@@ -80,6 +81,17 @@
     [tActionSheet dismissWithClickedButtonIndex:0 animated:YES];
     tActionSheet = nil;
 }
+
+#pragma mark -EditTextViewDelegate
+- (void)editTextDone:(NSString *)str type:(int)ty{
+    if (PrivateEditTextSign == ty) {
+        NSLog(@"签名");
+        labSign.text = str;
+    }else if(PrivateEditTextCom == ty) {
+        NSLog(@"企业");
+        labCom.text = str;
+    }
+}
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -107,15 +119,54 @@
                 
                 break;
             }
+            case 1:{
+                labNick = [self getCusRightLabel:cRect];
+                [cell addSubview:labNick];
+                labNick.text = @"luyi";
+                break;
+            }
+            case 2:{
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                labAccount = [self getCusRightLabel:cRect];
+                [cell addSubview:labAccount];
+                labAccount.text = @"13418884362";
+                break;
+            }
+            case 3:{
+                labSign= [self getCusRightLabel:cRect];
+                [cell addSubview:labSign];
+                labSign.text = @"这是我的签名";
+                break;
+            }
+            case 4:{
+                labSex= [self getCusRightLabel:cRect];
+                [cell addSubview:labSex];
+                labSex.text = @"男";
+                break;
+            }
             case 5:{
                 labBirthDate = [self getCusRightLabel:cRect];
                 [cell addSubview:labBirthDate];
-//                cell.accessoryView  = labBirthDate;
+                labBirthDate.text = @"1988-08-8";
+                //                cell.accessoryView  = labBirthDate;
+                break;
+            }
+            case 6:{
+                labMarStatus= [self getCusRightLabel:cRect];
+                [cell addSubview:labMarStatus];
+                labMarStatus.text = @"未婚";
+                break;
+            }
+            case 7:{
+                labCom= [self getCusRightLabel:cRect];
+                [cell addSubview:labCom];
+                labCom.text = @"兴天技术责任有限公司";
                 break;
             }
             default:
                 break;
-        }
+         }
     }
     
     cell.textLabel.text = [titleArr objectAtIndex:(int)indexPath.row];
@@ -133,6 +184,9 @@
 //    return view;
 //}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row == 0){
+        return 1.5*DEFAULT_CELL_HEIGHT;
+    }
     return DEFAULT_CELL_HEIGHT;
 }
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -157,12 +211,12 @@
             break;
         }
         case 3:{
-            EditTextViewController *et = [[EditTextViewController alloc]initWithType:0];
+            EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextSign delegate:self];
             [self.navigationController pushViewController:et animated:YES];
             break;
         }
         case 7:{
-            EditTextViewController *et = [[EditTextViewController alloc]initWithType:1];
+            EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextCom delegate:self];
             [self.navigationController pushViewController:et animated:YES];
             break;
         }

@@ -12,5 +12,18 @@
 
 
 @property(nonatomic,copy)NSString *account;
+@property(nonatomic,copy)NSString *psd;
 @property(nonatomic,retain)UIImage *headerIcon;
+@property(nonatomic)BOOL isRmbPsd;
+@property(nonatomic,copy)NSString *imgPath;
+
++(void)saveAccLoginInfo:(HisLoginAcc*)la;
++(NSArray *)getAllAccLoginInfo;
+
++(NSDictionary *)dictionaryFormatWith:(HisLoginAcc *)la;
++(HisLoginAcc *)hisLoginAccFormatWith:(NSDictionary *)dic;
+
+
++(void)saveLastAccLoginInfo:(HisLoginAcc*)la;
++(HisLoginAcc *)getLastAccLoginInfo;
 @end

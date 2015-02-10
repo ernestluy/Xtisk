@@ -36,6 +36,17 @@
 		764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60491A88B0D900B186A5 /* EditTextViewController.m */; };
 		764D604C1A88B0D900B186A5 /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D604A1A88B0D900B186A5 /* EditTextViewController.xib */; };
 		764D604E1A88BBE300B186A5 /* index_header_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764D604D1A88BBE300B186A5 /* index_header_icon@2x.png */; };
+		764D60511A89CC6800B186A5 /* IUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60501A89CC6800B186A5 /* IUser.m */; };
+		764D60551A89CE3E00B186A5 /* RegSecondStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60531A89CE3E00B186A5 /* RegSecondStepViewController.m */; };
+		764D60561A89CE3E00B186A5 /* RegSecondStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60541A89CE3E00B186A5 /* RegSecondStepViewController.xib */; };
+		764D60591A89D55B00B186A5 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60581A89D55B00B186A5 /* BaseResponse.m */; };
+		764D605C1A89DC7000B186A5 /* RecommendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D605B1A89DC7000B186A5 /* RecommendItem.m */; };
+		764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D605E1A89DDE500B186A5 /* ActivityItem.m */; };
+		764D60621A89E0E900B186A5 /* CommentsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60611A89E0E900B186A5 /* CommentsItem.m */; };
+		764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60641A89E37500B186A5 /* FavoriteItem.m */; };
+		764D60681A89E71500B186A5 /* JoinInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60671A89E71500B186A5 /* JoinInfo.m */; };
+		764D606D1A89EA6500B186A5 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D606C1A89EA6500B186A5 /* CategoryItem.m */; };
+		764D60701A89EDBD00B186A5 /* StoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D606F1A89EDBD00B186A5 /* StoreItem.m */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -162,6 +173,27 @@
 		764D60491A88B0D900B186A5 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
 		764D604A1A88B0D900B186A5 /* EditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		764D604D1A88BBE300B186A5 /* index_header_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "index_header_icon@2x.png"; sourceTree = "<group>"; };
+		764D604F1A89CC6800B186A5 /* IUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUser.h; sourceTree = "<group>"; };
+		764D60501A89CC6800B186A5 /* IUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUser.m; sourceTree = "<group>"; };
+		764D60521A89CE3E00B186A5 /* RegSecondStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegSecondStepViewController.h; sourceTree = "<group>"; };
+		764D60531A89CE3E00B186A5 /* RegSecondStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegSecondStepViewController.m; sourceTree = "<group>"; };
+		764D60541A89CE3E00B186A5 /* RegSecondStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegSecondStepViewController.xib; sourceTree = "<group>"; };
+		764D60571A89D55B00B186A5 /* BaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
+		764D60581A89D55B00B186A5 /* BaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
+		764D605A1A89DC7000B186A5 /* RecommendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendItem.h; sourceTree = "<group>"; };
+		764D605B1A89DC7000B186A5 /* RecommendItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItem.m; sourceTree = "<group>"; };
+		764D605D1A89DDE500B186A5 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
+		764D605E1A89DDE500B186A5 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
+		764D60601A89E0E900B186A5 /* CommentsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsItem.h; sourceTree = "<group>"; };
+		764D60611A89E0E900B186A5 /* CommentsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsItem.m; sourceTree = "<group>"; };
+		764D60631A89E37500B186A5 /* FavoriteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteItem.h; sourceTree = "<group>"; };
+		764D60641A89E37500B186A5 /* FavoriteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteItem.m; sourceTree = "<group>"; };
+		764D60661A89E71500B186A5 /* JoinInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinInfo.h; sourceTree = "<group>"; };
+		764D60671A89E71500B186A5 /* JoinInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinInfo.m; sourceTree = "<group>"; };
+		764D606B1A89EA6500B186A5 /* CategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItem.h; sourceTree = "<group>"; };
+		764D606C1A89EA6500B186A5 /* CategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
+		764D606E1A89EDBD00B186A5 /* StoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItem.h; sourceTree = "<group>"; };
+		764D606F1A89EDBD00B186A5 /* StoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreItem.m; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -368,6 +400,8 @@
 			children = (
 				764D60241A84A6CE00B186A5 /* HisLoginAcc.h */,
 				764D60251A84A6CE00B186A5 /* HisLoginAcc.m */,
+				764D604F1A89CC6800B186A5 /* IUser.h */,
+				764D60501A89CC6800B186A5 /* IUser.m */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -377,6 +411,18 @@
 			children = (
 				764D60331A887CAC00B186A5 /* ServiceItem.h */,
 				764D60341A887CAC00B186A5 /* ServiceItem.m */,
+				764D605D1A89DDE500B186A5 /* ActivityItem.h */,
+				764D605E1A89DDE500B186A5 /* ActivityItem.m */,
+				764D60601A89E0E900B186A5 /* CommentsItem.h */,
+				764D60611A89E0E900B186A5 /* CommentsItem.m */,
+				764D60631A89E37500B186A5 /* FavoriteItem.h */,
+				764D60641A89E37500B186A5 /* FavoriteItem.m */,
+				764D60661A89E71500B186A5 /* JoinInfo.h */,
+				764D60671A89E71500B186A5 /* JoinInfo.m */,
+				764D606B1A89EA6500B186A5 /* CategoryItem.h */,
+				764D606C1A89EA6500B186A5 /* CategoryItem.m */,
+				764D606E1A89EDBD00B186A5 /* StoreItem.h */,
+				764D606F1A89EDBD00B186A5 /* StoreItem.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -406,6 +452,8 @@
 				767812781A80939A00CB4B08 /* HttpService.m */,
 				7678127F1A80981000CB4B08 /* SettingService.h */,
 				767812801A80981000CB4B08 /* SettingService.m */,
+				764D60571A89D55B00B186A5 /* BaseResponse.h */,
+				764D60581A89D55B00B186A5 /* BaseResponse.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -682,6 +730,9 @@
 				7678127A1A8096FC00CB4B08 /* LostPsdViewController.h */,
 				7678127B1A8096FC00CB4B08 /* LostPsdViewController.m */,
 				7678127C1A8096FC00CB4B08 /* LostPsdViewController.xib */,
+				764D60521A89CE3E00B186A5 /* RegSecondStepViewController.h */,
+				764D60531A89CE3E00B186A5 /* RegSecondStepViewController.m */,
+				764D60541A89CE3E00B186A5 /* RegSecondStepViewController.xib */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -741,6 +792,8 @@
 			children = (
 				764D60361A887CD400B186A5 /* PosterItem.h */,
 				764D60371A887CD400B186A5 /* PosterItem.m */,
+				764D605A1A89DC7000B186A5 /* RecommendItem.h */,
+				764D605B1A89DC7000B186A5 /* RecommendItem.m */,
 			);
 			path = index;
 			sourceTree = "<group>";
@@ -849,6 +902,7 @@
 				764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */,
 				764D60421A888E9000B186A5 /* scan_line@2x.png in Resources */,
 				764D602C1A884CD800B186A5 /* icon_more@2x.png in Resources */,
+				764D60561A89CE3E00B186A5 /* RegSecondStepViewController.xib in Resources */,
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
 				764D604C1A88B0D900B186A5 /* EditTextViewController.xib in Resources */,
 				7678129B1A80A04600CB4B08 /* MoreTabViewController.xib in Resources */,
@@ -885,13 +939,17 @@
 				ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */,
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,
 				ED8C77A01A861F52009C8286 /* LYFlushDefine.m in Sources */,
+				764D60551A89CE3E00B186A5 /* RegSecondStepViewController.m in Sources */,
 				764D5FFD1A83345F00B186A5 /* SecondaryViewController.m in Sources */,
 				ED2587651A7FB1DA008EB344 /* ColorTools.m in Sources */,
+				764D60621A89E0E900B186A5 /* CommentsItem.m in Sources */,
 				ED25874F1A7D1C34008EB344 /* DBManager.m in Sources */,
 				764D60011A83349C00B186A5 /* CTLCustom.m in Sources */,
 				ED25876B1A80F961008EB344 /* SVProgressHUD.m in Sources */,
 				ED25872E1A7D185D008EB344 /* GTMBase64.mm in Sources */,
 				767812E91A83326F00CB4B08 /* MoreTableViewHeaderView.m in Sources */,
+				764D605C1A89DC7000B186A5 /* RecommendItem.m in Sources */,
+				764D60681A89E71500B186A5 /* JoinInfo.m in Sources */,
 				764D5FFB1A83345F00B186A5 /* CustomNavigationController.m in Sources */,
 				767812681A806C3200CB4B08 /* RegViewController.m in Sources */,
 				767812791A80939A00CB4B08 /* HttpService.m in Sources */,
@@ -902,6 +960,7 @@
 				ED2587471A7D1B4A008EB344 /* FMDatabaseAdditions.m in Sources */,
 				ED7791E91A85CE40003ADF27 /* LYTableView.m in Sources */,
 				764D60311A88598500B186A5 /* InfoViewController.m in Sources */,
+				764D60701A89EDBD00B186A5 /* StoreItem.m in Sources */,
 				ED8C77A31A8625AB009C8286 /* AsyncImgDownLoadRequest.m in Sources */,
 				764D60401A888B3F00B186A5 /* QRCodeScanViewController.m in Sources */,
 				ED8C779B1A8617D5009C8286 /* LYCollectionView.m in Sources */,
@@ -911,13 +970,17 @@
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
 				ED2587491A7D1B4A008EB344 /* FMDatabaseQueue.m in Sources */,
 				ED2587181A7D1857008EB344 /* NSDate+utils.m in Sources */,
+				764D60511A89CC6800B186A5 /* IUser.m in Sources */,
 				767812DF1A830B0700CB4B08 /* PosterCollectionViewCell.m in Sources */,
+				764D606D1A89EA6500B186A5 /* CategoryItem.m in Sources */,
 				ED2587301A7D185D008EB344 /* NSData+Base64.mm in Sources */,
 				ED2586E11A7D14A1008EB344 /* main.m in Sources */,
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
+				764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */,
 				764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */,
 				767812721A808F1D00CB4B08 /* AsyncHttpRequest.m in Sources */,
 				764D60351A887CAC00B186A5 /* ServiceItem.m in Sources */,
+				764D60591A89D55B00B186A5 /* BaseResponse.m in Sources */,
 				764D60131A8360B900B186A5 /* TicketQueryViewController.m in Sources */,
 				7678127D1A8096FC00CB4B08 /* LostPsdViewController.m in Sources */,
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
@@ -925,6 +988,7 @@
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
+				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
 				764D60461A88919200B186A5 /* PrivateViewController.m in Sources */,
 				764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */,

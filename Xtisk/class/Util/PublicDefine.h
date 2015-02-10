@@ -11,6 +11,7 @@
 #import "AsyncHttpRequest.h"
 #import "HttpPublic.h"
 #import "UcmDefine.h"
+#import "Util.h"
 
 #define kNeedCheckAuthentication 1 // 授权开关
 
@@ -24,7 +25,7 @@ NSLocalizedStringFromTable(key, @"Localizable", nil)
 NSLocalizedStringFromTable(key, @"SipLocalizable", nil)
 #endif
 
-
+#define SERVICE_HOME @"192.168.1.1:8080"
  #define MAX_PACKET_LEN 40000
 
 typedef void(^Block)(void);
@@ -120,6 +121,11 @@ typedef enum {
     XtServiceNear,
     XtServiceParkActivities
 }XtServiceType;
+
+typedef enum  {
+    PrivateEditTextSign,
+    PrivateEditTextCom
+} PrivateEditTextType;
 
 
 #define XT_CORNER_RADIUS  5

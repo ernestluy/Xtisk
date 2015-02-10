@@ -14,4 +14,11 @@
 @end
 @interface Util : NSObject
 
+
++(NSData *)strToData:(NSString *)str;
+
++(NSString*)getJsonStrWithObj:(id)obj;
+
++(id)getObjWithJsonStr:(NSString *)jsonStr;
++(id)getObjWithJsonData:(NSData *)jsonData;
 @end
