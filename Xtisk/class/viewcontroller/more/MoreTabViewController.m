@@ -15,6 +15,7 @@
 #import "SettingService.h"
 #import "QRCodeScanViewController.h"
 #import "PrivateViewController.h"
+#import "SettingViewController.h"
 #define MORE_HEIGHT 44.0
 @interface MoreTabViewController ()
 {
@@ -44,6 +45,9 @@
         }else if (tmpCustomView && tmpCustomView.tag == 1 && [tmpCustomView isKindOfClass:[MoreTableViewHeaderView class]]) {
             inHeaderView = (MoreTableViewHeaderView*)tmpCustomView;
             inHeaderView.backgroundColor = [UIColor lightGrayColor];
+            [inHeaderView.inBtnReset addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
+            CGRect rect = inHeaderView.inLine.frame;
+            inHeaderView.inLine.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 0.5);
         }
     }
     if ([[SettingService sharedInstance] isLogin]) {
@@ -78,7 +82,10 @@
     [nav pushViewController:[[LoginViewController alloc]init] animated:NO];
     appDelegate.window.rootViewController = nav;
 }
-
+-(IBAction)settingAction:(id)sender{
+    PrivateViewController *pv = [[PrivateViewController alloc]init];
+    [self.navigationController pushViewController:pv animated:YES];
+}
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -146,8 +153,10 @@
             break;
         }
         case 4:{
-            PrivateViewController *pv = [[PrivateViewController alloc]init];
-            [self.navigationController pushViewController:pv animated:YES];
+            
+            
+            SettingViewController *st = [[SettingViewController alloc]init];
+            [self.navigationController pushViewController:st animated:YES];
             break;
         }
         default:

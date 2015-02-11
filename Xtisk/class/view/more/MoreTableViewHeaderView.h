@@ -24,6 +24,7 @@
 @property(nonatomic,weak)IBOutlet UILabel *inLabName;
 @property(nonatomic,weak)IBOutlet UILabel *inLabAccount;
 @property(nonatomic,weak)IBOutlet UILabel *inLabSign;
+@property(nonatomic,weak)IBOutlet UIView *inLine;
 
 
 //-(void)inSetData

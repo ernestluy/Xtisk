@@ -39,6 +39,8 @@ typedef enum  {
     BOOL isExtend;
     
     UIImageView *headerImgView;
+    
+    HisLoginAcc *lastLogAcc;
 }
 
 
@@ -102,16 +104,7 @@ typedef enum  {
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    HisLoginAcc *la = [HisLoginAcc getLastAccLoginInfo];
-    if (la) {
-        tf_name.text = la.account;
-        rmbSwith.on = la.isRmbPsd;
-        if (la.isRmbPsd) {
-            tf_password.text = la.psd;
-        }else{
-            
-        }
-    }
+    
 }
 - (void)viewDidLoad
 {
@@ -126,6 +119,8 @@ typedef enum  {
         bounds.size.height = bounds.size.height -20;
         
     }
+    
+    
     
     tTableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     [self.view addSubview:tTableView];
@@ -168,25 +163,13 @@ typedef enum  {
     
     
     tTableView.tableHeaderView = tView;
+    [tTableView reloadData];
     
+    lastLogAcc = [HisLoginAcc getLastAccLoginInfo];
+    if (lastLogAcc) {
+        isRemPsd = lastLogAcc.isRmbPsd;
+    }
     
-    
-    
-    
-//    UIButton *ddd = [UIButton buttonWithType:UIButtonTypeCustom];
-//    ddd.frame = CGRectMake(100, 100, 100, 100);
-//    ddd.backgroundColor = [UIColor lightGrayColor];
-//    [ddd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [ddd setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-//    [ddd setTitle:@"OK" forState:UIControlStateNormal];
-//    [ddd addTarget:self action:@selector(setData) forControlEvents:UIControlEventTouchUpInside];
-//    [tView addSubview:ddd];
-//    
-//    UIView *tView2 = [[UIView alloc]initWithFrame:tView.bounds];
-//    tView2.backgroundColor = [UIColor blueColor];
-//    tView2.alpha = 0.4;
-//    tView2.userInteractionEnabled = NO;//NO可以穿透过去
-//    [tView addSubview:tView2];
     
     int btnWidth = 90;
     int btnHeight = 30;
@@ -374,6 +357,12 @@ typedef enum  {
             tf_name.delegate = self;
             tf_name.backgroundColor = [UIColor clearColor];
             [cell addSubview:tf_name];
+            if (lastLogAcc) {
+                tf_name.text = lastLogAcc.account;
+            }
+            
+                
+            
             
 //            去掉可选历史登录账户
 //            btnExtend = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -420,6 +409,17 @@ typedef enum  {
             tf_password.delegate = self;
             tf_password.backgroundColor = [UIColor clearColor];
             [cell addSubview:tf_password];
+            
+            if (lastLogAcc) {
+                if (lastLogAcc.isRmbPsd) {
+                    tf_password.text = lastLogAcc.psd;
+                }else{
+                    
+                }
+            }
+            
+            
+            
             UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, LOGIN_CELL_HEIGHT-0.7,cell.frame.size.width, 0.7)];
             separatorLine.backgroundColor = _rgb2uic(0xd8d8d8, 1);
             [cell addSubview:separatorLine];

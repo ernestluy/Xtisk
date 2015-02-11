@@ -12,4 +12,6 @@
 
 @property(nonatomic,weak)IBOutlet UITableView *tTableView;
 -(IBAction)logout:(id)sender;
+-(IBAction)settingAction:(id)sender;
+
 @end
