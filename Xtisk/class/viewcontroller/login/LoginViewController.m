@@ -94,13 +94,11 @@ typedef enum  {
     self.navigationController.navigationBarHidden = YES;
     self.title = @"登录";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 -(void)viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -114,7 +112,6 @@ typedef enum  {
             
         }
     }
-    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 - (void)viewDidLoad
 {
@@ -139,12 +136,15 @@ typedef enum  {
     tTableView.backgroundColor = [UIColor clearColor];
     tTableView.frame = self.view.frame;
     self.view.backgroundColor = _rgb2uic(0xeff9fb, 1);
-    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 150)];
+    
+    int edge = 20;
+    
+    UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 130)];
     tView.backgroundColor = [UIColor clearColor];
     
-    UIImageView *loginBg = [[UIImageView alloc] initWithFrame:tView.bounds];
+    CGRect ttt = CGRectMake(0, -edge, tView.bounds.size.width, tView.bounds.size.height+edge);
+    UIImageView *loginBg = [[UIImageView alloc] initWithFrame:ttt];
     loginBg.image = [UIImage imageNamed:@"login_header_bg"];
     [tView addSubview:loginBg];
     
@@ -153,7 +153,7 @@ typedef enum  {
     headerImgView.center = CGPointMake(tView.bounds.size.width/2, tView.bounds.size.height/2);
     
     UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnBack.frame = CGRectMake(5, 20, 40, 44);
+    btnBack.frame = CGRectMake(5, 20 - edge, 40, 44);
     [btnBack setImage:[UIImage imageNamed:@"base_white_back"] forState:UIControlStateNormal];
     [btnBack addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [tView addSubview:btnBack];
@@ -221,7 +221,7 @@ typedef enum  {
 }
 
 - (void)back{
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -262,6 +262,7 @@ typedef enum  {
     la.isRmbPsd = isRemPsd;
     [HisLoginAcc saveLastAccLoginInfo:la];
     [SettingService sharedInstance].account = la.account;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

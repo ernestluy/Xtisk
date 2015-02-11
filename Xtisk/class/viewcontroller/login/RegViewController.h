@@ -8,8 +8,11 @@
 
 #import "SecondaryViewController.h"
 
-@interface RegViewController : SecondaryViewController
+@interface RegViewController : SecondaryViewController<UITextFieldDelegate>
 
 
+@property(nonatomic,weak)IBOutlet UILabel *labPrompt;
 -(IBAction)regAction:(id)sender;
+-(IBAction)getVerCodeAction:(id)sender;
+-(IBAction)nextAction:(id)sender;
 @end

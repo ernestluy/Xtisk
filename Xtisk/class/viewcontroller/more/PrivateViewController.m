@@ -311,7 +311,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"buttonIndex:%d",(int)buttonIndex);
     catchPhotoMethod = (int)buttonIndex;
-    [self choosePhoto:nil];
     if ( 0 == buttonIndex) {
         //相册
         [self choosePhoto:nil];

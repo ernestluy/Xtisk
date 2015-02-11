@@ -8,6 +8,7 @@
 
 #import "SecondaryViewController.h"
 
-@interface RegSecondStepViewController : SecondaryViewController
-
+@interface RegSecondStepViewController : UIViewController<UITextFieldDelegate>
+@property(nonatomic,copy)NSString *phoneNum;
+-(IBAction)doneAction:(id)sender;
 @end
