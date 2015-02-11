@@ -9,7 +9,7 @@
 #import "SecondaryViewController.h"
 #import "PopoverView.h"
 #import "EditTextViewController.h"
-@interface PrivateViewController : SecondaryViewController<UIActionSheetDelegate,EditTextViewDelegate>
+@interface PrivateViewController : SecondaryViewController<UIActionSheetDelegate,EditTextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 
 @property(nonatomic,weak)IBOutlet UITableView *tTableView;

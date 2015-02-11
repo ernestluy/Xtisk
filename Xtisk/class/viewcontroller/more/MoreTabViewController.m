@@ -31,7 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.tTableView.bounces = NO;
-    titleArr = @[@"船票订单",@"推荐给好友",@"扫一扫",@"设置"];
+    titleArr = @[@"船票订单",@"我的活动",@"推荐给好友",@"扫一扫",@"设置"];
+    imgArr = @[@"more_cell_ticket_icon",@"more_cell_activity_icon",@"more_cell_recommend_icon",@"more_cell_scan_icon",@"more_cell_setting_icon"];
     
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"MoreTableViewHeaderView" owner:self options:nil];
     for (UIView *tmpCustomView in nib) {
@@ -102,13 +103,13 @@
     }
     
     cell.textLabel.text = [titleArr objectAtIndex:(int)indexPath.section];
-    
+    cell.imageView.image = [UIImage imageNamed:[imgArr objectAtIndex:(int)indexPath.section]];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 6;
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, MORE_HEIGHT)];
@@ -136,11 +137,15 @@
             break;
         }
         case 2:{
+            
+            break;
+        }
+        case 3:{
             QRCodeScanViewController *qsc = [[QRCodeScanViewController alloc] init];
             [self.navigationController pushViewController:qsc animated:YES];
             break;
         }
-        case 3:{
+        case 4:{
             PrivateViewController *pv = [[PrivateViewController alloc]init];
             [self.navigationController pushViewController:pv animated:YES];
             break;

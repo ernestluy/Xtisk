@@ -24,9 +24,9 @@
 }
 +(void)setButtonRadius:(UIButton *)btn{
     btn.titleLabel.font = [UIFont systemFontOfSize:14];
-    btn.backgroundColor = [UIColor whiteColor];
-    btn.layer.borderColor = _rgb2uic(0xd7d7d7, 1).CGColor;
-    [btn setTitleColor:_rgb2uic(0x888888, 1) forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor clearColor];
+    btn.layer.borderColor = [UIColor whiteColor].CGColor;//_rgb2uic(0xd7d7d7, 1).CGColor;
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn.layer.borderWidth = 1;
     btn.layer.cornerRadius = 4;
 }

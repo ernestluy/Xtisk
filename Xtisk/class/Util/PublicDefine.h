@@ -12,6 +12,7 @@
 #import "HttpPublic.h"
 #import "UcmDefine.h"
 #import "Util.h"
+#import "XTFileManager.h"
 
 #define kNeedCheckAuthentication 1 // 授权开关
 
@@ -129,6 +130,7 @@ typedef enum  {
 
 
 #define XT_CORNER_RADIUS  5
+#define XT_CELL_CORNER_RADIUS 8
 #define LY_DOWN_FLUSH_HEIGHT 64.0
 #define DOWN_DRAG_FLUSH_NORMAL @"上拉刷新"
 #define DOWN_DRAG_FLUSH_WILL_START @"上拉刷新"

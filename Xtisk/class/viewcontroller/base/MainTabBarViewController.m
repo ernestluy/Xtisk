@@ -50,9 +50,9 @@ typedef enum {
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (tTitleView == nil) {
-        tTitleView = self.navigationController.navigationBar.topItem.titleView;
-    }
+//    if (tTitleView == nil) {
+//        tTitleView = self.navigationController.navigationBar.topItem.titleView;
+//    }
     if (self.selectedIndex == 0) {
         [self.navigationController.navigationBar.topItem setTitleView:tImgView];
     }
@@ -62,17 +62,16 @@ typedef enum {
 {
 
     [super viewDidLoad];
-    
-    UIImage *hImg = [UIImage imageNamed:@"index_header_icon"];
-    tImgView = [[UIImageView alloc]initWithImage:hImg];
-    tImgView.frame = CGRectMake(0, 0, hImg.size.width, hImg.size.height);
-    
+    tImgView = [[UIImageView alloc]init];
+    UIImage *image = [UIImage imageNamed:@"index_header_icon"];
+    tImgView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    tImgView.image = image;
     
     NSMutableArray *baritems = [NSMutableArray array];
 
     NSArray *xibArray = [NSArray arrayWithObjects:@"IndexTabViewController",@"MessageTabViewController",@"ServiceTabViewController",@"MoreTabViewController", nil];
     NSArray *tabBarItemBg = [NSArray arrayWithObjects:@"icon_index.png",@"icon_msg.png",@"icon_service.png",@"icon_more.png", nil];
-    NSArray *tabBarItemSelectedBg = [NSArray arrayWithObjects:@"tab_bar_1_selected.png",@"tab_bar_1_selected.png",@"tab_bar_1_selected.png",@"tab_bar_1_selected.png", nil];
+    NSArray *tabBarItemSelectedBg = [NSArray arrayWithObjects:@"icon_index_selected.png",@"icon_msg_selected.png",@"icon_service_selected.png",@"icon_more_selected.png", nil];
     NSArray *btnName = [NSArray arrayWithObjects:@"首页",@"消息",@"服务",@"更多",nil];
     for (int i = 0; i<[xibArray count]; i++) {
         UIViewController *ctl =nil;
@@ -89,7 +88,7 @@ typedef enum {
         
 //        ctl.title = [tabBarItemBg objectAtIndex:i];
         UIImage *imageBg = [UIImage imageNamed:[tabBarItemBg objectAtIndex:i]];
-//        UIImage *imageSelectedBg = [UIImage imageNamed:[tabBarItemSelectedBg objectAtIndex:i]];
+        UIImage *imageSelectedBg = [UIImage imageNamed:[tabBarItemSelectedBg objectAtIndex:i]];
 //        UITabBarItem *item = [[UITabBarItem alloc] init] ;
 //        item.tag = i;
 //        item.title = [btnName objectAtIndex:i];
@@ -99,8 +98,9 @@ typedef enum {
 //        [item setTitleTextAttributes:@{ UITextAttributeTextColor : selectedColor } forState:UIControlStateHighlighted];
 //        ctl.tabBarItem  = item;
         
-        ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg tag:i];
-        
+//        ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg tag:i];
+        ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg selectedImage:imageSelectedBg];
+        ctl.tabBarItem.tag = i;
         [baritems addObject:ctl];
         
     }
@@ -141,7 +141,7 @@ typedef enum {
         
         [self.navigationController.navigationBar.topItem setTitleView:tImgView];
     }else{
-        [self.navigationController.navigationBar.topItem setTitleView:tTitleView];
+        [self.navigationController.navigationBar.topItem setTitleView:nil];
     }
 }
 

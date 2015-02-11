@@ -41,29 +41,39 @@
     headerView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
     int insetY = 10;
     //轮播图
-    circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 160)];
+    circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 130)];
     [circulaScrollView setPostersData:pmArr];
     circulaScrollView.cDelegate = self;
     [headerView addSubview:circulaScrollView];
     
     //四个图标
-    int btnWH = 60;
-    int fH = 80;
+    int btnWH = 65;
+    int fH = 90;
     int btnInset = (rect.size.width - btnWH *4)/5;
     int nY = CGRectGetMaxY(circulaScrollView.frame) + insetY;
     UIView *fourView = [[UIView alloc]initWithFrame:CGRectMake(0, nY, rect.size.width, fH)];
     fourView.backgroundColor = [UIColor whiteColor];
-    
+    NSArray *btnImgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_car_pool",@"service_icon_park_activity"];
     NSArray *btnTitle = @[@"船票",@"周边",@"拼车",@"园区活动"];
+    
+
+    
     for (int i = 0; i<4; i++) {
         UIButton *tmpBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         tmpBtn.tag = i;
         [tmpBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
-        tmpBtn.frame = CGRectMake(btnInset + (btnInset +btnWH)*i, (fH - btnWH)/2, btnWH, btnWH);
-        [tmpBtn setTitle:[btnTitle objectAtIndex:i] forState:UIControlStateNormal];
+        tmpBtn.frame = CGRectMake(btnInset + (btnInset +btnWH)*i, (fH - btnWH)/2, btnWH , btnWH);
+        [tmpBtn setImage:[UIImage imageNamed:[btnImgArr objectAtIndex:i]] forState:UIControlStateNormal];//Background
         [fourView addSubview:tmpBtn];
-        tmpBtn.backgroundColor = [UIColor lightGrayColor];
+        
+        UILabel *tmpLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 37, btnWH, 18)];
+        tmpLab.font = [UIFont systemFontOfSize:11];
+        tmpLab.textAlignment = NSTextAlignmentCenter;
+        tmpLab.text = [btnTitle objectAtIndex:i];
+        tmpLab.textColor = _rgb2uic(0x575757, 1);
+        [tmpBtn addSubview:tmpLab];
     }
+     
     UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, fourView.frame.size.width, 0.5)];
     separatorLine.backgroundColor = _rgb2uic(0xd8d8d8, 1);
     [fourView addSubview:separatorLine];

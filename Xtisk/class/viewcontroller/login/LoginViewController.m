@@ -23,8 +23,7 @@ typedef enum  {
     CELL_LOGIN_PSD,
     CELL_LOGIN_RMB,
     CELL_LOGIN_SUBMIT,
-    CELL_LOGIN_LAB_REG,
-    CELL_LOGIN_REG
+
 }LoginCellTag;
 
 
@@ -39,6 +38,7 @@ typedef enum  {
     BOOL isRemPsd;
     BOOL isExtend;
     
+    UIImageView *headerImgView;
 }
 
 
@@ -91,9 +91,16 @@ typedef enum  {
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = YES;
     self.title = @"登录";
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+}
+-(void)viewDidDisappear:(BOOL)animated{
     
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -107,6 +114,7 @@ typedef enum  {
             
         }
     }
+    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 - (void)viewDidLoad
 {
@@ -122,36 +130,82 @@ typedef enum  {
         
     }
     
-
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.bounces = NO;
+    tTableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    [self.view addSubview:tTableView];
+    tTableView.delegate = self;
+    tTableView.dataSource = self;
+    tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tTableView.bounces = NO;
+    tTableView.backgroundColor = [UIColor clearColor];
+    tTableView.frame = self.view.frame;
+    self.view.backgroundColor = _rgb2uic(0xeff9fb, 1);
+    tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 150)];
+    tView.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *loginBg = [[UIImageView alloc] initWithFrame:tView.bounds];
+    loginBg.image = [UIImage imageNamed:@"login_header_bg"];
+    [tView addSubview:loginBg];
+    
+    headerImgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"default_header"]];
+    [tView addSubview:headerImgView];
+    headerImgView.center = CGPointMake(tView.bounds.size.width/2, tView.bounds.size.height/2);
+    
+    UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnBack.frame = CGRectMake(5, 20, 40, 44);
+    [btnBack setImage:[UIImage imageNamed:@"base_white_back"] forState:UIControlStateNormal];
+    [btnBack addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [tView addSubview:btnBack];
+    
+    UILabel *tLab = [[UILabel alloc]init];
+    tLab.textColor = [UIColor whiteColor];
+    [tView addSubview:tLab];
+    tLab.text = @"欢迎来到爱蛇口";
+    tLab.textAlignment = NSTextAlignmentCenter;
+    tLab.font = [UIFont systemFontOfSize:16];
+    tLab.frame = CGRectMake(0, tView.bounds.size.height/2 +35, bounds.size.width, 24);
+    
+    
+    tTableView.tableHeaderView = tView;
     
     
     
-    UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 200)];
-    tView.backgroundColor = [UIColor yellowColor];
-    self.tableView.tableHeaderView = tView;
-    
-    UIButton *ddd = [UIButton buttonWithType:UIButtonTypeCustom];
-    ddd.frame = CGRectMake(100, 100, 100, 100);
-    ddd.backgroundColor = [UIColor lightGrayColor];
-    [ddd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [ddd setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [ddd setTitle:@"OK" forState:UIControlStateNormal];
-    [ddd addTarget:self action:@selector(setData) forControlEvents:UIControlEventTouchUpInside];
-    [tView addSubview:ddd];
-    
-    UIView *tView2 = [[UIView alloc]initWithFrame:tView.bounds];
-    tView2.backgroundColor = [UIColor blueColor];
-    tView2.alpha = 0.4;
-    tView2.userInteractionEnabled = NO;//NO可以穿透过去
-    [tView addSubview:tView2];
     
     
-//    self.tableView.tableFooterView;
+//    UIButton *ddd = [UIButton buttonWithType:UIButtonTypeCustom];
+//    ddd.frame = CGRectMake(100, 100, 100, 100);
+//    ddd.backgroundColor = [UIColor lightGrayColor];
+//    [ddd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [ddd setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+//    [ddd setTitle:@"OK" forState:UIControlStateNormal];
+//    [ddd addTarget:self action:@selector(setData) forControlEvents:UIControlEventTouchUpInside];
+//    [tView addSubview:ddd];
+//    
+//    UIView *tView2 = [[UIView alloc]initWithFrame:tView.bounds];
+//    tView2.backgroundColor = [UIColor blueColor];
+//    tView2.alpha = 0.4;
+//    tView2.userInteractionEnabled = NO;//NO可以穿透过去
+//    [tView addSubview:tView2];
+    
+    int btnWidth = 90;
+    int btnHeight = 30;
+    UIButton *btnReg = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnReg setTitle:@"快速注册" forState:UIControlStateNormal];
+    [btnReg setImage:[UIImage imageNamed:@"login_reg"] forState:UIControlStateNormal];
+    btnReg.titleLabel.font = nFont;
+    btnReg.titleLabel.textAlignment = NSTextAlignmentRight;
+    btnReg.backgroundColor = [UIColor clearColor];
+    [btnReg setTitleColor:_rgb2uic(0x5b5b5d, 1) forState:UIControlStateNormal];
+    [btnReg addTarget:self action:@selector(reg:) forControlEvents:UIControlEventTouchUpInside];
+    btnReg.frame = CGRectMake(self.view.frame.size.width - btnWidth - 15,self.view.frame.size.height - btnHeight - 20, btnWidth, btnHeight);
+    [self.view addSubview:btnReg];
+    
+    
+    
     self.view.tag = 100;
     UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self.tableView addGestureRecognizer:pan];
+    [tTableView addGestureRecognizer:pan];
     
     UITapGestureRecognizer *pan2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan2:)];
     
@@ -172,6 +226,11 @@ typedef enum  {
     
 }
 
+-(void)btnRmbAction:(id)sender{
+    UIButton*btn = (UIButton*)sender;
+    isRemPsd = !isRemPsd;
+    btn.selected = isRemPsd;
+}
 - (void) handlePan: (UIPanGestureRecognizer *)rec{
     NSLog(@"lTableView UITapGestureRecognizer");
     if (nowTextField) {
@@ -187,20 +246,22 @@ typedef enum  {
 }
 -(void)login:(id)sender{
     NSLog(@"login");
-    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
+//    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
 //    [SVProgressHUD showWithStatus:@"请等待" ];
-    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
-
+//    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
+    [self loginSucInto];
 }
 -(void)loginSucInto{
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
         [self.delegate loginSucBack:self];
     }
+    
     HisLoginAcc *la = [[HisLoginAcc alloc]init];
     la.account = tf_name.text;
     la.psd = tf_password.text;
     la.isRmbPsd = isRemPsd;
     [HisLoginAcc saveLastAccLoginInfo:la];
+    [SettingService sharedInstance].account = la.account;
     [self.navigationController popViewControllerAnimated:YES];
     
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -209,7 +270,7 @@ typedef enum  {
 //    nav.interactivePopGestureRecognizer.enabled = NO;
 //    
 //    appDelegate.window.rootViewController = nav;
-
+    
 }
 
 
@@ -235,7 +296,7 @@ typedef enum  {
     NSLog(@"extendAction");
     isExtend = !isExtend;
     NSIndexPath *indexPath= [NSIndexPath indexPathForRow:CELL_LOGIN_HIS_ACC inSection:0];
-    UIImageView *accessoryView=(UIImageView*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:CELL_LOGIN_NAME inSection:0]].accessoryView;
+    UIImageView *accessoryView=(UIImageView*)[tTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:CELL_LOGIN_NAME inSection:0]].accessoryView;
     if (isExtend) {
         
         [UIView animateWithDuration:0.25 animations:^{
@@ -243,7 +304,7 @@ typedef enum  {
             accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
         }completion:^(BOOL finished){
             //动画结束后执行的代码块
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
     }else{
 
@@ -252,7 +313,7 @@ typedef enum  {
             accessoryView.transform = CGAffineTransformMakeRotation(0);
         }completion:^(BOOL finished){
             //动画结束后执行的代码块
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
     }
 }
@@ -266,7 +327,6 @@ typedef enum  {
 #pragma mark UITableViewDataSource
 
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (CELL_LOGIN_HIS_ACC == indexPath.row) {
@@ -277,16 +337,14 @@ typedef enum  {
         }
     }
 	if (CELL_LOGIN_RMB == indexPath.row) {
-        return  40.0;
-    }else if(CELL_LOGIN_LAB_REG ==indexPath.row){
-        return 30;
+        return  1.5*LOGIN_CELL_HEIGHT;
     }
 	return LOGIN_CELL_HEIGHT;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-	return 7;
+	return 5;
 }
 
 
@@ -301,13 +359,19 @@ typedef enum  {
         cell.clipsToBounds = YES;
         int row = (int)indexPath.row;
         if (row == CELL_LOGIN_NAME) {
-            cell.textLabel.text = @"账号:";
-            cell.textLabel.textColor=_rgb2uic(0x767676, 1);
-            tf_name = [[UITextField alloc] initWithFrame:CGRectMake(65, 0, 200, LOGIN_CELL_HEIGHT)];
-            tf_name.placeholder = @"请输入账号";
+            tf_name = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, LOGIN_CELL_HEIGHT)];
+            tf_name.placeholder = @"账号/邮箱/手机号码";
+            UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, LOGIN_CELL_HEIGHT)];
+            UIImageView * tIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_tf_acc_head"]];
+            [tView addSubview:tIv];
+            tIv.center = CGPointMake(tView.frame.size.width/2, tView.frame.size.height/2);
+//            [cell addSubview:tView];
+            tf_name.leftView = tView;
+            tf_name.leftViewMode = UITextFieldViewModeAlways;
             tf_name.returnKeyType = UIReturnKeyNext;
             tf_name.clearButtonMode = YES;
             tf_name.delegate = self;
+            tf_name.backgroundColor = [UIColor clearColor];
             [cell addSubview:tf_name];
             
 //            去掉可选历史登录账户
@@ -316,6 +380,9 @@ typedef enum  {
 //            [btnExtend setBackgroundImage:[UIImage imageNamed:@"login_expend.png"] forState:UIControlStateNormal];
 //            [btnExtend addTarget:self action:@selector(extendAction:) forControlEvents:UIControlEventTouchUpInside];
 //            cell.accessoryView = btnExtend;
+            UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, LOGIN_CELL_HEIGHT-0.7, cell.frame.size.width, 0.7)];
+            separatorLine.backgroundColor = _rgb2uic(0xd8d8d8, 1);
+            [cell addSubview:separatorLine];
         }
         else if(row == CELL_LOGIN_HIS_ACC){
             
@@ -324,7 +391,7 @@ typedef enum  {
 //            [cell addSubview:tView];
             
             cell.backgroundColor = [UIColor lightGrayColor];
-            HisAccSelectView *as = [[HisAccSelectView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, EXTENDS_HEIGHT )];
+            HisAccSelectView *as = [[HisAccSelectView alloc]initWithFrame:CGRectMake(0, 0,tTableView.frame.size.width, EXTENDS_HEIGHT )];
             [cell addSubview:as];
             NSMutableArray *ma = [NSMutableArray array];
             for (int i = 0; i<5; i++) {
@@ -337,40 +404,55 @@ typedef enum  {
         }
         else if (row == CELL_LOGIN_PSD) {
  
-            cell.textLabel.text = @"密码:";
-            cell.textLabel.textColor= _rgb2uic(0x767676, 1);
-            tf_password = [[UITextField alloc] initWithFrame:CGRectMake(65,0, 200, LOGIN_CELL_HEIGHT)];
+            tf_password = [[UITextField alloc] initWithFrame:CGRectMake(0,0, cell.frame.size.width, LOGIN_CELL_HEIGHT)];
             tf_password.secureTextEntry = YES;
             tf_password.returnKeyType=UIReturnKeyGo;
-            tf_password.placeholder = @"请输入密码";
+            tf_password.placeholder = @"密码";
+            UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, LOGIN_CELL_HEIGHT)];
+            UIImageView * tIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_tf_psd_head"]];
+            [tView addSubview:tIv];
+            tIv.center = CGPointMake(tView.frame.size.width/2, tView.frame.size.height/2);
+            
+            tf_password.leftView = tView;
+            tf_password.leftViewMode = UITextFieldViewModeAlways;
             tf_password.clearButtonMode = YES;
             tf_password.delegate = self;
+            tf_password.backgroundColor = [UIColor clearColor];
             [cell addSubview:tf_password];
+            UIView *separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, LOGIN_CELL_HEIGHT-0.7,cell.frame.size.width, 0.7)];
+            separatorLine.backgroundColor = _rgb2uic(0xd8d8d8, 1);
+            [cell addSubview:separatorLine];
             
         }else if (row == CELL_LOGIN_RMB) {
             cell.backgroundColor = [UIColor clearColor];
-            // frame = (15 10; 51 31)
-            UISwitch *rememberSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(15, 5, 50, 31)];
-            rememberSwitch.on = YES;
-            [cell addSubview:rememberSwitch];
-            [rememberSwitch addTarget:self action:@selector(rememberSwitchAction:) forControlEvents:UIControlEventValueChanged];
-            rmbSwith = rememberSwitch;
-            
-            UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(rememberSwitch.frame)+4, 0, 90, 40)];
-            tLabel.font = nFont;
-            tLabel.textColor = [UIColor darkGrayColor];
-            [cell addSubview:tLabel];
-            tLabel.textAlignment = NSTextAlignmentLeft;
-            tLabel.text = @"记住密码?";
-            
+            int cHeight = 1.5 *LOGIN_CELL_HEIGHT;
+            int btnHeight = 30;
+            int btnWidth = 90;
+            UIButton *btnRmb = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnRmb setTitle:@"记住密码" forState:UIControlStateNormal];
+            [btnRmb setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
+            [btnRmb setImage:[UIImage imageNamed:@"login_rmb_selected"] forState:UIControlStateSelected];
+            [btnRmb setImage:[UIImage imageNamed:@"login_rmb_no_selected"] forState:UIControlStateNormal];
+            [btnRmb addTarget:self action:@selector(btnRmbAction:) forControlEvents:UIControlEventTouchUpInside];
+            btnRmb.titleLabel.textAlignment = NSTextAlignmentRight;
+            btnRmb.titleLabel.font = nFont;
+            btnRmb.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -3);
+            btnRmb.imageEdgeInsets = UIEdgeInsetsMake(0, -3, 0, 0);
+            btnRmb.backgroundColor = [UIColor clearColor];
+            [cell addSubview:btnRmb];
+            btnRmb.frame = CGRectMake(15, (cHeight - btnHeight)/2, btnWidth+10, btnHeight);
+            btnRmb.selected = isRemPsd;
 
             UIButton *btnForgon = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btnForgon setTitle:@"忘记密码?" forState:UIControlStateNormal];
+            [btnForgon setTitle:@"忘记密码>>" forState:UIControlStateNormal];
             btnForgon.titleLabel.font = nFont;
-            [btnForgon sizeToFit];
-            [btnForgon setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            btnForgon.backgroundColor = [UIColor clearColor];
+            [btnForgon setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
             [btnForgon addTarget:self action:@selector(forgotAction:) forControlEvents:UIControlEventTouchUpInside];
-            cell.accessoryView = btnForgon;
+            btnForgon.frame = CGRectMake(cell.frame.size.width - btnWidth - 15, (cHeight - btnHeight)/2, btnWidth, btnHeight);
+            [cell addSubview:btnForgon];
+            
+//            cell.backgroundColor = [UIColor redColor];
             
         }else if (row == CELL_LOGIN_SUBMIT) {
             cell.backgroundColor = [UIColor clearColor];
@@ -381,42 +463,15 @@ typedef enum  {
             btnOrder.frame = CGRectMake(startX, 5, bounds.size.width - 15*2, LOGIN_CELL_HEIGHT-10);
             [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [btnOrder setTitle:@"登录" forState:UIControlStateNormal];
-            btnOrder.layer.cornerRadius = 4;
-            btnOrder.backgroundColor = _rgb2uic(0x1bbbfe, 1);
+            [btnOrder setBackgroundImage:[UIImage imageNamed:@"login_submit"] forState:UIControlStateNormal];
+            btnOrder.backgroundColor = [UIColor clearColor];
             [btnOrder addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btnOrder];
 
             
         }
-        else if (row == CELL_LOGIN_LAB_REG) {
-            cell.backgroundColor = [UIColor clearColor];
-            
-            UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 90, 30)];
-            tLabel.font = nFont;
-            tLabel.textColor = [UIColor darkGrayColor];
-            [cell addSubview:tLabel];
-            tLabel.textAlignment = NSTextAlignmentLeft;
-            tLabel.text = @"还没账号?";
-            
-            
-        }
-        else if (row == CELL_LOGIN_REG) {
-            cell.backgroundColor = [UIColor clearColor];
-            
-            UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
-            int startX = 15;
-            CGRect bounds = [[UIScreen mainScreen] applicationFrame];
-            btnOrder.frame = CGRectMake(startX, 5, bounds.size.width - 15*2, LOGIN_CELL_HEIGHT-10);
-            [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [btnOrder setTitle:@"现在去注册" forState:UIControlStateNormal];
-            btnOrder.layer.cornerRadius = 4;
-            btnOrder.backgroundColor = _rgb2uic(0x1bbbfe, 1);
-            [btnOrder addTarget:self action:@selector(reg:) forControlEvents:UIControlEventTouchUpInside];
-            [cell addSubview:btnOrder];
-            
-            btnOrder.userInteractionEnabled = NO;
-            
-        }
+        
+        
     }else{
         if (indexPath.row == CELL_LOGIN_HIS_ACC) {
             

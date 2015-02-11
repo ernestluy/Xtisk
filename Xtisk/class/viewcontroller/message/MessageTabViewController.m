@@ -8,7 +8,7 @@
 
 #import "MessageTabViewController.h"
 #import "LYTableView.h"
-#define MSG_TAB_HEIGHT 44.0
+#define MSG_TAB_HEIGHT 50.0
 @interface MessageTabViewController ()
 {
     BOOL isCanFlushCtl;
@@ -39,12 +39,17 @@
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return tCount;
+    if (0 == section) {
+        return 1;
+    }else if (1 == section){
+        return 2;
+    }
+    return 1;
 }
 
 
@@ -59,10 +64,16 @@
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
     
-    cell.imageView.image = [UIImage imageNamed:@"1-1.jpg"];
-//    CGRect tRect = cell.imageView.frame;
-    cell.textLabel.text = @"cell";//[titleArr objectAtIndex:(int)indexPath.row];
     
+    if (0 == indexPath.section) {
+        cell.imageView.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
+        cell.textLabel.text = @"i蛇口";
+    }else if(1 == indexPath.section){
+        NSArray *titleArr2 = @[@"船票",@"园区活动"];
+        NSArray *imgArr2 =  @[@"msg_ticket_cell_icon",@"msg_activity_cell_icon"];
+        cell.imageView.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
+        cell.textLabel.text = [titleArr2 objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 
@@ -71,6 +82,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return MSG_TAB_HEIGHT;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 1.0;
 }

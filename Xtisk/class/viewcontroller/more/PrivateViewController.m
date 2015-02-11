@@ -11,7 +11,8 @@
 #import "PopoverView.h"
 #import "CTLCustom.h"
 #import "EditTextViewController.h"
-
+#import "SVProgressHUD.h"
+#import "Util.h"
 @interface PrivateViewController ()
 {
     NSArray *titleArr;
@@ -28,7 +29,11 @@
     UILabel *labMarStatus;
     UILabel *labCom;
     
+    UIImageView *headerImageView;
     
+    int headerCellHeight;
+    
+    int catchPhotoMethod;
     
 }
 -(void)datePickerAction:(id)sender;
@@ -39,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    headerCellHeight = 100;
     titleArr = @[@"我的头像",@"我的昵称",@"账号",@"个性签名",@"性别",@"生日",@"婚姻状况",@"企业"];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -52,7 +57,7 @@
     UILabel *lab = [[UILabel alloc]initWithFrame:rect];
     lab.textAlignment = NSTextAlignmentRight;
     lab.textColor = [UIColor darkGrayColor];
-    lab.backgroundColor = [UIColor yellowColor];
+//    lab.backgroundColor = [UIColor yellowColor];
     lab.font = [UIFont systemFontOfSize:14];
     return lab;
 }
@@ -110,13 +115,21 @@
     NSString *identifier = [NSString stringWithFormat:@"cell_%d",(int)indexPath.row];
     UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
     if (cell ==nil) {
-        CGRect cRect = CGRectMake(tv.frame.size.width - 30 - 180, 0, 180.0, DEFAULT_CELL_HEIGHT);
+        CGRect cRect = CGRectMake(tv.frame.size.width - 30 - 190, 0, 190.0, DEFAULT_CELL_HEIGHT);
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textColor = [UIColor darkGrayColor];
         switch (indexPath.row) {
             case 0:{
+                int headerW = 65;
                 
+                headerImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, (headerCellHeight - headerW)/2, headerW, headerW)];
+                headerImageView.layer.masksToBounds = YES;
+                headerImageView.layer.cornerRadius = headerImageView.frame.size.width/2;
+                headerImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                headerImageView.layer.borderWidth = 0.7;
+                headerImageView.image = [UIImage imageNamed:@"default_header_black"];
+                [cell addSubview:headerImageView];
                 break;
             }
             case 1:{
@@ -185,7 +198,7 @@
 //}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
-        return 1.5*DEFAULT_CELL_HEIGHT;
+        return headerCellHeight;
     }
     return DEFAULT_CELL_HEIGHT;
 }
@@ -199,7 +212,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:{
-            
+            UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"相册",@"拍照", nil];
+            [as showInView:[UIApplication sharedApplication].keyWindow];
             break;
         }
         case 1:{
@@ -269,12 +283,75 @@
     self.tPopView = [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:tView];
     
 }
+#pragma mark -
+- (void)choosePhoto:(id)sender{
+    
+
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    if ( catchPhotoMethod == 0) {
+        //相册
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+    }else if(catchPhotoMethod == 1){
+        //拍照
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [SVProgressHUD showErrorWithStatus:@"模拟器不支持拍照" duration:2];
+            return;
+        }
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    [self presentViewController:picker animated:YES completion:nil];
+    
+}
+
 #pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"buttonIndex:%d",(int)buttonIndex);
+    catchPhotoMethod = (int)buttonIndex;
+    [self choosePhoto:nil];
+    if ( 0 == buttonIndex) {
+        //相册
+        [self choosePhoto:nil];
+    }else if (1 == buttonIndex){
+        //拍照
+        [self choosePhoto:nil];
+    }else if (2 == buttonIndex){
+        //cancel
+        return;
+    }
+}
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet{
     NSLog(@"%@",actionSheet);
 }
 - (void)didPresentActionSheet:(UIActionSheet *)actionSheet{
     NSLog(@"%@",actionSheet);
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *tmpImage = info[UIImagePickerControllerEditedImage];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    UIImage *rImg =  [Util reSizeImage:tmpImage toSize:CGSizeMake(200, 200)]; //[tmpImage imageByScalingToSize:CGSizeMake(100, 100)];
+    headerImageView.image = rImg;
+    [XTFileManager writeImage:rImg toFileAtPath:PathDocFile(@"myheader.jpg")];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    
+    return UIInterfaceOrientationMaskPortrait;
+    
 }
 #pragma mark -
 - (void)didReceiveMemoryWarning {

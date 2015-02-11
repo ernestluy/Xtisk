@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     CGRect mRect = [UIScreen mainScreen].bounds;
     NSArray *nameArr = @[@"船票",@"周边",@"园区活动"];
-    NSArray *imgArr = @[@"1-1.jpg",@"1-1.jpg",@"1-1.jpg"];
+    NSArray *imgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_park_activity"];
     
     NSMutableArray *mArr = [NSMutableArray array];
     for (int i = 0; i<nameArr.count; i++) {

@@ -13,7 +13,7 @@ typedef enum  {
 - (void)loginSucBack:(LoginViewController *)loginVc;
 @end
 
-@interface LoginViewController : UITableViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource,ExtendsViewDelegate,AsyncHttpRequestDelegate>
+@interface LoginViewController : UIViewController<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource,ExtendsViewDelegate,AsyncHttpRequestDelegate>
 {
 //    UITableView *lTableView;
     UITextField *tf_name;
@@ -25,6 +25,8 @@ typedef enum  {
     int         rows;
     BOOL        isExtends;
     Person      *person;
+    
+    UITableView *tTableView;
 }
 @property (nonatomic)IntoLoginType tType;
 @property(nonatomic,weak)id<LoginViewControllerDelegate> delegate;

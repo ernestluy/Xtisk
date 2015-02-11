@@ -25,7 +25,7 @@ NSString *const ServiceMainViewCellIdentifier = @"Cell";
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    cInset = 8;
+    cInset = 12;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     CGRect rt = self.bounds;
     self.tCollectionView = [[UICollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
@@ -152,7 +152,7 @@ NSString *const ServiceMainViewCellIdentifier = @"Cell";
     //    if (indexPath.row%5 == 0) {
     //        return CGSizeMake(160, 100);
     //    }
-    return CGSizeMake(70, 70);
+    return CGSizeMake(65, 65);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     

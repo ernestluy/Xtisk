@@ -30,12 +30,12 @@
     
     [super drawRect:rect];
     
-    int width = rect.size.height - 2;
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(1, 1, width, width)];
-    //    [UIColor.whiteColor setFill];
-    //    [ovalPath fill];
-    [_rgb2uic(0xe8e8e8, 1) setStroke];
-    ovalPath.lineWidth = 0.7;
-    [ovalPath stroke];
+//    int width = rect.size.height - 2;
+//    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(1, 1, width, width)];
+//    //    [UIColor.whiteColor setFill];
+//    //    [ovalPath fill];
+//    [_rgb2uic(0xe8e8e8, 1) setStroke];
+//    ovalPath.lineWidth = 0.7;
+//    [ovalPath stroke];
 }
 @end

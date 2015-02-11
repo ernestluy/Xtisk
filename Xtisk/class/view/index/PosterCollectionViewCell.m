@@ -21,7 +21,7 @@
     
     self.layer.borderColor = _rgb2uic(0xdbdbdb, 1).CGColor;
     self.layer.borderWidth = 1;
-    self.layer.cornerRadius = XT_CORNER_RADIUS;
+    self.layer.cornerRadius = XT_CELL_CORNER_RADIUS;
 }
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
