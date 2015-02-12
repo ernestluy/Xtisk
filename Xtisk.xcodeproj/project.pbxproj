@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		760BF1DE1A8CA9FA0088DBA2 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF1DD1A8CA9FA0088DBA2 /* libz.1.1.3.dylib */; };
+		760BF1E51A8CB7B60088DBA2 /* BaiduMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */; };
+		760BF1E61A8CB7B60088DBA2 /* BaiduMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760BF1E41A8CB7B60088DBA2 /* BaiduMapViewController.xib */; };
+		760BF1E91A8CB7F90088DBA2 /* ForC++.m in Sources */ = {isa = PBXBuildFile; fileRef = 760BF1E81A8CB7F90088DBA2 /* ForC++.m */; };
 		764D5FFB1A83345F00B186A5 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF61A83345F00B186A5 /* CustomNavigationController.m */; };
 		764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF81A83345F00B186A5 /* MainTabBarViewController.m */; };
 		764D5FFD1A83345F00B186A5 /* SecondaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FFA1A83345F00B186A5 /* SecondaryViewController.m */; };
@@ -207,6 +210,11 @@
 
 /* Begin PBXFileReference section */
 		760BF1DD1A8CA9FA0088DBA2 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		760BF1E21A8CB7B60088DBA2 /* BaiduMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMapViewController.h; sourceTree = "<group>"; };
+		760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduMapViewController.m; sourceTree = "<group>"; };
+		760BF1E41A8CB7B60088DBA2 /* BaiduMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaiduMapViewController.xib; sourceTree = "<group>"; };
+		760BF1E71A8CB7F90088DBA2 /* ForC++.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ForC++.h"; sourceTree = "<group>"; };
+		760BF1E81A8CB7F90088DBA2 /* ForC++.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ForC++.m"; sourceTree = "<group>"; };
 		764D5FF51A83345F00B186A5 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		764D5FF61A83345F00B186A5 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		764D5FF71A83345F00B186A5 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
@@ -568,6 +576,9 @@
 				764D5FF81A83345F00B186A5 /* MainTabBarViewController.m */,
 				764D5FF91A83345F00B186A5 /* SecondaryViewController.h */,
 				764D5FFA1A83345F00B186A5 /* SecondaryViewController.m */,
+				760BF1E21A8CB7B60088DBA2 /* BaiduMapViewController.h */,
+				760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */,
+				760BF1E41A8CB7B60088DBA2 /* BaiduMapViewController.xib */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1116,6 +1127,8 @@
 				ED25870E1A7D1686008EB344 /* Util.m */,
 				764D60171A836DD600B186A5 /* XTFileManager.h */,
 				764D60181A836DD600B186A5 /* XTFileManager.m */,
+				760BF1E71A8CB7F90088DBA2 /* ForC++.h */,
+				760BF1E81A8CB7F90088DBA2 /* ForC++.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1390,6 +1403,7 @@
 				76C87CEF1A8CA43E00843060 /* UMShareEditViewController.xib in Resources */,
 				764D60471A88919200B186A5 /* PrivateViewController.xib in Resources */,
 				76C87C991A8C466E00843060 /* ModifyPsdViewController.xib in Resources */,
+				760BF1E61A8CB7B60088DBA2 /* BaiduMapViewController.xib in Resources */,
 				76C87CED1A8CA43E00843060 /* UMSCommentInputController.xib in Resources */,
 				764D60A41A8B251500B186A5 /* msg_ticket_cell_icon@2x.png in Resources */,
 				764D608E1A8AEBEE00B186A5 /* more_heaer_bg.png in Resources */,
@@ -1454,8 +1468,10 @@
 				764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */,
 				ED25875B1A7FAA0C008EB344 /* LevelTwoViewController.m in Sources */,
 				ED25875E1A7FAA2C008EB344 /* Person.m in Sources */,
+				760BF1E51A8CB7B60088DBA2 /* BaiduMapViewController.m in Sources */,
 				764D600F1A835F1F00B186A5 /* PopoverView.m in Sources */,
 				ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */,
+				760BF1E91A8CB7F90088DBA2 /* ForC++.m in Sources */,
 				764D60381A887CD400B186A5 /* PosterItem.m in Sources */,
 				ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */,
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,

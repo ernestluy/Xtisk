@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.tTableView.bounces = NO;
+//    self.tTableView.bounces = NO;
     titleArr = @[@"船票订单",@"我的活动",@"推荐给好友",@"扫一扫",@"设置"];
     imgArr = @[@"more_cell_ticket_icon",@"more_cell_activity_icon",@"more_cell_recommend_icon",@"more_cell_scan_icon",@"more_cell_setting_icon"];
     
@@ -49,7 +49,7 @@
             inHeaderView.backgroundColor = [UIColor lightGrayColor];
             [inHeaderView.inBtnReset addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
             CGRect rect = inHeaderView.inLine.frame;
-            inHeaderView.inLine.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 0.5);
+            inHeaderView.inLine.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 0.4);
         }
     }
     if ([[SettingService sharedInstance] isLogin]) {

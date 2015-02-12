@@ -151,6 +151,10 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ttCollectionViewCellIdentifier forIndexPath:indexPath];
 //    NSLog(@"row:%d",indexPath.row);
+    if (indexPath.row%3 == 0) {
+        PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
+        pcc.imageBg.image = nil;
+    }
     return cell;
 }
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath{

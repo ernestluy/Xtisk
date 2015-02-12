@@ -67,7 +67,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 6;
+    return 9;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -85,7 +85,7 @@
         AboutIshekouViewController *ai = [[AboutIshekouViewController alloc]init];
         [self.navigationController pushViewController:ai animated:YES];
     }else if (1 == indexPath.section){
-        switch (indexPath.section) {
+        switch (indexPath.row) {
             case 0:{
                 
                 break;
