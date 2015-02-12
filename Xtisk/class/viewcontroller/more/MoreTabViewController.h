@@ -7,8 +7,9 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface MoreTabViewController : SecondaryViewController
+#import "PublicDefine.h"
+@interface MoreTabViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate
+>
 
 @property(nonatomic,weak)IBOutlet UITableView *tTableView;
 -(IBAction)logout:(id)sender;

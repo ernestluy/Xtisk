@@ -8,9 +8,13 @@
 
 #import "SettingViewController.h"
 #import "PublicDefine.h"
+#import "SettingService.h"
+#import "AboutIshekouViewController.h"
+#import "ModifyPsdViewController.h"
 @interface SettingViewController ()
 {
-    NSArray *titleArr;
+    NSArray *titleArr1;
+    NSArray *titleArr2;
 }
 @end
 
@@ -20,16 +24,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"设置";
-    titleArr = @[@"建议反馈",@"修改密码",@"注销",@"退出"];
+    titleArr1 = @[@"关于i蛇口"];
+    titleArr2 = @[@"建议反馈",@"修改密码",@"退出"];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return titleArr.count;
+    
+    return 2;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (0 == section) {
+        return titleArr1.count;
+    }else if (1 == section) {
+        return titleArr2.count;
+    }
     return 1;
 }
 
@@ -45,7 +56,12 @@
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
     
-    cell.textLabel.text = [titleArr objectAtIndex:(int)indexPath.section];
+    if (0 == indexPath.section) {
+        cell.textLabel.text = [titleArr1 objectAtIndex:(int)indexPath.row];
+    }else if (1 == indexPath.section) {
+        cell.textLabel.text = [titleArr2 objectAtIndex:(int)indexPath.row];
+    }
+    
     return cell;
 }
 
@@ -53,11 +69,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 6;
 }
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, MORE_HEIGHT)];
-//    view.backgroundColor = [UIColor redColor];
-//    return view;
-//}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return DEFAULT_CELL_HEIGHT;
 }
@@ -69,29 +81,30 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.section) {
-        case 0:{
+    if (0 == indexPath.section && 0 == indexPath.row) {
+        AboutIshekouViewController *ai = [[AboutIshekouViewController alloc]init];
+        [self.navigationController pushViewController:ai animated:YES];
+    }else if (1 == indexPath.section){
+        switch (indexPath.section) {
+            case 0:{
+                
+                break;
+            }
+            case 1:{
+                ModifyPsdViewController *ai = [[ModifyPsdViewController alloc]init];
+                [self.navigationController pushViewController:ai animated:YES];
+                break;
+            }
             
-            break;
+            case 2:{
+                [[SettingService sharedInstance] logout];
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
+            }
+                
+            default:
+                break;
         }
-        case 1:{
-            
-            break;
-        }
-        case 2:{
-            
-            break;
-        }
-        case 3:{
-            
-            break;
-        }
-        case 4:{
-            
-            break;
-        }
-        default:
-            break;
     }
     
 }

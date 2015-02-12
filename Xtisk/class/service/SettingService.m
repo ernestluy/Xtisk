@@ -34,6 +34,7 @@ static SettingService *settingServiceInstance = nil;
 -(void)logout{
 
     self.iUser = nil;
+    self.account = nil;
     self.JSESSIONID = nil;
 }
 @end

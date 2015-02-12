@@ -13,6 +13,10 @@
 #import "UcmDefine.h"
 #import "Util.h"
 #import "XTFileManager.h"
+#import "UMSocial.h"
+
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 
 #define kNeedCheckAuthentication 1 // 授权开关
 
@@ -126,6 +130,9 @@ typedef enum  {
     PrivateEditTextCom
 } PrivateEditTextType;
 
+#define UmengAppkey @"5211818556240bc9ee01db2f"
+#import "UMSocialControllerService.h"
+#import "UMSocialShakeService.h"
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
