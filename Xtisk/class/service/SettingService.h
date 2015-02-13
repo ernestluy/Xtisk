@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "IUser.h"
-@interface SettingService : NSObject
+#import "PublicDefine.h"
+@interface SettingService : NSObject<BMKGeneralDelegate>
 {
     
 }
@@ -38,4 +39,6 @@
 
 -(void)logout;
 
+
+-(void)PermissionBaiduMap;
 @end

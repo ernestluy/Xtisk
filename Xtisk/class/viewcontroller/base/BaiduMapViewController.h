@@ -7,7 +7,15 @@
 //
 
 #import "SecondaryViewController.h"
+#import "PublicDefine.h"
+#import "BMapKit.h"
+@interface BaiduMapViewController : SecondaryViewController<BMKMapViewDelegate, BMKGeoCodeSearchDelegate,BMKLocationServiceDelegate>
+{
+    IBOutlet BMKMapView* _mapView;
+    BMKGeoCodeSearch* _geocodesearch;
+    BMKLocationService* _locService;
+}
 
-@interface BaiduMapViewController : SecondaryViewController
-
+-(id)initWithLong:(float)longitude   lat:(float) latitude;
+-(void)reverseGeoCode:(float)lat long:(float)lg;
 @end

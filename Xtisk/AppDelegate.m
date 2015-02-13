@@ -15,7 +15,7 @@
 #import "PosterItem.h"
 #import "PublicDefine.h"
 
-
+#import "SettingService.h"
 
 @interface AppDelegate ()
 
@@ -55,6 +55,7 @@
 //    NSString *jsonStr= [Util getJsonStrWithObj:dic];
 //    NSLog(@"%@",jsonStr);
     
+    [[SettingService sharedInstance] PermissionBaiduMap];
     //设置友盟Appkey
     [UMSocialData setAppKey:UmengAppkey];
     
@@ -95,4 +96,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"联网成功");
+    }
+    else{
+        NSLog(@"onGetNetworkState %d",iError);
+    }
+    
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"授权成功");
+    }
+    else {
+        NSLog(@"onGetPermissionState %d",iError);
+    }
+}
 @end

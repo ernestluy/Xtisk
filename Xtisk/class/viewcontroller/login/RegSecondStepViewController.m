@@ -60,7 +60,7 @@
     textFieldPsd.leftView = tmpInsetView;
     textFieldPsd.leftViewMode = UITextFieldViewModeAlways;
     textFieldPsd.returnKeyType = UIReturnKeyNext;
-    textFieldPsd.clearButtonMode = YES;
+    textFieldPsd.clearButtonMode = UITextFieldViewModeAlways;
     textFieldPsd.delegate = self;
     textFieldPsd.layer.cornerRadius = 10;
     textFieldPsd.layer.borderWidth = 1;
@@ -76,7 +76,7 @@
     textFieldComfirm.leftView = tmpInsetView;
     textFieldComfirm.leftViewMode = UITextFieldViewModeAlways;
     textFieldComfirm.returnKeyType = UIReturnKeyDone;
-    textFieldComfirm.clearButtonMode = YES;
+    textFieldComfirm.clearButtonMode = UITextFieldViewModeAlways;
     textFieldComfirm.delegate = self;
     textFieldComfirm.layer.cornerRadius = 10;
     textFieldComfirm.layer.borderWidth = 1;

@@ -18,6 +18,9 @@
 #import "SettingViewController.h"
 
 #import "UMSocialScreenShoter.h"
+
+#import "BaiduMapViewController.h"
+#import "GeocodeDemoViewController.h"
 #define MORE_HEIGHT 44.0
 @interface MoreTabViewController ()
 {
@@ -138,11 +141,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
         case 0:{
-            
+//            [[SettingService sharedInstance] PermissionBaiduMap];
+            BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:114.056 lat:22.552];
+            [self.navigationController pushViewController:bv animated:YES];
             break;
         }
         case 1:{
-            
+            GeocodeDemoViewController *gdc = [[GeocodeDemoViewController alloc] init];
+            [self.navigationController pushViewController:gdc animated:YES];
+
             break;
         }
         case 2:{//分享

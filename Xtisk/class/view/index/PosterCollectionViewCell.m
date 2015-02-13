@@ -27,6 +27,8 @@
     self.layer.borderWidth = 1;
     self.layer.cornerRadius = XT_CELL_CORNER_RADIUS;
     isLoading = YES;
+    
+    self.backgroundColor = _rgb2uic(0xf6f6f6, 1);
 }
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -35,26 +37,24 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    
     [super drawRect:rect];
     if (isLoading) {
         //draw mine
         //// Color Declarations
-        UIColor* color = [UIColor colorWithRed: 0.859 green: 0.078 blue: 0.078 alpha: 1];
-        UIColor* color2 = [UIColor colorWithRed: 0.557 green: 0.548 blue: 0.548 alpha: 1];
+        CGContextRef context = UIGraphicsGetCurrentContext();
         
-        //// Bezier Drawing
-        UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-        [bezierPath moveToPoint: CGPointMake(13.5, 13.5)];
-        [bezierPath addLineToPoint: CGPointMake(25.5, 31.5)];
-        [bezierPath addLineToPoint: CGPointMake(38.5, 13.5)];
-        [bezierPath addLineToPoint: CGPointMake(13.5, 13.5)];
-        [bezierPath closePath];
-        [color setFill];
-        [bezierPath fill];
-        [color2 setStroke];
-        bezierPath.lineWidth = 2;
-        [bezierPath stroke];
+        
+        //// Image Declarations
+        UIImage* down1 = [UIImage imageNamed: @"down_img"];
+        int startX = (rect.size.width - down1.size.width )/2;
+        int startY = ( rect.size.height - down1.size.height)/2;
+        //// Rectangle Drawing
+//        CGRect rectangleRect = CGRectMake(CGRectGetMinX(rect), CGRectGetMinY(rect), down1.size.width, down1.size.height);
+//        UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: rectangleRect];
+        CGContextSaveGState(context);
+//        [rectanglePath addClip];
+        [down1 drawInRect: CGRectMake(startX, startY, down1.size.width, down1.size.height)];
+        CGContextRestoreGState(context);
     }
 }
 @end

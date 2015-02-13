@@ -36,14 +36,6 @@
 
 #define bgColor [UIColor colorWithRed:0.976 green:0.976 blue:0.976 alpha:1]
 
-#define riseImgNormal [UIImage imageNamed:@"btn_rise_normal.png"]
-#define riseImgTouch [UIImage imageNamed:@"btn_rise_touch.png"]
-
-#define fallImgNormal [UIImage imageNamed:@"btn_fall_normal.png"]
-#define fallImgTouch [UIImage imageNamed:@"btn_fall_touch.png"]
-
-#define defaultImgNormal [UIImage imageNamed:@"btn_default_normal.png"]
-#define defaultImgTouch [UIImage imageNamed:@"btn_default_touch.png"]
 
 
 @interface ColorTools : NSObject {
