@@ -18,7 +18,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "BMapKit.h"
-
+#import "SVProgressHUD.h"
 
 BMKMapManager* _mapManager;
 
@@ -59,7 +59,7 @@ green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 #define XT_SHOWALERT(CONTENT) [[[UIAlertView alloc]initWithTitle:@"提示" message:(CONTENT) delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show]
-
+#define LyRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
 
 //IM related .
@@ -89,6 +89,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define SEARCH_FONT_SIZE  14
 
 #define DEFAULT_CELL_HEIGHT 44.0
+
+#define COMMEND_CELL_HEIGHT 120.0
 
 #define DATABASE_PATH                   @"xt"
 #define DATABASE_TYPE                   @"db"
@@ -131,8 +133,18 @@ typedef enum {
 
 typedef enum  {
     PrivateEditTextSign,
-    PrivateEditTextCom
+    PrivateEditTextCom,
+    PrivateEditTextFoodCommend
 } PrivateEditTextType;
+
+
+typedef enum  {
+    ServiceFirst,
+    ServiceSecond,
+    ServiceThird,
+    ServiceForth
+} ServiceMenuLevel ;
+
 
 #define UmengAppkey @"5211818556240bc9ee01db2f"
 #import "UMSocialControllerService.h"

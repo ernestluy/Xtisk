@@ -198,15 +198,18 @@
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:i]];
         imageView.frame = CGRectMake((self.frame.size.width * i) + self.frame.size.width, 0, self.frame.size.width  , self.frame.size.height);
+//        imageView.contentMode = UIViewContentModeScaleAspectFill;
         [scrollView addSubview:imageView];
         [scrollView sendSubviewToBack:imageView];
     }
     // 取数组最后一张图片 放在第0页
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:([slideImages count]-1)]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height); // 添加最后1页在首页 循环
     [scrollView addSubview:imageView];
     // 取数组第一张图片 放在最后1页
     imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:0]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.frame = CGRectMake((self.frame.size.width * ([slideImages count] + 1)) , 0, self.frame.size.width, self.frame.size.height); // 添加第1页在最后 循环
     [scrollView addSubview:imageView];
     

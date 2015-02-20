@@ -7,9 +7,11 @@
 //
 
 #import "EditTextViewController.h"
-
+#import "PublicDefine.h"
 @interface EditTextViewController ()
-
+{
+    int limitNum;
+}
 @end
 
 @implementation EditTextViewController
@@ -24,12 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    if (tType == 0) {
+    if (tType == PrivateEditTextSign) {
         self.title = @"修改签名";
-    }else if (tType == 1){
+        limitNum = 32;
+    }else if (tType == PrivateEditTextCom){
         self.title = @"企业";
+        limitNum = 32;
+    }else if (tType == PrivateEditTextFoodCommend){
+        self.title = @"评价";
+        limitNum = 150;
     }
-    self.labWarnning.text  = @"32";
+    self.labWarnning.text  = [NSString stringWithFormat:@"%d",limitNum];
     self.tTextView.layer.borderWidth = 1;
     self.tTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.tTextView.layer.cornerRadius = 5;
@@ -38,13 +45,13 @@
     
     [self.tTextView becomeFirstResponder];
     UIButton * okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    okBtn.frame = CGRectMake(0, 0, 40, 28);
+    okBtn.frame = CGRectMake(0, 0, 40, 25);
     okBtn.layer.borderWidth = 1;
-    okBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    okBtn.layer.borderColor = headerColor.CGColor;
     okBtn.layer.cornerRadius = 5;
-    okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    okBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [okBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [okBtn setTitleColor:headerColor forState:UIControlStateNormal];
     
     
     [okBtn addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
@@ -74,15 +81,16 @@
     }else if ([gStr isEqualToString:@"\n"]){
         [textView resignFirstResponder];
         return NO;
-    }else if (textView.text.length >= 32){
+    }else if (textView.text.length >= limitNum){
         return NO;
     }
     
     return YES;
 }
 - (void)textViewDidChange:(UITextView *)textView{
-    int dd = 32 - (int)textView.text.length;
+    int dd = limitNum - (int)textView.text.length;
     self.labWarnning.text = [NSString stringWithFormat:@"%d",dd];
+    
 }
 #pragma mark -
 - (void)didReceiveMemoryWarning {

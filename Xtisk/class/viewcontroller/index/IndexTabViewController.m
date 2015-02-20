@@ -10,6 +10,11 @@
 #import "PosterItem.h"
 #import "PublicDefine.h"
 #import "InfoViewController.h"
+#import "ServiceMenuComViewController.h"
+#import "FoodDetailViewController.h"
+#import "ActivityViewController.h"
+#import "StarCommendView.h"
+#import "TicketQueryViewController.h"
 @interface IndexTabViewController ()
 {
     NSMutableArray *pmArr;
@@ -107,6 +112,12 @@
     
     [self.view addSubview:gridMainView];
     
+    
+    StarCommendView *sc = [[StarCommendView alloc]init];
+    sc.frame = CGRectMake(100, 100, 75, 15);
+    [sc setNums:7.5];
+    sc.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:sc];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -116,16 +127,20 @@
 
 -(void)selectAction:(id)sender{
     NSLog(@"selectAction");
-    InfoViewController *iv = [[InfoViewController alloc]initWithUrl:@"http://www.baidu.com" title:@"百度"];
-    [self.navigationController pushViewController:iv animated:YES];
+//    InfoViewController *iv = [[InfoViewController alloc]initWithUrl:@"http://www.baidu.com" title:@"百度"];
+//    [self.navigationController pushViewController:iv animated:YES];
     UIButton * btn = (UIButton *)sender;
     switch (btn.tag) {
         case 0:{
-            
+//            FoodDetailViewController *fc = [[FoodDetailViewController alloc]init];
+//            [self.navigationController pushViewController:fc animated:YES];
+            TicketQueryViewController *tqv = [[TicketQueryViewController alloc] init];
+            [self.navigationController pushViewController:tqv animated:YES];
             break;
         }
         case 1:{
-            
+            ServiceMenuComViewController *scv = [[ServiceMenuComViewController alloc]initWithLevel:ServiceSecond title:@"周边"];
+            [self.navigationController pushViewController:scv animated:YES];
             break;
         }
         case 2:{
@@ -133,7 +148,8 @@
             break;
         }
         case 3:{
-            
+            ActivityViewController *ac = [[ActivityViewController alloc]init];
+            [self.navigationController pushViewController:ac animated:YES];
             break;
         }
         default:
@@ -152,6 +168,9 @@
     
 //    [self.navigationController pushViewController:[[TicketQueryViewController alloc]init] animated:YES];
     NSLog(@"GridMainViewDelegate");
+    InfoViewController *iv = [[InfoViewController alloc]initWithUrl:@"http://www.baidu.com" title:@"百度"];
+    [self.navigationController pushViewController:iv animated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,8 @@
 #import "TicketQueryViewController.h"
 #import "PublicDefine.h"
 #import "ServiceItem.h"
+#import "ServiceMenuComViewController.h"
+#import "ActivityViewController.h"
 @interface ServiceTabViewController ()
 {
     ServiceMainView  *mainView;
@@ -55,11 +57,14 @@
             break;
         }
         case XtServiceNear:{
-            
+            ServiceMenuComViewController *scv = [[ServiceMenuComViewController alloc]initWithLevel:ServiceSecond title:@"周边"];
+            [self.navigationController pushViewController:scv animated:YES];
             break;
         }
         case XtServiceParkActivities:{
             
+            ActivityViewController *ac = [[ActivityViewController alloc]init];
+            [self.navigationController pushViewController:ac animated:YES];
             break;
         }
         default:

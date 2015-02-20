@@ -4,9 +4,13 @@
 #import "ExtendsView.h"
 #import "Person.h"
 #import "PublicDefine.h"
+
 typedef enum  {
     INTO_TAB_OTHER = 0,
-    INTO_TAB_MSG = 0
+    INTO_TAB_MSG ,
+    INTO_WITH_VC ,
+    INTO_MORE_MY_TICKIT,
+    INTO_MORE_MY_ACTIVITY
 } IntoLoginType;
 @class LoginViewController;
 @protocol LoginViewControllerDelegate <NSObject>
@@ -31,5 +35,6 @@ typedef enum  {
 @property (nonatomic)IntoLoginType tType;
 @property(nonatomic,weak)id<LoginViewControllerDelegate> delegate;
 -(id)initWithType:(IntoLoginType)type;
+-(id)initWithVc:(UIViewController *)vc;
 -(void)accTapped:(id)sender;
 @end

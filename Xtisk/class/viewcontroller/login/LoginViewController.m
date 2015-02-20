@@ -41,6 +41,8 @@ typedef enum  {
     UIImageView *headerImgView;
     
     HisLoginAcc *lastLogAcc;
+    
+    UIViewController *tVc;
 }
 
 
@@ -57,37 +59,39 @@ typedef enum  {
     self = [super init];
     if (self) {
         tType = type;
-        isExtends = NO;
-        rows = 2;
-        person = [[Person alloc] init];
-        person.name = @"61";
-        person.add = @"douan";
-        person.age = 27;
-        nowTextField = nil;
-        fontSize = 14;
-        nFont = [UIFont systemFontOfSize:15];
-        isRemPsd = YES;
+        
     }
+    [self initData];
+    return self;
+}
+-(id)initWithVc:(UIViewController *)vc{
+    self = [super init];
+    tType = INTO_WITH_VC;
+    tVc = vc;
+    [self initData];
     return self;
 }
 -(id)init{
     self = [super init];
     if (self) {
         tType = INTO_TAB_OTHER;
-        isExtends = NO;
-        rows = 2;
-        person = [[Person alloc] init];
-        person.name = @"61";
-        person.add = @"douan";
-        person.age = 27;
-        nowTextField = nil;
-        fontSize = 14;
-        nFont = [UIFont systemFontOfSize:15];
-        isRemPsd = YES;
+        
     }
+    [self initData];
     return self;
 }
-
+-(void)initData{
+    isExtends = NO;
+    rows = 2;
+    person = [[Person alloc] init];
+    person.name = @"61";
+    person.add = @"douan";
+    person.age = 27;
+    nowTextField = nil;
+    fontSize = 14;
+    nFont = [UIFont systemFontOfSize:15];
+    isRemPsd = YES;
+}
 -(void)dealloc{
     NSLog(@"login dealloc");
 }
@@ -235,9 +239,7 @@ typedef enum  {
     [self loginSucInto];
 }
 -(void)loginSucInto{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
-        [self.delegate loginSucBack:self];
-    }
+    
     
     HisLoginAcc *la = [[HisLoginAcc alloc]init];
     la.account = tf_name.text;
@@ -246,7 +248,25 @@ typedef enum  {
     [HisLoginAcc saveLastAccLoginInfo:la];
     [SettingService sharedInstance].account = la.account;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    UINavigationController *nav = self.navigationController;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
+        [self.delegate loginSucBack:self];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        if (INTO_WITH_VC == tType) {
+            [nav popViewControllerAnimated:NO];
+            if (tVc) {
+                [nav pushViewController:tVc animated:YES];
+            }
+        }else if (INTO_TAB_OTHER == tType) {
+            [nav popViewControllerAnimated:YES];
+        }else{
+            [nav popViewControllerAnimated:YES];
+        }
+    }
+    
+//    [self.navigationController popViewControllerAnimated:YES];
     
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 //    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];

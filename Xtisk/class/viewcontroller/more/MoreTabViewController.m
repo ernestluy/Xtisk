@@ -21,6 +21,8 @@
 
 #import "BaiduMapViewController.h"
 #import "GeocodeDemoViewController.h"
+#import "MyActivityViewController.h"
+#import "MyTicketViewController.h"
 #define MORE_HEIGHT 44.0
 @interface MoreTabViewController ()
 {
@@ -142,14 +144,30 @@
     switch (indexPath.section) {
         case 0:{
 //            [[SettingService sharedInstance] PermissionBaiduMap];
-            BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:114.056 lat:22.552];
-            [self.navigationController pushViewController:bv animated:YES];
+//            BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:114.056 lat:22.552];
+//            [self.navigationController pushViewController:bv animated:YES];
+            if (![[SettingService sharedInstance] isLogin]){
+                MyTicketViewController *mtc = [[MyTicketViewController alloc] init];
+                LoginViewController *lv = [[LoginViewController alloc]initWithVc:mtc];
+                [self.navigationController pushViewController:lv animated:YES];
+                return;
+            }
+            MyTicketViewController *mtc = [[MyTicketViewController alloc] init];
+            [self.navigationController pushViewController:mtc animated:YES];
+
             break;
         }
         case 1:{
-            GeocodeDemoViewController *gdc = [[GeocodeDemoViewController alloc] init];
-            [self.navigationController pushViewController:gdc animated:YES];
-
+//            GeocodeDemoViewController *gdc = [[GeocodeDemoViewController alloc] init];
+//            [self.navigationController pushViewController:gdc animated:YES];
+            if (![[SettingService sharedInstance] isLogin]){
+                MyActivityViewController *mav = [[MyActivityViewController alloc] init];
+                LoginViewController *lv = [[LoginViewController alloc]initWithVc:mav];
+                [self.navigationController pushViewController:lv animated:YES];
+                return;
+            }
+            MyActivityViewController *mav = [[MyActivityViewController alloc] init];
+            [self.navigationController pushViewController:mav animated:YES];
             break;
         }
         case 2:{//分享
