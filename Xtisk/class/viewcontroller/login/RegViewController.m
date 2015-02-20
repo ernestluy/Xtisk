@@ -146,7 +146,7 @@
         XT_SHOWALERT(@"验证码太长");
         return;
     }
-    RegSecondStepViewController *rs = [[RegSecondStepViewController alloc]init];
+    RegSecondStepViewController *rs = [[RegSecondStepViewController alloc]initWithTitle:@"设置密码" type:PsdSettingReg];
     rs.phoneNum = textFieldAc.text;
     [self.navigationController pushViewController:rs animated:YES];
 }

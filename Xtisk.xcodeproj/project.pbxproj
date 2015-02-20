@@ -264,6 +264,17 @@
 		ED8C783A1A96F6CD009C8286 /* share_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78361A96F6CD009C8286 /* share_arrow@2x.png */; };
 		ED8C783E1A96FCAC009C8286 /* ActivitySignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C783C1A96FCAC009C8286 /* ActivitySignUpViewController.m */; };
 		ED8C783F1A96FCAC009C8286 /* ActivitySignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C783D1A96FCAC009C8286 /* ActivitySignUpViewController.xib */; };
+		ED8C78451A970CDE009C8286 /* about_coo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78401A970CDE009C8286 /* about_coo@2x.png */; };
+		ED8C78461A970CDE009C8286 /* about_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78411A970CDE009C8286 /* about_email@2x.png */; };
+		ED8C78471A970CDE009C8286 /* about_ishekou_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78421A970CDE009C8286 /* about_ishekou_logo@2x.png */; };
+		ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78431A970CDE009C8286 /* about_tel@2x.png */; };
+		ED8C78491A970CDE009C8286 /* about_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78441A970CDE009C8286 /* about_wechat@2x.png */; };
+		ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C78501A970FF8009C8286 /* AboutIshekouHeaderView.m */; };
+		ED8C78531A97100B009C8286 /* AboutIshekouHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78521A97100B009C8286 /* AboutIshekouHeaderView.xib */; };
+		ED8C78581A97397F009C8286 /* MsgTicketListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C78561A97397F009C8286 /* MsgTicketListTableViewCell.m */; };
+		ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */; };
+		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
+		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -728,6 +739,20 @@
 		ED8C783B1A96FCAC009C8286 /* ActivitySignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitySignUpViewController.h; sourceTree = "<group>"; };
 		ED8C783C1A96FCAC009C8286 /* ActivitySignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitySignUpViewController.m; sourceTree = "<group>"; };
 		ED8C783D1A96FCAC009C8286 /* ActivitySignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivitySignUpViewController.xib; sourceTree = "<group>"; };
+		ED8C78401A970CDE009C8286 /* about_coo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_coo@2x.png"; sourceTree = "<group>"; };
+		ED8C78411A970CDE009C8286 /* about_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_email@2x.png"; sourceTree = "<group>"; };
+		ED8C78421A970CDE009C8286 /* about_ishekou_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_ishekou_logo@2x.png"; sourceTree = "<group>"; };
+		ED8C78431A970CDE009C8286 /* about_tel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_tel@2x.png"; sourceTree = "<group>"; };
+		ED8C78441A970CDE009C8286 /* about_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_wechat@2x.png"; sourceTree = "<group>"; };
+		ED8C784F1A970FF8009C8286 /* AboutIshekouHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutIshekouHeaderView.h; sourceTree = "<group>"; };
+		ED8C78501A970FF8009C8286 /* AboutIshekouHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutIshekouHeaderView.m; sourceTree = "<group>"; };
+		ED8C78521A97100B009C8286 /* AboutIshekouHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutIshekouHeaderView.xib; sourceTree = "<group>"; };
+		ED8C78551A97397F009C8286 /* MsgTicketListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTicketListTableViewCell.h; sourceTree = "<group>"; };
+		ED8C78561A97397F009C8286 /* MsgTicketListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTicketListTableViewCell.m; sourceTree = "<group>"; };
+		ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListTableViewCell.xib; sourceTree = "<group>"; };
+		ED8C785A1A973C3C009C8286 /* MsgTicketListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTicketListViewController.h; sourceTree = "<group>"; };
+		ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTicketListViewController.m; sourceTree = "<group>"; };
+		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -920,13 +945,6 @@
 			path = login;
 			sourceTree = "<group>";
 		};
-		764D60031A833C5C00B186A5 /* message */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = message;
-			sourceTree = "<group>";
-		};
 		764D60041A833C5C00B186A5 /* service */ = {
 			isa = PBXGroup;
 			children = (
@@ -1041,6 +1059,9 @@
 				7678128D1A80A00F00CB4B08 /* MessageTabViewController.h */,
 				7678128E1A80A00F00CB4B08 /* MessageTabViewController.m */,
 				7678128F1A80A00F00CB4B08 /* MessageTabViewController.xib */,
+				ED8C785A1A973C3C009C8286 /* MsgTicketListViewController.h */,
+				ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */,
+				ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1152,8 +1173,8 @@
 		767812C81A81F9E000CB4B08 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				ED8C78541A973942009C8286 /* message */,
 				764D60021A833C5C00B186A5 /* login */,
-				764D60031A833C5C00B186A5 /* message */,
 				764D60041A833C5C00B186A5 /* service */,
 				764D5FFE1A83347C00B186A5 /* base */,
 				767812E61A83323500CB4B08 /* more */,
@@ -1171,6 +1192,9 @@
 				ED8C78291A96D21E009C8286 /* MyActivityTableViewCell.h */,
 				ED8C782A1A96D21E009C8286 /* MyActivityTableViewCell.m */,
 				ED8C782B1A96D21E009C8286 /* MyActivityTableViewCell.xib */,
+				ED8C784F1A970FF8009C8286 /* AboutIshekouHeaderView.h */,
+				ED8C78501A970FF8009C8286 /* AboutIshekouHeaderView.m */,
+				ED8C78521A97100B009C8286 /* AboutIshekouHeaderView.xib */,
 			);
 			path = more;
 			sourceTree = "<group>";
@@ -1579,6 +1603,11 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				ED8C78401A970CDE009C8286 /* about_coo@2x.png */,
+				ED8C78411A970CDE009C8286 /* about_email@2x.png */,
+				ED8C78421A970CDE009C8286 /* about_ishekou_logo@2x.png */,
+				ED8C78431A970CDE009C8286 /* about_tel@2x.png */,
+				ED8C78441A970CDE009C8286 /* about_wechat@2x.png */,
 				ED8C78331A96F6CD009C8286 /* activity_commend_btn@2x.png */,
 				ED8C78341A96F6CD009C8286 /* heart_good_no@2x.png */,
 				ED8C78351A96F6CD009C8286 /* heart_good_yes@2x.png */,
@@ -1688,6 +1717,16 @@
 			);
 			name = "Release-iphonesimulator";
 			path = "libs/Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
+		ED8C78541A973942009C8286 /* message */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C78551A97397F009C8286 /* MsgTicketListTableViewCell.h */,
+				ED8C78561A97397F009C8286 /* MsgTicketListTableViewCell.m */,
+				ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */,
+			);
+			path = message;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1805,6 +1844,7 @@
 				767812D11A81F9FC00CB4B08 /* 1-2.jpg in Resources */,
 				76C87CFC1A8CA43E00843060 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				ED8C77FD1A94D47B009C8286 /* bad_star@2x.png in Resources */,
+				ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */,
 				76C87CF41A8CA43E00843060 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				767812D01A81F9FC00CB4B08 /* 1-1.jpg in Resources */,
 				ED8C78321A96F149009C8286 /* ActivityDetailViewController.xib in Resources */,
@@ -1847,6 +1887,7 @@
 				ED8C77CA1A930691009C8286 /* near_food_0@2x.png in Resources */,
 				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
 				76C87CF11A8CA43E00843060 /* UMSLoginViewController.xib in Resources */,
+				ED8C78471A970CDE009C8286 /* about_ishekou_logo@2x.png in Resources */,
 				767812961A80A02D00CB4B08 /* ServiceTabViewController.xib in Resources */,
 				764D609E1A8B1F0400B186A5 /* service_icon_car_pool@2x.png in Resources */,
 				764D609C1A8AF41C00B186A5 /* login_tf_psd_head@2x.png in Resources */,
@@ -1871,22 +1912,28 @@
 				764D608C1A8AEBEE00B186A5 /* more_cell_setting_icon@2x.png in Resources */,
 				764D602C1A884CD800B186A5 /* icon_more@2x.png in Resources */,
 				ED8C77CE1A930692009C8286 /* near_food_4@2x.png in Resources */,
+				ED8C78491A970CDE009C8286 /* about_wechat@2x.png in Resources */,
 				760BF23D1A8DCFF00088DBA2 /* mapapi.bundle in Resources */,
 				76C87CEC1A8CA43E00843060 /* UMSCommentDetailController.xib in Resources */,
+				ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */,
 				764D607F1A8AE99A00B186A5 /* icon_msg_selected@2x.png in Resources */,
+				ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */,
 				764D608B1A8AEBEE00B186A5 /* more_cell_scan_icon@2x.png in Resources */,
 				764D60561A89CE3E00B186A5 /* RegSecondStepViewController.xib in Resources */,
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
+				ED8C78531A97100B009C8286 /* AboutIshekouHeaderView.xib in Resources */,
 				ED8C78081A94E110009C8286 /* food_call_normal@2x.png in Resources */,
 				764D60771A8AE38800B186A5 /* service_icon_park_activity@2x.png in Resources */,
 				764D604C1A88B0D900B186A5 /* EditTextViewController.xib in Resources */,
 				7678129B1A80A04600CB4B08 /* MoreTabViewController.xib in Resources */,
+				ED8C78461A970CDE009C8286 /* about_email@2x.png in Resources */,
 				764D60781A8AE38800B186A5 /* service_icon_ticket@2x.png in Resources */,
 				764D60991A8AF41C00B186A5 /* login_rmb_selected@2x.png in Resources */,
 				767812EB1A83328500CB4B08 /* MoreTableViewHeaderView.xib in Resources */,
 				764D601D1A8449CF00B186A5 /* xt.sql in Resources */,
 				764D604E1A88BBE300B186A5 /* index_header_icon@2x.png in Resources */,
 				764D60801A8AE99A00B186A5 /* icon_service_selected@2x.png in Resources */,
+				ED8C78451A970CDE009C8286 /* about_coo@2x.png in Resources */,
 				764D60971A8AF41C00B186A5 /* login_reg@2x.png in Resources */,
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
@@ -1978,6 +2025,7 @@
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
 				764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */,
 				764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */,
+				ED8C78581A97397F009C8286 /* MsgTicketListTableViewCell.m in Sources */,
 				767812721A808F1D00CB4B08 /* AsyncHttpRequest.m in Sources */,
 				764D60351A887CAC00B186A5 /* ServiceItem.m in Sources */,
 				764D60591A89D55B00B186A5 /* BaseResponse.m in Sources */,
@@ -1991,10 +2039,12 @@
 				76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */,
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
+				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
 				76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
 				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
+				ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
 				ED8C78311A96F149009C8286 /* ActivityDetailViewController.m in Sources */,
 				ED8C77BC1A92FD23009C8286 /* NearMenuCollectionViewCell.m in Sources */,

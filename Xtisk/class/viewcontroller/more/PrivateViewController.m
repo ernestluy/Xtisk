@@ -93,14 +93,7 @@
 }
 
 
--(UILabel*)getCusRightLabel:(CGRect)rect{
-    UILabel *lab = [[UILabel alloc]initWithFrame:rect];
-    lab.textAlignment = NSTextAlignmentRight;
-    lab.textColor = [UIColor darkGrayColor];
-//    lab.backgroundColor = [UIColor yellowColor];
-    lab.font = [UIFont systemFontOfSize:14];
-    return lab;
-}
+
 -(void)datePickerAction:(id)sender;{
     UIView *dp = (UIView *)sender;
     switch (dp.tag) {
@@ -185,7 +178,7 @@
                     break;
                 }
                 case 1:{
-                    labNick = [self getCusRightLabel:cRect];
+                    labNick = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labNick];
                     labNick.text = @"luyi";
                     break;
@@ -193,7 +186,7 @@
                 case 2:{
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.accessoryType = UITableViewCellAccessoryNone;
-                    labAccount = [self getCusRightLabel:cRect];
+                    labAccount = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labAccount];
                     labAccount.text = @"13418884362";
                     break;
@@ -207,32 +200,32 @@
             switch (indexPath.row) {
                 
                 case 0:{
-                    labSex= [self getCusRightLabel:cRect];
+                    labSex= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labSex];
                     labSex.text = @"男";
                     break;
                 }
                 case 1:{
-                    labBirthDate = [self getCusRightLabel:cRect];
+                    labBirthDate = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labBirthDate];
                     labBirthDate.text = @"1988-08-8";
                     //                cell.accessoryView  = labBirthDate;
                     break;
                 }
                 case 2:{
-                    labMarStatus= [self getCusRightLabel:cRect];
+                    labMarStatus= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labMarStatus];
                     labMarStatus.text = @"未婚";
                     break;
                 }
                 case 3:{
-                    labCom= [self getCusRightLabel:cRect];
+                    labCom= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labCom];
                     labCom.text = @"兴天技术责任有限公司";
                     break;
                 }
                 case 4:{
-                    labSign= [self getCusRightLabel:cRect];
+                    labSign= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labSign];
                     labSign.text = @"这是我的签名";
                     break;

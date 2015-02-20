@@ -35,6 +35,9 @@
     }else if (tType == PrivateEditTextFoodCommend){
         self.title = @"评价";
         limitNum = 150;
+    }else if (tType == PrivateEditTextAdvise){
+        self.title = @"建议反馈";
+        limitNum = 150;
     }
     self.labWarnning.text  = [NSString stringWithFormat:@"%d",limitNum];
     self.tTextView.layer.borderWidth = 1;

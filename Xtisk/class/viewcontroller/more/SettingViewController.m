@@ -12,6 +12,8 @@
 #import "AboutIshekouViewController.h"
 #import "ModifyPsdViewController.h"
 #import "AboutIshekouViewController.h"
+#import "RegSecondStepViewController.h"
+#import "EditTextViewController.h"
 @interface SettingViewController ()
 {
     NSArray *titleArr1;
@@ -27,6 +29,13 @@
     self.title = @"设置";
     titleArr1 = @[@"关于i蛇口",@"建议反馈",@"修改密码"];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -50,6 +59,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
     }
     
 //    if (0 == indexPath.section) {
@@ -84,13 +94,16 @@
             break;
         }
         case 1:{
-            
+            EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextAdvise delegate:nil];
+            [self.navigationController pushViewController:et animated:YES];
             break;
         }
             
         case 2:{
-            ModifyPsdViewController *ai = [[ModifyPsdViewController alloc]init];
-            [self.navigationController pushViewController:ai animated:YES];
+//            ModifyPsdViewController *ai = [[ModifyPsdViewController alloc]init];
+//            [self.navigationController pushViewController:ai animated:YES];
+            RegSecondStepViewController *rs = [[RegSecondStepViewController alloc]initWithTitle:@"修改密码" type:PsdSettingModify];
+            [self.navigationController pushViewController:rs animated:YES];
             break;
         }
             

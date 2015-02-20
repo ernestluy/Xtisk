@@ -134,9 +134,14 @@ typedef enum {
 typedef enum  {
     PrivateEditTextSign,
     PrivateEditTextCom,
-    PrivateEditTextFoodCommend
+    PrivateEditTextFoodCommend,
+    PrivateEditTextAdvise
 } PrivateEditTextType;
 
+typedef enum  {
+    PsdSettingReg,
+    PsdSettingModify
+}PsdSettingType;
 
 typedef enum  {
     ServiceFirst,
@@ -149,6 +154,9 @@ typedef enum  {
 #define UmengAppkey @"5211818556240bc9ee01db2f"
 #import "UMSocialControllerService.h"
 #import "UMSocialShakeService.h"
+
+#define DefaultCellFont [UIFont systemFontOfSize:15]
+
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8

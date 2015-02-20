@@ -8,6 +8,9 @@
 
 #import "SecondaryViewController.h"
 
-@interface AboutIshekouViewController : SecondaryViewController
+@interface AboutIshekouViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    UITableView *tTableView;
+}
 
 @end

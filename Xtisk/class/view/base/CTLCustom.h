@@ -12,4 +12,6 @@
 +(UIButton *)getButtonRadiusWithRect:(CGRect )rect;
 +(void)setButtonRadius:(UIButton *)btn;
 +(UIButton *)getButtonSubmitWithRect:(CGRect )rect;
+
++(UILabel*)getCusRightLabel:(CGRect)rect;
 @end

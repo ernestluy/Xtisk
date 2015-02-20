@@ -8,16 +8,35 @@
 
 #import "RegSecondStepViewController.h"
 #import "PublicDefine.h"
+#import "LoginViewController.h"
+#import "HisLoginAcc.h"
+#import "SettingService.h"
+#import "PrivateViewController.h"
 @interface RegSecondStepViewController ()
 {
     UITextField *nowTextField;
     UITextField *textFieldPsd;
     UITextField *textFieldComfirm;
+    
+    NSString *tTitle;
+    int tType;
 }
 @end
 
 @implementation RegSecondStepViewController
 
+-(id)initWithTitle:(NSString *)tl type:(int)t{
+    self = [super init];
+    tTitle = tl;
+    tType = t;
+    return self;
+}
+-(id)init{
+    self = [super init];
+    
+    tTitle = @"设置密码";
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -45,7 +64,7 @@
     UILabel *tLab = [[UILabel alloc]init];
     tLab.textColor = [UIColor whiteColor];
     [tView addSubview:tLab];
-    tLab.text = @"设置密码";
+    tLab.text = tTitle;
     tLab.textAlignment = NSTextAlignmentCenter;
     tLab.font = [UIFont systemFontOfSize:16];
     tLab.frame = CGRectMake(0, tView.bounds.size.height/2 +35, bounds.size.width, 24);
@@ -95,6 +114,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
 }
 - (void) handlePan2: (UIPanGestureRecognizer *)rec{
@@ -121,9 +141,44 @@
     if ([textFieldPsd.text isEqualToString:textFieldComfirm.text] == NO) {
         XT_SHOWALERT(@"设置密码和确认密码不一致");
     }
+    
+    if (PsdSettingReg == tType) {
+        //注册的时候设置密码
+        [self regSuc];
+        NSLog(@"注册的时候设置密码");
+    }else if (PsdSettingModify == tType){
+        //重置密码
+        NSLog(@"重置密码");
+    }
+}
+
+-(void)regSuc{
+    NSLog(@"regSuc");
+    HisLoginAcc *la = [[HisLoginAcc alloc]init];
+    la.account = self.phoneNum;
+    la.psd = textFieldPsd.text;
+    la.isRmbPsd = YES;
+    [HisLoginAcc saveLastAccLoginInfo:la];
+    [SettingService sharedInstance].account = la.account;
+    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"恭喜您，注册成功！现在去完善资料？" delegate:self cancelButtonTitle:@"马上就去" otherButtonTitles:@"以后再说", nil];
+    av.delegate = self;
+    [av show];
 }
 - (void)back{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"index:%d",(int)buttonIndex);
+    if (0 == buttonIndex) {
+        PrivateViewController *pv = [[PrivateViewController alloc]init];
+        UINavigationController *nav = self.navigationController;
+        [nav popToRootViewControllerAnimated:NO];
+        [nav pushViewController:pv animated:YES];
+    }else if (1 == buttonIndex){
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 #pragma mark - UITextFieldDelegate
 

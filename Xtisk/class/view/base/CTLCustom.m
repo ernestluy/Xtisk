@@ -38,4 +38,13 @@
     btn.backgroundColor = _rgb2uic(0x1bbbfe, 1);
     return btn;
 }
+
++(UILabel*)getCusRightLabel:(CGRect)rect{
+    UILabel *lab = [[UILabel alloc]initWithFrame:rect];
+    lab.textAlignment = NSTextAlignmentRight;
+    lab.textColor = [UIColor darkGrayColor];
+    //    lab.backgroundColor = [UIColor yellowColor];
+    lab.font = [UIFont systemFontOfSize:14];
+    return lab;
+}
 @end

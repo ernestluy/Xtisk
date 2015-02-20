@@ -7,7 +7,7 @@
 //
 
 #import "LostPsdViewController.h"
-
+#import "PublicDefine.h"
 @interface LostPsdViewController ()
 
 
@@ -20,16 +20,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"找回密码";
+    
+    self.view.backgroundColor = _rgb2uic(0xeff9fb, 1);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self performSelector:@selector(showUI) withObject:nil afterDelay:1];
 }
 
 -(void)showUI{
     CGRect bRect = self.btnTest.frame;
-    NSLog(@"");
+    NSLog(@"showUI");
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

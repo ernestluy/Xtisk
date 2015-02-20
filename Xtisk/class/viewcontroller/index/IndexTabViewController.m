@@ -144,7 +144,7 @@
             break;
         }
         case 2:{
-            
+            XT_SHOWALERT(@"该功能暂不开放");
             break;
         }
         case 3:{

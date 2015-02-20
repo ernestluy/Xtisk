@@ -115,7 +115,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
-    
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.text = [titleArr objectAtIndex:(int)indexPath.section];
     cell.imageView.image = [UIImage imageNamed:[imgArr objectAtIndex:(int)indexPath.section]];
     return cell;

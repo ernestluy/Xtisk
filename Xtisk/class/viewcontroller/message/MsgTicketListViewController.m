@@ -1,42 +1,26 @@
 //
-//  MessageTabViewController.m
+//  MsgTicketListViewController.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/20.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
-#import "MessageTabViewController.h"
-#import "LYTableView.h"
 #import "MsgTicketListViewController.h"
-#define MSG_TAB_HEIGHT 50.0
-@interface MessageTabViewController ()
-{
-    BOOL isCanFlushCtl;
-    int tCount;
-}
+#import "PublicDefine.h"
+#import "MsgTicketListTableViewCell.h"
+@interface MsgTicketListViewController ()
 
 @end
 
-
-@implementation MessageTabViewController
+@implementation MsgTicketListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    tCount= 5;
+    self.title = @"船票";
+    self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
 }
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.tabBarController.title = @"消息";
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -61,7 +45,7 @@
     UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
     if (cell ==nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textColor = [UIColor darkGrayColor];
     }
     
@@ -81,7 +65,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return MSG_TAB_HEIGHT;
+    return 140;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
@@ -101,24 +85,22 @@
     }
     
 }
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
 
-    LYTableView *lyt = (LYTableView *)self.tTableView;
-    [lyt setIsDraging:YES];
-}
-- (void)scrollViewDidScroll:(UIScrollView *)sender
-{
-    LYTableView *lyt = (LYTableView *)self.tTableView;
-    [lyt judgeDragIng];
-}
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"drag end");
-    LYTableView *lyt = (LYTableView *)self.tTableView;
-    [lyt judgeDragEnd];
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
+*/
+
 @end
