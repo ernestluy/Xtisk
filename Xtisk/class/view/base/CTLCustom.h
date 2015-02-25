@@ -13,6 +13,7 @@
 +(void)setButtonRadius:(UIButton *)btn;
 +(UIButton *)getButtonSubmitWithRect:(CGRect )rect;
 
++(UIButton *)getTableViewLastButton:(CGRect)rect;
 +(UILabel*)getCusRightLabel:(CGRect)rect;
 
 +(UITextField*)getRegTextFieldWith:(CGRect)rect;

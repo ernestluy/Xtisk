@@ -20,6 +20,7 @@
     
     NSString *tTitle;
     int tType;
+    
 }
 @end
 
@@ -117,6 +118,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
 }
+
+
 - (void) handlePan2: (UIPanGestureRecognizer *)rec{
     NSLog(@"self.view UITapGestureRecognizer");
     if (nowTextField) {

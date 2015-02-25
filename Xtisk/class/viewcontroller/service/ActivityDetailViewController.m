@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"活动详情";
-//    [self loadRemoteUrl:@"http://www.sina.com.cn"];
+    [self loadRemoteUrl:@"http://www.sina.com.cn"];
     
     
     

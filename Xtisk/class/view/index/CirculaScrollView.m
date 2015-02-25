@@ -55,6 +55,9 @@
 }
 
 -(void)didSelectedAction:(UIButton *)btn{
+    if (dataArr.count <= btn.tag+1) {
+        return;
+    }
     if (self.cDelegate && [self.cDelegate respondsToSelector:@selector(didSelected:)]) {
         [self.cDelegate didSelected:[dataArr objectAtIndex:btn.tag]];
     }
@@ -144,13 +147,14 @@
 -(void)initPosterData{
     // 初始化 数组 并添加四张图片
     pageControl.numberOfPages = 4;
-    NSString *dStr = @"1-1.jpg";
+    NSString *dStr = @"down_img";
     int count = 4;
     // 创建四个图片 imageview
     for (int i = 0;i<count;i++)
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dStr]];
         imageView.frame = CGRectMake((self.frame.size.width * i) + self.frame.size.width, 0, self.frame.size.width  , self.frame.size.height);
+        imageView.contentMode = UIViewContentModeCenter;
         [imgViewArr addObject:imageView];
         [scrollView addSubview:imageView];
         [scrollView sendSubviewToBack:imageView];
@@ -163,6 +167,7 @@
     // 取数组最后一张图片 放在第0页
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dStr]];
     imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height); // 添加最后1页在首页 循环
+    imageView.contentMode = UIViewContentModeCenter;
     [scrollView addSubview:imageView];
     [imgViewArr insertObject:imageView atIndex:0];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -174,6 +179,7 @@
     //    原理：3-[0-1-2-3]-0
     // 取数组第一张图片 放在最后1页
     imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dStr]];
+    imageView.contentMode = UIViewContentModeCenter;
     imageView.frame = CGRectMake((self.frame.size.width * (count + 1)) , 0, self.frame.size.width, self.frame.size.height); // 添加第1页在最后 循环
     [scrollView addSubview:imageView];
     [imgViewArr addObject:imageView];
@@ -198,18 +204,18 @@
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:i]];
         imageView.frame = CGRectMake((self.frame.size.width * i) + self.frame.size.width, 0, self.frame.size.width  , self.frame.size.height);
-//        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeCenter;
         [scrollView addSubview:imageView];
         [scrollView sendSubviewToBack:imageView];
     }
     // 取数组最后一张图片 放在第0页
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:([slideImages count]-1)]];
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.contentMode = UIViewContentModeCenter;
     imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height); // 添加最后1页在首页 循环
     [scrollView addSubview:imageView];
     // 取数组第一张图片 放在最后1页
     imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:0]];
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.contentMode = UIViewContentModeCenter;
     imageView.frame = CGRectMake((self.frame.size.width * ([slideImages count] + 1)) , 0, self.frame.size.width, self.frame.size.height); // 添加第1页在最后 循环
     [scrollView addSubview:imageView];
     
@@ -297,7 +303,7 @@
                 UIImage *rImage = [UIImage imageWithData:data];
                 UIImageView *iv =  [imgViewArr objectAtIndex:(ir.tTag+1)];
                 iv.image = rImage;
-                
+                iv.contentMode = UIViewContentModeScaleToFill;
                 //    原理：3-[0-1-2-3]-0
                 if (ir.tTag == 0) {
                     iv =  [imgViewArr objectAtIndex:5];
@@ -306,6 +312,7 @@
                     iv =  [imgViewArr objectAtIndex:0];
                     iv.image = rImage;
                 }
+                iv.contentMode = UIViewContentModeScaleToFill;
             }else{
                 [request requestAgain];
                 NSLog(@"请求图片失败");

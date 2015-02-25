@@ -14,6 +14,11 @@
     UITextField *nowTextField;
     UITextField *textFieldAc;
     UITextField *textFieldCode;
+    UIButton *btnAcquireCode;
+    
+    NSTimer *timer;
+    int limitTime;
+    int leftTime;
 }
 @end
 
@@ -24,7 +29,7 @@
     // Do any additional setup after loading the view.
     self.title = @"注册账号";
     CGRect bounds = [UIScreen mainScreen].bounds;
-    
+    limitTime = 10;
     self.view.backgroundColor = _rgb2uic(0xeff9fb, 1);
     UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 150)];
     tView.backgroundColor = [UIColor clearColor];
@@ -98,7 +103,7 @@
     [btnGetCode setBackgroundImage:[UIImage imageNamed:@"reg_get_ver_code"] forState:UIControlStateNormal];
     [btnGetCode addTarget:self action:@selector(getVerCodeAction:) forControlEvents:UIControlEventTouchUpInside];
 //    btnGetCode.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4);
-    
+    btnAcquireCode = btnGetCode;
     [self.view addSubview:btnGetCode];
 //    textFieldCode.rightView = btnGetCode;
 //    textFieldCode.rightViewMode = UITextFieldViewModeAlways;
@@ -118,6 +123,40 @@
     self.navigationController.navigationBarHidden = YES;
     
 }
+
+-(void)stopTimer{
+    if (timer) {
+        if ([timer isValid]) {
+            [timer invalidate];
+            timer = nil;
+        }
+    }
+}
+-(void)startCalTime{
+    [self stopTimer];
+    if (timer == nil) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(judgeTimer) userInfo:nil repeats:YES];
+        leftTime = limitTime;
+        NSString *tTitle = [NSString stringWithFormat:@"倒计时（%d）秒",leftTime];
+        [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
+        btnAcquireCode.enabled = NO;
+        btnAcquireCode.alpha = 0.65;
+    }
+}
+
+-(void)judgeTimer{
+    NSLog(@"judgeTimer");
+    leftTime --;
+    NSString *tTitle = [NSString stringWithFormat:@"倒计时（%d）秒",leftTime];
+    [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
+    if (leftTime == 0) {
+        [self stopTimer];
+        tTitle = @"点击获取验证码";
+        btnAcquireCode.enabled = YES;
+        btnAcquireCode.alpha = 1;
+        [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
+    }
+}
 - (void) handlePan2: (UIPanGestureRecognizer *)rec{
     NSLog(@"self.view UITapGestureRecognizer");
     if (nowTextField) {
@@ -130,6 +169,7 @@
 }
 -(IBAction)getVerCodeAction:(id)sender{
     NSLog(@"getVerCodeAction");
+    [self startCalTime];
 }
 -(IBAction)nextAction:(id)sender{
     NSLog(@"nextAction");

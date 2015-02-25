@@ -8,7 +8,7 @@
 
 #import "SecondaryViewController.h"
 
-@interface LostPsdViewController : SecondaryViewController<UITableViewDelegate,UITableViewDataSource>
+@interface LostPsdViewController : SecondaryViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UITableView *tTableView;
 }

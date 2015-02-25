@@ -171,8 +171,8 @@
                     headerImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, (headerCellHeight - headerW)/2, headerW, headerW)];
                     headerImageView.layer.masksToBounds = YES;
                     headerImageView.layer.cornerRadius = headerImageView.frame.size.width/2;
-                    headerImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                    headerImageView.layer.borderWidth = 0.7;
+//                    headerImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//                    headerImageView.layer.borderWidth = 0.7;
                     headerImageView.image = [UIImage imageNamed:@"default_header_gray"];
                     [cell addSubview:headerImageView];
                     break;

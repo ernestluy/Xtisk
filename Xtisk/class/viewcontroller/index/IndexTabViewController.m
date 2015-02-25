@@ -69,6 +69,7 @@
         [tmpBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
         tmpBtn.frame = CGRectMake(btnInset + (btnInset +btnWH)*i, (fH - btnWH)/2, btnWH , btnWH);
         [tmpBtn setImage:[UIImage imageNamed:[btnImgArr objectAtIndex:i]] forState:UIControlStateNormal];//Background
+        [tmpBtn setImage:[UIImage imageNamed:[btnImgArr objectAtIndex:i]] forState:UIControlStateHighlighted];
         [fourView addSubview:tmpBtn];
         
         UILabel *tmpLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 37, btnWH, 18)];
@@ -113,11 +114,11 @@
     [self.view addSubview:gridMainView];
     
     
-    StarCommendView *sc = [[StarCommendView alloc]init];
-    sc.frame = CGRectMake(100, 100, 75, 15);
-    [sc setNums:7.5];
-    sc.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:sc];
+//    StarCommendView *sc = [[StarCommendView alloc]init];
+//    sc.frame = CGRectMake(100, 100, 75, 15);
+//    [sc setNums:7.5];
+//    sc.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:sc];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

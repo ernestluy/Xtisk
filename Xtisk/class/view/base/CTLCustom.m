@@ -34,9 +34,20 @@
 +(UIButton *)getButtonSubmitWithRect:(CGRect )rect{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btn.layer.cornerRadius = 4;
+    btn.layer.cornerRadius = 10;
+    btn.frame = rect;
     btn.backgroundColor = _rgb2uic(0x1bbbfe, 1);
     return btn;
+}
+
++(UIButton *)getTableViewLastButton:(CGRect)rect{
+    UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnOrder.frame = rect;
+    btnOrder.titleLabel.font = DefaultCellFont;
+    [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnOrder setBackgroundImage:[UIImage imageNamed:@"login_submit"] forState:UIControlStateNormal];
+    btnOrder.backgroundColor = [UIColor clearColor];
+    return btnOrder;
 }
 
 +(UILabel*)getCusRightLabel:(CGRect)rect{
@@ -61,6 +72,7 @@
     tf.layer.borderWidth = 1;
     tf.layer.borderColor = _rgb2uic(0x8da3ae, 1).CGColor;
     tf.font = DefaultCellFont;
+    tf.backgroundColor = [UIColor whiteColor];
     return tf;
 }
 @end
