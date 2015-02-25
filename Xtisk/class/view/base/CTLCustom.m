@@ -47,4 +47,20 @@
     lab.font = [UIFont systemFontOfSize:14];
     return lab;
 }
+
++(UITextField*)getRegTextFieldWith:(CGRect)rect{
+    UITextField *tf = [[UITextField alloc]init];
+    tf.frame = rect;
+    tf.textAlignment = NSTextAlignmentLeft;
+    UIView* tmpInsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, rect.size.height)];
+    tf.leftView = tmpInsetView;
+    tf.leftViewMode = UITextFieldViewModeAlways;
+    tf.returnKeyType = UIReturnKeyDone;
+    tf.clearButtonMode = YES;
+    tf.layer.cornerRadius = 10;
+    tf.layer.borderWidth = 1;
+    tf.layer.borderColor = _rgb2uic(0x8da3ae, 1).CGColor;
+    tf.font = DefaultCellFont;
+    return tf;
+}
 @end

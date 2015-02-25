@@ -14,4 +14,6 @@
 +(UIButton *)getButtonSubmitWithRect:(CGRect )rect;
 
 +(UILabel*)getCusRightLabel:(CGRect)rect;
+
++(UITextField*)getRegTextFieldWith:(CGRect)rect;
 @end

@@ -8,6 +8,8 @@
 
 #import "SecondaryViewController.h"
 
-@interface ActivitySignUpViewController : SecondaryViewController
-
+@interface ActivitySignUpViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+{
+    UITableView *tTableView;
+}
 @end

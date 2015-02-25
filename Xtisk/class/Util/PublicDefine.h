@@ -150,7 +150,8 @@ typedef enum  {
     ServiceForth
 } ServiceMenuLevel ;
 
-
+#define IshekouWXAppId     @"wxd930ea5d5a258f4f"
+#define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
 #define UmengAppkey @"5211818556240bc9ee01db2f"
 #import "UMSocialControllerService.h"
 #import "UMSocialShakeService.h"

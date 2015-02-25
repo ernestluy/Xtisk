@@ -9,8 +9,11 @@
 #import "MsgTicketListViewController.h"
 #import "PublicDefine.h"
 #import "MsgTicketListTableViewCell.h"
+#import "TicketDetailViewController.h"
 @interface MsgTicketListViewController ()
-
+{
+    NSMutableArray *dataArr;
+}
 @end
 
 @implementation MsgTicketListViewController
@@ -20,20 +23,27 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"船票";
     self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+    dataArr = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]];
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    int tableHeight = bounds.size.height - 64;
+    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 0, bounds.size.width-20, tableHeight) style:UITableViewStylePlain];
+    tTableView.delegate = self;
+    tTableView.dataSource = self;
+//    tTableView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+//    tTableView.backgroundColor = [UIColor clearColor];
+    [tTableView registerNib:[UINib nibWithNibName:@"MsgTicketListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.view addSubview:tTableView];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return dataArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (0 == section) {
-        return 1;
-    }else if (1 == section){
-        return 2;
-    }
+    
     return 1;
 }
 
@@ -43,22 +53,8 @@
     
     NSString *identifier = @"cell";
     UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
-    if (cell ==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.textColor = [UIColor darkGrayColor];
-    }
+//    cell.backgroundColor = [UIColor clearColor];
     
-    
-    if (0 == indexPath.section) {
-        cell.imageView.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
-        cell.textLabel.text = @"i蛇口";
-    }else if(1 == indexPath.section){
-        NSArray *titleArr2 = @[@"船票",@"园区活动"];
-        NSArray *imgArr2 =  @[@"msg_ticket_cell_icon",@"msg_activity_cell_icon"];
-        cell.imageView.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
-        cell.textLabel.text = [titleArr2 objectAtIndex:indexPath.row];
-    }
     return cell;
 }
 
@@ -68,22 +64,33 @@
     return 140;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 9;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == (dataArr.count - 1)) {
+        return 10;
+    }
     return 1.0;
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    CGRect bounds = [UIScreen mainScreen].bounds;
+//    UIView *tt = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 10)];
+//    tt.backgroundColor = [UIColor redColor];
+//    return tt;
+//}
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    return nil;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (1 == indexPath.section &&  0 == indexPath.row) {
-        MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];
-        [self.navigationController pushViewController:mt animated:YES];
-    }
     
+    TicketDetailViewController *tdc = [[TicketDetailViewController alloc]init];
+    [self.navigationController pushViewController:tdc animated:YES];
 }
 
 

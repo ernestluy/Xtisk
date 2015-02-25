@@ -275,6 +275,10 @@
 		ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */; };
 		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
 		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
+		EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */; };
+		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
+		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
+		EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -753,6 +757,12 @@
 		ED8C785A1A973C3C009C8286 /* MsgTicketListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTicketListViewController.h; sourceTree = "<group>"; };
 		ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTicketListViewController.m; sourceTree = "<group>"; };
 		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
+		EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
+		EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
+		EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
+		EDD99D1C1A97B06500DFF260 /* TicketDetailContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailContentView.h; sourceTree = "<group>"; };
+		EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailContentView.m; sourceTree = "<group>"; };
+		EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailContentView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1062,6 +1072,9 @@
 				ED8C785A1A973C3C009C8286 /* MsgTicketListViewController.h */,
 				ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */,
 				ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */,
+				EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */,
+				EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */,
+				EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1725,6 +1738,9 @@
 				ED8C78551A97397F009C8286 /* MsgTicketListTableViewCell.h */,
 				ED8C78561A97397F009C8286 /* MsgTicketListTableViewCell.m */,
 				ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */,
+				EDD99D1C1A97B06500DFF260 /* TicketDetailContentView.h */,
+				EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */,
+				EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1871,6 +1887,8 @@
 				ED8C77EC1A9367E3009C8286 /* good_commend@2x.png in Resources */,
 				ED8C78281A9631DC009C8286 /* ac_delete@2x.png in Resources */,
 				ED8C77FE1A94D47B009C8286 /* good_star@2x.png in Resources */,
+				EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */,
+				EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */,
 				ED8C77CC1A930692009C8286 /* near_food_2@2x.png in Resources */,
 				764D60A21A8B251500B186A5 /* msg_activity_cell_icon@2x.png in Resources */,
 				ED8C77EA1A93650F009C8286 /* commend_icon@2x.png in Resources */,
@@ -2035,6 +2053,7 @@
 				ED8C782C1A96D21E009C8286 /* MyActivityTableViewCell.m in Sources */,
 				ED8C78101A94EDA9009C8286 /* ComCommendViewController.m in Sources */,
 				ED8C77D71A930D62009C8286 /* FoodListTableViewCell.m in Sources */,
+				EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */,
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
 				76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */,
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
@@ -2057,6 +2076,7 @@
 				ED8C77E01A93139B009C8286 /* ActivityViewController.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,
 				764D60221A84A58500B186A5 /* HisAccSelectView.m in Sources */,
+				EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

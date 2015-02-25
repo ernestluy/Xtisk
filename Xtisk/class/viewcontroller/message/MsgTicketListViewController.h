@@ -9,5 +9,7 @@
 #import "SecondaryViewController.h"
 
 @interface MsgTicketListViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>
-
+{
+    UITableView *tTableView;
+}
 @end

@@ -56,7 +56,7 @@
     
 
     NSArray*tmp2Arr = @[@[@"餐饮美食",@"外卖菜单一览无余",@"near_food",[NSNumber numberWithBool:YES],_rgb2uic(0xfd8c46, 1)],
-  @[@"餐饮美食",@"便利24小时不打烊",@"near_super_shop",[NSNumber numberWithBool:YES],_rgb2uic(0x35baff, 1)],
+  @[@"商超便利",@"便利24小时不打烊",@"near_super_shop",[NSNumber numberWithBool:YES],_rgb2uic(0x35baff, 1)],
 //  @[@"餐饮美食",@"外卖菜单一览无余",@"near_food",[NSNumber numberWithBool:NO],_rgb2uic(0xc6c6c6, 1)],
 //  @[@"餐饮美食",@"外卖菜单一览无余",@"near_food",[NSNumber numberWithBool:NO],_rgb2uic(0xc6c6c6, 1)]
                         ];

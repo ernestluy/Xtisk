@@ -7,8 +7,9 @@
 //
 
 #import "SecondaryViewController.h"
+#import "PublicDefine.h"
+@interface ActivityDetailViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate>
 
-@interface ActivityDetailViewController : SecondaryViewController
 
 
 @property(nonatomic,weak)IBOutlet UIWebView *webView;

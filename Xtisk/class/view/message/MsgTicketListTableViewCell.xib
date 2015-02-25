@@ -58,6 +58,13 @@
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labCode" destination="q6N-ki-uZk" id="Axy-Ca-MHN"/>
+                <outlet property="labLine" destination="r2T-VA-Zd3" id="s7A-Sz-L3K"/>
+                <outlet property="labName" destination="Sym-pP-Kna" id="uhJ-wd-Y3E"/>
+                <outlet property="labPayTime" destination="BCo-dA-jlh" id="yok-ar-Lhb"/>
+                <outlet property="labRemind" destination="xjT-3e-p32" id="Y4m-Gw-qGd"/>
+            </connections>
             <point key="canvasLocation" x="216" y="158"/>
         </tableViewCell>
     </objects>

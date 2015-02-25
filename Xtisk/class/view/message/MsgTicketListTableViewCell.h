@@ -10,4 +10,10 @@
 
 @interface MsgTicketListTableViewCell : UITableViewCell
 
+
+@property(nonatomic,weak)IBOutlet UILabel *labCode;
+@property(nonatomic,weak)IBOutlet UILabel *labName;
+@property(nonatomic,weak)IBOutlet UILabel *labPayTime;
+@property(nonatomic,weak)IBOutlet UILabel *labLine;
+@property(nonatomic,weak)IBOutlet UILabel *labRemind;
 @end
