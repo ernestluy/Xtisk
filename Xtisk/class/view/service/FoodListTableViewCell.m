@@ -23,6 +23,7 @@
     self.labQs.layer.borderWidth = 1;
     self.labQs.layer.cornerRadius = 3;
     
+    self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
     ///-----------------------
 }
 

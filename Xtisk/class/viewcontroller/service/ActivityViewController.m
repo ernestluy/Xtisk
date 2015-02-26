@@ -26,6 +26,7 @@
     [self.view addSubview:self.tTableView];
     self.tTableView.dataSource = self;
     self.tTableView.delegate = self;
+    self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tTableView registerNib:[UINib nibWithNibName:@"ActivityListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.title = @"园区活动";

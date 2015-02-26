@@ -19,4 +19,7 @@
 @property(nonatomic,copy)NSString *maritalStatus;
 @property(nonatomic,copy)NSString *enterprise;
 @property(nonatomic,copy)NSString *account;//企业
+
+
++(IUser *)getIUserWithDic:(NSDictionary *)dic;
 @end

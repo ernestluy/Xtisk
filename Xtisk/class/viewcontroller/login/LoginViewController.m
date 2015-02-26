@@ -250,6 +250,10 @@ typedef enum  {
     la.isRmbPsd = isRemPsd;
     [HisLoginAcc saveLastAccLoginInfo:la];
     [SettingService sharedInstance].account = la.account;
+    IUser *iuser = [[IUser alloc]init];
+    iuser.phone  = tf_name.text;
+    [SettingService sharedInstance].iUser = iuser;
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     UINavigationController *nav = self.navigationController;

@@ -25,7 +25,7 @@
  Capacity：业务id list
  ResultInfo:结果信息
  */
-@property(nonatomic,copy)IUser *iUser;
+@property(nonatomic,strong)IUser *iUser;
 @property(nonatomic,copy)NSString *key;
 @property(nonatomic,copy)NSString *orgId;
 @property(nonatomic,copy)NSString *account;

@@ -18,6 +18,7 @@
 		760BF2451A8DE6D70088DBA2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF2441A8DE6D70088DBA2 /* CoreLocation.framework */; };
 		760BF24B1A9EB46E0088DBA2 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF24A1A9EB46E0088DBA2 /* libbaidumapapi.a */; };
 		760BF24E1A9EE7300088DBA2 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 760BF24D1A9EE7300088DBA2 /* MenuItem.m */; };
+		760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */; };
 		764D5FFB1A83345F00B186A5 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF61A83345F00B186A5 /* CustomNavigationController.m */; };
 		764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF81A83345F00B186A5 /* MainTabBarViewController.m */; };
 		764D5FFD1A83345F00B186A5 /* SecondaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FFA1A83345F00B186A5 /* SecondaryViewController.m */; };
@@ -369,6 +370,7 @@
 		760BF24A1A9EB46E0088DBA2 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		760BF24C1A9EE7300088DBA2 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
 		760BF24D1A9EE7300088DBA2 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_img_small@2x.png"; sourceTree = "<group>"; };
 		764D5FF51A83345F00B186A5 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		764D5FF61A83345F00B186A5 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		764D5FF71A83345F00B186A5 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
@@ -1630,6 +1632,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */,
 				ED8C78401A970CDE009C8286 /* about_coo@2x.png */,
 				ED8C78411A970CDE009C8286 /* about_email@2x.png */,
 				ED8C78421A970CDE009C8286 /* about_ishekou_logo@2x.png */,
@@ -1961,6 +1964,7 @@
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
+				760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */,
 				ED8C77CB1A930692009C8286 /* near_food_1@2x.png in Resources */,
 				764D60881A8AEBEE00B186A5 /* default_header@2x.png in Resources */,
 				ED8C78001A94D6F3009C8286 /* up_cn@2x.png in Resources */,

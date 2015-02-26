@@ -7,11 +7,12 @@
 //
 
 #import "ActivityListTableViewCell.h"
-
+#import "PublicDefine.h"
 @implementation ActivityListTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

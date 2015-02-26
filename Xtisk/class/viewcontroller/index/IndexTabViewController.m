@@ -196,7 +196,9 @@
     [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
 }
 - (void)startToFlushDown:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
     
+    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
 }
 #pragma mark - GridMainViewDelegate
 - (void)gridMainView:(GridMainView *)mainView{
@@ -244,7 +246,7 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-                    NSDictionary *tmpDic = (NSDictionary *)br.data;
+//                    NSDictionary *tmpDic = (NSDictionary *)br.data;
 //                    tRecommendList = [tmpDic objectForKey:@"recomList"];
 //                    if (tRecommendList) {
 //                        NSArray *pArr = [RecommendItem getRecommendItemsWithArr:tRecommendList];

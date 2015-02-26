@@ -13,6 +13,7 @@
     NSMutableArray *dataArr;
     NSMutableArray *viewArr;
     NSMutableArray *viewSecondArr;
+    NSMutableDictionary *heightDic;
 }
 @end
 
@@ -23,6 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"订单详情";
     self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+    heightDic = [NSMutableDictionary dictionary];
     viewArr = [NSMutableArray array];
     viewSecondArr = [NSMutableArray array];
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"TicketDetailContentView" owner:self options:nil];
@@ -39,6 +41,7 @@
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64 - 76;
     tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
+    tTableView.bounces = NO;
     tTableView.delegate = self;
     tTableView.dataSource = self;
     //    tTableView.backgroundColor = _rgb2uic(0xf7f7f7, 1);

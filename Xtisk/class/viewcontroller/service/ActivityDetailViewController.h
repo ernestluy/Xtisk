@@ -8,7 +8,7 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface ActivityDetailViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate>
+@interface ActivityDetailViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate,UIWebViewDelegate>
 
 
 

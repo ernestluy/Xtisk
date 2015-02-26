@@ -10,4 +10,5 @@
 
 @interface ActivityListTableViewCell : UITableViewCell
 
+@property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
 @end

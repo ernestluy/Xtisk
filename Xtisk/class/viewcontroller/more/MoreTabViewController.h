@@ -8,7 +8,7 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface MoreTabViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate
+@interface MoreTabViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate,AsyncHttpRequestDelegate
 >
 
 @property(nonatomic,weak)IBOutlet UITableView *tTableView;

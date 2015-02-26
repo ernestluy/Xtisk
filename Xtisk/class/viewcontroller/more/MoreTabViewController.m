@@ -24,6 +24,7 @@
 #import "MyActivityViewController.h"
 #import "MyTicketViewController.h"
 #define MORE_HEIGHT 44.0
+#define REQUEST_HEADER_TAG 88
 @interface MoreTabViewController ()
 {
     NSArray *titleArr;
@@ -244,5 +245,38 @@
 -(void)didFinishShareInShakeView:(UMSocialResponseEntity *)response
 {
     NSLog(@"finish share with response is %@",response);
+}
+
+#pragma mark -  AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <2000) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+//                NSString *imgUrl = [[SettingService sharedInstance].iUser.headImageUrl stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+                
+                if (REQUEST_HEADER_TAG == ir.tTag) {
+                    NSString *headerPath = PathDocFile([SettingService sharedInstance].iUser.headImageUrl);
+                    [XTFileManager writeImage:rImage toFileAtPath:headerPath];
+                }
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        default:{
+            break;
+        }
+    }
 }
 @end

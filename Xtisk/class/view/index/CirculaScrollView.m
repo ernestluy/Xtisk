@@ -86,7 +86,7 @@
     dataArr = [NSMutableArray array];
     // 定时器 循环
     nTag = 0;
-    timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
     // 初始化 scrollview
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     [self addSubview:scrollView];

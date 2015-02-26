@@ -16,6 +16,7 @@
 #import "ComCommendViewController.h"
 #import "EditTextViewController.h"
 #import "FoodShopAllMenuViewController.h"
+#import "LoginViewController.h"
 #define SECTION_SENCOND_HEIGHT   56.0
 #define SECTION_THIRD_HEIGHT     120.0
 @interface FoodDetailViewController ()
@@ -73,9 +74,10 @@
     btnCall.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [callView addSubview:btnCall];
 }
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-//    self.tTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 
@@ -86,10 +88,20 @@
 }
 -(void)toCommend:(id)sender{
     NSLog(@"toCommend");
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
     EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
     [self.navigationController pushViewController:et animated:YES];
 }
 -(void)toPraise:(id)sender{
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
     NSLog(@"toPraise");
 }
 

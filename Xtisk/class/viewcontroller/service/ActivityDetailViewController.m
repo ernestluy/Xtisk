@@ -42,6 +42,7 @@
     self.btnPraise.layer.borderWidth = 1;
     
     self.webView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64 - 50);
+    self.webView.delegate = self;
     
     UIButton * okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     okBtn.frame = CGRectMake(0, 0, 20, 20);
@@ -50,6 +51,24 @@
     [okBtn addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
     [self.navigationItem setRightBarButtonItem:ritem];
+    
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
+    [SVProgressHUD showWithStatus:@"正在加载..." ];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+-(void)judgeTimeOut{
+    if (timer) {
+        if ([timer isValid]) {
+            [timer invalidate];
+            timer = nil;
+        }
+    }
+    [SVProgressHUD dismiss];
 }
 
 - (void)loadRemoteUrl:(NSString *)urlString
@@ -128,5 +147,20 @@
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
 }
+
+#pragma mark -  webviewDelegate
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"网络连接错误");
+    [SVProgressHUD showErrorWithStatus:@"加载失败" duration:2];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [SVProgressHUD dismiss];
+}
+- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
+
+
 
 @end

@@ -93,6 +93,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -  webviewDelegate
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"网络连接错误");
     [SVProgressHUD showErrorWithStatus:@"加载失败" duration:2];

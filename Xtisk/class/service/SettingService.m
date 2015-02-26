@@ -34,7 +34,7 @@ static SettingService *settingServiceInstance = nil;
 //    if (self.JSESSIONID && self.JSESSIONID.length>0) {
 //        return YES;
 //    }
-    if (self.account && self.account.length>0) {
+    if (self.iUser && self.iUser.phone.length>0) {
         return YES;
     }
     return NO;
