@@ -78,6 +78,12 @@
 //    未开始 4ad02a
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 -(void)toDelete:(id)sender{
     NSLog(@"toDelete");
     [tTableView setEditing:YES];

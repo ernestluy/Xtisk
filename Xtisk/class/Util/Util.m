@@ -7,6 +7,7 @@
 //
 
 #import "Util.h"
+#import "PublicDefine.h"
 @implementation  UIImage (Extras)
 
 - (UIImage *)imageByScalingToSize:(CGSize)targetSize {
@@ -85,4 +86,6 @@
     
     return reSizeImage;
 }
+
+
 @end

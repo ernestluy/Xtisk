@@ -27,6 +27,8 @@
         ci.favorite = [[dic objectForKey:@"favorite"] intValue];
         ci.activityBeginTime = [dic objectForKey:@"activityBeginTime"];
         ci.activityEndTime = [dic objectForKey:@"activityEndTime"];
+        
+        ci.status = [dic objectForKey:@"status"];
         [mArr addObject:ci];
     }
     return mArr;

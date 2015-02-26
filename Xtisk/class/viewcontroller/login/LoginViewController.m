@@ -239,7 +239,10 @@ typedef enum  {
     [self loginSucInto];
 }
 -(void)loginSucInto{
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
+        [self.delegate loginSucBack:self];
+//        [self.navigationController popViewControllerAnimated:YES];
+    }
     
     HisLoginAcc *la = [[HisLoginAcc alloc]init];
     la.account = tf_name.text;
@@ -250,20 +253,15 @@ typedef enum  {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     UINavigationController *nav = self.navigationController;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
-        [self.delegate loginSucBack:self];
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        if (INTO_WITH_VC == tType) {
-            [nav popViewControllerAnimated:NO];
-            if (tVc) {
-                [nav pushViewController:tVc animated:YES];
-            }
-        }else if (INTO_TAB_OTHER == tType) {
-            [nav popViewControllerAnimated:YES];
-        }else{
-            [nav popViewControllerAnimated:YES];
+    if (INTO_WITH_VC == tType) {
+        [nav popViewControllerAnimated:NO];
+        if (tVc) {
+            [nav pushViewController:tVc animated:YES];
         }
+    }else if (INTO_TAB_OTHER == tType) {
+        [nav popViewControllerAnimated:YES];
+    }else{
+        [nav popViewControllerAnimated:YES];
     }
     
 //    [self.navigationController popViewControllerAnimated:YES];

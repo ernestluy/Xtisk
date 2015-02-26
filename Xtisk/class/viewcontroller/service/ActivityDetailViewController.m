@@ -10,11 +10,21 @@
 #import "EditTextViewController.h"
 #import "PublicDefine.h"
 #import "ActivitySignUpViewController.h"
+#import "LoginViewController.h"
 @interface ActivityDetailViewController ()
-
+{
+    NSTimer *timer;
+}
 @end
 
 @implementation ActivityDetailViewController
+
+
+-(id)initWithType:(int)t{
+    self = [super init];
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,13 +33,15 @@
     [self loadRemoteUrl:@"http://www.sina.com.cn"];
     
     
-    
+    CGRect bounds = [UIScreen mainScreen].bounds;
     
     self.btnCommend.layer.borderColor = _rgb2uic(0xe1e1e1, 1).CGColor;
     self.btnCommend.layer.borderWidth = 1;
     
     self.btnPraise.layer.borderColor = _rgb2uic(0xe1e1e1, 1).CGColor;
     self.btnPraise.layer.borderWidth = 1;
+    
+    self.webView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64 - 50);
     
     UIButton * okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     okBtn.frame = CGRectMake(0, 0, 20, 20);
@@ -67,15 +79,29 @@
 
 -(IBAction)toSignUp:(id)sender{
     NSLog(@"toSignUp");
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
     ActivitySignUpViewController *as = [[ActivitySignUpViewController alloc]init];
     [self.navigationController pushViewController:as animated:YES];
 }
 -(IBAction)toPraise:(id)sender{
     NSLog(@"toPraise");
-    
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
 }
 -(IBAction)toCommend:(id)sender{
     NSLog(@"toCommend");
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
     EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:nil];
     [self.navigationController pushViewController:ec animated:YES];
 }

@@ -16,4 +16,7 @@
 +(BOOL)isExistFile:(NSString *)file;
 +(BOOL)createDirAtPath:(NSString *)dir;
 +(BOOL)writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath;
++(UIImage *)getTmpFolderFileWithPath:(NSString *)path;
++(UIImage *)getTmpFolderFileWithUrlPath:(NSString *)path;
++(void)saveTmpFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img;
 @end

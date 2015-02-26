@@ -89,4 +89,21 @@
     return NO;
 }
 
++(UIImage *)getTmpFolderFileWithPath:(NSString *)path{
+    NSString *tp = PathTmpFile(path);
+    return [UIImage imageWithContentsOfFile:tp];
+}
++(UIImage *)getTmpFolderFileWithUrlPath:(NSString *)path{
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathTmpFile(path);
+    return [UIImage imageWithContentsOfFile:tp];
+}
++(void)saveTmpFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img{
+    if (!img) {
+        return;
+    }
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathTmpFile(path);
+    [XTFileManager writeImage:img toFileAtPath:tp];
+}
 @end

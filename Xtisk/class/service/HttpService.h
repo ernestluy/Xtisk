@@ -57,7 +57,23 @@
 -(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId;
 #pragma mark - 4.3.3.3	获取店家详情
 -(AsyncHttpRequest *)getRequestQueryStoreDetail:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
+#pragma mark - 4.3.3.4	获取店家菜单列表
+-(AsyncHttpRequest *)getRequestQueryStoreMenu:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
+#pragma mark - 4.3.3.5	店家点赞/取消点赞
+-(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
+#pragma mark - 4.3.3.6	店铺评价
+-(AsyncHttpRequest *)getRequestStoreComments:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId content:(NSString *)content;
+#pragma mark - 4.3.3.7	获取店铺评价列表
+-(AsyncHttpRequest *)getRequestStoreCommentsList:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId pageNo:(int)pageNo pageSize:(int)pageSize;
 
+#pragma mark - 4.3.4	我的
+#pragma mark - 4.3.4.1	查看我的船票订单列表
+
+
+#pragma mark - 4.3.4.4	查看我报名的活动列表
+-(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize;
+#pragma mark - 4.3.4.5	修改密码
+-(AsyncHttpRequest *)getRequestUpdateMyPassword:(id<AsyncHttpRequestDelegate>)delegate oldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword checkPassword:(NSString *)checkPassword;
 
 #pragma mark - 4.3.4.9	登录
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd;

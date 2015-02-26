@@ -7,12 +7,17 @@
 //
 
 #import "AsyncImgDownLoadRequest.h"
+#import "PublicDefine.h"
 @interface AsyncImgDownLoadRequest(){
     
 }
 @end
 @implementation AsyncImgDownLoadRequest
 - (id)initWithServiceAPI:(NSString *)turl target:(id<AsyncHttpRequestDelegate>)requestDelegate type:(HttpRequestType )type{
+    NSRange range = [turl rangeOfString:@"http://"];
+    if (range.length==0) {
+        turl = [NSString stringWithFormat:@"%@%@",RESOURSE_HOME,turl];
+    }
     
     self =[super initWithServiceAPI:(NSString *)turl target:requestDelegate type:type];
     

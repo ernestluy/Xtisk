@@ -12,4 +12,6 @@
 @property(nonatomic)int code;//如果处理成功，结果码为0；其他值表示有误（参见错误码说明）
 @property(nonatomic,copy)NSString *msg;//错误描述
 @property(nonatomic,copy)NSObject *data;//接口返回的数据内容
+
++(BaseResponse *)getBaseResponseWithDic:(NSDictionary *)dic;
 @end

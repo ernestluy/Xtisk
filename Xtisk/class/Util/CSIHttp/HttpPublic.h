@@ -35,6 +35,12 @@ typedef enum HttpRequestType{
     HttpRequestType_XT_QUERYCATEGORY,
     HttpRequestType_XT_QUERYSTOREBYCATEGORY,//此处接口不健全，需要注意
     HttpRequestType_XT_QUERYSTOREDETAIL,
+    HttpRequestType_XT_QUERYSTOREMENU,
+    HttpRequestType_XT_FAVORITESTORE,
+    HttpRequestType_XT_STORECOMMENTS,
+    HttpRequestType_XT_STORECOMMENTSLIST,
+    HttpRequestType_XT_QUERYMYACTIVITY,
+    HttpRequestType_XT_UPDATEMYPASSWORD,
     
     HttpRequestType_Img_LoadDown,
     

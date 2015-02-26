@@ -1,7 +1,10 @@
 
 #import "InfoViewController.h"
+#import "PublicDefine.h"
 @interface InfoViewController ()
-
+{
+    NSTimer *timer;
+}
 @end
 
 @implementation InfoViewController
@@ -53,16 +56,27 @@
     [self.view addSubview:webView];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    
+    timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
     [self loadRemoteUrl:self.tUrl];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [SVProgressHUD showWithStatus:@"正在加载..." ];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 }
 
-
+-(void)judgeTimeOut{
+    if (timer) {
+        if ([timer isValid]) {
+            [timer invalidate];
+            timer = nil;
+        }
+    }
+    [SVProgressHUD dismiss];
+}
 
 - (void)loadRemoteUrl:(NSString *)urlString
 {
@@ -81,8 +95,11 @@
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"网络连接错误");
+    [SVProgressHUD showErrorWithStatus:@"加载失败" duration:2];
 }
-
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [SVProgressHUD dismiss];
+}
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     return YES;

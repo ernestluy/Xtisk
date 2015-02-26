@@ -147,6 +147,7 @@
         item.title = result.address;
         [_mapView addAnnotation:item];
         _mapView.centerCoordinate = result.location;
+        /*
         NSString* titleStr;
         NSString* showmeg;
         titleStr = @"反向地理编码";
@@ -154,6 +155,7 @@
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:titleStr message:showmeg delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
         [myAlertView show];
+         */
     }
 }
 

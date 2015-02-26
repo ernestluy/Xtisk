@@ -23,4 +23,6 @@
 +(id)getObjWithJsonData:(NSData *)jsonData;
 
 + (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize;
+
+
 @end

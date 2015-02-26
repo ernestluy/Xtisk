@@ -23,6 +23,7 @@
         ci.content = [dic objectForKey:@"content"];
         ci.commentsTime = [dic objectForKey:@"commentsTime"];
         ci.activityId = [dic objectForKey:@"activityId"];
+        ci.activityId = [dic objectForKey:@"storeId"];
         ci.userName = [dic objectForKey:@"userName"];
         [mArr addObject:ci];
     }

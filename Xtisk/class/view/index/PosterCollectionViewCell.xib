@@ -8,19 +8,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PosterCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+            <rect key="frame" x="0.0" y="0.0" width="145" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+                <rect key="frame" x="0.0" y="0.0" width="145" height="100"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1LF-8D-fqH">
-                        <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+                        <rect key="frame" x="0.0" y="0.0" width="145" height="100"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPr-4Z-xKL">
-                        <rect key="frame" x="0.0" y="79" width="145" height="66"/>
+                        <rect key="frame" x="0.0" y="44" width="145" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2H-zb-Ly4">
-                                <rect key="frame" x="8" y="21" width="129" height="45"/>
+                                <rect key="frame" x="8" y="11" width="129" height="45"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,23 +30,19 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="base_back.png" translatesAutoresizingMaskIntoConstraints="NO" id="5aQ-RV-rfQ">
-                        <rect key="frame" x="8" y="57" width="45" height="45"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <size key="customSize" width="145" height="106"/>
             <connections>
                 <outlet property="imageBg" destination="1LF-8D-fqH" id="pZ0-a5-ZHT"/>
-                <outlet property="imgIcon" destination="5aQ-RV-rfQ" id="OsZ-5i-RRn"/>
                 <outlet property="labelContent" destination="L2H-zb-Ly4" id="8jL-Gi-nuP"/>
                 <outlet property="viewAlphe" destination="uPr-4Z-xKL" id="fIA-Ut-bNV"/>
             </connections>
-            <point key="canvasLocation" x="342.5" y="282.5"/>
+            <point key="canvasLocation" x="342.5" y="263"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="1-1.jpg" width="510" height="519"/>
-        <image name="base_back.png" width="20" height="20"/>
     </resources>
 </document>

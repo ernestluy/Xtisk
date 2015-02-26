@@ -9,7 +9,7 @@
 #import "SecondaryViewController.h"
 #import "CirculaScrollView.h"
 #import "GridMainView.h"
-@interface IndexTabViewController : SecondaryViewController<GridMainViewDelegate,CirculaScrollViewDelegate>
+@interface IndexTabViewController : SecondaryViewController<GridMainViewDelegate,CirculaScrollViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate>
 
 {
     CirculaScrollView *circulaScrollView;

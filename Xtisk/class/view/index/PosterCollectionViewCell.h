@@ -12,7 +12,6 @@
 
 
 @property(nonatomic,weak)IBOutlet UIImageView *imageBg;
-@property(nonatomic,weak)IBOutlet UIImageView *imgIcon;
 @property(nonatomic,weak)IBOutlet UILabel *labelContent;
 @property(nonatomic,weak)IBOutlet UIView *viewAlphe;
 

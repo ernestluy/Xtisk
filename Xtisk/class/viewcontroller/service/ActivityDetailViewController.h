@@ -17,6 +17,8 @@
 @property(nonatomic,weak)IBOutlet UIButton *btnPraise;
 @property(nonatomic,weak)IBOutlet UIButton *btnCommend;
 
+-(id)initWithType:(int)t;
+
 -(IBAction)toSignUp:(id)sender;
 -(IBAction)toPraise:(id)sender;
 -(IBAction)toCommend:(id)sender;

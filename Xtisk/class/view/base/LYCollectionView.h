@@ -20,4 +20,6 @@
 
 -(void)changeToNormalStatus;
 -(void)changeToFlushStatus;
+
+-(void)flushDone;
 @end

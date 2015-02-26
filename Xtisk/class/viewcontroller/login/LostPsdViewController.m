@@ -220,6 +220,7 @@
             tfPsd = [CTLCustom getRegTextFieldWith:tr];
             tfPsd.delegate = self;
             tfPsd.placeholder = @"请设置密码";
+            tfPsd.secureTextEntry = YES;
             [cell addSubview:tfPsd];
             
         }else if (3 == indexPath.section) {
@@ -227,6 +228,7 @@
             tfComfirmCode = [CTLCustom getRegTextFieldWith:tr];
             tfComfirmCode.delegate = self;
             tfComfirmCode.placeholder = @"请确认密码";
+            tfComfirmCode.secureTextEntry = YES;
             [cell addSubview:tfComfirmCode];
             
         }else if (4 == indexPath.section) {

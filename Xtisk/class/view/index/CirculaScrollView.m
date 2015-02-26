@@ -19,7 +19,7 @@
     
     NSMutableArray *dataArr;
     
-    
+    int allCount;
     int nTag;
 }
 -(void)selectedEnd:(int)tag;
@@ -28,7 +28,7 @@
 
 @implementation CirculaScrollView
 
-@synthesize scrollView, slideImages;
+@synthesize scrollView;
 @synthesize text;
 @synthesize pageControl,labelTitle;
 
@@ -55,7 +55,7 @@
 }
 
 -(void)didSelectedAction:(UIButton *)btn{
-    if (dataArr.count <= btn.tag+1) {
+    if (dataArr.count <= btn.tag) {
         return;
     }
     if (self.cDelegate && [self.cDelegate respondsToSelector:@selector(didSelected:)]) {
@@ -65,10 +65,13 @@
 -(void)selectedEnd:(int)tag{
 //    NSLog(@"selectedEnd");
     nTag = tag;
+    
     if (dataArr && dataArr.count>nTag) {
         PosterItem *pi = [dataArr objectAtIndex:nTag];
-        self.labelTitle .text = pi.posterTitle;
+        self.labelTitle.text = pi.posterTitle;
         
+    }else{
+        self.labelTitle.text = @"";
     }
     
 }
@@ -76,7 +79,7 @@
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     isMoving = NO;
-    slideImages = [[NSMutableArray alloc] init];
+    allCount = 4;
     int barHeight = 20;
     labArr = [NSMutableArray array];
     imgViewArr = [NSMutableArray array];
@@ -94,13 +97,13 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     
     UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - barHeight, frame.size.width, barHeight)];
-    tmpView.backgroundColor = _rgb2uic(0x000000, 0.3);
+    tmpView.backgroundColor = _rgb2uic(0xd5d5d5, 0.4);
     [self addSubview:tmpView];
     
     UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, frame.size.height - barHeight, 210, barHeight)];
     tLabel.textColor = [UIColor whiteColor];
     tLabel.font = [UIFont systemFontOfSize:13];
-    tLabel.text = @"app订船票业务上线啦";
+    tLabel.text = @"";
     self.labelTitle = tLabel;
     [self addSubview:tLabel];
     
@@ -112,16 +115,14 @@
     self.pageControl = [[UIPageControl alloc]initWithFrame:pRect]; // 初始化mypagecontrol
     [pageControl setCurrentPageIndicatorTintColor:headerColor];
     [pageControl setPageIndicatorTintColor:[UIColor whiteColor]];
-    pageControl.numberOfPages = [self.slideImages count];
+    pageControl.numberOfPages = 4;
     pageControl.currentPage = 0;
     [self addSubview:pageControl];
     
     
     
     
-    NSArray *imgArr = @[[UIImage imageNamed:@"1-1.jpg"],[UIImage imageNamed:@"1-2.jpg"],[UIImage imageNamed:@"1-3.jpg"],[UIImage imageNamed:@"1-4.jpg"]];
-//    [self setImageData:imgArr];
-    [self.slideImages addObjectsFromArray:imgArr];
+    
     [self initPosterData];
 //    原理：3-[0-1-2-3]-0
     
@@ -194,35 +195,7 @@
     [scrollView setContentOffset:CGPointMake(0, 0)];
     [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width,0,self.frame.size.width,self.frame.size.height) animated:NO];
 }
--(void)setImageData:(NSArray *)imgArr{
-    // 初始化 数组 并添加四张图片
-    [slideImages removeAllObjects];
-    [slideImages addObjectsFromArray:imgArr];
-    pageControl.numberOfPages = [self.slideImages count];
-    // 创建四个图片 imageview
-    for (int i = 0;i<[slideImages count];i++)
-    {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:i]];
-        imageView.frame = CGRectMake((self.frame.size.width * i) + self.frame.size.width, 0, self.frame.size.width  , self.frame.size.height);
-        imageView.contentMode = UIViewContentModeCenter;
-        [scrollView addSubview:imageView];
-        [scrollView sendSubviewToBack:imageView];
-    }
-    // 取数组最后一张图片 放在第0页
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:([slideImages count]-1)]];
-    imageView.contentMode = UIViewContentModeCenter;
-    imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height); // 添加最后1页在首页 循环
-    [scrollView addSubview:imageView];
-    // 取数组第一张图片 放在最后1页
-    imageView = [[UIImageView alloc] initWithImage:[slideImages objectAtIndex:0]];
-    imageView.contentMode = UIViewContentModeCenter;
-    imageView.frame = CGRectMake((self.frame.size.width * ([slideImages count] + 1)) , 0, self.frame.size.width, self.frame.size.height); // 添加第1页在最后 循环
-    [scrollView addSubview:imageView];
-    
-    [scrollView setContentSize:CGSizeMake(self.frame.size.width * ([slideImages count] + 2), self.frame.size.height)]; //  +上第1页和第4页  原理：4-[1-2-3-4]-1
-    [scrollView setContentOffset:CGPointMake(0, 0)];
-    [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width,0,self.frame.size.width,self.frame.size.height) animated:NO]; // 默认从序号1位置放第1页 ，序号0位置位置放第4页
-}
+
 #pragma mark -  UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
 //    NSLog(@"scrollViewWillBeginDragging");
@@ -237,14 +210,15 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 //    NSLog(@"scrollViewDidEndDecelerating");
+    
     isMoving = NO;
     int index = self.scrollView.contentOffset.x / self.frame.size.width;
     
     if (index == 0) {
-        pageControl.currentPage = slideImages.count - 1;
-        [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width * slideImages.count,0,self.frame.size.width,self.frame.size.height) animated:NO];
+        pageControl.currentPage = allCount - 1;
+        [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width * allCount,0,self.frame.size.width,self.frame.size.height) animated:NO];
     }
-    else if (index>slideImages.count) {
+    else if (index>allCount) {
         pageControl.currentPage  = 0;
         [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width ,0,self.frame.size.width,self.frame.size.height) animated:NO];
     }
@@ -252,6 +226,7 @@
         pageControl.currentPage = index - 1;
     }
     [self selectedEnd:(int)pageControl.currentPage];
+//    NSLog(@"scrollViewDidEnd,page:%d,x:%f",(int)pageControl.currentPage,self.scrollView.contentOffset.x);
 }
 #pragma mark - 
 
@@ -264,7 +239,7 @@
     }
     int page = (int)pageControl.currentPage; // 获取当前的page
     page++;
-    page = page >= slideImages.count ? 0 : page ;
+    page = page >= allCount ? 0 : page ;
     [self selectedEnd:page];
     pageControl.currentPage = page;
     [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.contentOffset.x + self.frame.size.width,0,self.frame.size.width,self.frame.size.height) animated:YES];
@@ -276,15 +251,17 @@
     
     if (index == 0) {
 //        pageControl.currentPage = slideImages.count - 1;
-        [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width * slideImages.count,0,self.frame.size.width,self.frame.size.height) animated:NO];
+        [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width * allCount,0,self.frame.size.width,self.frame.size.height) animated:NO];
     }
-    else if (index>slideImages.count) {
+    else if (index>allCount) {
 //        pageControl.currentPage  = 0;
         [self.scrollView scrollRectToVisible:CGRectMake(self.frame.size.width ,0,self.frame.size.width,self.frame.size.height) animated:NO];
     }
     else{
 //        pageControl.currentPage = index - 1;
     }
+    
+//    NSLog(@"scrollViewDidEnd,page:%d,x:%f",(int)pageControl.currentPage,self.scrollView.contentOffset.x);
 }
 
 #pragma mark -  AsyncHttpRequestDelegate

@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//活动评价、店铺评价 公用
 @interface CommentsItem : NSObject
 @property(nonatomic,copy)NSString *commentsId;//String	否	评论ID
 @property(nonatomic,copy)NSString *content;
-@property(nonatomic,copy)NSString *commentsTime;//	String	否	评论时间，格式：YYYY-MM-dd HH24:mm
+@property(nonatomic,copy)NSString *commentsTime;//	String	否	评论时间，格式：yyyy-MM-dd HH:mm
 @property(nonatomic,copy)NSString *activityId;//	String	否	评论所属活动ID
+@property(nonatomic,copy)NSString *storeId;//	String	否	评论所属店铺ID
 @property(nonatomic,copy)NSString *userName;//	String	否	评论者账号
 +(NSArray *)getCommentsItemsWithArr:(NSArray *)arr;
 @end

@@ -64,7 +64,9 @@
 -(void)setIsDraging:(BOOL)b{
     isDraging = b;
 }
-
+-(void)flushDone{
+    [self changeToNormalStatus];
+}
 #pragma mark -  回复正常状态
 -(void)changeToNormalStatus{
 //    NSLog(@"changeToNormalStatus");
@@ -77,7 +79,7 @@
 }
 -(void)changeToFlushStatus{
 //    NSLog(@"changeToFlushStatus");
-    [self performSelector:@selector(changeToNormalStatus) withObject:nil afterDelay:3];
+//    [self performSelector:@selector(changeToNormalStatus) withObject:nil afterDelay:3];
 }
 #pragma mark -  判断下拉，下拉
 

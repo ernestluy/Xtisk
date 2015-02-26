@@ -19,6 +19,10 @@
 #import "UMSocialQQHandler.h"
 #import "BMapKit.h"
 #import "SVProgressHUD.h"
+#import "BaseResponse.h"
+#import "HttpService.h"
+#import "RecommendItem.h"
+#import "SettingService.h"
 
 BMKMapManager* _mapManager;
 
@@ -34,7 +38,8 @@ NSLocalizedStringFromTable(key, @"Localizable", nil)
 NSLocalizedStringFromTable(key, @"SipLocalizable", nil)
 #endif
 
-#define SERVICE_HOME @"192.168.1.1:8080"
+#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms/control/index"
+#define RESOURSE_HOME @"http://116.7.243.122:10080/ipop_tms/"
  #define MAX_PACKET_LEN 40000
 
 typedef void(^Block)(void);
@@ -150,6 +155,15 @@ typedef enum  {
     ServiceForth
 } ServiceMenuLevel ;
 
+typedef enum  {
+    ActivityStatusOver,//过期
+    Activity
+}ActivityStatus ;
+
+typedef enum  {
+    ResponseCodeSuccess = 0
+}ResponseCodeType;
+
 #define IshekouWXAppId     @"wxd930ea5d5a258f4f"
 #define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
 #define UmengAppkey @"5211818556240bc9ee01db2f"
@@ -162,12 +176,12 @@ typedef enum  {
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
 #define LY_DOWN_FLUSH_HEIGHT 64.0
-#define DOWN_DRAG_FLUSH_NORMAL @"上拉刷新"
-#define DOWN_DRAG_FLUSH_WILL_START @"上拉刷新"
+#define DOWN_DRAG_FLUSH_NORMAL @"上拉可以刷新"
+#define DOWN_DRAG_FLUSH_WILL_START @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_DOING @"正在刷新中"
 
 #define RELEASE_DRAG_TO_FLUSH @"松开开始刷新"
 
-#define UP_DRAG_FLUSH_NORMAL @"下拉刷新"
-#define UP_DRAG_FLUSH_WILL_START @"下拉刷新"
+#define UP_DRAG_FLUSH_NORMAL @"下拉可以刷新"
+#define UP_DRAG_FLUSH_WILL_START @"下拉可以刷新"
 #define UP_DRAG_FLUSH_DOING @"正在刷新中"

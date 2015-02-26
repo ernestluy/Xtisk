@@ -21,6 +21,7 @@
 @interface FoodDetailViewController ()
 {
     FoodDetailHeader *foodDetailHeader;
+    UIButton *btnCall;
 }
 @end
 
@@ -31,7 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     CGRect bounds = [UIScreen mainScreen].bounds;
 //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
-    CGRect tableRect = CGRectMake(0, 0, bounds.size.width, self.view.bounds.size.height - DEFAULT_CELL_HEIGHT - 64);
+    CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - DEFAULT_CELL_HEIGHT - 64);
     self.tTableView = [[UITableView alloc]initWithFrame:tableRect style:UITableViewStyleGrouped];
     [self.view addSubview:self.tTableView];
     self.tTableView.dataSource = self;
@@ -50,7 +51,7 @@
     //DetailFoodCommendTableViewCell
     [self.tTableView registerNib:[UINib nibWithNibName:@"DetailFoodCommendTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell3"];
     
-    UIView *callView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height - DEFAULT_CELL_HEIGHT - 64, bounds.size.width, DEFAULT_CELL_HEIGHT)];
+    UIView *callView = [[UIView alloc]initWithFrame:CGRectMake(0, bounds.size.height - DEFAULT_CELL_HEIGHT - 64, bounds.size.width, DEFAULT_CELL_HEIGHT)];
     callView.backgroundColor = _rgb2uic(0x0095f1, 1);
     [self.view addSubview:callView];
     UILabel *labCall = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, callView.frame.size.height)];
@@ -59,7 +60,7 @@
     labCall.textColor = [UIColor whiteColor];
     labCall.text = @"我要叫餐";
     [callView addSubview:labCall];
-    UIButton *btnCall = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnCall = [UIButton buttonWithType:UIButtonTypeCustom];
     btnCall.frame = CGRectMake(130, 5, 180, 33);
     [btnCall addTarget:self action:@selector(toCall:) forControlEvents:UIControlEventTouchUpInside];
     [btnCall setTitle:@"0755-23656666" forState:UIControlStateNormal];
@@ -80,6 +81,8 @@
 
 -(void)toCall:(id)sender{
     NSLog(@"toCall");
+    NSString *telNum = [NSString stringWithFormat:@"tel://%@",btnCall.titleLabel.text];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
 }
 -(void)toCommend:(id)sender{
     NSLog(@"toCommend");
@@ -228,7 +231,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (0 == indexPath.row && 0 == indexPath.section) {
         [[SettingService sharedInstance] PermissionBaiduMap];
-        BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:114.056 lat:22.552];
+        BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:113.922 lat:22.497];
         [self.navigationController pushViewController:bv animated:YES];
 
     }else if (0 == indexPath.row && 1 == indexPath.section) {

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+//用于UI的业务类
 @interface NearMenuItem : NSObject
 
 

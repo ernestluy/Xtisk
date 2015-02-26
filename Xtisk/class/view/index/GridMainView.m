@@ -8,6 +8,7 @@
 
 #import "GridMainView.h"
 #import "PosterCollectionViewCell.h"
+#import "PublicDefine.h"
 /*
  具体用法：查看MJRefresh.h
  */
@@ -22,6 +23,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 @interface GridMainView(){
     int cInset ;
     UIView *cHeader;
+    NSArray *tDataArr;
 }
 
 @end
@@ -44,6 +46,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     //    layout.headerReferenceSize = CGSizeMake(320, 30);
     //    layout.footerReferenceSize = CGSizeMake(320, 50);
     CGRect rt = self.bounds;
+    tDataArr = @[];
     self.tCollectionView = [[LYCollectionView alloc] initWithFrame:rt collectionViewLayout:layout];
     
 //    self.tCollectionView.bounces = NO;
@@ -79,7 +82,13 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 {
     
 }
-
+-(void)setDataArr:(NSArray*)arr{
+    tDataArr = arr;
+    
+    
+    
+    [tCollectionView reloadData];
+}
 -(void)initFlushCtl{
     NSLog(@"initFlushCtl");
 }
@@ -141,7 +150,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 6;
+    return tDataArr.count;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -151,10 +160,28 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ttCollectionViewCellIdentifier forIndexPath:indexPath];
 //    NSLog(@"row:%d",indexPath.row);
-    if (indexPath.row%3 == 0) {
-        PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
-        pcc.imageBg.image = nil;
+//    if (indexPath.row%3 == 0) {
+//        PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
+//        pcc.imageBg.image = nil;
+//    }
+    PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
+    pcc.imageBg.contentMode = UIViewContentModeScaleToFill;
+    
+    RecommendItem *ri = [tDataArr objectAtIndex:indexPath.row];
+    UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:ri.recomPic];
+    if (!tImg) {
+        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:ri.recomPic
+                                                                                       target:self
+                                                                                         type:HttpRequestType_Img_LoadDown];
+        request.tTag = (int)indexPath.row;
+        request.indexPath = indexPath;
+        [request setRequestMethod:@"GET"];
+        [request startAsynchronous];
+    }else{
+        pcc.imageBg.image = tImg;
     }
+    
+    
     return cell;
 }
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -165,26 +192,12 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    MJTestViewController *test = [[MJTestViewController alloc] init];
-    //    [self.navigationController pushViewController:test animated:YES];
-    
-    //    [self.collectionView performBatchUpdates:^{
-    //        NSLog(@"delete");
-    //        [self.fakeColors removeObjectAtIndex:indexPath.row];
-    //        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-    //    } completion:nil];
-    
-    //    NSLog(@"delete");
-    //    [self.fakeColors removeObjectAtIndex:indexPath.row];
-    //    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+
     tIndexPath = indexPath;
     if (self.delegate && [self.delegate respondsToSelector:@selector(gridMainView:)]) {
         [self.delegate gridMainView:self];
     }
-    //    [self performSelector:@selector(deleteItem) withObject:nil afterDelay:1];
-//    [self.fakeColors addObject:MJRandomColor];
-//    [self.tCollectionView reloadData];
-//    [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+
 }
 
 //collectionView:layout:referenceSizeForHeaderInSection:
@@ -212,7 +225,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 //    if (indexPath.row%5 == 0) {
 //        return CGSizeMake(160, 100);
 //    }
-    return CGSizeMake(145, 145);
+    return CGSizeMake(145, 100);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
@@ -234,4 +247,38 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 //    return CGSizeMake(320, 50);
 //}
 
+#pragma mark -  AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <2000) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+                RecommendItem *ri = [tDataArr objectAtIndex:ir.tTag];
+                [XTFileManager saveTmpFolderFileWithUrlPath:ri.recomPic with:rImage];
+                PosterCollectionViewCell * pc = (PosterCollectionViewCell * )[tCollectionView cellForItemAtIndexPath:ir.indexPath];
+                if (pc) {
+                    UIImageView *iv = pc.imageBg;
+                    iv.image = rImage;
+                }
+                
+
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        default:{
+            break;
+        }
+    }
+}
 @end

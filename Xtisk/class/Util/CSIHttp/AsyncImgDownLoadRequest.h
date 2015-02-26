@@ -11,7 +11,7 @@
 @interface AsyncImgDownLoadRequest : AsyncHttpRequest
 
 
-@property (nonatomic,copy) NSIndexPath  *indexPath;
+@property (nonatomic,strong) NSIndexPath  *indexPath;
 @property (nonatomic,strong) UIImageView  *tImageView;
 @property (nonatomic) int  tTag;
 @end

@@ -82,6 +82,7 @@
     textFieldPsd.returnKeyType = UIReturnKeyNext;
     textFieldPsd.clearButtonMode = UITextFieldViewModeAlways;
     textFieldPsd.delegate = self;
+    textFieldPsd.secureTextEntry = YES;
     textFieldPsd.layer.cornerRadius = 10;
     textFieldPsd.layer.borderWidth = 1;
     textFieldPsd.layer.borderColor = _rgb2uic(0x8da3ae, 1).CGColor;
@@ -98,6 +99,7 @@
     textFieldComfirm.returnKeyType = UIReturnKeyDone;
     textFieldComfirm.clearButtonMode = UITextFieldViewModeAlways;
     textFieldComfirm.delegate = self;
+    textFieldComfirm.secureTextEntry = YES;
     textFieldComfirm.layer.cornerRadius = 10;
     textFieldComfirm.layer.borderWidth = 1;
     textFieldComfirm.layer.borderColor = _rgb2uic(0x8da3ae, 1).CGColor;

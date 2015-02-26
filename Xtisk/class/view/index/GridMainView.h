@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LYCollectionView.h"
 #import "LYFlushDefine.h"
+#import "PublicDefine.h"
 @class GridMainView;
 @protocol GridMainViewDelegate <NSObject>
 - (void)gridMainView:(GridMainView *)mainView;
 @end
-@interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LYFlushViewDelegate>
+@interface GridMainView : UIView<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LYFlushViewDelegate,AsyncHttpRequestDelegate>
 {
     LYCollectionView *tCollectionView;
     __weak UIButton *btn;
@@ -24,4 +25,6 @@
 @property(nonatomic,weak)id<GridMainViewDelegate> delegate;
 -(void)setHeaderView:(UIView *)headerView;
 -(void)initFlushCtl;
+
+-(void)setDataArr:(NSArray*)arr;
 @end

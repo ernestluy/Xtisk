@@ -10,4 +10,17 @@
 
 @implementation BaseResponse
 
+
++(BaseResponse *)getBaseResponseWithDic:(NSDictionary *)dic{
+    if (!dic) {
+        return nil;
+    }
+    BaseResponse * ci = [[BaseResponse alloc]init];
+    ci.code = [[dic objectForKey:@"code"] intValue];
+    ci.msg = [dic objectForKey:@"msg"];
+    ci.data = [dic objectForKey:@"data"];
+
+    return ci;
+    
+}
 @end

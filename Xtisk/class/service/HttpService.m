@@ -43,13 +43,13 @@ static HttpService *httpServiceInstance = nil;
         return nil;
     }
 //    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    BaseResponse *br = (BaseResponse *)[Util getObjWithJsonData:data];
+    BaseResponse *br = [BaseResponse getBaseResponseWithDic:[Util getObjWithJsonData:data]];
     return br;
 }
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate {
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryRecom",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryPoster",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_POSTERLIST];
@@ -60,7 +60,7 @@ static HttpService *httpServiceInstance = nil;
 }
 #pragma mark - 4.3.1.2	获取推荐位
 -(AsyncHttpRequest *)getRequestRecomList:(id<AsyncHttpRequestDelegate>)delegate{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryPoster",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryRecom",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_RECOMMENDLIST];
@@ -269,6 +269,93 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 
+#pragma mark - 4.3.3.4	获取店家菜单列表
+-(AsyncHttpRequest *)getRequestQueryStoreMenu:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryStoreMenu",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERYSTOREMENU];
+    
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.3.5	店家点赞/取消点赞
+-(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/favoriteStore",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_FAVORITESTORE];
+    
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.3.6	店铺评价
+-(AsyncHttpRequest *)getRequestStoreComments:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId content:(NSString *)content{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/storeComments",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_STORECOMMENTS];
+//    storeId	String		否	店铺ID
+//    content	String	300	否	评价内容
+    content = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@&content=%@",storeId,content];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.3.7	获取店铺评价列表
+-(AsyncHttpRequest *)getRequestStoreCommentsList:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId pageNo:(int)pageNo pageSize:(int)pageSize{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/querystoreComments",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_STORECOMMENTSLIST];
+    
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@&pageNo=%d&pageSize=%d",storeId,pageNo,pageSize];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.4	我的
+#pragma mark - 4.3.4.1	查看我的船票订单列表
+
+
+#pragma mark - 4.3.4.4	查看我报名的活动列表
+-(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryMyActivity",SERVICE_HOME];
+    urlStr = [NSString stringWithFormat:@"%@?pageNo=%d&pageSize=%d",urlStr,pageNo,pageSize];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERYMYACTIVITY];
+    [request setRequestMethod:@"GET"];
+    return request;
+}
+
+#pragma mark - 4.3.4.5	修改密码
+-(AsyncHttpRequest *)getRequestUpdateMyPassword:(id<AsyncHttpRequestDelegate>)delegate oldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword checkPassword:(NSString *)checkPassword{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/updateMyPassword",SERVICE_HOME];
+    urlStr = [NSString stringWithFormat:@"%@?oldPassword=%@&newPassword=%@&checkPassword=%@",urlStr,oldPassword,newPassword,checkPassword];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_UPDATEMYPASSWORD];
+    [request setRequestMethod:@"GET"];
+    return request;
+}
 
 #pragma mark - 4.3.4.9	登录
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd{
@@ -296,7 +383,7 @@ static HttpService *httpServiceInstance = nil;
     urlStr = [urlStr stringByAppendingString:middleString];
     urlStr = [urlStr stringByAppendingString:reEncoded];
     // TODO: 4 is iPhone module type .
-    urlStr = [urlStr stringByAppendingFormat:@"&NetType=%d",DEBUG?1:2];
+    urlStr = [urlStr stringByAppendingFormat:@"&NetType=%d",1];
     urlStr = [urlStr stringByAppendingString:@"&ModuleType=4"];
     
     // version number
