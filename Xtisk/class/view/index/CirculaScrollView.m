@@ -44,6 +44,11 @@
     }
 }
 
+-(void)startTimer{
+    [self stopTimer];
+    timer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+}
+
 - (void) imageViewHandlePan: (UIPanGestureRecognizer *)rec{
     NSLog(@"self.view UITapGestureRecognizer");
     int ttag = (int)rec.view.tag;
@@ -79,14 +84,14 @@
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     isMoving = NO;
-    allCount = 4;
+    allCount = 0;
     int barHeight = 20;
     labArr = [NSMutableArray array];
     imgViewArr = [NSMutableArray array];
     dataArr = [NSMutableArray array];
     // 定时器 循环
     nTag = 0;
-    timer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+    
     // 初始化 scrollview
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     [self addSubview:scrollView];
@@ -132,6 +137,14 @@
 -(void)setPostersData:(NSArray *)arr{
     [dataArr removeAllObjects];
     [dataArr addObjectsFromArray:arr];
+    allCount = (int)dataArr.count;
+    
+    [self initPosterData];
+    if (allCount <= 1) {
+        [self stopTimer];
+    }else{
+        [self startTimer];
+    }
     [self selectedEnd:nTag];
     for (int i = 0; i<dataArr.count; i++) {
         PosterItem *pi = [dataArr objectAtIndex:i];
@@ -146,10 +159,23 @@
     
 }
 -(void)initPosterData{
+    [imgViewArr removeAllObjects];
+    for (UIView *v in scrollView.subviews) {
+        [v removeFromSuperview];
+    }
     // 初始化 数组 并添加四张图片
-    pageControl.numberOfPages = 4;
+    int count = allCount;
+    pageControl.numberOfPages = count;
     NSString *dStr = @"down_img";
-    int count = 4;
+    if (allCount == 0) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dStr]];
+        imageView.frame = CGRectMake(0, 0, self.frame.size.width  , self.frame.size.height);
+        imageView.contentMode = UIViewContentModeCenter;
+        [scrollView addSubview:imageView];
+        [scrollView setContentSize:CGSizeMake(self.frame.size.width, self.frame.size.height)];
+        return;
+    }
+    
     // 创建四个图片 imageview
     for (int i = 0;i<count;i++)
     {
@@ -172,7 +198,7 @@
     [scrollView addSubview:imageView];
     [imgViewArr insertObject:imageView atIndex:0];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.tag = 3;
+    btn.tag = allCount - 1;
     [btn addTarget:self action:@selector(didSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
     btn.frame = imageView.frame;
     [scrollView addSubview:btn];
@@ -280,16 +306,16 @@
                 UIImage *rImage = [UIImage imageWithData:data];
                 UIImageView *iv =  [imgViewArr objectAtIndex:(ir.tTag+1)];
                 iv.image = rImage;
-                iv.contentMode = UIViewContentModeScaleToFill;
+                iv.contentMode = DefaultImageViewContentMode;
                 //    原理：3-[0-1-2-3]-0
                 if (ir.tTag == 0) {
-                    iv =  [imgViewArr objectAtIndex:5];
+                    iv =  [imgViewArr objectAtIndex:allCount+1];
                     iv.image = rImage;
-                }else if(ir.tTag == 3){
+                }else if(ir.tTag == (allCount - 1)){
                     iv =  [imgViewArr objectAtIndex:0];
                     iv.image = rImage;
                 }
-                iv.contentMode = UIViewContentModeScaleToFill;
+                iv.contentMode = DefaultImageViewContentMode;
             }else{
                 [request requestAgain];
                 NSLog(@"请求图片失败");

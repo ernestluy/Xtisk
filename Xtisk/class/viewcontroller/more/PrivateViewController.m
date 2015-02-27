@@ -291,7 +291,8 @@
                 break;
             }
             case 1:{
-                
+                EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextNick delegate:self];
+                [self.navigationController pushViewController:et animated:YES];
                 break;
             }
             case 2:{
@@ -320,12 +321,12 @@
                 break;
             }
             case 3:{
-                EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextSign delegate:self];
+                EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextCom delegate:self];
                 [self.navigationController pushViewController:et animated:YES];
                 break;
             }
             case 4:{
-                EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextCom delegate:self];
+                EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextSign delegate:self];
                 [self.navigationController pushViewController:et animated:YES];
                 break;
             }

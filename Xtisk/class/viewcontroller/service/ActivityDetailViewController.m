@@ -43,6 +43,7 @@
     
     self.webView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64 - 50);
     self.webView.delegate = self;
+    self.webView.backgroundColor = [UIColor whiteColor];
     
     UIButton * okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     okBtn.frame = CGRectMake(0, 0, 20, 20);

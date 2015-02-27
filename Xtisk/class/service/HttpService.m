@@ -10,6 +10,7 @@
 #import "NSData+Base64.h"
 #import "NSData+AES256.h"
 #import "NSDate+utils.h"
+
 static HttpService *httpServiceInstance = nil;
 @implementation HttpService
 
@@ -37,6 +38,27 @@ static HttpService *httpServiceInstance = nil;
     return httpServiceInstance;
 }
 
++(NSString *)getErrorStrWithCode:(int)code{
+    switch (code) {
+        case 0:
+            return @"成功";
+        case 1:
+            return @"系统异常";
+        case 2:
+            return @"用户未登录";
+        case 110101:
+            return @"手机号码不正确";
+        case 110102:
+            return @"无效的验证码";
+        case 110103:
+            return @"验证码发送失败";
+        case 110201:
+            return @"密码重置失败";
+        default:
+            return @"未知错误";
+    }
+}
+
 #pragma mark - 返回数据处理
 -(BaseResponse *)dealResponseData:(NSData *)data{
     if (!data) {
@@ -49,7 +71,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate {
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryPoster",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/index/queryPoster",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_POSTERLIST];
@@ -60,7 +82,7 @@ static HttpService *httpServiceInstance = nil;
 }
 #pragma mark - 4.3.1.2	获取推荐位
 -(AsyncHttpRequest *)getRequestRecomList:(id<AsyncHttpRequestDelegate>)delegate{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryRecom",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/index/queryRecom",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_RECOMMENDLIST];
@@ -73,7 +95,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.2.1	获取活动列表
 -(AsyncHttpRequest *)getRequestActivityList:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryActivityList",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/queryActivityList",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_ACTIVITYLIST];
@@ -86,7 +108,7 @@ static HttpService *httpServiceInstance = nil;
 }
 #pragma mark - 4.3.2.2	获取活动详情
 -(AsyncHttpRequest *)getRequestActivityDetail:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryActivityDetail",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/queryActivityDetail",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_ACTIVITYDETAIL];
@@ -348,7 +370,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.4.5	修改密码
 -(AsyncHttpRequest *)getRequestUpdateMyPassword:(id<AsyncHttpRequestDelegate>)delegate oldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword checkPassword:(NSString *)checkPassword{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/updateMyPassword",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/updateMyPassword",SERVICE_HOME];
     urlStr = [NSString stringWithFormat:@"%@?oldPassword=%@&newPassword=%@&checkPassword=%@",urlStr,oldPassword,newPassword,checkPassword];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
@@ -357,49 +379,52 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 
+#pragma mark - 4.3.4.7	修改个人信息
+-(AsyncHttpRequest *)getRequestUpdatePerson:(id<AsyncHttpRequestDelegate>)delegate user:(IUser*)user{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/updatePerson",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_UPDATEPERSON];
+    //    NSMutableString *contentStr = [NSMutableString string];
+    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr stringByAppendingFormat:@"imageFileName=%@&",user.headImageUrl];
+    [mContentStr stringByAppendingFormat:@"nickName=%@&",user.nickName];
+    [mContentStr stringByAppendingFormat:@"signature=%@&",user.signature];
+    [mContentStr stringByAppendingFormat:@"gender=%@&",user.gender];
+    [mContentStr stringByAppendingFormat:@"birthday=%@&",user.birthday];
+    [mContentStr stringByAppendingFormat:@"maritalStatus=%@&",user.maritalStatus];
+    [mContentStr stringByAppendingFormat:@"enterprise=%@&",user.enterprise];
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.4.8	注销
+-(AsyncHttpRequest *)getRequestlogout:(id<AsyncHttpRequestDelegate>)delegate{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    
+    NSString *urlStr = [NSString stringWithFormat:@"https://%@/user/login",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_LOGOUT];
+   
+    [request setRequestMethod:@"GET"];
+    
+    return request;
+}
+
 #pragma mark - 4.3.4.9	登录
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd{
-    
-#pragma mark 密码加密 -
-    NSString *middleString = @"&passWord=";
-    NSString *pass = psd;
-    NSData *plain = [pass dataUsingEncoding:NSUTF8StringEncoding];
-    //设置密钥"ABCD1234abcd5678"
-    NSString *keyString =  @"ABCD1234abcd5678";
-    NSData *keyData = [keyString dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encData = [HttpService doCipher:plain key:keyData context:kCCEncrypt];
-    NSString *encoded = [encData base64EncodedString];
-    NSString *decoded   = [encoded stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *reEncoded = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                                ( CFStringRef)decoded,
-                                                                                                NULL,
-                                                                                                CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                                                kCFStringEncodingUTF8));
-    NSLog(@"reEncoded: '%@'", reEncoded);
-#pragma mark 发送消息到服务器格式 -
-    NSString *ip = @"116.7.243.122:9999";
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/UCM/LoginServiceDS?IMSNo=", ip];
-    urlStr = [urlStr stringByAppendingString:name];
-    urlStr = [urlStr stringByAppendingString:middleString];
-    urlStr = [urlStr stringByAppendingString:reEncoded];
-    // TODO: 4 is iPhone module type .
-    urlStr = [urlStr stringByAppendingFormat:@"&NetType=%d",1];
-    urlStr = [urlStr stringByAppendingString:@"&ModuleType=4"];
-    
-    // version number
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
-    urlStr = [urlStr stringByAppendingFormat:@"&Version=%@",[NSString stringWithFormat:@"%@.%@",
-                                                             majorVersion, minorVersion]];
-     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
-     target:delegate
-     type:HttpRequestType_XT_LOGIN];
-     [request setRequestMethod:@"GET"];
+   
     
     
-    /*
-    NSString *urlStr = [NSString stringWithFormat:@"https://%@/login",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"https://%@/user/login",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_LOGIN];
@@ -409,7 +434,7 @@ static HttpService *httpServiceInstance = nil;
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
-     */
+     
     return request;
 }
 
@@ -419,10 +444,10 @@ static HttpService *httpServiceInstance = nil;
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/createUser",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
-                                                                       type:HttpRequestType_XT_LOGIN];
+                                                                       type:HttpRequestType_XT_REG];
     //    NSMutableString *contentStr = [NSMutableString string];
     //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
-    NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&checkPassword=%@&authCode=%@",account,psd,psd,authCode];
+    NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&authCode=%@",account,psd,authCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
@@ -434,10 +459,39 @@ static HttpService *httpServiceInstance = nil;
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/smsCode",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
-                                                                       type:HttpRequestType_XT_LOGIN];
+                                                                       type:HttpRequestType_XT_GETSMSCODE];
     //    NSMutableString *contentStr = [NSMutableString string];
     //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&method=%@&smsCode=%@",account,method,smsCode];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.4.12	重置密码
+-(AsyncHttpRequest *)getRequestResetPassword:(id<AsyncHttpRequestDelegate>)delegate  phone:(NSString *)phone password:(NSString *)password authCode:(NSString *)authCode{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/resetPassword",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_RESETPSD];
+    
+    NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&authCode=%@",phone,password,authCode];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.4.14	建议反馈
+-(AsyncHttpRequest *)getRequestSuggestion :(id<AsyncHttpRequestDelegate>)delegate  content:(NSString *)content{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/suggestion",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_RESETPSD];
+    //content	String	300	否	建议反馈内容
+    NSString *contentStr = [NSString stringWithFormat:@"content=%@",content];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];

@@ -20,6 +20,13 @@ typedef enum HttpRequestType{
     
     //【交易】请求sessionID
     HttpRequestType_XT_LOGIN = 0,
+    HttpRequestType_XT_REG,
+    HttpRequestType_XT_GETSMSCODE,
+    HttpRequestType_XT_RESETPSD,
+    HttpRequestType_XT_SUGGESTION,
+    HttpRequestType_XT_UPDATEPERSON,
+    HttpRequestType_XT_LOGOUT,
+    
     HttpRequestType_XT_POSTERLIST,
     HttpRequestType_XT_RECOMMENDLIST,
     HttpRequestType_XT_ACTIVITYLIST,

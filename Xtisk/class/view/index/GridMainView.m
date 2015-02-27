@@ -165,7 +165,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 //        pcc.imageBg.image = nil;
 //    }
     PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
-    pcc.imageBg.contentMode = UIViewContentModeScaleToFill;
+    
     
     RecommendItem *ri = [tDataArr objectAtIndex:indexPath.row];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:ri.recomPic];
@@ -178,6 +178,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
         [request setRequestMethod:@"GET"];
         [request startAsynchronous];
     }else{
+        pcc.imageBg.contentMode = DefaultImageViewContentMode;
         pcc.imageBg.image = tImg;
     }
     
@@ -266,6 +267,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
                 PosterCollectionViewCell * pc = (PosterCollectionViewCell * )[tCollectionView cellForItemAtIndexPath:ir.indexPath];
                 if (pc) {
                     UIImageView *iv = pc.imageBg;
+                    iv.contentMode = DefaultImageViewContentMode;
                     iv.image = rImage;
                 }
                 

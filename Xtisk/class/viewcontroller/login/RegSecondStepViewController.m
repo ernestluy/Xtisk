@@ -12,6 +12,7 @@
 #import "HisLoginAcc.h"
 #import "SettingService.h"
 #import "PrivateViewController.h"
+#import "LoginViewController.h"
 @interface RegSecondStepViewController ()
 {
     UITextField *nowTextField;
@@ -164,7 +165,10 @@
     la.psd = textFieldPsd.text;
     la.isRmbPsd = YES;
     [HisLoginAcc saveLastAccLoginInfo:la];
-    [SettingService sharedInstance].account = la.account;
+//    [SettingService sharedInstance].account = la.account;
+    IUser *iuser = [[IUser alloc]init];
+    iuser.phone  = self.phoneNum;
+    [SettingService sharedInstance].iUser = iuser;
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"恭喜您，注册成功！现在去完善资料？" delegate:self cancelButtonTitle:@"马上就去" otherButtonTitles:@"以后再说", nil];
     av.delegate = self;
     [av show];
@@ -179,11 +183,29 @@
     if (0 == buttonIndex) {
         PrivateViewController *pv = [[PrivateViewController alloc]init];
         UINavigationController *nav = self.navigationController;
-        [nav popToRootViewControllerAnimated:NO];
+//        [nav popToRootViewControllerAnimated:NO];
+        UIViewController *vc = [self vcPopToLoginLastLevel];
+        [nav popToViewController:vc animated:NO];
         [nav pushViewController:pv animated:YES];
     }else if (1 == buttonIndex){
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        UIViewController *vc = [self vcPopToLoginLastLevel];
+        [self.navigationController popToViewController:vc animated:YES];
     }
+}
+
+-(UIViewController *)vcPopToLoginLastLevel{
+    UINavigationController *nav = self.navigationController;
+    NSArray *vcArr = nav.viewControllers;
+    UIViewController *theVc = nil;
+    int count = (int)vcArr.count;
+    for (int i = count-1;i>=0;i--) {
+        UIViewController *tmpVc = [vcArr objectAtIndex:i];
+        if ([tmpVc isKindOfClass:[LoginViewController class]]) {
+            theVc = [vcArr objectAtIndex:(i-1)];
+        }
+    }
+    return theVc;
 }
 #pragma mark - UITextFieldDelegate
 

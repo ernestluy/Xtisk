@@ -226,6 +226,7 @@ typedef enum  {
 }
 - (void) handlePan2: (UIPanGestureRecognizer *)rec{
     NSLog(@"self.view UITapGestureRecognizer");
+    
     if (nowTextField) {
         [nowTextField resignFirstResponder];
     }

@@ -18,6 +18,7 @@
 
 
 +(HttpService *)sharedInstance;
++(NSString *)getErrorStrWithCode:(int)code;
 #pragma mark - 返回数据处理
 -(BaseResponse *)dealResponseData:(NSData *)data;
 #pragma mark - 4.3.1.1	获取海报
@@ -74,6 +75,12 @@
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize;
 #pragma mark - 4.3.4.5	修改密码
 -(AsyncHttpRequest *)getRequestUpdateMyPassword:(id<AsyncHttpRequestDelegate>)delegate oldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword checkPassword:(NSString *)checkPassword;
+#pragma mark - 4.3.4.6	图片上传
+
+#pragma mark - 4.3.4.7	修改个人信息
+-(AsyncHttpRequest *)getRequestUpdatePerson:(id<AsyncHttpRequestDelegate>)delegate user:(IUser*)iUser;
+#pragma mark - 4.3.4.8	注销
+-(AsyncHttpRequest *)getRequestlogout:(id<AsyncHttpRequestDelegate>)delegate;
 
 #pragma mark - 4.3.4.9	登录
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd;
@@ -81,4 +88,13 @@
 -(AsyncHttpRequest *)getRequestReg:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account psd:(NSString *)psd authCode:(NSString *)authCode;
 #pragma mark - 4.3.4.11	获取/验证短信验证码
 -(AsyncHttpRequest *)getRequestSmsCode:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account method:(NSString *)method smsCode:(NSString *)smsCode;
+#pragma mark - 4.3.4.12	重置密码
+-(AsyncHttpRequest *)getRequestResetPassword:(id<AsyncHttpRequestDelegate>)delegate  phone:(NSString *)phone password:(NSString *)password authCode:(NSString *)authCode;
+
+
+
+#pragma mark - 4.3.4.14	建议反馈
+-(AsyncHttpRequest *)getRequestSuggestion :(id<AsyncHttpRequestDelegate>)delegate  content:(NSString *)content;
+
+
 @end

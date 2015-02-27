@@ -26,7 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    if (tType == PrivateEditTextSign) {
+    if (tType == PrivateEditTextNick) {
+        self.title = @"昵称";
+        limitNum = 15;
+    }
+    else if (tType == PrivateEditTextSign) {
         self.title = @"修改签名";
         limitNum = 32;
     }else if (tType == PrivateEditTextCom){

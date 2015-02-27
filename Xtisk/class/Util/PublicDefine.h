@@ -20,6 +20,7 @@
 #import "BMapKit.h"
 #import "SVProgressHUD.h"
 #import "BaseResponse.h"
+#import "IUser.h"
 #import "HttpService.h"
 #import "RecommendItem.h"
 #import "SettingService.h"
@@ -38,7 +39,7 @@ NSLocalizedStringFromTable(key, @"Localizable", nil)
 NSLocalizedStringFromTable(key, @"SipLocalizable", nil)
 #endif
 
-#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms/control/index"
+#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms/control"
 #define RESOURSE_HOME @"http://116.7.243.122:10080/ipop_tms/"
  #define MAX_PACKET_LEN 40000
 
@@ -137,6 +138,7 @@ typedef enum {
 }XtServiceType;
 
 typedef enum  {
+    PrivateEditTextNick,
     PrivateEditTextSign,
     PrivateEditTextCom,
     PrivateEditTextFoodCommend,
@@ -172,6 +174,7 @@ typedef enum  {
 
 #define DefaultCellFont [UIFont systemFontOfSize:15]
 
+#define DefaultImageViewContentMode UIViewContentModeScaleAspectFill
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
