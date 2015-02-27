@@ -150,7 +150,9 @@
     
     if (PsdSettingReg == tType) {
         //注册的时候设置密码
-        [self regSuc];
+//        [self regSuc];
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance] getRequestReg:self account:self.phoneNum psd:textFieldPsd.text authCode:self.smsCode]startAsynchronous];
         NSLog(@"注册的时候设置密码");
     }else if (PsdSettingModify == tType){
         //重置密码
@@ -166,9 +168,7 @@
     la.isRmbPsd = YES;
     [HisLoginAcc saveLastAccLoginInfo:la];
 //    [SettingService sharedInstance].account = la.account;
-    IUser *iuser = [[IUser alloc]init];
-    iuser.phone  = self.phoneNum;
-    [SettingService sharedInstance].iUser = iuser;
+    
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"提示" message:@"恭喜您，注册成功！现在去完善资料？" delegate:self cancelButtonTitle:@"马上就去" otherButtonTitles:@"以后再说", nil];
     av.delegate = self;
     [av show];
@@ -220,7 +220,44 @@
     }
     return YES;
 }
-
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        case HttpRequestType_XT_REG:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+//                    IUser *iuser = [[IUser alloc]init];
+//                    iuser.phone  = self.phoneNum;
+//                    [SettingService sharedInstance].iUser = iuser;
+                    NSDictionary *tDic = (NSDictionary *)br.data;
+                    if (tDic == nil) {
+                        [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    }else{
+                        IUser *user = [IUser getIUserWithDic:tDic];
+                        if (user.phone == nil || user.phone.length <1) {
+                            [SVProgressHUD showErrorWithStatus:@"注册失败" duration:1.5];
+                            return;
+                        }
+                        [SettingService sharedInstance].iUser = user;
+                        [self regSuc];
+                    }
+                    
+                }
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+                
+            }
+            break;
+        }
+        default:{
+            
+            break;
+        }
+    }
+}
 #pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

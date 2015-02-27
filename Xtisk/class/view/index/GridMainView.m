@@ -83,6 +83,9 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     
 }
 -(void)setDataArr:(NSArray*)arr{
+    if (!arr) {
+        return;
+    }
     tDataArr = arr;
     
     

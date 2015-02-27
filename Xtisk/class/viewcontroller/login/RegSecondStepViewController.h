@@ -7,9 +7,10 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface RegSecondStepViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate>
+#import "PublicDefine.h"
+@interface RegSecondStepViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate,AsyncHttpRequestDelegate>
 @property(nonatomic,copy)NSString *phoneNum;
+@property(nonatomic,copy)NSString *smsCode;
 
 -(id)initWithTitle:(NSString *)tl type:(int)t;
 

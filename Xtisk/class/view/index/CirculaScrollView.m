@@ -135,6 +135,9 @@
     return self;
 }
 -(void)setPostersData:(NSArray *)arr{
+    if (!arr) {
+        return;
+    }
     [dataArr removeAllObjects];
     [dataArr addObjectsFromArray:arr];
     allCount = (int)dataArr.count;

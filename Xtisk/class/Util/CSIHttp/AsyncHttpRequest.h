@@ -27,6 +27,7 @@
 	NSString                      *responseStringData;              //服务器返回数据
 }
 @property (retain,nonatomic) id<AsyncHttpRequestDelegate> m_asyncHttpRequestDelegate;
+@property (nonatomic) int  iMark;
 @property                    HttpRequestType              m_requestType;
 @property (retain,nonatomic) NSString                     *responseStringData; 
 
@@ -36,4 +37,6 @@
 -(NSString *)getResponseJsonStr;
 -(NSString *)getResponseStr;
 - (NSData *)getResponseData;
+
+-(void)setHttpsRequest;
 @end

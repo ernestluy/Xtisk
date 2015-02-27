@@ -60,7 +60,7 @@
     int insetY = 10;
     //轮播图
     circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 130)];
-    [circulaScrollView setPostersData:pmArr];
+//    [circulaScrollView setPostersData:pmArr];
     circulaScrollView.cDelegate = self;
     [headerView addSubview:circulaScrollView];
     
@@ -134,9 +134,8 @@
 //    [sc setNums:7.5];
 //    sc.backgroundColor = [UIColor clearColor];
 //    [self.view addSubview:sc];
-//    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
-//    
-//    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
+    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
+    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -231,12 +230,12 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-//                    NSDictionary *tmpDic = (NSDictionary *)br.data;
-//                    NSArray *posterList = [tmpDic objectForKey:@"posterList"];
-//                    if (posterList) {
-//                        NSArray *pArr = [PosterItem getPosterItemsWithArr:posterList];
-//                        [circulaScrollView setPostersData:pArr];
-//                    }
+                    NSDictionary *tmpDic = (NSDictionary *)br.data;
+                    NSArray *posterList = [tmpDic objectForKey:@"posterList"];
+                    if (posterList) {
+                        NSArray *pArr = [PosterItem getPosterItemsWithArr:posterList];
+                        [circulaScrollView setPostersData:pArr];
+                    }
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");
@@ -249,11 +248,12 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-//                    NSDictionary *tmpDic = (NSDictionary *)br.data;
-//                    tRecommendList = [tmpDic objectForKey:@"recomList"];
-//                    if (tRecommendList) {
-//                        NSArray *pArr = [RecommendItem getRecommendItemsWithArr:tRecommendList];
-//                    }
+                    NSDictionary *tmpDic = (NSDictionary *)br.data;
+                    tRecommendList = [tmpDic objectForKey:@"recomList"];
+                    if (tRecommendList) {
+                        NSArray *pArr = [RecommendItem getRecommendItemsWithArr:tRecommendList];
+                        [gridMainView setDataArr:pArr];
+                    }
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");

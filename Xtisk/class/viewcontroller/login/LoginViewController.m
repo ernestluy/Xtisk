@@ -235,9 +235,9 @@ typedef enum  {
 -(void)login:(id)sender{
     NSLog(@"login");
 //    [SVProgressHUD showWithStatus:@"请等待" maskType:SVProgressHUDMaskTypeNone];
-//    [SVProgressHUD showWithStatus:@"请等待" ];
-//    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
-    [self loginSucInto];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt ];
+    [[[HttpService sharedInstance] getRequestLogin:self name:tf_name.text psd:tf_password.text]startAsynchronous];
+//    [self loginSucInto];
 }
 -(void)loginSucInto{
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginSucBack:)]) {
@@ -251,9 +251,9 @@ typedef enum  {
     la.isRmbPsd = isRemPsd;
     [HisLoginAcc saveLastAccLoginInfo:la];
     [SettingService sharedInstance].account = la.account;
-    IUser *iuser = [[IUser alloc]init];
-    iuser.phone  = tf_name.text;
-    [SettingService sharedInstance].iUser = iuser;
+//    IUser *iuser = [[IUser alloc]init];
+//    iuser.phone  = tf_name.text;
+//    [SettingService sharedInstance].iUser = iuser;
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
@@ -537,123 +537,39 @@ typedef enum  {
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         case HttpRequestType_XT_LOGIN:{
             if (HttpResponseTypeFinished ==  responseCode) {
-                //成功
-                NSString *xmlStr = [request getResponseStr];
-                //NSLog(@"xmlStr-->%@",xmlStr);
-                //解析xml
-                NSError *error;
-
-                GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
-                if (xmlDoc == nil) return;
-                NSLog(@"LOG=%@",[[NSString alloc] initWithData:xmlDoc.XMLData encoding:NSUTF8StringEncoding]);
-                NSArray *returnMembers = [xmlDoc.rootElement nodesForXPath:@"/result" error:nil];
-                //遍历节点
-                if (returnMembers.count>0)
-                {
-                    GDataXMLElement *returnMember = (GDataXMLElement *)[returnMembers objectAtIndex:0];
-                    //取ErrorCode值`
-                    NSArray *arrayValues = [returnMember elementsForName:@"ErrorCode"];
-                    GDataXMLElement *returnCode = (GDataXMLElement *) [arrayValues objectAtIndex:0];
-                    NSString *errorCode = returnCode.stringValue;
-                    NSLog(@"errorCode-->%@",errorCode);
-                    if (![errorCode isEqualToString:@"0"]) {
-                        //登录失败，显示失败原因
-                        NSString *strError = @"系统异常";
-                        int tTag = [errorCode intValue];
-                        switch (tTag) {
-                            case 0:{
-                                //成功
-                                break;
-                            }
-                            case 1:{
-                                strError = @"系统账号数量超出许可，无法使用";
-                                break;
-                            }
-                            case 2:{
-                                strError = @"账号与密码不符";
-                                break;
-                            }
-                            case 3:
-                            case 6:{
-                                NSLog(@"不存在该账户");
-                                strError = @"不存在该账户";
-                                break;
-                            }
-                            case 4:{
-                                strError = @"发送令牌失败";
-                                break;
-                            }
-                            case 5:{
-                                strError = @"获取系统参数异常";
-                                break;
-                            }
-                            case 7:{
-                                strError = @"账号未开通";
-                                break;
-                            }
-                            case 8:{
-                                strError = @"账号暂停使用";
-                                break;
-                            }
-                            case 9:{
-                                strError = @"获取用户登录参数异常";
-                                break;
-                            }
-                            case 10:{
-                                strError = @"账号没有业务权限";
-                                break;
-                            }
-                            case 11:{
-                                strError = @"许可期限已到，无法使用";
-                                break;
-                            }
-                            default:
-                                break;
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *tDic = (NSDictionary *)br.data;
+                    if (tDic == nil) {
+                        [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    }else{
+                        IUser *user = [IUser getIUserWithDic:tDic];
+                        if (user.phone == nil || user.phone.length <1) {
+                            [SVProgressHUD showErrorWithStatus:@"登录失败" duration:1.5];
+                            return;
                         }
-                        [SVProgressHUD showErrorWithStatus:strError duration:2];
-                        return;
+                        [SettingService sharedInstance].iUser = user;
+                        [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1.5];
+                        [self loginSucInto];
                     }
                     
-                    //登录成功，读取信息
-                    
-                    //account
-                    NSArray *keyArr = [returnMember elementsForName:@"Key"];
-                    GDataXMLElement *keyElement = (GDataXMLElement *) [keyArr objectAtIndex:0];
-                    [SettingService sharedInstance].key = keyElement.stringValue;
-                    
-                    NSArray *orgArr = [returnMember elementsForName:@"OrgId"];
-                    GDataXMLElement *orgElement = (GDataXMLElement *) [orgArr objectAtIndex:0];
-                    [SettingService sharedInstance].orgId = orgElement.stringValue;
-                    
-                    NSArray *accountArr = [returnMember elementsForName:@"Account"];
-                    GDataXMLElement *accElement = (GDataXMLElement *) [accountArr objectAtIndex:0];
-                    [SettingService sharedInstance].account = accElement.stringValue;
-                    
-                    NSArray *userArr = [returnMember elementsForName:@"User"];
-                    GDataXMLElement *userElement = (GDataXMLElement *) [userArr objectAtIndex:0];
-                    [SettingService sharedInstance].user = userElement.stringValue;
-                    
-                    NSArray *tokenArr = [returnMember elementsForName:@"Token"];
-                    GDataXMLElement *tokenElement = (GDataXMLElement *) [tokenArr objectAtIndex:0];
-                    [SettingService sharedInstance].token = tokenElement.stringValue;
-                    
-                    [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1];
-                    [self loginSucInto];
                 }
-
-            }else{
-                //失败
-                [SVProgressHUD showErrorWithStatus:@"请求失败" duration:2];
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
             }
             break;
         }
-        default:
+        default:{
+            
             break;
+        }
     }
-    
 }
 #pragma mark -
 #pragma mark view touches

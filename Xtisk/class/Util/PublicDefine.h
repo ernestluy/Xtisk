@@ -39,7 +39,7 @@ NSLocalizedStringFromTable(key, @"Localizable", nil)
 NSLocalizedStringFromTable(key, @"SipLocalizable", nil)
 #endif
 
-#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms/control"
+#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms"//http://ip:port/ipop_tms
 #define RESOURSE_HOME @"http://116.7.243.122:10080/ipop_tms/"
  #define MAX_PACKET_LEN 40000
 
@@ -68,22 +68,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define LyRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
 
-//IM related .
-#ifndef IM_SERVER_DEFINE
-#define IM_SERVER_ADDRESS @"10.20.11.131"
-#define IM_SERVER_GATE_PORT 2084
 
-//IM test user account and pwd .
-#define IM_USER_TEST_ACCOUNT @"uctest005"
-#define IM_USER_TEST_PWD @"123456"
-
-
-#define LOGIN_ENCRYPT_KEY @"ABCD1234abcd5678"
-
-#define VIDEO_CONF_HOUR      2
-#define VIDEO_CONF_DURATION  60*60*VIDEO_CONF_HOUR
-#define IS_LT_VIDEO_VISION   YES
-#endif
 //Documents 路径
 #define PathDocumentsHeadIcon				[NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/headicon"]
 //头像路径
@@ -112,6 +97,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define _NOTHING  (-1)
 
 #define keyMyselfSign @"keyMyselfSign"
+
+
 
 
 typedef enum  {
@@ -175,6 +162,9 @@ typedef enum  {
 #define DefaultCellFont [UIFont systemFontOfSize:15]
 
 #define DefaultImageViewContentMode UIViewContentModeScaleAspectFill
+
+#define DefaultRequestPrompt  @"请求中..."
+#define DefaultRequestFaile  @"请求失败"
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8

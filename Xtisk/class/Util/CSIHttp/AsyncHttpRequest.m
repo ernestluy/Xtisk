@@ -29,6 +29,7 @@
 @synthesize m_asyncHttpRequestDelegate;
 @synthesize m_requestType;
 @synthesize responseStringData;
+@synthesize iMark;
 
 
 - (id)initWithServiceAPI:(NSString *)turl target:(id<AsyncHttpRequestDelegate>)requestDelegate type:(HttpRequestType )type {
@@ -157,7 +158,12 @@
 	//	NSURL *urll = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_SERVICE_URL,serviceAPI]];
 	//	self.url = urll;
 }
-
+-(void)setHttpsRequest{
+//    [Req setAuthenticationScheme:@"https"];//设置验证方式
+//    
+//    [Req setValidatesSecureCertificate:NO];//设置验证证书
+    //self.urlRequest setvali
+}
 -(void)dealloc{
 	[responseStringData release];
 	[m_asyncHttpRequestDelegate release];

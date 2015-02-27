@@ -7,8 +7,8 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface RegViewController : SecondaryViewController<UITextFieldDelegate>
+#import "PublicDefine.h"
+@interface RegViewController : SecondaryViewController<UITextFieldDelegate,AsyncHttpRequestDelegate>
 
 
 @property(nonatomic,weak)IBOutlet UILabel *labPrompt;

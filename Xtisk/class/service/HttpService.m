@@ -434,14 +434,13 @@ static HttpService *httpServiceInstance = nil;
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
-     
     return request;
 }
 
 
 #pragma mark - 4.3.4.10	注册
 -(AsyncHttpRequest *)getRequestReg:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account psd:(NSString *)psd authCode:(NSString *)authCode{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/createUser",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/createUser",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_REG];
@@ -456,7 +455,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.4.11	获取/验证短信验证码
 -(AsyncHttpRequest *)getRequestSmsCode:(id<AsyncHttpRequestDelegate>)delegate  account:(NSString *)account method:(NSString *)method smsCode:(NSString *)smsCode{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/smsCode",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/smsCode",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_GETSMSCODE];

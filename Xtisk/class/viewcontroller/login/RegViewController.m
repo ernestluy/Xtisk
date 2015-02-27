@@ -170,6 +170,9 @@
 -(IBAction)getVerCodeAction:(id)sender{
     NSLog(@"getVerCodeAction");
     [self startCalTime];
+    AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:textFieldAc.text method:@"phone" smsCode:@""];
+    aRequest.iMark = 0;
+    [aRequest startAsynchronous];
 }
 -(IBAction)nextAction:(id)sender{
     NSLog(@"nextAction");
@@ -186,8 +189,15 @@
         XT_SHOWALERT(@"验证码太长");
         return;
     }
+    AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:textFieldAc.text method:@"code" smsCode:textFieldCode.text];
+    aRequest.iMark = 1;
+    [aRequest startAsynchronous];
+    
+}
+-(void)toNextStep{
     RegSecondStepViewController *rs = [[RegSecondStepViewController alloc]initWithTitle:@"设置密码" type:PsdSettingReg];
     rs.phoneNum = textFieldAc.text;
+    rs.smsCode = textFieldCode.text;
     [self.navigationController pushViewController:rs animated:YES];
 }
 -(IBAction)regAction:(id)sender{
@@ -205,6 +215,41 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_XT_GETSMSCODE:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    if (request.iMark == 0) {
+                        NSLog(@"请求验证码成功");
+                        [SVProgressHUD showSuccessWithStatus:@"请求成功，请等待接收含有验证码的短信息" duration:1.5];
+                    }else if (request.iMark == 1) {
+                        NSLog(@"验证发送的验证码成功");
+                        [SVProgressHUD showSuccessWithStatus:@"验证成功" duration:0.8];
+                        [self toNextStep];
+                    }
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:br.msg duration:0.8];
+                }
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求验证码失败");
+                if (request.iMark == 0) {
+                    NSLog(@"请求验证码失败");
+                }else if (request.iMark == 1) {
+                    NSLog(@"验证发送的验证码失败");
+                }
+            }
+            break;
+        }
+        default:{
+            
+            break;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
