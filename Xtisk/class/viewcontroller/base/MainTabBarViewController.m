@@ -73,7 +73,7 @@ typedef enum {
     NSArray *xibArray = [NSArray arrayWithObjects:@"IndexTabViewController",@"MessageTabViewController",@"ServiceTabViewController",@"MoreTabViewController", nil];
     NSArray *tabBarItemBg = [NSArray arrayWithObjects:@"icon_index.png",@"icon_msg.png",@"icon_service.png",@"icon_more.png", nil];
     NSArray *tabBarItemSelectedBg = [NSArray arrayWithObjects:@"icon_index_selected.png",@"icon_msg_selected.png",@"icon_service_selected.png",@"icon_more_selected.png", nil];
-    NSArray *btnName = [NSArray arrayWithObjects:@"首页",@"消息",@"服务",@"更多",nil];
+    NSArray *btnName = [NSArray arrayWithObjects:@"首页",@"消息",@"服务",@"我的",nil];
     for (int i = 0; i<[xibArray count]; i++) {
         UIViewController *ctl =nil;
         if (i == TAB_BAR_INDEX) {

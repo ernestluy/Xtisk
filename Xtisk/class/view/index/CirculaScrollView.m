@@ -108,7 +108,7 @@
     [self addSubview:tmpView];
     
     UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, frame.size.height - barHeight, 210, barHeight)];
-    tLabel.textColor = [UIColor whiteColor];
+    tLabel.textColor = headerColor;// [UIColor whiteColor];
     tLabel.font = [UIFont systemFontOfSize:13];
     tLabel.text = @"";
     self.labelTitle = tLabel;

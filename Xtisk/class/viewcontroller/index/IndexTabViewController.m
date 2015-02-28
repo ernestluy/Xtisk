@@ -63,7 +63,7 @@
     CGRect rect = [UIScreen mainScreen].bounds;
     UIView *headerView = [[UIView alloc]init];
     headerView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
-    int insetY = 10;
+    int insetY = 6;
     //轮播图
     circulaScrollView = [[CirculaScrollView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, 130)];
 //    [circulaScrollView setPostersData:pmArr];
@@ -111,13 +111,13 @@
     
     //热门推荐bar
     nY += (fH + insetY);
-    int rmtjH = 20;
+    int rmtjH = 16;
     UIView *rmtjView = [[UIView alloc]initWithFrame:CGRectMake(0, nY, rect.size.width, rmtjH)];
     rmtjView.backgroundColor = [UIColor whiteColor];
-    UILabel *rmtjLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 200, 15)];
+    UILabel *rmtjLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 6, 200, 14)];
     rmtjLabel.textColor = _rgb2uic(0xe62100, 1);
     rmtjLabel.text = @"热门推荐";
-    rmtjLabel.font = DefaultCellFont;
+    rmtjLabel.font = [UIFont systemFontOfSize:13];
     rmtjLabel.textAlignment = NSTextAlignmentLeft;
     [rmtjView addSubview:rmtjLabel];
     
@@ -155,6 +155,8 @@
     
 }
 
+
+//persistence
 -(void)initLastData{
     NSArray *tmpRecArrs = [[NSArray alloc]initWithContentsOfFile:PathDocFile(IndexRecomList)];
     if (tmpRecArrs && tmpRecArrs.count>0) {

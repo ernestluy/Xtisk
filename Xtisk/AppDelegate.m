@@ -54,6 +54,15 @@
 //    NSDictionary *dic = @{@"luyi":@"He is a good man.",@"age":[NSNumber numberWithInt:29]};
 //    NSString *jsonStr= [Util getJsonStrWithObj:dic];
 //    NSLog(@"%@",jsonStr);
+    /*
+     
+     <NSHTTPCookie version:0 name:"JSESSIONID" value:"EE5AB6135EFCA21C3B2D16516CA943C5" expiresDate:(null) created:2015-02-28 09:32:38 +0000 (4.46809e+08) sessionOnly:TRUE domain:"116.7.243.122" path:"/ipop_tms/" isSecure:FALSE>
+
+     */
+//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+//        NSLog(@"%@", cookie);
+//    }
     
     [[SettingService sharedInstance] PermissionBaiduMap];
     //设置友盟Appkey
