@@ -145,11 +145,12 @@
         
         viewUpDrag = [[UIView alloc]init];
         viewUpDrag.frame = CGRectMake(0, -LY_DOWN_FLUSH_HEIGHT, bounds.size.width, LY_DOWN_FLUSH_HEIGHT);
-        viewUpDrag.backgroundColor = [UIColor lightGrayColor];
+//        viewUpDrag.backgroundColor = [UIColor lightGrayColor];
         acUpDrag = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [viewUpDrag addSubview:acUpDrag];
         acUpDrag.center = CGPointMake(50, LY_DOWN_FLUSH_HEIGHT/2);
         acUpDrag.hidden = YES;
+        acUpDrag.color = headerColor;
         
         labelUpDrag = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width , LY_DOWN_FLUSH_HEIGHT)];
         labelUpDrag.textAlignment = NSTextAlignmentCenter;
@@ -209,11 +210,12 @@
     if (viewDownDrag == nil) {
         
         viewDownDrag = [[UIView alloc]init];
-        viewDownDrag.backgroundColor = [UIColor lightGrayColor];
+//        viewDownDrag.backgroundColor = [UIColor lightGrayColor];
         acDownDrag = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [viewDownDrag addSubview:acDownDrag];
         acDownDrag.center = CGPointMake(50, LY_DOWN_FLUSH_HEIGHT/2);
         acDownDrag.hidden = YES;
+        acDownDrag.color = headerColor;
         
         labelDownDrag = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width , LY_DOWN_FLUSH_HEIGHT)];
         labelDownDrag.textAlignment = NSTextAlignmentCenter;

@@ -54,6 +54,12 @@
         [tmpMarr addObject:tri];
     }
     tRecommendList = tmpMarr;
+    
+    
+//    NSArray *ttdic = @[@{@"recomPic":@"http://img3.3lian.com/2006/013/02/016.jpg",@"recomUrl":@"http://www.sina.com.cn"},@{@"recomPic":@"http://img.159.com/desk/user/2012/4/7/Jiker201236151827921.jpg",@"recomUrl":@"http://www.sina.com.cn"},@{@"recomPic":@"http://pica.nipic.com/2007-11-09/2007119122712983_2.jpg",@"recomUrl":@"http://www.sina.com.cn"}];
+//    NSString *tttt = PathDocFile(IndexRecomList);
+//    [ttdic writeToFile:PathDocFile(IndexRecomList) atomically:YES];
+    
     CGRect rect = [UIScreen mainScreen].bounds;
     UIView *headerView = [[UIView alloc]init];
     headerView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
@@ -128,7 +134,7 @@
     
     [self.view addSubview:gridMainView];
     
-    
+    [self initLastData];
 //    StarCommendView *sc = [[StarCommendView alloc]init];
 //    sc.frame = CGRectMake(100, 100, 75, 15);
 //    [sc setNums:7.5];
@@ -146,7 +152,20 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [gridMainView setDataArr:tmpMarr];
+    
+}
+
+-(void)initLastData{
+    NSArray *tmpRecArrs = [[NSArray alloc]initWithContentsOfFile:PathDocFile(IndexRecomList)];
+    if (tmpRecArrs && tmpRecArrs.count>0) {
+        tRecommendList = [RecommendItem getRecommendItemsWithArr:tmpRecArrs];
+        [gridMainView setDataArr:tRecommendList];
+    }
+    NSArray* tmpArr = [[NSArray alloc]initWithContentsOfFile:PathDocFile(IndexPosterList)];
+    if (tmpArr && tmpArr.count>0) {
+        NSArray *tmpRecArrs = [PosterItem getPosterItemsWithArr:tmpArr];
+        [circulaScrollView setPostersData:tmpRecArrs];
+    }
 }
 -(void)selectAction:(id)sender{
     NSLog(@"selectAction");
@@ -192,7 +211,6 @@
 
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
-    [gridMainView setDataArr:tmpMarr];
     [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
     
     [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
@@ -231,10 +249,14 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     NSDictionary *tmpDic = (NSDictionary *)br.data;
-                    NSArray *posterList = [tmpDic objectForKey:@"posterList"];
+                    NSArray *posterList = [tmpDic objectForKey:IndexPosterList];//@"posterList"
                     if (posterList) {
                         NSArray *pArr = [PosterItem getPosterItemsWithArr:posterList];
-                        [circulaScrollView setPostersData:pArr];
+                        
+                        if (pArr.count>0) {
+                            [posterList writeToFile:PathDocFile(IndexPosterList) atomically:YES];
+                            [circulaScrollView setPostersData:pArr];
+                        }
                     }
                 }
             }else{
@@ -249,10 +271,16 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     NSDictionary *tmpDic = (NSDictionary *)br.data;
-                    tRecommendList = [tmpDic objectForKey:@"recomList"];
-                    if (tRecommendList) {
-                        NSArray *pArr = [RecommendItem getRecommendItemsWithArr:tRecommendList];
-                        [gridMainView setDataArr:pArr];
+                    NSArray *tmpArr = [tmpDic objectForKey:IndexRecomList];
+                    if (tmpArr== nil || tmpArr.count == 0) {
+                        return;
+                    }
+                    if (tmpArr) {
+                        tRecommendList = [RecommendItem getRecommendItemsWithArr:tmpArr];
+                        if (tRecommendList.count>0) {
+                            [tmpArr writeToFile:PathDocFile(IndexRecomList) atomically:YES];
+                            [gridMainView setDataArr:tRecommendList];
+                        }
                     }
                 }
             }else{

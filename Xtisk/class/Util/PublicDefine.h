@@ -69,7 +69,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define LyRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
 
-
+#define  randomInt arc4random_uniform(100)
 //Documents 路径
 #define PathDocumentsHeadIcon				[NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/headicon"]
 //头像路径
@@ -92,7 +92,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 
 
-
+#pragma mark - service str
+#define IndexRecomList  @"recomList"
+#define IndexPosterList  @"posterList"
 
 
 #define _NOTHING  (-1)
@@ -178,7 +180,7 @@ typedef enum  {
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
-#define LY_DOWN_FLUSH_HEIGHT 64.0
+#define LY_DOWN_FLUSH_HEIGHT 44.0
 #define DOWN_DRAG_FLUSH_NORMAL @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_WILL_START @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_DOING @"正在刷新中"

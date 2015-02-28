@@ -21,6 +21,8 @@
     
     int allCount;
     int nTag;
+    
+    int myTask;
 }
 -(void)selectedEnd:(int)tag;
 -(void)stopTimer;
@@ -141,7 +143,7 @@
     [dataArr removeAllObjects];
     [dataArr addObjectsFromArray:arr];
     allCount = (int)dataArr.count;
-    
+    myTask = randomInt;
     [self initPosterData];
     if (allCount <= 1) {
         [self stopTimer];
@@ -154,7 +156,7 @@
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:pi.posterPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
-
+        request.iMark = myTask;
         request.tTag = i;
         [request setRequestMethod:@"GET"];
         [request startAsynchronous];
@@ -292,12 +294,24 @@
     
 //    NSLog(@"scrollViewDidEnd,page:%d,x:%f",(int)pageControl.currentPage,self.scrollView.contentOffset.x);
 }
-
+-(UIImageView *)getTagImageView:(int)tTag{
+    if (imgViewArr.count == 0) {
+        return nil;
+    }
+    if (imgViewArr.count <= (1 + tTag)) {
+        return nil;
+    }
+    return [imgViewArr objectAtIndex:tTag];
+}
 #pragma mark -  AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
+                if (request.iMark != myTask) {
+                    NSLog(@"不是本次任务，返回");
+                    return;
+                }
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
                 if (!data || data.length <2000) {

@@ -24,6 +24,8 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     int cInset ;
     UIView *cHeader;
     NSArray *tDataArr;
+    
+    int myTask;
 }
 
 @end
@@ -86,6 +88,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     if (!arr) {
         return;
     }
+    myTask = randomInt;
     tDataArr = arr;
     
     
@@ -176,6 +179,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:ri.recomPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
+        request.iMark = myTask;
         request.tTag = (int)indexPath.row;
         request.indexPath = indexPath;
         [request setRequestMethod:@"GET"];
@@ -256,6 +260,10 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
+                if (request.iMark != myTask) {
+                    NSLog(@"不是本次任务，返回");
+                    return;
+                }
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
                 if (!data || data.length <2000) {

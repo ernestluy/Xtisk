@@ -123,6 +123,20 @@
     [[[HttpService sharedInstance] getRequestlogout:self] startAsynchronous];
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
 }
+
+-(void)setDataInfo{
+    IUser *user = [SettingService sharedInstance].iUser;
+    
+    labNick.text = user.nickName;
+    labAccount.text = user.phone;
+    labSign.text = user.signature;
+    labSex.text = user.gender;
+    labBirthDate.text = user.birthday;
+    labMarStatus.text = user.maritalStatus;
+    labCom.text = user.account;
+    
+    headerImageView.image = [UIImage imageNamed:@"default_header_gray"];
+}
 #pragma mark -EditTextViewDelegate
 - (void)editTextDone:(NSString *)str type:(int)ty{
     if (PrivateEditTextSign == ty) {
@@ -203,6 +217,7 @@
                     labSex= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labSex];
                     labSex.text = @"男";
+                    labSex.text = [SettingService sharedInstance].iUser.gender;
                     break;
                 }
                 case 1:{
@@ -215,7 +230,7 @@
                 case 2:{
                     labMarStatus= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labMarStatus];
-                    labMarStatus.text = [SettingService sharedInstance].iUser.gender;
+                    labMarStatus.text = [SettingService sharedInstance].iUser.maritalStatus;
                     break;
                 }
                 case 3:{
