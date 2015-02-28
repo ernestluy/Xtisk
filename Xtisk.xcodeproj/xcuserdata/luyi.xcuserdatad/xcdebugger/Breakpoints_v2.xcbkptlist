@@ -150,16 +150,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Xtisk/class/viewcontroller/more/MyActivityViewController.m"
-            timestampString = "446095159.752824"
+            filePath = "Xtisk/class/viewcontroller/login/LostPsdViewController.m"
+            timestampString = "446789052.890358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-numberOfSectionsInTableView:"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
+            landmarkName = "-requestDidFinish:code:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Xtisk/class/viewcontroller/login/LostPsdViewController.m"
+            timestampString = "446789052.890358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
+            landmarkName = "-requestDidFinish:code:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -17,7 +17,7 @@
 - (void)requestFailed:(CSIHttpRequest *)request;
 
 @end
-@interface CSIHttpRequest : NSObject<NSURLConnectionDelegate>
+@interface CSIHttpRequest : NSObject<NSURLConnectionDataDelegate>
 {
     NSError *error;
     NSMutableURLRequest *urlRequest;

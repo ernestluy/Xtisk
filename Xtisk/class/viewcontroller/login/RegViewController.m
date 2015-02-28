@@ -131,6 +131,11 @@
             timer = nil;
         }
     }
+    
+    NSString * tTitle = @"点击获取验证码";
+    btnAcquireCode.enabled = YES;
+    btnAcquireCode.alpha = 1;
+    [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
 }
 -(void)startCalTime{
     [self stopTimer];
@@ -151,10 +156,7 @@
     [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
     if (leftTime == 0) {
         [self stopTimer];
-        tTitle = @"点击获取验证码";
-        btnAcquireCode.enabled = YES;
-        btnAcquireCode.alpha = 1;
-        [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
+        
     }
 }
 - (void) handlePan2: (UIPanGestureRecognizer *)rec{
@@ -171,7 +173,7 @@
     NSLog(@"getVerCodeAction");
     [self startCalTime];
     AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:textFieldAc.text method:@"phone" smsCode:@""];
-    aRequest.iMark = 0;
+    aRequest.iMark = VerifyCodeGet;
     [aRequest startAsynchronous];
 }
 -(IBAction)nextAction:(id)sender{
@@ -222,25 +224,32 @@
         case HttpRequestType_XT_GETSMSCODE:{
             if (HttpResponseTypeFinished ==  responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (!br) {
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestException duration:DefaultRequestDonePromptTime];
+                    return;
+                }
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-                    if (request.iMark == 0) {
+                    if (request.iMark == VerifyCodeGet) {
                         NSLog(@"请求验证码成功");
                         [SVProgressHUD showSuccessWithStatus:@"请求成功，请等待接收含有验证码的短信息" duration:1.5];
-                    }else if (request.iMark == 1) {
+                    }else if (request.iMark == VerifyCodeJudge) {
                         NSLog(@"验证发送的验证码成功");
                         [SVProgressHUD showSuccessWithStatus:@"验证成功" duration:0.8];
                         [self toNextStep];
                     }
                 }else{
-                    [SVProgressHUD showSuccessWithStatus:br.msg duration:0.8];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:0.8];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求验证码失败");
-                if (request.iMark == 0) {
+                if (request.iMark == VerifyCodeGet) {
+                    [self stopTimer];
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestFaileToAgain duration:DefaultRequestDonePromptTime];
                     NSLog(@"请求验证码失败");
-                }else if (request.iMark == 1) {
+                }else if (request.iMark == VerifyCodeJudge) {
                     NSLog(@"验证发送的验证码失败");
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 }
             }
             break;

@@ -7,8 +7,8 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface LostPsdViewController : SecondaryViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+#import "PublicDefine.h"
+@interface LostPsdViewController : SecondaryViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,AsyncHttpRequestDelegate>
 {
     UITableView *tTableView;
 }

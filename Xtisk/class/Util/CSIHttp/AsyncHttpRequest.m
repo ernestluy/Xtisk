@@ -163,6 +163,8 @@
 //    
 //    [Req setValidatesSecureCertificate:NO];//设置验证证书
     //self.urlRequest setvali
+    
+    [self.urlRequest addValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
 }
 -(void)dealloc{
 	[responseStringData release];

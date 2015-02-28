@@ -542,6 +542,12 @@ typedef enum  {
         case HttpRequestType_XT_LOGIN:{
             if (HttpResponseTypeFinished ==  responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                NSString *tmpStr = [request getResponseStr];
+                NSLog(@"result:%@",tmpStr);
+                if (!br) {
+                    [SVProgressHUD showErrorWithStatus:@"登录失败，未知错误" duration:1.5];
+                    return;
+                }
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     NSDictionary *tDic = (NSDictionary *)br.data;
@@ -550,14 +556,17 @@ typedef enum  {
                     }else{
                         IUser *user = [IUser getIUserWithDic:tDic];
                         if (user.phone == nil || user.phone.length <1) {
-                            [SVProgressHUD showErrorWithStatus:@"登录失败" duration:1.5];
+                            [SVProgressHUD showErrorWithStatus:@"登录失败" duration:DefaultRequestDonePromptTime];
                             return;
                         }
                         [SettingService sharedInstance].iUser = user;
+                        [[SettingService sharedInstance] setLoginJSessionid];
                         [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1.5];
                         [self loginSucInto];
                     }
                     
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求失败");

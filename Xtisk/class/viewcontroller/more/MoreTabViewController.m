@@ -60,6 +60,7 @@
     }
     if ([[SettingService sharedInstance] isLogin]) {
         self.tTableView.tableHeaderView = inHeaderView;
+        [inHeaderView inSetDataWith:[SettingService sharedInstance].iUser];
     }else{
         self.tTableView.tableHeaderView = outHeaderView;
     }
@@ -75,6 +76,7 @@
     
     if ([[SettingService sharedInstance] isLogin]) {
         self.tTableView.tableHeaderView = inHeaderView;
+        [inHeaderView inSetDataWith:[SettingService sharedInstance].iUser];
     }else{
         self.tTableView.tableHeaderView = outHeaderView;
     }

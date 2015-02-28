@@ -102,7 +102,7 @@
         case 2:{
 //            ModifyPsdViewController *ai = [[ModifyPsdViewController alloc]init];
 //            [self.navigationController pushViewController:ai animated:YES];
-            RegSecondStepViewController *rs = [[RegSecondStepViewController alloc]initWithTitle:@"修改密码" type:PsdSettingModify];
+            ModifyPsdViewController *rs = [[ModifyPsdViewController alloc]initWithTitle:@"修改密码" type:PsdSettingModify];
             [self.navigationController pushViewController:rs animated:YES];
             break;
         }

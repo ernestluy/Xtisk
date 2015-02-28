@@ -15,9 +15,7 @@
 #import "LoginViewController.h"
 @interface RegSecondStepViewController ()
 {
-    UITextField *nowTextField;
-    UITextField *textFieldPsd;
-    UITextField *textFieldComfirm;
+    
     
     NSString *tTitle;
     int tType;
@@ -140,12 +138,14 @@
         XT_SHOWALERT(@"确认密码不能为空");
         return;
     }
-    if (textFieldPsd.text.length > 20) {
-        XT_SHOWALERT(@"密码太长");
+    if (textFieldPsd.text.length == 0 || textFieldComfirm.text.length<6 ||textFieldPsd.text.length > 20) {
+        XT_SHOWALERT(@"新密码长度为6-20位");
         return;
     }
+
     if ([textFieldPsd.text isEqualToString:textFieldComfirm.text] == NO) {
         XT_SHOWALERT(@"设置密码和确认密码不一致");
+        return;
     }
     
     if (PsdSettingReg == tType) {
@@ -245,10 +245,12 @@
                         [self regSuc];
                     }
                     
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求失败");
-                
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
             }
             break;
         }

@@ -409,7 +409,7 @@ static HttpService *httpServiceInstance = nil;
 -(AsyncHttpRequest *)getRequestlogout:(id<AsyncHttpRequestDelegate>)delegate{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
     
-    NSString *urlStr = [NSString stringWithFormat:@"https://%@/user/login",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/logout",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_LOGOUT];
@@ -423,8 +423,8 @@ static HttpService *httpServiceInstance = nil;
 -(AsyncHttpRequest *)getRequestLogin:(id<AsyncHttpRequestDelegate>)delegate  name:(NSString *)name psd:(NSString *)psd{
    
     
-    
-    NSString *urlStr = [NSString stringWithFormat:@"https://%@/user/login",SERVICE_HOME];
+    //此处暂时改为http
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/applogin",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_LOGIN];
@@ -434,6 +434,7 @@ static HttpService *httpServiceInstance = nil;
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
+//    [request setHttpsRequest];
     return request;
 }
 
@@ -475,7 +476,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_RESETPSD];
     
-    NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&authCode=%@",phone,password,authCode];
+    NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&checkPassword=%@&authCode=%@",phone,password,password,authCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];

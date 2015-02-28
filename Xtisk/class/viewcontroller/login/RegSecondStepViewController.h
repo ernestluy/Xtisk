@@ -9,6 +9,11 @@
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
 @interface RegSecondStepViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate,AsyncHttpRequestDelegate>
+{
+    UITextField *nowTextField;
+    UITextField *textFieldPsd;
+    UITextField *textFieldComfirm;
+}
 @property(nonatomic,copy)NSString *phoneNum;
 @property(nonatomic,copy)NSString *smsCode;
 

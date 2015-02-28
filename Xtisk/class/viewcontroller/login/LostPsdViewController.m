@@ -49,10 +49,10 @@
     firstStepAcount = 2;
     secondeStepAcount = 5;
     insetW = 15;
-    limitTime = 10;
+    limitTime = GetVerifyCodeWaitingTime;
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
-    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
+    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
     tTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
@@ -91,6 +91,10 @@
             timer = nil;
         }
     }
+    NSString* tTitle = @"点击获取验证码";
+    btnAcquireCode.enabled = YES;
+    btnAcquireCode.alpha = 1;
+    [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
 }
 -(void)startCalTime{
     [self stopTimer];
@@ -111,10 +115,7 @@
     [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
     if (leftTime == 0) {
         [self stopTimer];
-        tTitle = @"点击获取验证码";
-        btnAcquireCode.enabled = YES;
-        btnAcquireCode.alpha = 1;
-        [btnAcquireCode setTitle:tTitle forState:UIControlStateNormal];
+        
     }
 }
 
@@ -126,13 +127,19 @@
 -(void)acquireCode{
     
     NSLog(@"acquireCode");
+    
+    [self startCalTime];
+    AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:tfTel.text method:@"phone" smsCode:@""];
+    aRequest.iMark = 0;
+    [aRequest startAsynchronous];
+    
+}
+
+-(void)intoNextStep{
     if (nowStep == 1) {
         nowStep = 2;
         [tTableView reloadData];
     }
-    [self startCalTime];
-    
-    
 }
 
 -(void)submitAction{
@@ -146,20 +153,21 @@
         XT_SHOWALERT(@"确认密码不能为空");
         return;
     }
-    if (tfPsd.text.length > 20) {
-        XT_SHOWALERT(@"密码太长");
+    if (tfPsd.text.length == 0 || tfPsd.text.length<6 ||tfPsd.text.length > 20) {
+        XT_SHOWALERT(@"新密码长度为6-20位");
         return;
     }
-    
-    if (tfPsd.text.length < 6) {
-        XT_SHOWALERT(@"密码太短");
-        return;
-    }
+
     if ([tfPsd.text isEqualToString:tfComfirmCode.text] == NO) {
         XT_SHOWALERT(@"设置密码和确认密码不一致");
+        return;
     }
     
     //do
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    AsyncHttpRequest *request = [[HttpService sharedInstance] getRequestResetPassword:self phone:tfTel.text password:tfPsd.text authCode:tfVerifyCode.text];
+    request.iMark = VerifyCodeGet;
+    [request startAsynchronous];
 }
 
 #pragma mark - UITableViewDataSource
@@ -281,6 +289,7 @@
     return LpcHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
     return 10;
 }
 
@@ -344,9 +353,73 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        case HttpRequestType_XT_GETSMSCODE:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (!br) {
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestException duration:DefaultRequestDonePromptTime];
+                    return;
+                }
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    if (request.iMark == VerifyCodeGet) {
+                        NSLog(@"请求验证码成功");
+                        [SVProgressHUD showSuccessWithStatus:@"请求成功，请等待接收含有验证码的短信息" duration:2];
+                        [self intoNextStep];
+                    }else if (request.iMark == VerifyCodeJudge) {
+                        NSLog(@"验证发送的验证码成功");
+                        [SVProgressHUD showSuccessWithStatus:@"验证成功" duration:0.8];
+                    }
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求验证码失败");
+                if (request.iMark == VerifyCodeGet) {
+                    NSLog(@"请求验证码失败");
+                    [self stopTimer];
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestFaileToAgain duration:DefaultRequestDonePromptTime];
+                }else if (request.iMark == VerifyCodeJudge) {
+                    NSLog(@"验证发送的验证码失败");
+                }
+            }
+            break;
+        }
+        case HttpRequestType_XT_RESETPSD:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (!br) {
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestException duration:1.5];
+                    return;
+                }
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    
+                    NSDictionary *tDic = (NSDictionary *)br.data;
+                    if (tDic == nil) {
+                        [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    }else{
+                        
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
+            }
+            break;
+        }
+        default:{
+            
+            break;
+        }
+    }
 }
 
 /*

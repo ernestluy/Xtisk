@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PublicDefine.h"
 @interface MoreTableViewHeaderView : UIView
 
 
@@ -27,5 +27,5 @@
 @property(nonatomic,weak)IBOutlet UIView *inLine;
 
 
-//-(void)inSetData
+-(void)inSetDataWith:(IUser *)tuser;
 @end

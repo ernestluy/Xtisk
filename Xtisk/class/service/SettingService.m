@@ -12,6 +12,7 @@ static SettingService *settingServiceInstance = nil;
 {
     BMKMapManager *_mapManager;
 }
+-(void)setLoginJSessionid;
 @end
 @implementation SettingService
 @synthesize account,user,token,psd,key,orgId,JSESSIONID;
@@ -39,9 +40,25 @@ static SettingService *settingServiceInstance = nil;
     }
     return NO;
 }
-
+//
+-(void)setLoginJSessionid{
+    NSString *tPath = [NSString stringWithFormat:@"http://%@",SERVICE_HOME];
+    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+    [cookieProperties setObject:tPath forKey:NSHTTPCookiePath];
+    [cookieProperties setObject:self.iUser.JSESSIONID forKey:@"JSESSIONID"];
+    
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+}
 -(void)logout{
-
+    NSString *tPath = [NSString stringWithFormat:@"http://%@",SERVICE_HOME];
+    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+    [cookieProperties setObject:tPath forKey:NSHTTPCookiePath];
+    [cookieProperties setObject:@"" forKey:@"JSESSIONID"];
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    
+    
     self.iUser = nil;
     self.account = nil;
     self.JSESSIONID = nil;

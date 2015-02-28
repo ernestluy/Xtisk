@@ -16,7 +16,6 @@
 		760BF2421A8DD0410088DBA2 /* GeocodeDemoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 760BF2401A8DD0410088DBA2 /* GeocodeDemoViewController.mm */; };
 		760BF2431A8DD0410088DBA2 /* GeocodeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760BF2411A8DD0410088DBA2 /* GeocodeDemoViewController.xib */; };
 		760BF2451A8DE6D70088DBA2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF2441A8DE6D70088DBA2 /* CoreLocation.framework */; };
-		760BF24B1A9EB46E0088DBA2 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF24A1A9EB46E0088DBA2 /* libbaidumapapi.a */; };
 		760BF24E1A9EE7300088DBA2 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 760BF24D1A9EE7300088DBA2 /* MenuItem.m */; };
 		760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */; };
 		764D5FFB1A83345F00B186A5 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D5FF61A83345F00B186A5 /* CustomNavigationController.m */; };
@@ -281,6 +280,9 @@
 		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
 		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
 		EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */; };
+		EDE4B3E01AA0C1AE0098CCF6 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE4B3DF1AA0C1AE0098CCF6 /* libbaidumapapi.a */; };
+		EDE4B3E21AA0C2C50098CCF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */; };
+		EDE4B4231AA176C40098CCF6 /* line_white.png in Resources */ = {isa = PBXBuildFile; fileRef = EDE4B4221AA176C40098CCF6 /* line_white.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,7 +369,6 @@
 		760BF2401A8DD0410088DBA2 /* GeocodeDemoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GeocodeDemoViewController.mm; sourceTree = "<group>"; };
 		760BF2411A8DD0410088DBA2 /* GeocodeDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeocodeDemoViewController.xib; sourceTree = "<group>"; };
 		760BF2441A8DE6D70088DBA2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		760BF24A1A9EB46E0088DBA2 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		760BF24C1A9EE7300088DBA2 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
 		760BF24D1A9EE7300088DBA2 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_img_small@2x.png"; sourceTree = "<group>"; };
@@ -768,6 +769,9 @@
 		EDD99D1C1A97B06500DFF260 /* TicketDetailContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailContentView.h; sourceTree = "<group>"; };
 		EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailContentView.m; sourceTree = "<group>"; };
 		EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailContentView.xib; sourceTree = "<group>"; };
+		EDE4B3DF1AA0C1AE0098CCF6 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EDE4B4221AA176C40098CCF6 /* line_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_white.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -775,6 +779,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE4B3E21AA0C2C50098CCF6 /* CFNetwork.framework in Frameworks */,
 				760BF2451A8DE6D70088DBA2 /* CoreLocation.framework in Frameworks */,
 				760BF1DE1A8CA9FA0088DBA2 /* libz.1.1.3.dylib in Frameworks */,
 				76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */,
@@ -809,7 +814,7 @@
 				76C87CF51A8CA43E00843060 /* libSocialFacebook.a in Frameworks */,
 				76C87CF91A8CA43E00843060 /* libSocialSina.a in Frameworks */,
 				76C87CF71A8CA43E00843060 /* libSocialLaiWang.a in Frameworks */,
-				760BF24B1A9EB46E0088DBA2 /* libbaidumapapi.a in Frameworks */,
+				EDE4B3E01AA0C1AE0098CCF6 /* libbaidumapapi.a in Frameworks */,
 				76C87CEB1A8CA43E00843060 /* libUMSocial_Sdk_Comment_4.2.1.a in Frameworks */,
 				76C87D071A8CA43E00843060 /* libYixinSDK_V2.2.a in Frameworks */,
 			);
@@ -828,7 +833,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				760BF2491A9EB46E0088DBA2 /* Release-iphoneos */,
+				EDE4B3DE1AA0C1AE0098CCF6 /* Release-iphonesimulator */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -912,15 +917,6 @@
 				760BF2411A8DD0410088DBA2 /* GeocodeDemoViewController.xib */,
 			);
 			path = class;
-			sourceTree = "<group>";
-		};
-		760BF2491A9EB46E0088DBA2 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				760BF24A1A9EB46E0088DBA2 /* libbaidumapapi.a */,
-			);
-			name = "Release-iphoneos";
-			path = "libs/Release-iphoneos";
 			sourceTree = "<group>";
 		};
 		764D5FF41A83345F00B186A5 /* base */ = {
@@ -1433,6 +1429,7 @@
 		ED2586D21A7D14A1008EB344 = {
 			isa = PBXGroup;
 			children = (
+				EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */,
 				760BF2441A8DE6D70088DBA2 /* CoreLocation.framework */,
 				760BF1DD1A8CA9FA0088DBA2 /* libz.1.1.3.dylib */,
 				76C87D201A8CA8E700843060 /* CoreGraphics.framework */,
@@ -1632,6 +1629,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				EDE4B4221AA176C40098CCF6 /* line_white.png */,
 				760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */,
 				ED8C78401A970CDE009C8286 /* about_coo@2x.png */,
 				ED8C78411A970CDE009C8286 /* about_email@2x.png */,
@@ -1751,6 +1749,15 @@
 				EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */,
 			);
 			path = message;
+			sourceTree = "<group>";
+		};
+		EDE4B3DE1AA0C1AE0098CCF6 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				EDE4B3DF1AA0C1AE0098CCF6 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphonesimulator";
+			path = "libs/Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1906,6 +1913,7 @@
 				764D60471A88919200B186A5 /* PrivateViewController.xib in Resources */,
 				ED8C77F11A9369BB009C8286 /* FoodDetailViewController.xib in Resources */,
 				76C87C991A8C466E00843060 /* ModifyPsdViewController.xib in Resources */,
+				EDE4B4231AA176C40098CCF6 /* line_white.png in Resources */,
 				760BF1E61A8CB7B60088DBA2 /* BaiduMapViewController.xib in Resources */,
 				76C87CED1A8CA43E00843060 /* UMSCommentInputController.xib in Resources */,
 				764D60A41A8B251500B186A5 /* msg_ticket_cell_icon@2x.png in Resources */,
@@ -2250,7 +2258,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2297,7 +2305,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";

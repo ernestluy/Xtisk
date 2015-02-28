@@ -7,7 +7,7 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface ModifyPsdViewController : SecondaryViewController
+#import "RegSecondStepViewController.h"
+@interface ModifyPsdViewController : RegSecondStepViewController
 
 @end

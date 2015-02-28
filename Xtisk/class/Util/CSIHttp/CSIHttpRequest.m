@@ -110,18 +110,26 @@ NSOperationQueue *tQueue = nil;
     return YES;
 }
 #pragma mark - NSURLConnectionDelegate
+//- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection{
+//    NSLog(@"connectionShouldUseCredentialStorage");
+//    return NO;
+//}
 //NS_DEPRECATED(10_6, 10_10, 3_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead."
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+    NSLog(@"canAuthenticateAgainstProtectionSpace");
+    return YES;
+//    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
 //NS_DEPRECATED(10_2, 10_10, 2_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.")
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    
+    /*
     NSLog(@"didReceiveAuthenticationChallenge:%@%zd",[[challenge protectionSpace] authenticationMethod],(ssize_t)[challenge previousFailureCount]);
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         [[challenge sender] useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
         [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
     }
+    */
+    [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     

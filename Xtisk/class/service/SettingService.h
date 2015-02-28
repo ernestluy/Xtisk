@@ -36,7 +36,7 @@
 +(SettingService *)sharedInstance;
 
 -(BOOL)isLogin;
-
+-(void)setLoginJSessionid;
 -(void)logout;
 
 

@@ -23,4 +23,10 @@
     self = [super initWithFrame:frame];
     return self;
 }
+
+-(void)inSetDataWith:(IUser *)tuser{
+    self.inLabName.text = tuser.nickName;
+    self.inLabAccount.text = tuser.phone;
+    self.inLabSign.text = @"哈哈";//tuser.signature;
+}
 @end

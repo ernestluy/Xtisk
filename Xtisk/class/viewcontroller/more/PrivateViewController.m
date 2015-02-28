@@ -120,8 +120,8 @@
     tActionSheet = nil;
 }
 -(void)logout:(id)sender{
-    [[SettingService sharedInstance] logout];
-    [self.navigationController popViewControllerAnimated:YES];
+    [[[HttpService sharedInstance] getRequestlogout:self] startAsynchronous];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
 }
 #pragma mark -EditTextViewDelegate
 - (void)editTextDone:(NSString *)str type:(int)ty{
@@ -180,7 +180,7 @@
                 case 1:{
                     labNick = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labNick];
-                    labNick.text = @"luyi";
+                    labNick.text = [SettingService sharedInstance].iUser.nickName;
                     break;
                 }
                 case 2:{
@@ -188,7 +188,7 @@
                     cell.accessoryType = UITableViewCellAccessoryNone;
                     labAccount = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labAccount];
-                    labAccount.text = @"13418884362";
+                    labAccount.text = [SettingService sharedInstance].iUser.phone;
                     break;
                 }
                 
@@ -208,26 +208,26 @@
                 case 1:{
                     labBirthDate = [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labBirthDate];
-                    labBirthDate.text = @"1988-08-8";
+                    labBirthDate.text = [SettingService sharedInstance].iUser.birthday;
                     //                cell.accessoryView  = labBirthDate;
                     break;
                 }
                 case 2:{
                     labMarStatus= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labMarStatus];
-                    labMarStatus.text = @"未婚";
+                    labMarStatus.text = [SettingService sharedInstance].iUser.gender;
                     break;
                 }
                 case 3:{
                     labCom= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labCom];
-                    labCom.text = @"兴天技术责任有限公司";
+                    labCom.text = [SettingService sharedInstance].iUser.account;
                     break;
                 }
                 case 4:{
                     labSign= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labSign];
-                    labSign.text = @"这是我的签名";
+                    labSign.text = [SettingService sharedInstance].iUser.signature;
                     break;
                 }
                 default:
@@ -525,6 +525,38 @@
     
     return UIInterfaceOrientationMaskPortrait;
     
+}
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        case HttpRequestType_XT_LOGOUT:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (!br) {
+                    [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
+                    return;
+                }
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"注销请求成功");
+                    [[SettingService sharedInstance] logout];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+                
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
+            }
+            break;
+        }
+        default:{
+            
+            break;
+        }
+    }
 }
 #pragma mark -
 - (void)didReceiveMemoryWarning {
