@@ -24,7 +24,7 @@
         ci.menuUrl = [dic objectForKey:@"menuUrl"];
         ci.recomNumber = [[dic objectForKey:@"recomNumber"]intValue];
         ci.menuPrice = [[dic objectForKey:@"menuPrice"] floatValue];
-        ci.strMenuPrice = [[dic objectForKey:@"menuPrice"] stringValue];
+        ci.strMenuPrice = [NSString stringWithFormat:@"￥%f",ci.menuPrice];
         
         [mArr addObject:ci];
     }

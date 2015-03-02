@@ -57,7 +57,7 @@
             break;
         }
         case XtServiceNear:{
-            ServiceMenuComViewController *scv = [[ServiceMenuComViewController alloc]initWithLevel:ServiceSecond title:@"周边"];
+            ServiceMenuComViewController *scv = [[ServiceMenuComViewController alloc]initWithLevel:ServiceFirst title:@"周边"];
             [self.navigationController pushViewController:scv animated:YES];
             break;
         }

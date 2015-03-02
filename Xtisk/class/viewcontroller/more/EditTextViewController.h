@@ -19,6 +19,7 @@
 @property(nonatomic,weak)IBOutlet UILabel *labWarnning;
 @property(nonatomic,weak)id<EditTextViewDelegate> tDelegate;
 @property(nonatomic)int tType;
+@property(nonatomic) int storeId;
 
 -(id)initWithType:(int)type delegate:(id<EditTextViewDelegate>) delegate;
 @end

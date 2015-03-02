@@ -25,6 +25,15 @@
 #import "RecommendItem.h"
 #import "SettingService.h"
 #import "HisLoginAcc.h"
+#import "MenuItem.h"
+#import "CategoryItem.h"
+#import "StoreItem.h"
+#import "ServiceItem.h"
+#import "ActivityItem.h"
+#import "CommentsItem.h"
+#import "FavoriteItem.h"
+#import "JoinInfo.h"
+
 
 BMKMapManager* _mapManager;
 
@@ -74,6 +83,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 
 #define  randomInt arc4random_uniform(100)
+#define int2str(i) [NSString stringWithFormat:@"%d",(i)]
 //Documents 路径
 #define PathDocumentsHeadIcon				[NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/headicon"]
 //头像路径
@@ -146,9 +156,8 @@ typedef enum  {
 
 typedef enum  {
     ServiceFirst,
-    ServiceSecond,
-    ServiceThird,
-    ServiceForth
+    ServiceNode,
+    ServiceEnd
 } ServiceMenuLevel ;
 
 typedef enum  {

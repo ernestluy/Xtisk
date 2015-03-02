@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PublicDefine.h"
 @interface FoodDetailHeader : UIView
 
 
@@ -19,7 +19,10 @@
 @property(nonatomic,weak)IBOutlet UILabel *labYysj;
 @property(nonatomic,weak)IBOutlet UIButton *btnCommend;
 @property(nonatomic,weak)IBOutlet UIButton *btnGood;
+@property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
 
 
 -(void)setUIInit;
+
+-(void)setStoreDetailData:(StoreItem *)storeItem;
 @end

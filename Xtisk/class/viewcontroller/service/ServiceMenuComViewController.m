@@ -7,6 +7,7 @@
 //
 
 #import "ServiceMenuComViewController.h"
+#import "PublicDefine.h"
 #import "NearMenuItem.h"
 #import "NearMenuCollectionViewCell.h"
 #import "FoodListViewController.h"
@@ -16,11 +17,13 @@
     int cInset ;
     NSMutableArray *mArr;
     NSMutableArray *mFoodArr;
+    
+    BOOL isRequestSuc;
 }
 @end
 
 @implementation ServiceMenuComViewController
-@synthesize tCollectionView,menuLevel;
+@synthesize tCollectionView,menuLevel,categoryItem;
 
 -(id)initWithLevel:(int)level title:(NSString *)tl{
     self = [super init];
@@ -29,6 +32,13 @@
     mArr = [[NSMutableArray alloc]init];
     
     mFoodArr = [[NSMutableArray alloc]init];
+    
+    
+    if (ServiceFirst == level) {
+        self.categoryItem = [[CategoryItem alloc]init];
+        self.categoryItem.childList = @[];
+        self.categoryItem.categoryName = @"周 边";
+    }
     return self;
 }
 - (void)viewDidLoad {
@@ -36,6 +46,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = tTitle;
     cInset = 10;
+    isRequestSuc = NO;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     CGRect bounds = [UIScreen mainScreen].bounds;
     self.tCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64)  collectionViewLayout:layout];
@@ -78,6 +89,20 @@
     [mFoodArr addObjectsFromArray:tmp2Arr];
 }
 
+-(void)requestData{
+    if (ServiceFirst == menuLevel && !isRequestSuc) {
+        [[[HttpService sharedInstance] getRequestCategoryTypeList:self parentCategoryId:nil]startAsynchronous];
+    }
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+    if (ServiceFirst == menuLevel ){
+        self.title = @"周 边";
+    }else{
+        self.title = self.categoryItem.categoryName;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -86,10 +111,10 @@
 #pragma mark - collection数据源代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.menuLevel == ServiceThird) {
-        return mFoodArr.count;
+    if (self.categoryItem) {
+        return self.categoryItem.childList.count;
     }
-    return mArr.count;
+    return 0;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -98,20 +123,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ServiceCollectionViewCellIdentifier forIndexPath:indexPath];
-    //    NSLog(@"row:%d",indexPath.row);
-//    if (indexPath.row%3 == 0) {
-//        PosterCollectionViewCell *pcc =  (PosterCollectionViewCell*)cell;
-//        pcc.imageBg.image = nil;
-//    }
-//    cell.backgroundColor = LyRandomColor;
+
     NearMenuCollectionViewCell *cc = (NearMenuCollectionViewCell *)cell;
-    if (self.menuLevel == ServiceThird) {
-        [cc setFoodData:[mFoodArr objectAtIndex:indexPath.row]];
-    }else if (self.menuLevel == ServiceSecond){
-        NearMenuItem *nmi = [mArr objectAtIndex:indexPath.row];
-        [cc setItemData:nmi];
+
+    CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:indexPath.row];
+    UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tCategoryItem.categoryImageUrl];
+    if (!tImg) {
+        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:tCategoryItem.categoryImageUrl
+                                                                                       target:self
+                                                                                         type:HttpRequestType_Img_LoadDown];
+        request.tTag = (int)indexPath.row;
+        request.indexPath = indexPath;
+        [request startAsynchronous];
+    }else{
+        cc.imageBg.contentMode = DefaultImageViewContentMode;
+        cc.imageBg.image = tImg;
     }
-    
     return cell;
 }
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -124,13 +151,17 @@
 {
     
     self.tIndexPath = indexPath;
-    if (self.menuLevel == ServiceSecond) {
-        ServiceMenuComViewController *smc = [[ServiceMenuComViewController alloc] initWithLevel:ServiceThird title:@"餐饮美食"];
+
+    CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:indexPath.row];
+    if (tCategoryItem.childList) {
+        ServiceMenuComViewController *smc = [[ServiceMenuComViewController alloc] initWithLevel:ServiceNode title:tCategoryItem.categoryName];
+        smc.categoryItem = tCategoryItem;
         [self.navigationController pushViewController:smc animated:YES];
-    }else if (self.menuLevel == ServiceThird) {
+    }else if (!tCategoryItem.childList) {
         FoodListViewController *fvc = [[FoodListViewController alloc] init];
-        fvc.title = @"粉面";
+        fvc.categoryItem = tCategoryItem;
         [self.navigationController pushViewController:fvc animated:YES];
+        return;
     }
 }
 
@@ -168,6 +199,62 @@
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 //    return CGSizeMake(320, 30);
 //}
-
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <2000) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+                CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:ir.indexPath.row];
+                [XTFileManager saveTmpFolderFileWithUrlPath:tCategoryItem.categoryImageUrl with:rImage];
+                NearMenuCollectionViewCell * pc = (NearMenuCollectionViewCell * )[self.tCollectionView cellForItemAtIndexPath:ir.indexPath];
+                if (pc) {
+                    UIImageView *iv = pc.imageBg;
+                    iv.contentMode = DefaultImageViewContentMode;
+                    iv.image = rImage;
+                }
+                
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERYCATEGORY:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+//                NSString *tmpStr = [request getResponseStr];
+//                NSLog(@"result:%@",tmpStr);
+                if (ResponseCodeSuccess == br.code) {
+                    isRequestSuc = YES;
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    NSArray *tmpArr = [dic objectForKey:@"categoryList"];
+                    if (dic) {
+                        self.categoryItem.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];
+                        [self.tCollectionView reloadData];
+                    }
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 @end

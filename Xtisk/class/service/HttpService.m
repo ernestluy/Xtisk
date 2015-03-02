@@ -64,6 +64,7 @@ static HttpService *httpServiceInstance = nil;
     if (!data) {
         return nil;
     }
+    NSLog(@"result:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 //    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     BaseResponse *br = [BaseResponse getBaseResponseWithDic:[Util getObjWithJsonData:data]];
     return br;
@@ -252,7 +253,12 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.3.1	获取周边的分类（含根据父分类获取子分类）
 -(AsyncHttpRequest *)getRequestCategoryTypeList:(id<AsyncHttpRequestDelegate>)delegate parentCategoryId:(NSString *)parentCategoryId{
     //parentCategoryId	String	是	父分类ID，如果获取第一层分类则改ID不填
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryCategory?parentCategoryId=%@",SERVICE_HOME,parentCategoryId];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryCategory?parentCategoryId=%@",SERVICE_HOME,parentCategoryId];
+    if (parentCategoryId && parentCategoryId.length>0) {
+        urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryCategory?parentCategoryId=%@",SERVICE_HOME,parentCategoryId];
+    }else{
+        urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryCategory",SERVICE_HOME];
+    }
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYCATEGORY];
@@ -266,7 +272,7 @@ static HttpService *httpServiceInstance = nil;
 }
 #pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
 -(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryStoreByCategory",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreByCategory",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREBYCATEGORY];
@@ -279,7 +285,7 @@ static HttpService *httpServiceInstance = nil;
 }
 #pragma mark - 4.3.3.3	获取店家详情
 -(AsyncHttpRequest *)getRequestQueryStoreDetail:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryStoreDetail",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreDetail",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREDETAIL];
@@ -308,7 +314,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.3.5	店家点赞/取消点赞
 -(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/favoriteStore",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_FAVORITESTORE];

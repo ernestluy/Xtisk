@@ -7,9 +7,10 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface FoodListViewController : SecondaryViewController
+#import "PublicDefine.h"
+@interface FoodListViewController : SecondaryViewController<AsyncHttpRequestDelegate>
 
 
 @property(nonatomic,weak)IBOutlet UITableView *tTableView;
+@property(nonatomic,strong)CategoryItem *categoryItem;
 @end

@@ -8,13 +8,14 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface ServiceMenuComViewController : SecondaryViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface ServiceMenuComViewController : SecondaryViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,AsyncHttpRequestDelegate>
 {
     NSString*tTitle;
 }
 @property(nonatomic,strong) NSIndexPath *tIndexPath;
 @property(nonatomic,strong) UICollectionView *tCollectionView;
 @property(nonatomic)ServiceMenuLevel menuLevel;
+@property(nonatomic,strong)CategoryItem *categoryItem;
 
 -(id)initWithLevel:(int)level title:(NSString *)tl;
 @end

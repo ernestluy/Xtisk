@@ -15,4 +15,5 @@
 @property(nonatomic,strong)NSArray *childList;//	Json Array	是	该分类的子分类，若分类下面还有子分类，则子分类的内容结构同父分类内容结构
 
 +(NSArray *)getCategoryItemsWithArr:(NSArray *)arr;
++(CategoryItem *)getCategoryItemWithDic:(NSDictionary *)dic;
 @end

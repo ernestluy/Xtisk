@@ -18,7 +18,7 @@
                         <rect key="frame" x="115" y="16" width="15" height="15"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="127" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KZ-hV-tJ2">
-                        <rect key="frame" x="130" y="14" width="32" height="21"/>
+                        <rect key="frame" x="132" y="14" width="32" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_img_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="VLq-DD-tNV" userLabel="headerImage View">
-                        <rect key="frame" x="8" y="6" width="99" height="75"/>
+                        <rect key="frame" x="6" y="7" width="99" height="75"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                 </subviews>

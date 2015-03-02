@@ -33,6 +33,7 @@
     
     
     [self.urlRequest addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    [self setRequestMethod:@"GET"];
     [self setTimeOutSeconds:30];
     return self;
 }

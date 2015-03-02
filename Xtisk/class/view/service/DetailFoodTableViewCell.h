@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "StarCommendView.h"
+#import "PublicDefine.h"
 @interface DetailFoodTableViewCell : UITableViewCell
 
+@property(nonatomic,weak)IBOutlet UILabel *labTitle;
 @property(nonatomic,weak)IBOutlet UILabel *labJg;
 @property(nonatomic,weak)IBOutlet UIImageView *imgViewTj;
+@property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
 @property(nonatomic,weak)IBOutlet StarCommendView *viewStar;
+
+-(void)setData:(MenuItem *)item;
 @end

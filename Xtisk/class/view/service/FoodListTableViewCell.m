@@ -27,6 +27,18 @@
     ///-----------------------
 }
 
+-(void)setStoreDataWithStoreItem:(StoreItem *)storeItem{
+    self.labAddress.text = storeItem.storeAddress;
+    self.labQs.text = [NSString stringWithFormat:@"%@元起送",storeItem.strPrice];//storeItem.strPrice;
+    self.labTitle.text = storeItem.storeName;
+    self.labPj.text = [NSString stringWithFormat:@"评价%d",storeItem.reviews];
+    self.labGood.text = [NSString stringWithFormat:@"%d",storeItem.favoritePeople];
+//    self.labAddress.text = storeItem.storeAddress;
+//    self.labAddress.text = storeItem.storeAddress;
+
+    
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

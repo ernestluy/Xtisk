@@ -21,8 +21,27 @@
         ci.categoryId = [dic objectForKey:@"categoryId"];
         ci.categoryName = [dic objectForKey:@"categoryName"];
         ci.categoryImageUrl = [dic objectForKey:@"categoryImageUrl"];
+        NSArray *tmpArr = [dic objectForKey:@"childList"];
+        if (tmpArr && [tmpArr isKindOfClass:[NSArray class]]) {
+            ci.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];
+        }
         [mArr addObject:ci];
     }
     return mArr;
+}
+
++(CategoryItem *)getCategoryItemWithDic:(NSDictionary *)dic{
+    if (!dic) {
+        return nil;
+    }
+    CategoryItem * ci = [[CategoryItem alloc]init];
+    ci.categoryId = [dic objectForKey:@"categoryId"];
+    ci.categoryName = [dic objectForKey:@"categoryName"];
+    ci.categoryImageUrl = [dic objectForKey:@"categoryImageUrl"];
+    NSArray *tmpArr = [dic objectForKey:@"childList"];
+    if (tmpArr && [tmpArr isKindOfClass:[NSArray class]]) {
+        ci.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];
+    }
+    return ci;
 }
 @end

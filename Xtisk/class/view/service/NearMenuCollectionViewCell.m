@@ -17,6 +17,14 @@
     self.layer.cornerRadius = XT_CORNER_RADIUS;
     self.content.textColor = _rgb2uic(0x585858, 1);
     
+    self.title.hidden = YES;
+    self.content.hidden = YES;
+    self.imageHeader.hidden = YES;
+    
+}
+-(void)setMenuItem:(MenuItem *)tItem{
+    self.mItem = tItem;
+    
 }
 -(void)setItemData:(NearMenuItem *)sItem{
     self.title.text = sItem.tTitle;
@@ -28,6 +36,9 @@
         self.content.textColor = _rgb2uic(0xc6c6c6, 1);
         self.backgroundColor = _rgb2uic(0xeaeaea, 1);
     }
+    self.title.hidden = YES;
+    self.content.hidden = YES;
+    self.imageHeader.hidden = YES;
 }
 
 -(void)setFoodData:(NSString *)imgNme{

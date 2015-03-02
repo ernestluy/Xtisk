@@ -5,18 +5,43 @@
 //  Created by zzt on 15/2/10.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
-
+/*
+ {
+ "storeName": "餐厅1",
+ "storeInfo": "介绍",
+ "storeMiniPic": "upload/common/2015_03_02/308_qr-code.jpg",
+ "storeAddress": "地址2",
+ "storePhone": "15208376070",
+ "recomDishes": [
+ {
+ "recomNumber": "5",
+ "menuUrl": "upload/common/2015_03_02/388_2.png",
+ "menuPrice": 40,
+ "menuId": 185,
+ "menuName": "酱鸭子"
+ }
+ ],
+ "storeOpenTime": "06:00",
+ "price": "8",
+ "favoritePeople": 0,
+ "isFavorite": false,
+ "keyWords": "炒饭",
+ "storeCloseTime": "18:00",
+ "storeId": 166
+ }
+ */
 #import <Foundation/Foundation.h>
 
 @interface StoreItem : NSObject
 //列表获取的信息
-@property(nonatomic,copy)NSString *storeId;//	String	否	店铺ID
+@property(nonatomic)int storeId;//	String	否	店铺ID
 @property(nonatomic,copy)NSString *storeName;//	String	否	店铺名称
 @property(nonatomic,copy)NSString *keyWords;//	String	否	关键字
 @property(nonatomic)double price;//	Double	否	起送价格
 @property(nonatomic,copy)NSString *strPrice;//	Double	否	起送价格
 @property(nonatomic)int favoritePeople;//	Int	否	点赞人数
 @property(nonatomic,copy)NSString *storeMiniPic;//	String	否	店铺缩略图URL地址
+@property(nonatomic)int reviews;//	评论数
 
 //详情
 @property(nonatomic,copy)NSString *storeOpenTime;//	String	否	每天营业开始时间

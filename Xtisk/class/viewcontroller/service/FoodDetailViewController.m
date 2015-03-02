@@ -23,6 +23,7 @@
 {
     FoodDetailHeader *foodDetailHeader;
     UIButton *btnCall;
+    BOOL isRequestSuc;
 }
 @end
 
@@ -41,6 +42,7 @@
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"FoodDetailHeader" owner:self options:nil];
     foodDetailHeader = [nib objectAtIndex:0];
     [foodDetailHeader setUIInit];
+//    [foodDetailHeader setStoreDetailData:self.mStoreItem];
 //    foodDetailHeader.backgroundColor = [UIColor redColor];
     self.tTableView.tableHeaderView = foodDetailHeader;
     [foodDetailHeader.btnCommend addTarget:self action:@selector(toCommend:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,7 +66,7 @@
     btnCall = [UIButton buttonWithType:UIButtonTypeCustom];
     btnCall.frame = CGRectMake(130, 5, 180, 33);
     [btnCall addTarget:self action:@selector(toCall:) forControlEvents:UIControlEventTouchUpInside];
-    [btnCall setTitle:@"0755-23656666" forState:UIControlStateNormal];
+    [btnCall setTitle:@"" forState:UIControlStateNormal];//0755-23656666
     [btnCall setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnCall setBackgroundImage:[UIImage imageNamed:@"food_call_normal"] forState:UIControlStateNormal];
     [btnCall setBackgroundImage:[UIImage imageNamed:@"food_call_normal"] forState:UIControlStateHighlighted];
@@ -73,13 +75,39 @@
     btnCall.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     btnCall.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [callView addSubview:btnCall];
+    isRequestSuc = NO;
+    [self setDataWithStoreInfo:self.mStoreItem];
+    
+    
+    UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:self.mStoreItem.storeMiniPic];
+    if (!tImg) {
+        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:self.mStoreItem.storeMiniPic
+                                                                                       target:self
+                                                                                         type:HttpRequestType_Img_LoadDown];
+        request.tTag = -1;
+        [request startAsynchronous];
+    }else{
+        foodDetailHeader.imgHeader.contentMode = DefaultImageViewContentMode;
+        foodDetailHeader.imgHeader.image = tImg;
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self requestListData];
 }
-
+-(void)setDataWithStoreInfo:(StoreItem*)store{
+    [foodDetailHeader setStoreDetailData:store];
+    [btnCall setTitle:store.storePhone forState:UIControlStateNormal];
+}
+-(void)requestListData{
+    if (!isRequestSuc) {
+        [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];;
+    }
+    
+}
 
 -(void)toCall:(id)sender{
     NSLog(@"toCall");
@@ -87,21 +115,25 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
 }
 -(void)toCommend:(id)sender{
-    NSLog(@"toCommend");
+    NSLog(@"toCommend");//评价
     if (![[SettingService sharedInstance] isLogin]) {
         LoginViewController *lv = [[LoginViewController alloc]init];
         [self.navigationController pushViewController:lv animated:YES];
         return;
     }
     EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
+    et.storeId = self.mStoreItem.storeId;
     [self.navigationController pushViewController:et animated:YES];
 }
 -(void)toPraise:(id)sender{
+    //点赞
     if (![[SettingService sharedInstance] isLogin]) {
         LoginViewController *lv = [[LoginViewController alloc]init];
         [self.navigationController pushViewController:lv animated:YES];
         return;
     }
+    [[[HttpService sharedInstance] getRequestFavoriteStore:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
+    
     NSLog(@"toPraise");
 }
 
@@ -120,7 +152,7 @@
     if (0 == section) {
         return 1;
     }else if (1 == section){
-        return 3 + 1;
+        return self.mStoreItem.recomDishes.count + 1;
     }else if(2 == section){
         return 5 + 1;
     }
@@ -164,13 +196,23 @@
         }else{
             NSString *identifier = @"cell2";
             DetailFoodTableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
-            
-            if (cell ==nil) {
-                cell = [[DetailFoodTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-                cell.textLabel.textColor = [UIColor darkGrayColor];
-                cell.textLabel.font = [UIFont systemFontOfSize:14];
-            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            MenuItem *mi = [self.mStoreItem.recomDishes objectAtIndex:(indexPath.row-1)];
+            [cell setData:mi];
+            UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:mi.menuUrl];
+            if (!tImg) {
+                AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:mi.menuUrl
+                                                                                               target:self
+                                                                                                 type:HttpRequestType_Img_LoadDown];
+                request.tTag = 1;
+                request.indexPath = indexPath;
+                [request startAsynchronous];
+            }else{
+                cell.imgHeader.contentMode = DefaultImageViewContentMode;
+                cell.imgHeader.image = tImg;
+            }
+            
+            
             return cell;
         }
     }else if (2 == indexPath.section) {
@@ -259,10 +301,93 @@
 }
 
 
-#pragma ,mark -
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <2000) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+                if (-1 == ir.tTag) {
+                    [XTFileManager saveTmpFolderFileWithUrlPath:self.mStoreItem.storeMiniPic with:rImage];
+                    foodDetailHeader.imgHeader.contentMode = DefaultImageViewContentMode;
+                    foodDetailHeader.imgHeader.image = rImage;
+                }else if (1 == ir.tTag){
+                    MenuItem *tmpMenuItem  = [self.mStoreItem.recomDishes objectAtIndex:(ir.indexPath.row-1)];
+                    [XTFileManager saveTmpFolderFileWithUrlPath:tmpMenuItem.menuUrl with:rImage];
+                    DetailFoodTableViewCell *cell = (DetailFoodTableViewCell * )[self.tTableView cellForRowAtIndexPath:ir.indexPath];
+                    if (cell) {
+                        cell.imgHeader.image = rImage;
+                        cell.imgHeader.contentMode = DefaultImageViewContentMode;
+                    }
+                }else if (2 == ir.tTag){
+                    
+                }
+                
+                
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERYSTOREDETAIL:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    isRequestSuc = YES;
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        StoreItem *tmpStoreItem = [StoreItem getStoreItemWith:dic];
+                        if (tmpStoreItem) {
+                            self.mStoreItem = tmpStoreItem;
+                            [self setDataWithStoreInfo:self.mStoreItem];
+                            [self.tTableView reloadData];
+                        }
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_FAVORITESTORE:{
+            
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"点赞请求成功");
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"点赞成功" duration:DefaultRequestDonePromptTime];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+            
+            
+        default:
+            break;
+    }
 }
 
 /*

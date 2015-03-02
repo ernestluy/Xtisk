@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PublicDefine.h"
 @interface FoodListTableViewCell : UITableViewCell
 
 
@@ -18,4 +18,6 @@
 @property(nonatomic,weak)IBOutlet UILabel *labPj;
 @property(nonatomic,weak)IBOutlet UILabel *labQs;
 @property(nonatomic,weak)IBOutlet UILabel *labAddress;
+
+-(void)setStoreDataWithStoreItem:(StoreItem *)storeItem;
 @end

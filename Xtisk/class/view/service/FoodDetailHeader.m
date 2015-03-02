@@ -36,4 +36,28 @@
     self.labYysj.textColor = _rgb2uic(0x404040, 1);
     
 }
+/*
+ @property(nonatomic,weak)IBOutlet UILabel *labGoodNum;
+ @property(nonatomic,weak)IBOutlet UILabel *labTitle;
+ @property(nonatomic,weak)IBOutlet UILabel *labPj;
+ @property(nonatomic,weak)IBOutlet UILabel *labQs;
+ @property(nonatomic,weak)IBOutlet UILabel *labContent;
+ @property(nonatomic,weak)IBOutlet UILabel *labYysj;
+ @property(nonatomic,weak)IBOutlet UIButton *btnCommend;
+ @property(nonatomic,weak)IBOutlet UIButton *btnGood;
+ */
+-(void)setStoreDetailData:(StoreItem *)storeItem{
+    self.labGoodNum.text = [NSString stringWithFormat:@"%d",storeItem.favoritePeople];
+    self.labTitle.text = storeItem.storeName;
+    self.labPj.text = [NSString stringWithFormat:@"评价%d",storeItem.reviews];
+    self.labQs.text = [NSString stringWithFormat:@"%@元起送",storeItem.strPrice];;//storeItem.strPrice;
+    if (storeItem.storeInfo) {
+        self.labContent.text = storeItem.storeInfo;
+    }
+    if (storeItem.storeOpenTime) {
+        self.labYysj.text = [NSString stringWithFormat:@"营业时间:%@-%@",storeItem.storeOpenTime,storeItem.storeCloseTime];
+    }
+
+    
+}
 @end

@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "NearMenuItem.h"
+#import "PublicDefine.h"
 @interface NearMenuCollectionViewCell : UICollectionViewCell
 
 @property(nonatomic,weak)IBOutlet UILabel *title;
 @property(nonatomic,weak)IBOutlet UILabel *content;
 @property(nonatomic,weak)IBOutlet UIImageView *imageHeader;
 @property(nonatomic,weak)IBOutlet UIImageView *imageBg;
+@property(nonatomic,strong)MenuItem *mItem;
 
+
+-(void)setMenuItem:(MenuItem *)tItem;
 -(void)setItemData:(NearMenuItem *)sItem;
 
 -(void)setFoodData:(NSString *)imgNme;
