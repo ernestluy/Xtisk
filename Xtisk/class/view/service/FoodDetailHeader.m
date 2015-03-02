@@ -35,6 +35,7 @@
     self.labContent.textColor = _rgb2uic(0x404040, 1);
     self.labYysj.textColor = _rgb2uic(0x404040, 1);
     
+    self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
 }
 /*
  @property(nonatomic,weak)IBOutlet UILabel *labGoodNum;

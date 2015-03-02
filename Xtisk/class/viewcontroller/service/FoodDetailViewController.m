@@ -24,6 +24,7 @@
     FoodDetailHeader *foodDetailHeader;
     UIButton *btnCall;
     BOOL isRequestSuc;
+    UILabel *labTaddress;
 }
 @end
 
@@ -101,6 +102,9 @@
 -(void)setDataWithStoreInfo:(StoreItem*)store{
     [foodDetailHeader setStoreDetailData:store];
     [btnCall setTitle:store.storePhone forState:UIControlStateNormal];
+    if (labTaddress) {
+        labTaddress.text = [NSString stringWithFormat:@"地址:%@",self.mStoreItem.storeAddress];
+    }
 }
 -(void)requestListData{
     if (!isRequestSuc) {
@@ -116,13 +120,14 @@
 }
 -(void)toCommend:(id)sender{
     NSLog(@"toCommend");//评价
+    EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
+    et.storeId = self.mStoreItem.storeId;
     if (![[SettingService sharedInstance] isLogin]) {
-        LoginViewController *lv = [[LoginViewController alloc]init];
+        LoginViewController *lv = [[LoginViewController alloc]initWithVc:et];
         [self.navigationController pushViewController:lv animated:YES];
         return;
     }
-    EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
-    et.storeId = self.mStoreItem.storeId;
+    
     [self.navigationController pushViewController:et animated:YES];
 }
 -(void)toPraise:(id)sender{
@@ -173,7 +178,13 @@
             cell.textLabel.font = [UIFont systemFontOfSize:14];
         }
         cell.imageView.image  = [UIImage imageNamed:@"address_cion"];
-        cell.textLabel.text = @"地址:南山区工业五路万维大厦一楼";
+        if (self.mStoreItem.storeAddress) {
+            cell.textLabel.text = [NSString stringWithFormat:@"地址:%@",self.mStoreItem.storeAddress];
+        }else{
+            cell.textLabel.text = @"地址:";
+        }
+        labTaddress = cell.textLabel;
+//        cell.textLabel.text = @"地址:南山区工业五路万维大厦一楼";
         cell.clipsToBounds = YES;
         
 //        UIImageView *iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"right_arrow_gray"]];
@@ -357,7 +368,7 @@
                     }
                     
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");

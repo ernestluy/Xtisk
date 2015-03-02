@@ -73,7 +73,11 @@
     if (self.tDelegate &&  [self.tDelegate respondsToSelector:@selector(editTextDone:type:)]) {
         [self.tDelegate editTextDone:self.tTextView.text type:tType];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    if (PrivateEditTextFoodCommend == tType) {
+        [[[HttpService sharedInstance] getRequestStoreComments:self storeId:int2str(self.storeId) content:self.tTextView.text]startAsynchronous];
+    }
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -  UITextViewDelegate
@@ -99,20 +103,30 @@
     self.labWarnning.text = [NSString stringWithFormat:@"%d",dd];
     
 }
-#pragma mark -
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    switch (request.m_requestType) {
+        
+        case HttpRequestType_XT_STORECOMMENTS:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
-*/
 
 @end

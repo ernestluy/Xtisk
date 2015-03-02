@@ -314,22 +314,22 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.3.5	店家点赞/取消点赞
 -(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore?storeId=%@",SERVICE_HOME,storeId];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_FAVORITESTORE];
     
-    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
-    NSData *data = [Util strToData:contentStr];
-    [request appendPostData:data];
-    [request setRequestMethod:@"POST"];
+//    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
+//    NSData *data = [Util strToData:contentStr];
+//    [request appendPostData:data];
+    [request setRequestMethod:@"GET"];
     return request;
 }
 
 #pragma mark - 4.3.3.6	店铺评价
 -(AsyncHttpRequest *)getRequestStoreComments:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId content:(NSString *)content{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/storeComments",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/storeComments",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_STORECOMMENTS];

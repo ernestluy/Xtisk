@@ -17,7 +17,7 @@
     self.labJg.layer.borderWidth = 1;
     self.labJg.layer.cornerRadius = 3;
     
-    
+    self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
 //    [self.viewStar setNums:6];
 }
 
@@ -28,9 +28,8 @@
     [self.labTitle sizeToFit];
     [self.viewStar setNums:item.recomNumber * 2.0];
     [self.labTitle sizeToFit];
-    CGRect tr = self.imgViewTj.frame;
     int tWidth = [item.menuName sizeWithFont:self.labTitle.font].width;
-    self.imgViewTj.frame = CGRectMake(tWidth+3, tr.origin.y,tr.size.width, tr.size.height);
+    self.imgViewTj.center = CGPointMake(self.labTitle.frame.origin.x + tWidth + 10, self.imgViewTj.center.y);
 
 }
 

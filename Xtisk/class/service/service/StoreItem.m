@@ -21,7 +21,7 @@
     for (int i = 0; i<arr.count;i++) {
         StoreItem * ci = [[StoreItem alloc]init];
         NSDictionary *dic = [arr objectAtIndex:i];
-        ci.storeId = [dic objectForKey:@"storeId"];
+        ci.storeId = [[dic objectForKey:@"storeId"]intValue];
         ci.storeName = [dic objectForKey:@"storeName"];
         ci.price = [[dic objectForKey:@"price"] doubleValue];
         ci.strPrice = [dic objectForKey:@"price"] ;

@@ -182,7 +182,7 @@ typedef enum  {
 
 #define DefaultCellFont [UIFont systemFontOfSize:15]
 
-#define DefaultImageViewContentMode UIViewContentModeScaleAspectFill
+#define DefaultImageViewContentMode UIViewContentModeScaleAspectFill//UIViewContentModeScaleToFill//
 
 #define DefaultRequestPrompt  @"请求中..."
 #define DefaultRequestDonePromptTime 1.1

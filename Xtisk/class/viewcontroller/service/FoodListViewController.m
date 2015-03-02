@@ -18,6 +18,7 @@
     NSMutableArray *mDataArr;
     
     int tCount;
+    
 }
 @end
 
@@ -26,6 +27,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
+    CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64);
+    self.tTableView = [[UITableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
+    [self.view addSubview:self.tTableView];
+    self.tTableView.dataSource = self;
+    self.tTableView.delegate = self;
+    
     [self.tTableView registerNib:[UINib nibWithNibName:@"FoodListTableViewCell" bundle:nil] forCellReuseIdentifier:FoodListCellId];
 //    self.tTableView.separatorInset = UIEdgeInsetsMake(0,6, 0, 6);
     isRequestSuc = NO;
@@ -61,13 +71,8 @@
     
 
     FoodListTableViewCell * cell = (FoodListTableViewCell*)[tv dequeueReusableCellWithIdentifier:FoodListCellId];
-//    if (cell ==nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FoodListCellId];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        cell.textLabel.textColor = [UIColor darkGrayColor];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//    }
+
+    [cell clipsToBounds];
     StoreItem *tmpStoreItem = [mDataArr objectAtIndex:indexPath.row];
     [cell setStoreDataWithStoreItem:tmpStoreItem];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tmpStoreItem.storeMiniPic];
@@ -79,10 +84,9 @@
         request.indexPath = indexPath;
         [request startAsynchronous];
     }else{
-        cell.imgHeader.contentMode = DefaultImageViewContentMode;
+        cell.imgHeader.contentMode =  DefaultImageViewContentMode;
         cell.imgHeader.image = tImg;
     }
-    
     return cell;
 }
 
@@ -122,9 +126,8 @@
                 [XTFileManager saveTmpFolderFileWithUrlPath:tmpStroeItem.storeMiniPic with:rImage];
                 FoodListTableViewCell  * pc = (FoodListTableViewCell * )[self.tTableView cellForRowAtIndexPath:ir.indexPath];
                 if (pc) {
-                    UIImageView *iv = pc.imgHeader;
-                    iv.contentMode = DefaultImageViewContentMode;
-                    iv.image = rImage;
+                    pc.imgHeader.contentMode = DefaultImageViewContentMode;
+                    pc.imgHeader.image = rImage;
                 }
                 
                 
@@ -145,6 +148,13 @@
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
                         NSArray *tmpArr = [dic objectForKey:@"storeList"];
+                        
+                        
+                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+                        
+                        
                         tCount = [[dic objectForKey:@"total"] intValue];
                         if (tmpArr) {
                             tmpArr = [StoreItem getStoreItemsWithArr:tmpArr];

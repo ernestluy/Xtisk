@@ -7,10 +7,11 @@
 //
 
 #import "SecondaryViewController.h"
+#import "PublicDefine.h"
 @protocol EditTextViewDelegate <NSObject>
 - (void)editTextDone:(NSString *)str type:(int)ty;
 @end
-@interface EditTextViewController : SecondaryViewController<UITextViewDelegate >
+@interface EditTextViewController : SecondaryViewController<UITextViewDelegate ,AsyncHttpRequestDelegate>
 {
     int tType;
 }

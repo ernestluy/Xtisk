@@ -33,6 +33,9 @@
     self.labTitle.text = storeItem.storeName;
     self.labPj.text = [NSString stringWithFormat:@"评价%d",storeItem.reviews];
     self.labGood.text = [NSString stringWithFormat:@"%d",storeItem.favoritePeople];
+//    if (storeItem.storeAddress) {
+//        
+//    }
 //    self.labAddress.text = storeItem.storeAddress;
 //    self.labAddress.text = storeItem.storeAddress;
 

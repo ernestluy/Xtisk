@@ -11,9 +11,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="near_food_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="hlb-VJ-nOT">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_img_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="hlb-VJ-nOT">
                     <rect key="frame" x="8" y="8" width="105" height="83"/>
-                    <color key="backgroundColor" red="0.91048693783068779" green="0.91048693783068779" blue="0.91048693783068779" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.9596748737373737" green="0.9596748737373737" blue="0.9596748737373737" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="wkb-Dw-1PC">
                     <rect key="frame" x="0.0" y="99" width="320" height="1"/>
@@ -104,9 +104,9 @@
     </objects>
     <resources>
         <image name="commend_icon.png" width="15" height="15"/>
+        <image name="down_img_small.png" width="40" height="40"/>
         <image name="good_commend.png" width="15" height="15"/>
         <image name="good_yes_icon.png" width="24" height="25"/>
         <image name="line_gray.png" width="1" height="1"/>
-        <image name="near_food_0.png" width="145" height="72"/>
     </resources>
 </document>
