@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.layer.borderColor = _rgb2uic(0xe7e7e7, 1).CGColor;//0xcecece
+    self.layer.borderColor =  defaultBorderColor.CGColor;//_rgb2uic(0xe7e7e7, 1).CGColor;//0xcecece
     self.layer.borderWidth = 1.0;
     self.layer.cornerRadius = XT_CORNER_RADIUS;
     self.content.textColor = _rgb2uic(0x585858, 1);

@@ -266,7 +266,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
-    NSLog(@"LYTableView scrollViewDidScroll ");
+//    NSLog(@"LYTableView scrollViewDidScroll ");
     [self judgeDragIng];
 }
 

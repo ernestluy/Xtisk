@@ -97,7 +97,7 @@
 #pragma mark -  webviewDelegate
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"网络连接错误");
-    [SVProgressHUD showErrorWithStatus:@"加载失败" duration:2];
+//    [SVProgressHUD showErrorWithStatus:@"加载失败" duration:2];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [SVProgressHUD dismiss];

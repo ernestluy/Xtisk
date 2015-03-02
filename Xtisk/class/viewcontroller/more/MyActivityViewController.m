@@ -16,6 +16,9 @@
     int selectedIndex;
     
     int tAcount;
+    
+    UIBarButtonItem * doneItem;
+    UIBarButtonItem * delItem;
 }
 @end
 
@@ -70,8 +73,19 @@
     [okBtn setBackgroundImage:[UIImage imageNamed:@"ac_delete"] forState:UIControlStateNormal];
     
     [okBtn addTarget:self action:@selector(toDelete:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
-    [self.navigationItem setRightBarButtonItem:ritem];
+    delItem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
+    [self.navigationItem setRightBarButtonItem:delItem];
+    
+    
+    UIButton * doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    doneBtn.frame = CGRectMake(0, 0, 30, 20);
+    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [doneBtn setTitleColor:headerColor forState:UIControlStateNormal];
+    doneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [doneBtn addTarget:self action:@selector(doneDelete:) forControlEvents:UIControlEventTouchUpInside];
+    doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn] ;
+//    [self.navigationItem setRightBarButtonItem:doneItem];
     
 //    进行中 f75218
 //    已结束 bcbcbc
@@ -84,8 +98,14 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
+-(void)doneDelete:(id)sender{
+    NSLog(@"doneDelete");
+    [self.navigationItem setRightBarButtonItem:delItem];
+    [tTableView setEditing:NO];
+}
 -(void)toDelete:(id)sender{
     NSLog(@"toDelete");
+    [self.navigationItem setRightBarButtonItem:doneItem];
     [tTableView setEditing:YES];
 }
 -(void)actListAction:(id)sender{

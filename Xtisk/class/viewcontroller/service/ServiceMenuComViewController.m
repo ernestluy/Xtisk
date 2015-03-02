@@ -153,7 +153,7 @@
     //    if (indexPath.row%5 == 0) {
     //        return CGSizeMake(160, 100);
     //    }
-    return CGSizeMake(145, 80);
+    return CGSizeMake(145, 72);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     

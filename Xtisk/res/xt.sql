@@ -308,3 +308,10 @@ create table CALL_DATE_RECORD(
     time                    INTEGER,
     user_id                 TEXT
 );
+/*ishekou*/
+create table MSG_ITEM(
+_id                     INTEGER primary key autoincrement,
+name                    TEXT,
+time                    INTEGER,
+user_id                 TEXT
+);

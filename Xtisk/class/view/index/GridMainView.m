@@ -233,7 +233,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
 //    if (indexPath.row%5 == 0) {
 //        return CGSizeMake(160, 100);
 //    }
-    return CGSizeMake(145, 100);
+    return CGSizeMake(145, 73);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     

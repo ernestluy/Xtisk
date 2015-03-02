@@ -72,7 +72,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.title = @"更多";
+    self.tabBarController.title = @"我的";
     
     if ([[SettingService sharedInstance] isLogin]) {
         self.tTableView.tableHeaderView = inHeaderView;

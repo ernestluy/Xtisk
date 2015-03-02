@@ -29,6 +29,7 @@
     isLoading = YES;
     
     self.backgroundColor = _rgb2uic(0xf6f6f6, 1);
+    self.viewAlphe.hidden = YES;
 }
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

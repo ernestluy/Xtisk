@@ -53,6 +53,10 @@ typedef void(^Block)(void);
 
 
 #define  kTitleColor [UIColor colorWithRed:71.0/255 green:94.0/255 blue:136.0/255 alpha:1.0f]
+#define defaultTextColor _rgb2uic(0x333333, 1)
+#define defaultBorderColor _rgb2uic(0xcfcfcf, 1)
+#define defaultSeparatorColor _rgb2uic(0xdadada, 1)
+
 //RGB color macro
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -180,7 +184,7 @@ typedef enum  {
 
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
-#define LY_DOWN_FLUSH_HEIGHT 44.0
+#define LY_DOWN_FLUSH_HEIGHT 54.0
 #define DOWN_DRAG_FLUSH_NORMAL @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_WILL_START @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_DOING @"正在刷新中"

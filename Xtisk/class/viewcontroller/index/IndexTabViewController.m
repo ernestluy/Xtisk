@@ -78,7 +78,7 @@
     UIView *fourView = [[UIView alloc]initWithFrame:CGRectMake(0, nY, rect.size.width, fH)];
     fourView.backgroundColor = [UIColor whiteColor];
     NSArray *btnImgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_car_pool",@"service_icon_park_activity"];
-    NSArray *btnTitle = @[@"船票",@"周边",@"拼车",@"园区活动"];
+    NSArray *btnTitle = @[@"船票",@"周 边",@"拼 车",@"园区活动"];
     
 
     
@@ -92,10 +92,10 @@
         [fourView addSubview:tmpBtn];
         
         UILabel *tmpLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 37, btnWH, 18)];
-        tmpLab.font = [UIFont systemFontOfSize:11];
+        tmpLab.font = [UIFont systemFontOfSize:10];
         tmpLab.textAlignment = NSTextAlignmentCenter;
         tmpLab.text = [btnTitle objectAtIndex:i];
-        tmpLab.textColor = _rgb2uic(0x575757, 1);
+        tmpLab.textColor = defaultTextColor;//575757
         [tmpBtn addSubview:tmpLab];
     }
      
