@@ -13,7 +13,11 @@
 - (void)awakeFromNib {
     // Initialization code
 }
-
+-(void)setDataWith:(CommentsItem *)ci{
+    self.labContent.text = ci.content;
+    self.labName.text = ci.userName;
+    self.labTime.text = ci.commentsTime;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

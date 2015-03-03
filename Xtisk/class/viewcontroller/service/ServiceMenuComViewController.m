@@ -91,6 +91,7 @@
 
 -(void)requestData{
     if (ServiceFirst == menuLevel && !isRequestSuc) {
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [[[HttpService sharedInstance] getRequestCategoryTypeList:self parentCategoryId:nil]startAsynchronous];
     }
 }
@@ -129,6 +130,8 @@
     CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:indexPath.row];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tCategoryItem.categoryImageUrl];
     if (!tImg) {
+        cc.imageBg.contentMode = DefaultImageViewInitMode;
+        cc.imageBg.image = [UIImage imageNamed:@"down_img"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:tCategoryItem.categoryImageUrl
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
@@ -153,11 +156,11 @@
     self.tIndexPath = indexPath;
 
     CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:indexPath.row];
-    if (tCategoryItem.childList) {
+    if (tCategoryItem.childList && tCategoryItem.childList.count>0) {
         ServiceMenuComViewController *smc = [[ServiceMenuComViewController alloc] initWithLevel:ServiceNode title:tCategoryItem.categoryName];
         smc.categoryItem = tCategoryItem;
         [self.navigationController pushViewController:smc animated:YES];
-    }else if (!tCategoryItem.childList) {
+    }else if (!tCategoryItem.childList || tCategoryItem.childList.count == 0) {
         FoodListViewController *fvc = [[FoodListViewController alloc] init];
         fvc.categoryItem = tCategoryItem;
         [self.navigationController pushViewController:fvc animated:YES];
@@ -201,6 +204,7 @@
 //}
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {

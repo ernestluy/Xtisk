@@ -10,7 +10,15 @@
 
 @implementation MenuItem
 
-
+/*
+ {
+ "recomNumber": "4",
+ "menuUrl": "upload/common/2015_03_02/788_store.png",
+ "menuPrice": 20,
+ "menuId": 181,
+ "menuName": "满汉全系"
+ }
+ */
 +(NSArray *)getMenuItemsWithArr:(NSArray *)arr{
     if (!arr) {
         return nil;
@@ -24,7 +32,7 @@
         ci.menuUrl = [dic objectForKey:@"menuUrl"];
         ci.recomNumber = [[dic objectForKey:@"recomNumber"]intValue];
         ci.menuPrice = [[dic objectForKey:@"menuPrice"] floatValue];
-        ci.strMenuPrice = [NSString stringWithFormat:@"￥%f",ci.menuPrice];
+        ci.strMenuPrice = [NSString stringWithFormat:@"￥%.f",ci.menuPrice];
         
         [mArr addObject:ci];
     }

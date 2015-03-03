@@ -11,6 +11,14 @@
 #import "PublicDefine.h"
 @implementation CTLCustom
 
++(UIButton *)getButtonNormalWithRect:(CGRect )rect{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitleColor:defaultTextColor forState:UIControlStateNormal];
+    btn.frame = rect;
+//    btn.backgroundColor = [UIColor yellowColor];
+    return btn;
+}
+
 +(UIButton *)getButtonRadiusWithRect:(CGRect )rect{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = rect;

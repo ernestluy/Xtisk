@@ -9,7 +9,8 @@
 #import "SecondaryViewController.h"
 #import "EditTextViewController.h"
 #import "PublicDefine.h"
-@interface FoodDetailViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,EditTextViewDelegate,AsyncHttpRequestDelegate>
+#import "LoginViewController.h"
+@interface FoodDetailViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,EditTextViewDelegate,AsyncHttpRequestDelegate,LoginViewControllerDelegate>
 
 @property(nonatomic,strong)IBOutlet UITableView *tTableView;
 @property(nonatomic,strong) StoreItem *mStoreItem;

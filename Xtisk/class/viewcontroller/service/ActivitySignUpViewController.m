@@ -43,13 +43,13 @@
     tTableView.dataSource = self;
     tTableView.delegate = self;
     
-    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 60)];
+    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 70)];
     footView.backgroundColor = [UIColor clearColor];
     tTableView.tableFooterView = footView;
     
     UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
     int startX = 15;
-    btnOrder.frame = CGRectMake(startX, 10, bounds.size.width - 15*2, 40);
+    btnOrder.frame = CGRectMake(startX, 20, bounds.size.width - 15*2, 44);
     [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnOrder setTitle:@"报名" forState:UIControlStateNormal];
     [btnOrder setBackgroundImage:[UIImage imageNamed:@"radiu_done"] forState:UIControlStateNormal];

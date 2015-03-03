@@ -299,7 +299,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.3.4	获取店家菜单列表
 -(AsyncHttpRequest *)getRequestQueryStoreMenu:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryStoreMenu",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreMenu",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREMENU];
@@ -314,15 +314,15 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.3.5	店家点赞/取消点赞
 -(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore?storeId=%@",SERVICE_HOME,storeId];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_FAVORITESTORE];
     
-//    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
-//    NSData *data = [Util strToData:contentStr];
-//    [request appendPostData:data];
-    [request setRequestMethod:@"GET"];
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
     return request;
 }
 
@@ -345,7 +345,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.3.7	获取店铺评价列表
 -(AsyncHttpRequest *)getRequestStoreCommentsList:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId pageNo:(int)pageNo pageSize:(int)pageSize{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/querystoreComments",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/querystoreComments",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_STORECOMMENTSLIST];

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface CTLCustom : NSObject
++(UIButton *)getButtonNormalWithRect:(CGRect )rect;
 +(UIButton *)getButtonRadiusWithRect:(CGRect )rect;
 +(void)setButtonRadius:(UIButton *)btn;
 +(UIButton *)getButtonSubmitWithRect:(CGRect )rect;

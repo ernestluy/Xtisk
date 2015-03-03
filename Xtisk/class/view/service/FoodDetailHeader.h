@@ -25,4 +25,6 @@
 -(void)setUIInit;
 
 -(void)setStoreDetailData:(StoreItem *)storeItem;
+
+-(void)setFavoriteStatus:(BOOL)b;
 @end

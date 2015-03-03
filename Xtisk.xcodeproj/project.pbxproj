@@ -119,6 +119,9 @@
 		767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812DE1A830B0700CB4B08 /* PosterCollectionViewCell.xib */; };
 		767812E91A83326F00CB4B08 /* MoreTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812E81A83326F00CB4B08 /* MoreTableViewHeaderView.m */; };
 		767812EB1A83328500CB4B08 /* MoreTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812EA1A83328500CB4B08 /* MoreTableViewHeaderView.xib */; };
+		767B6FD41AA55F1700D0FA54 /* TicketQueryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */; };
+		767B6FD51AA55F1700D0FA54 /* TicketQueryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */; };
+		767B6FD71AA57F5B00D0FA54 /* good_commend_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */; };
 		76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */; };
 		76C87C941A8C3D8300843060 /* AboutIshekouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */; };
 		76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C961A8C466E00843060 /* ModifyPsdViewController.m */; };
@@ -518,6 +521,10 @@
 		767812E71A83326F00CB4B08 /* MoreTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewHeaderView.h; sourceTree = "<group>"; };
 		767812E81A83326F00CB4B08 /* MoreTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewHeaderView.m; sourceTree = "<group>"; };
 		767812EA1A83328500CB4B08 /* MoreTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreTableViewHeaderView.xib; sourceTree = "<group>"; };
+		767B6FD11AA55F1700D0FA54 /* TicketQueryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketQueryListViewController.h; sourceTree = "<group>"; };
+		767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketQueryListViewController.m; sourceTree = "<group>"; };
+		767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryListViewController.xib; sourceTree = "<group>"; };
+		767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "good_commend_yes@2x.png"; sourceTree = "<group>"; };
 		76C87C901A8C3D8300843060 /* AboutIshekouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutIshekouViewController.h; sourceTree = "<group>"; };
 		76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutIshekouViewController.m; sourceTree = "<group>"; };
 		76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutIshekouViewController.xib; sourceTree = "<group>"; };
@@ -1170,6 +1177,9 @@
 				ED8C783B1A96FCAC009C8286 /* ActivitySignUpViewController.h */,
 				ED8C783C1A96FCAC009C8286 /* ActivitySignUpViewController.m */,
 				ED8C783D1A96FCAC009C8286 /* ActivitySignUpViewController.xib */,
+				767B6FD11AA55F1700D0FA54 /* TicketQueryListViewController.h */,
+				767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */,
+				767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1646,6 +1656,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */,
 				EDE4B4221AA176C40098CCF6 /* line_white.png */,
 				760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */,
 				ED8C78401A970CDE009C8286 /* about_coo@2x.png */,
@@ -1852,6 +1863,7 @@
 				ED8C77C41A93040D009C8286 /* near_super_shop@2x.png in Resources */,
 				76C87CF31A8CA43E00843060 /* UMSShareListController.xib in Resources */,
 				ED8C77BF1A92FE9A009C8286 /* near_food@2x.png in Resources */,
+				767B6FD71AA57F5B00D0FA54 /* good_commend_yes@2x.png in Resources */,
 				ED8C77F51A94D27C009C8286 /* right_arrow_gray@2x.png in Resources */,
 				ED8C78391A96F6CD009C8286 /* heart_good_yes@2x.png in Resources */,
 				ED8C78151A94F44A009C8286 /* ActivityListTableViewCell.xib in Resources */,
@@ -1870,6 +1882,7 @@
 				764D602B1A884CD800B186A5 /* icon_index@2x.png in Resources */,
 				764D60721A8A0E3900B186A5 /* base_white_back@2x.png in Resources */,
 				ED8C77CD1A930692009C8286 /* near_food_3@2x.png in Resources */,
+				767B6FD51AA55F1700D0FA54 /* TicketQueryListViewController.xib in Resources */,
 				7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */,
 				764D60981A8AF41C00B186A5 /* login_rmb_no_selected@2x.png in Resources */,
 				ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */,
@@ -2027,6 +2040,7 @@
 				ED8C77D21A930BA9009C8286 /* FoodListViewController.m in Sources */,
 				767812E91A83326F00CB4B08 /* MoreTableViewHeaderView.m in Sources */,
 				ED8C78261A961971009C8286 /* MyTicketViewController.m in Sources */,
+				767B6FD41AA55F1700D0FA54 /* TicketQueryListViewController.m in Sources */,
 				764D605C1A89DC7000B186A5 /* RecommendItem.m in Sources */,
 				764D60681A89E71500B186A5 /* JoinInfo.m in Sources */,
 				ED8C77C21A92FFFF009C8286 /* NearMenuItem.m in Sources */,

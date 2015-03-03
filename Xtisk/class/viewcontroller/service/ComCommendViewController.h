@@ -7,8 +7,9 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>
+#import "PublicDefine.h"
+@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate>
 
 @property(nonatomic,strong)IBOutlet UITableView *tTableView;
+@property(nonatomic) int storeId;
 @end

@@ -106,6 +106,7 @@
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         
         case HttpRequestType_XT_STORECOMMENTS:{

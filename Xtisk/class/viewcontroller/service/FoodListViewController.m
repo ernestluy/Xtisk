@@ -77,6 +77,9 @@
     [cell setStoreDataWithStoreItem:tmpStoreItem];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tmpStoreItem.storeMiniPic];
     if (!tImg) {
+        //down_img_small.png
+        cell.imgHeader.contentMode = DefaultImageViewInitMode;
+        cell.imgHeader.image = [UIImage imageNamed:@"down_img_small"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:tmpStoreItem.storeMiniPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
@@ -110,6 +113,7 @@
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
@@ -150,9 +154,9 @@
                         NSArray *tmpArr = [dic objectForKey:@"storeList"];
                         
                         
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+//                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+//                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
+//                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
                         
                         
                         tCount = [[dic objectForKey:@"total"] intValue];

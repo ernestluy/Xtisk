@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    isRequestSucMark = NO;
     UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 60, 36);
     [backBtn setImage:[UIImage imageNamed:@"base_back.png"] forState:UIControlStateNormal];

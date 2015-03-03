@@ -7,12 +7,14 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface FoodShopAllMenuViewController : SecondaryViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "PublicDefine.h"
+@interface FoodShopAllMenuViewController : SecondaryViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,AsyncHttpRequestDelegate>
 {
     
 }
 @property(nonatomic,strong) NSIndexPath *tIndexPath;
 @property(nonatomic,strong) UICollectionView *tCollectionView;
+@property(nonatomic,strong)NSString *storePhone;
+@property(nonatomic) int storeId;
 -(id)initWithId:(int)tid;
 @end

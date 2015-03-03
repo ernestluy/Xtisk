@@ -19,6 +19,13 @@
     
     self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
 //    [self.viewStar setNums:6];
+    
+    
+    UIImageView *tiv = [[UIImageView alloc]initWithFrame:CGRectMake(171, 7, 17, 17)];
+    [self addSubview:tiv];
+    tiv.image = [UIImage imageNamed:@"up_cn"];
+    
+    self.imgTjc = tiv;
 }
 
 -(void)setData:(MenuItem *)item{
@@ -29,8 +36,9 @@
     [self.viewStar setNums:item.recomNumber * 2.0];
     [self.labTitle sizeToFit];
     int tWidth = [item.menuName sizeWithFont:self.labTitle.font].width;
-    self.imgViewTj.center = CGPointMake(self.labTitle.frame.origin.x + tWidth + 10, self.imgViewTj.center.y);
-
+//    self.imgViewTj.center = CGPointMake(self.labTitle.frame.origin.x + tWidth + 10, self.imgViewTj.center.y);
+    self.imgViewTj.hidden = YES;
+    self.imgTjc.center = CGPointMake(self.labTitle.frame.origin.x + tWidth + 10, self.imgViewTj.center.y);
 }
 
 

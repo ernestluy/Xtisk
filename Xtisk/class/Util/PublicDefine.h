@@ -33,6 +33,7 @@
 #import "CommentsItem.h"
 #import "FavoriteItem.h"
 #import "JoinInfo.h"
+#import "CTLCustom.h"
 
 
 BMKMapManager* _mapManager;
@@ -63,6 +64,7 @@ typedef void(^Block)(void);
 
 #define  kTitleColor [UIColor colorWithRed:71.0/255 green:94.0/255 blue:136.0/255 alpha:1.0f]
 #define defaultTextColor _rgb2uic(0x333333, 1)
+#define defaultTextGrayColor _rgb2uic(0xb0b0b0, 1)  //b0b0b0
 #define defaultBorderColor _rgb2uic(0xcfcfcf, 1)
 #define defaultSeparatorColor _rgb2uic(0xdadada, 1)
 
@@ -174,6 +176,13 @@ typedef enum  {
     VerifyCodeJudge
 }VerifyCodeAction ;
 
+typedef enum  {
+    StationOrigin = 0,
+    StationDest
+}StationSelectType ;
+
+
+
 #define IshekouWXAppId     @"wxd930ea5d5a258f4f"
 #define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
 #define UmengAppkey @"5211818556240bc9ee01db2f"
@@ -182,7 +191,8 @@ typedef enum  {
 
 #define DefaultCellFont [UIFont systemFontOfSize:15]
 
-#define DefaultImageViewContentMode UIViewContentModeScaleAspectFill//UIViewContentModeScaleToFill//
+#define DefaultImageViewContentMode UIViewContentModeScaleToFill//UIViewContentModeScaleAspectFill//
+#define DefaultImageViewInitMode UIViewContentModeCenter//UIViewContentModeScaleToFill//
 
 #define DefaultRequestPrompt  @"请求中..."
 #define DefaultRequestDonePromptTime 1.1

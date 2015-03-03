@@ -36,6 +36,7 @@
     return self;
 }
 
+/*
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     [super drawRect:rect];
@@ -58,4 +59,5 @@
         CGContextRestoreGState(context);
     }
 }
+ */
 @end

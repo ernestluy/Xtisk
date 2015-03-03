@@ -10,7 +10,9 @@
 #import "PublicDefine.h"
 #import "DetailFoodCommendTableViewCell.h"
 @interface ComCommendViewController ()
-
+{
+    NSArray *comArr;
+}
 @end
 
 @implementation ComCommendViewController
@@ -32,6 +34,8 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [[[HttpService sharedInstance] getRequestStoreCommentsList:self storeId:int2str(self.storeId) pageNo:1 pageSize:10]startAsynchronous];
     
 }
 #pragma mark - UITableViewDataSource
@@ -43,7 +47,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 14;
+    return comArr.count;
 }
 
 
@@ -59,6 +63,9 @@
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    CommentsItem *ci = [comArr objectAtIndex:indexPath.row];
+    [cell setDataWith:ci];
     return cell;
     
     
@@ -82,9 +89,57 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <2000) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+                
+                
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_STORECOMMENTSLIST:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    NSArray *tmpComArr = [dic objectForKey:@"items"];
+                    comArr = [CommentsItem getCommentsItemsWithArr:tmpComArr];
+                    [self.tTableView reloadData];
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        
+            
+            
+        default:
+            break;
+    }
 }
 
 

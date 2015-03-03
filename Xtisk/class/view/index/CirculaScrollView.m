@@ -72,7 +72,7 @@
 -(void)selectedEnd:(int)tag{
 //    NSLog(@"selectedEnd");
     nTag = tag;
-    
+    /*
     if (dataArr && dataArr.count>nTag) {
         PosterItem *pi = [dataArr objectAtIndex:nTag];
         self.labelTitle.text = pi.posterTitle;
@@ -80,7 +80,7 @@
     }else{
         self.labelTitle.text = @"";
     }
-    
+    */
 }
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
