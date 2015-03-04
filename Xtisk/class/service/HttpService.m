@@ -2,7 +2,7 @@
 //  HttpService.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/3.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -123,7 +123,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.2.3	获取活动评论 页码，默认为1
 -(AsyncHttpRequest *)getRequestactivityCommentsList:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId pageNo:(int)pageNo pageSize:(int)pageSize{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activityCommentsList",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/activityCommentsList",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_ACTIVITYCOMMENTSLIST];
@@ -138,7 +138,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.2.4	评论活动
 -(AsyncHttpRequest *)getRequestActivityComments:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId content:(NSString *)content{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activityComments",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/activityComments",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_ACTIVITYCOMMENTS];
@@ -153,7 +153,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.2.5	活动点赞/取消点赞
 -(AsyncHttpRequest *)getRequestFavoriteActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/favoriteActivity",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/favoriteActivity",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_FAVORITEACTIVITY];
@@ -166,7 +166,7 @@ static HttpService *httpServiceInstance = nil;
 }
 
 #pragma mark - 4.3.2.6	活动报名
--(AsyncHttpRequest *)getRequestJoinActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail{
+-(AsyncHttpRequest *)getRequestJoinActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinInfo:(JoinInfo *)jInfo{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
     /*
      activityId	String	否		活动ID
@@ -175,18 +175,18 @@ static HttpService *httpServiceInstance = nil;
      joinGender	String	否		性别(男/女)
      joinEmail	String	否	10-100	报名者邮箱
      */
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/favoriteActivity",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/joinActivity",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
-                                                                       type:HttpRequestType_XT_ACTIVITYCOMMENTS];
+                                                                       type:HttpRequestType_XT_JOINACTIVITY];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"activityId=%@&",activityId];
-    [mContentStr stringByAppendingFormat:@"joinName=%@&",joinName];
-    [mContentStr stringByAppendingFormat:@"joinPhone=%@&",joinPhone];
-    [mContentStr stringByAppendingFormat:@"joinGender=%@&",joinGender];
-    [mContentStr stringByAppendingFormat:@"joinEmail=%@",joinEmail];
-    
+    [mContentStr appendFormat:@"activityId=%@&",activityId];
+    [mContentStr appendFormat:@"joinName=%@&",jInfo.joinName];
+    [mContentStr appendFormat:@"joinPhone=%@&",jInfo.joinPhone];
+    [mContentStr appendFormat:@"joinGender=%@&",jInfo.joinGender];
+    [mContentStr appendFormat:@"joinEmail=%@",jInfo.joinEmail];
+    NSLog(@"mContentStr%@",mContentStr );
     NSData *data = [Util strToData:mContentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
@@ -196,7 +196,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.2.7	查看活动报名信息
 -(AsyncHttpRequest *)getRequestQueryActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryActivityJoinInfo",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/queryActivityJoinInfo",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYACTIVITYJOININFO];
@@ -209,19 +209,19 @@ static HttpService *httpServiceInstance = nil;
 }
 
 #pragma mark - 4.3.2.8	修改活动报名信息
--(AsyncHttpRequest *)getRequestUpdateActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail{
+-(AsyncHttpRequest *)getRequestUpdateActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId  joinInfo:(JoinInfo *)jInfo{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/updateActivityJoinInfo",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/updateActivityJoinInfo",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_UPDATEACTIVITYJOININFO];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"activityId=%@&",activityId];
-    [mContentStr stringByAppendingFormat:@"joinName=%@&",joinName];
-    [mContentStr stringByAppendingFormat:@"joinPhone=%@&",joinPhone];
-    [mContentStr stringByAppendingFormat:@"joinGender=%@&",joinGender];
-    [mContentStr stringByAppendingFormat:@"joinEmail=%@",joinEmail];
+    [mContentStr appendFormat:@"activityId=%@&",activityId];
+    [mContentStr appendFormat:@"joinName=%@&",jInfo.joinName];
+    [mContentStr appendFormat:@"joinPhone=%@&",jInfo.joinPhone];
+    [mContentStr appendFormat:@"joinGender=%@&",jInfo.joinGender];
+    [mContentStr appendFormat:@"joinEmail=%@",jInfo.joinEmail];
     
     NSData *data = [Util strToData:mContentStr];
     [request appendPostData:data];
@@ -232,7 +232,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.2.9	取消报名
 -(AsyncHttpRequest *)getRequestCancelActivityJoin:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID。
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/cancelActivityJoin",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/activity/cancelActivityJoin",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_CANCELACTIVITYJOIN];
@@ -271,13 +271,13 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 #pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
--(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId{
+-(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize;{
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreByCategory",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREBYCATEGORY];
     
-    NSString *contentStr = [NSString stringWithFormat:@"categoryId=%@",categoryId];
+    NSString *contentStr = [NSString stringWithFormat:@"categoryId=%@&pageNo=%d&pageSize=%d",categoryId,pageNo,pageSize];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
@@ -299,7 +299,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.3.4	获取店家菜单列表
 -(AsyncHttpRequest *)getRequestQueryStoreMenu:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryStoreMenu",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreMenu",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREMENU];
@@ -314,15 +314,15 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.3.5	店家点赞/取消点赞
 -(AsyncHttpRequest *)getRequestFavoriteStore:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore?storeId=%@",SERVICE_HOME,storeId];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/favoriteStore",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_FAVORITESTORE];
     
-//    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
-//    NSData *data = [Util strToData:contentStr];
-//    [request appendPostData:data];
-    [request setRequestMethod:@"GET"];
+    NSString *contentStr = [NSString stringWithFormat:@"storeId=%@",storeId];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
     return request;
 }
 
@@ -345,7 +345,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.3.7	获取店铺评价列表
 -(AsyncHttpRequest *)getRequestStoreCommentsList:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId pageNo:(int)pageNo pageSize:(int)pageSize{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/querystoreComments",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/querystoreComments",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_STORECOMMENTSLIST];
@@ -393,16 +393,16 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_UPDATEPERSON];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"imageFileName=%@&",user.headImageUrl];
-    [mContentStr stringByAppendingFormat:@"nickName=%@&",user.nickName];
-    [mContentStr stringByAppendingFormat:@"signature=%@&",user.signature];
-    [mContentStr stringByAppendingFormat:@"gender=%@&",user.gender];
-    [mContentStr stringByAppendingFormat:@"birthday=%@&",user.birthday];
-    [mContentStr stringByAppendingFormat:@"maritalStatus=%@&",user.maritalStatus];
-    [mContentStr stringByAppendingFormat:@"enterprise=%@&",user.enterprise];
+    [mContentStr appendFormat:@"imageFileName=%@&",user.headImageUrl];
+    [mContentStr appendFormat:@"nickName=%@&",user.nickName];
+    [mContentStr appendFormat:@"signature=%@&",user.signature];
+    [mContentStr appendFormat:@"gender=%@&",user.gender];
+    [mContentStr appendFormat:@"birthday=%@&",user.birthday];
+    [mContentStr appendFormat:@"maritalStatus=%@&",user.maritalStatus];
+    [mContentStr appendFormat:@"enterprise=%@&",user.enterprise];
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [Util strToData:sendStr];
@@ -435,7 +435,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_LOGIN];
 //    NSMutableString *contentStr = [NSMutableString string];
-//    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+//    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@",name,psd];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
@@ -452,7 +452,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_REG];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&authCode=%@",account,psd,authCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
@@ -467,7 +467,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_GETSMSCODE];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&method=%@&smsCode=%@",account,method,smsCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];

@@ -2,7 +2,7 @@
 //  HttpService.h
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/3.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -10,11 +10,14 @@
 #import "PublicDefine.h"
 #import "AsyncImgDownLoadRequest.h"
 #import "BaseResponse.h"
+#import "CategoryItem.h"
+#import "JoinInfo.h"
+
 @interface HttpService : NSObject
 {
     
 }
-
+@property(nonatomic,strong)CategoryItem *gCategoryItem;
 
 
 +(HttpService *)sharedInstance;
@@ -42,11 +45,11 @@
 -(AsyncHttpRequest *)getRequestFavoriteActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId ;
 
 #pragma mark - 4.3.2.6	活动报名
--(AsyncHttpRequest *)getRequestJoinActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail;
+-(AsyncHttpRequest *)getRequestJoinActivity:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId  joinInfo:(JoinInfo *)jInfo;
 #pragma mark - 4.3.2.7	查看活动报名信息
 -(AsyncHttpRequest *)getRequestQueryActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId;
 #pragma mark - 4.3.2.8	修改活动报名信息
--(AsyncHttpRequest *)getRequestUpdateActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId joinName:(NSString *)joinName joinPhone:(NSString *)joinPhone joinGender:(NSString *)joinGender joinEmail:(NSString *)joinEmail;
+-(AsyncHttpRequest *)getRequestUpdateActivityJoinInfo:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId  joinInfo:(JoinInfo *)jInfo;
 #pragma mark - 4.3.2.9	取消报名
 -(AsyncHttpRequest *)getRequestCancelActivityJoin:(id<AsyncHttpRequestDelegate>)delegate activityId:(NSString *)activityId;
 
@@ -55,7 +58,7 @@
 #pragma mark - 4.3.3.1	获取周边的分类（含根据父分类获取子分类）
 -(AsyncHttpRequest *)getRequestCategoryTypeList:(id<AsyncHttpRequestDelegate>)delegate parentCategoryId:(NSString *)parentCategoryId;
 #pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
--(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId;
+-(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize;
 #pragma mark - 4.3.3.3	获取店家详情
 -(AsyncHttpRequest *)getRequestQueryStoreDetail:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
 #pragma mark - 4.3.3.4	获取店家菜单列表

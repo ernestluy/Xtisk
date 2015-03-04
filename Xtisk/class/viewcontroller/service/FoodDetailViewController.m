@@ -25,6 +25,10 @@
     UIButton *btnCall;
     BOOL isRequestSuc;
     UILabel *labTaddress;
+    
+    NSArray *comArr;
+    
+    int totalCom;
 }
 @end
 
@@ -35,6 +39,8 @@
     // Do any additional setup after loading the view from its nib.
     CGRect bounds = [UIScreen mainScreen].bounds;
 //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
+    totalCom = 0;
+    
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - DEFAULT_CELL_HEIGHT - 64);
     self.tTableView = [[UITableView alloc]initWithFrame:tableRect style:UITableViewStyleGrouped];
     [self.view addSubview:self.tTableView];
@@ -82,6 +88,8 @@
     
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:self.mStoreItem.storeMiniPic];
     if (!tImg) {
+        foodDetailHeader.imgHeader.contentMode = DefaultImageViewInitMode;
+        foodDetailHeader.imgHeader.image = [UIImage imageNamed:@"down_img_small"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:self.mStoreItem.storeMiniPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
@@ -108,7 +116,8 @@
 }
 -(void)requestListData{
     if (!isRequestSuc) {
-        [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];;
+        [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
+        [[[HttpService sharedInstance] getRequestStoreCommentsList:self storeId:int2str(self.mStoreItem.storeId) pageNo:1 pageSize:5]startAsynchronous];
     }
     
 }
@@ -124,6 +133,7 @@
     et.storeId = self.mStoreItem.storeId;
     if (![[SettingService sharedInstance] isLogin]) {
         LoginViewController *lv = [[LoginViewController alloc]initWithVc:et];
+        lv.delegate = self;
         [self.navigationController pushViewController:lv animated:YES];
         return;
     }
@@ -134,12 +144,17 @@
     //点赞
     if (![[SettingService sharedInstance] isLogin]) {
         LoginViewController *lv = [[LoginViewController alloc]init];
+        lv.delegate = self;
         [self.navigationController pushViewController:lv animated:YES];
         return;
     }
     [[[HttpService sharedInstance] getRequestFavoriteStore:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
     
     NSLog(@"toPraise");
+}
+#pragma mark - LoginViewControllerDelegate
+- (void)loginSucBack:(LoginViewController *)loginVc{
+    [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
 }
 
 #pragma mark - EditTextViewDelegate
@@ -159,7 +174,7 @@
     }else if (1 == section){
         return self.mStoreItem.recomDishes.count + 1;
     }else if(2 == section){
-        return 5 + 1;
+        return comArr.count + 1;
     }
     return 4;
 }
@@ -201,7 +216,7 @@
                 cell.textLabel.textColor = [UIColor darkGrayColor];
                 cell.textLabel.font = [UIFont boldSystemFontOfSize:14]; //[UIFont systemFontOfSize:14];
             }
-            cell.textLabel.text = @"全部菜单(24)";
+            cell.textLabel.text = @"全部菜单";
             
             return cell;
         }else{
@@ -212,6 +227,8 @@
             [cell setData:mi];
             UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:mi.menuUrl];
             if (!tImg) {
+                cell.imgHeader.contentMode = DefaultImageViewInitMode;
+                cell.imgHeader.image = [UIImage imageNamed:@"down_img_small"];
                 AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:mi.menuUrl
                                                                                                target:self
                                                                                                  type:HttpRequestType_Img_LoadDown];
@@ -240,7 +257,11 @@
             }
             //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = @"网友评价(36)";
-            
+            if (totalCom == 0) {
+                cell.textLabel.text = @"网友评价";
+            }else{
+                cell.textLabel.text = [NSString stringWithFormat:@"网友评价(%d)",totalCom];
+            }
             return cell;
         }else{
             NSString *identifier = @"cell3";
@@ -253,6 +274,8 @@
                 cell.textLabel.font = [UIFont systemFontOfSize:14];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            CommentsItem *ci = [comArr objectAtIndex:(indexPath.row - 1)];
+            [cell setDataWith:ci];
             return cell;
         }
         
@@ -274,7 +297,7 @@
     if (0 == section) {
         return 0.1;
     }
-    return 9.0;
+    return 6.0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((1 == indexPath.section || 2 == indexPath.section) && 0 == indexPath.row) {
@@ -301,11 +324,15 @@
 
     }else if (0 == indexPath.row && 1 == indexPath.section) {
         NSLog(@"全部菜单");
-        FoodShopAllMenuViewController *sc = [[FoodShopAllMenuViewController alloc]initWithId:10];
+        FoodShopAllMenuViewController *sc = [[FoodShopAllMenuViewController alloc]initWithId:self.mStoreItem.storeId];
+        sc.storeId = self.mStoreItem.storeId;
+        sc.storePhone = self.mStoreItem.storePhone;
         [self.navigationController pushViewController:sc animated:YES];
     }else if (0 == indexPath.row && 2 == indexPath.section) {
         NSLog(@"网友评价");
         ComCommendViewController *ccc = [[ComCommendViewController alloc]init];
+        ccc.storeId = self.mStoreItem.storeId;
+        ccc.vcType = CommendVcStore;
         [self.navigationController pushViewController:ccc animated:YES];
     }
     
@@ -314,6 +341,7 @@
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
@@ -383,8 +411,19 @@
                 
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"点赞请求成功");
-                    
-                    [SVProgressHUD showSuccessWithStatus:@"点赞成功" duration:DefaultRequestDonePromptTime];
+//                    [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
+                    //{"favoritePeople":2,"isFavorite":true}
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        self.mStoreItem.favoritePeople = [[dic objectForKey:@"favoritePeople"] intValue];
+                        self.mStoreItem.isFavorite = [[dic objectForKey:@"isFavorite"] boolValue];
+                    }
+                    [self setDataWithStoreInfo:self.mStoreItem];
+                    NSString *strNote = @"点赞成功";
+                    if (!self.mStoreItem.isFavorite) {
+                        strNote = @"已经取消点赞";
+                    }
+                    [SVProgressHUD showSuccessWithStatus:strNote duration:DefaultRequestDonePromptTime];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
@@ -394,7 +433,27 @@
             }
             break;
         }
-            
+        case HttpRequestType_XT_STORECOMMENTSLIST:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    totalCom = [[dic objectForKey:@"total"] intValue];
+                    NSArray *tmpComArr = [dic objectForKey:@"items"];
+                    comArr = [CommentsItem getCommentsItemsWithArr:tmpComArr];
+                    [self.tTableView reloadData];
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
             
         default:
             break;

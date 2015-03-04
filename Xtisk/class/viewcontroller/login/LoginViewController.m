@@ -545,14 +545,14 @@ typedef enum  {
                 NSString *tmpStr = [request getResponseStr];
                 NSLog(@"result:%@",tmpStr);
                 if (!br) {
-                    [SVProgressHUD showErrorWithStatus:@"登录失败，未知错误" duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:@"登录失败，未知错误" duration:DefaultRequestDonePromptTime];
                     return;
                 }
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     NSDictionary *tDic = (NSDictionary *)br.data;
                     if (tDic == nil) {
-                        [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                        [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                     }else{
                         IUser *user = [IUser getIUserWithDic:tDic];
                         if (user.phone == nil || user.phone.length <1) {
@@ -561,16 +561,16 @@ typedef enum  {
                         }
                         [SettingService sharedInstance].iUser = user;
                         [[SettingService sharedInstance] setLoginJSessionid];
-                        [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1.5];
+                        [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:DefaultRequestDonePromptTime];
                         [self loginSucInto];
                     }
                     
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求失败");
-                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
         }

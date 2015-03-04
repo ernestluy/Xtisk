@@ -2,7 +2,7 @@
 //  EditTextViewController.h
 //  Xtisk
 //
-//  Created by zzt on 15/2/9.
+//  Created by 卢一 on 15/2/9.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -21,6 +21,7 @@
 @property(nonatomic,weak)id<EditTextViewDelegate> tDelegate;
 @property(nonatomic)int tType;
 @property(nonatomic) int storeId;
+@property(nonatomic) int activityId;
 
 -(id)initWithType:(int)type delegate:(id<EditTextViewDelegate>) delegate;
 @end

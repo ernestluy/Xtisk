@@ -24,6 +24,11 @@
     UIPickerView *mPickerView;
     
     NSArray *genderArr;
+    UIButton *btnOrder;
+    
+    JoinInfo *mJoinInfo;
+    
+    UIView *modelView;
 }
 @end
 
@@ -43,24 +48,105 @@
     tTableView.dataSource = self;
     tTableView.delegate = self;
     
-    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 60)];
+    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 70)];
     footView.backgroundColor = [UIColor clearColor];
     tTableView.tableFooterView = footView;
     
-    UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
     int startX = 15;
-    btnOrder.frame = CGRectMake(startX, 10, bounds.size.width - 15*2, 40);
+    btnOrder.frame = CGRectMake(startX, 20, bounds.size.width - 15*2, 44);
     [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnOrder setTitle:@"报名" forState:UIControlStateNormal];
+    [btnOrder setTitle:@"提 交" forState:UIControlStateNormal];
     [btnOrder setBackgroundImage:[UIImage imageNamed:@"radiu_done"] forState:UIControlStateNormal];
     btnOrder.backgroundColor = [UIColor clearColor];
     [btnOrder addTarget:self action:@selector(signUp:) forControlEvents:UIControlEventTouchUpInside];
     [footView addSubview:btnOrder];
     
+    modelView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 10 + DEFAULT_CELL_HEIGHT*4)];
+    modelView.backgroundColor = [UIColor clearColor];
+    [tTableView addSubview:modelView];
+    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.view addGestureRecognizer:tap];
     
+    if (ActivityVcBrow == self.signUpInfoType) {
+        UIButton * doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        doneBtn.frame = CGRectMake(0, 0, 30, 20);
+        [doneBtn setTitle:@"编辑" forState:UIControlStateNormal];
+        [doneBtn setTitleColor:headerColor forState:UIControlStateNormal];
+        doneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [doneBtn addTarget:self action:@selector(toEditStatus:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn] ;
+        
+        UIButton * btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnCancel.frame = CGRectMake(0, 0, 30, 20);
+        [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
+        [btnCancel setTitleColor:headerColor forState:UIControlStateNormal];
+        btnCancel.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [btnCancel addTarget:self action:@selector(toCancel:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:btnCancel] ;
+        
+        [self.navigationItem setRightBarButtonItems:@[doneItem]];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (ActivityVcBrow == self.signUpInfoType) {
+
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance] getRequestQueryActivityJoinInfo:self activityId:int2str(self.mActivityItem.activityId)]startAsynchronous];
+    }
+//    else if (ActivityVcEdit == self.signUpInfoType) {
+//        modelView.hidden = YES;
+//    }else if (ActivityVcSignUp == self.signUpInfoType) {
+//        modelView.hidden = YES;
+//    }
+//    [self performSelector:@selector(initData) withObject:nil afterDelay:1.5];
+    [self flushUI];
+}
+-(void)flushUI{
+    if (ActivityVcBrow == self.signUpInfoType) {
+        
+        modelView.hidden = NO;
+        [btnOrder setTitle:@"取消报名" forState:UIControlStateNormal];
+    }else if (ActivityVcEdit == self.signUpInfoType) {
+        modelView.hidden = YES;
+        [btnOrder setTitle:@"提交修改" forState:UIControlStateNormal];
+    }else if (ActivityVcSignUp == self.signUpInfoType) {
+        modelView.hidden = YES;
+        [btnOrder setTitle:@"提 交" forState:UIControlStateNormal];
+    }
+    
+}
+-(void)initData{
+    tfNme.text = @"卢一"    ;
+    tfTel.text = @"13418884362"    ;
+    tfEmail.text = @"erera@df.com"    ;
+}
+-(void)toEditStatus:(id)sender{
+    NSLog(@"toEdit");
+    self.signUpInfoType = ActivityVcEdit;
+    [self flushUI];
+    [self.navigationItem setRightBarButtonItems:@[]];
+    [tfNme becomeFirstResponder];
+//    [tTableView reloadData];
+}
+
+-(void)toCancel:(id)sender{
+    NSLog(@"toCancel");
+    self.signUpInfoType = ActivityVcEdit;
+//    [tTableView reloadData];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [[[HttpService sharedInstance] getRequestCancelActivityJoin:self activityId:int2str(self.mActivityItem.activityId)]startAsynchronous];
+
+}
+
+-(void)toDone:(id)sender{
+    NSLog(@"toDone");
 }
 
 -(void)changeGenderDone{
@@ -71,6 +157,10 @@
 }
 
 -(void)selectGender:(id)sender{
+    [tfNme resignFirstResponder];
+    [tfEmail resignFirstResponder];
+    [tfTel resignFirstResponder];
+    
     CGRect rt = [UIScreen mainScreen].bounds;
     UIView *tView = [[UIView alloc]init];
     
@@ -100,10 +190,44 @@
     tPopView = [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:tView];
 }
 
-
+-(void)setInfo:(JoinInfo*)jInfo{
+    tfNme.text = jInfo.joinName;
+    tfTel.text = jInfo.joinPhone;
+    tfEmail.text = jInfo.joinEmail;
+    labGender.text = jInfo.joinGender;
+}
+-(JoinInfo *)getJoinInfo{
+    JoinInfo *jInfo = [[JoinInfo alloc]init];
+    jInfo.joinName = tfNme.text;
+    jInfo.joinPhone = tfTel.text;
+    jInfo.joinEmail = tfEmail.text;
+    jInfo.joinGender = labGender.text;
+    return jInfo;
+}
 -(void)signUp:(id)sender{
     NSLog(@"signUp");
+    if (ActivityVcBrow == self.signUpInfoType){
+        [self toCancel:nil];
+    }else if (ActivityVcEdit==self.signUpInfoType){
+        JoinInfo *jInfo = [self getJoinInfo];
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance]getRequestUpdateActivityJoinInfo:self activityId:int2str(self.mActivityItem.activityId) joinInfo:jInfo]startAsynchronous];
+    }else if (ActivityVcSignUp==self.signUpInfoType){
+        JoinInfo *jInfo = [self getJoinInfo];
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance]getRequestJoinActivity:self activityId:int2str(self.mActivityItem.activityId) joinInfo:jInfo]startAsynchronous];
+    }
+    
 }
+-(void)editSignUpInfo:(id)sender{
+    NSLog(@"editSignUpInfo");
+    JoinInfo *jInfo = [self getJoinInfo];
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [[[HttpService sharedInstance]getRequestUpdateActivityJoinInfo:self activityId:int2str(self.mActivityItem.activityId) joinInfo:jInfo]startAsynchronous];
+
+}
+
+
 -(void)tapped:(UITapGestureRecognizer *)tap
 {
     if (nowTextField) {
@@ -178,14 +302,15 @@
     UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
     
     if (cell ==nil) {
-        int textFieldWidth = 170;
+        int textFieldWidth = 200;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = [titleArr objectAtIndex:indexPath.row];
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         int startX = 15 + [cell.textLabel.text sizeWithFont:cell.textLabel.font].width + 5 ;
-        CGRect textFieldRect = CGRectMake(startX, 0.0f, textFieldWidth, 44.0);
+        
+        CGRect textFieldRect = CGRectMake(startX, 0.0f, [UIScreen mainScreen].bounds.size.width - startX - 1, 44.0);
         
         if (2 == indexPath.row) {
             UILabel *tLab = [CTLCustom getCusRightLabel:textFieldRect];
@@ -205,6 +330,7 @@
             theTextField.delegate = self;
             theTextField.placeholder = @"请输入";
             theTextField.font = cell.textLabel.font;
+//            theTextField.backgroundColor = [UIColor lightGrayColor];
             [cell addSubview:theTextField];
             //        theTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             if (0 == indexPath.row) {
@@ -234,7 +360,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 44.0;
+    return DEFAULT_CELL_HEIGHT;
 }
 
 
@@ -247,10 +373,90 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        
+        case HttpRequestType_XT_JOINACTIVITY:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    isRequestSucMark = YES;
+                    NSLog(@"请求成功");
+                    //{"code":0,"msg":"成功","data":{}}
+                    self.mActivityItem.isJoin = YES;
+//                    NSDictionary *dic = (NSDictionary *)br.data;
+//                    self.mActivityItem.isJoin = [[dic objectForKey:@"isJoin"] boolValue];
+//                    int joinPeople = [[dic objectForKey:@"joinPeople"] boolValue];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [SVProgressHUD showErrorWithStatus:@"恭喜你报名成功" duration:DefaultRequestDonePromptTime];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:3];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_CANCELACTIVITYJOIN:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                //{"code":0,"msg":"","data":{"joinPeople":1}}
+                if (ResponseCodeSuccess == br.code) {
+//                    isRequestSucMark = YES;
+                    NSLog(@"取消成功");
+                    self.mActivityItem.isJoin = NO;
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [SVProgressHUD showErrorWithStatus:@"取消报名成功" duration:DefaultRequestDonePromptTime];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:3];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERYACTIVITYJOININFO:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    JoinInfo *ji = [JoinInfo getJoinInfoWithDic:dic];
+                    [self setInfo:ji];
+                    [tTableView reloadData];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_UPDATEACTIVITYJOININFO:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [SVProgressHUD showErrorWithStatus:@"修改报名信息成功" duration:DefaultRequestDonePromptTime];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
-
 
 @end

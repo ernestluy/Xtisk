@@ -59,6 +59,17 @@
         self.labYysj.text = [NSString stringWithFormat:@"营业时间:%@-%@",storeItem.storeOpenTime,storeItem.storeCloseTime];
     }
 
-    
+    [self setFavoriteStatus:storeItem.isFavorite];
+}
+
+//设置点赞状态
+-(void)setFavoriteStatus:(BOOL)b{
+    if (b) {
+        [self.btnGood setImage:[UIImage imageNamed:@"good_commend_yes"] forState:UIControlStateNormal];
+        [self.btnGood setTitleColor:_rgb2uic(0xff6c0a, 1) forState:UIControlStateNormal];
+    }else{
+        [self.btnGood setImage:[UIImage imageNamed:@"good_commend"] forState:UIControlStateNormal];
+        [self.btnGood setTitleColor:defaultTextGrayColor forState:UIControlStateNormal];
+    }
 }
 @end

@@ -8,9 +8,9 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface FoodListViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate, AsyncHttpRequestDelegate>
+@interface FoodListViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate, AsyncHttpRequestDelegate,LYFlushViewDelegate>
 
 
-@property(nonatomic,strong) UITableView *tTableView;
+@property(nonatomic,strong) LYTableView *tTableView;
 @property(nonatomic,strong)CategoryItem *categoryItem;
 @end

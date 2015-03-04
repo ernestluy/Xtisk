@@ -16,7 +16,7 @@
 #import "PublicDefine.h"
 
 #import "SettingService.h"
-
+#import "CustomMenuTutorialController.h"
 @interface AppDelegate ()
 
 @end
@@ -34,16 +34,25 @@
 //    self.window.rootViewController = nav;
     
     
-    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
-    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
+    
+    CustomNavigationController *nav = [[CustomNavigationController alloc]init];
     nav.interactivePopGestureRecognizer.enabled = NO;
     self.window.rootViewController = nav;
+    NSObject *obj = [[NSUserDefaults standardUserDefaults] objectForKey:GuideMark];
+    if (obj) {
+        MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
+        [nav pushViewController:mTabBar animated:NO];
+    }else{
+        CustomMenuTutorialController *cc = [[CustomMenuTutorialController alloc]init];
+        [nav pushViewController:cc animated:NO];
+    }
     
     
     [self.window makeKeyAndVisible];
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [XTFileManager shareInstance];
     [DBManager initDB];
     

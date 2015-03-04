@@ -17,7 +17,7 @@
     BOOL isRequestSuc;
     NSMutableArray *mDataArr;
     
-    int tCount;
+    
     
 }
 @end
@@ -31,10 +31,13 @@
     CGRect bounds = [UIScreen mainScreen].bounds;
     //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64);
-    self.tTableView = [[UITableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
+    self.tTableView = [[LYTableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
     [self.view addSubview:self.tTableView];
     self.tTableView.dataSource = self;
     self.tTableView.delegate = self;
+    self.tTableView.lyDelegate = self;
+    [self.tTableView setNeedBottomFlush];
+    [self.tTableView setNeedTopFlush];
     
     [self.tTableView registerNib:[UINib nibWithNibName:@"FoodListTableViewCell" bundle:nil] forCellReuseIdentifier:FoodListCellId];
 //    self.tTableView.separatorInset = UIEdgeInsetsMake(0,6, 0, 6);
@@ -44,8 +47,7 @@
 }
 -(void)requestListData{
     if (!isRequestSuc) {
-        [mDataArr removeAllObjects];
-        [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId]startAsynchronous];
+        [self.tTableView upToStartFlush];
     }
     
 }
@@ -53,6 +55,33 @@
     [super viewWillAppear:animated];
     self.title = self.categoryItem.categoryName;
     [self requestListData];
+}
+#pragma mark - LYFlushViewDelegate
+- (void)startToFlushUp:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+}
+- (void)flushUpEnd:(NSObject *)ly{
+    
+}
+- (void)startToFlushDown:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId pageNo:(curPage+1) pageSize:DefaultPageSize]startAsynchronous];
+}
+- (void)flushDownEnd:(NSObject *)ly{
+    
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [self.tTableView setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    [self.tTableView judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //    NSLog(@"drag end");
+    [self.tTableView judgeDragEnd];
+    
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -77,6 +106,9 @@
     [cell setStoreDataWithStoreItem:tmpStoreItem];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tmpStoreItem.storeMiniPic];
     if (!tImg) {
+        //down_img_small.png
+        cell.imgHeader.contentMode = DefaultImageViewInitMode;
+        cell.imgHeader.image = [UIImage imageNamed:@"down_img_small.png"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:tmpStoreItem.storeMiniPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
@@ -110,16 +142,17 @@
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
-//                if (!data || data.length <2000) {
-//                    NSLog(@"请求图片失败");
-//                    [request requestAgain];
-//                    return;
-//                }
+                if (!data || data.length <DefaultImageMinSize) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
                 StoreItem *tmpStroeItem = [mDataArr objectAtIndex:ir.indexPath.row];
@@ -144,23 +177,25 @@
                 if (ResponseCodeSuccess == br.code) {
                     isRequestSuc = YES;
                     NSLog(@"请求成功");
-                    [mDataArr removeAllObjects];
                     NSDictionary *dic = (NSDictionary *)br.data;
+                    curPage ++;
                     if (dic) {
-                        NSArray *tmpArr = [dic objectForKey:@"storeList"];
-                        
-                        
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
-                        [mDataArr addObjectsFromArray:[StoreItem getStoreItemsWithArr:tmpArr]];
-                        
+                        NSArray *tmpArr = [dic objectForKey:@"items"];
+ 
                         
                         tCount = [[dic objectForKey:@"total"] intValue];
                         if (tmpArr) {
                             tmpArr = [StoreItem getStoreItemsWithArr:tmpArr];
                             if (tmpArr) {
-                                [mDataArr addObjectsFromArray:tmpArr];
+                                if (self.tTableView.flushDirType == FlushDirDown) {
+                                    [mDataArr addObjectsFromArray:tmpArr];
+                                }else{
+                                    [mDataArr removeAllObjects];
+                                    [mDataArr addObjectsFromArray:tmpArr];
+                                }
+                                [self.tTableView flushDoneStatus:YES];
                                 [self.tTableView reloadData];
+                                return;
                             }
                         }
                     }
@@ -172,6 +207,7 @@
                 //XT_SHOWALERT(@"请求失败");
                 NSLog(@"请求失败");
             }
+            [self.tTableView flushDoneStatus:NO];
             break;
         }
         default:

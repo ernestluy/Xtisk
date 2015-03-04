@@ -2,7 +2,7 @@
 //  ServiceTabViewController.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/3.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     CGRect mRect = [UIScreen mainScreen].bounds;
-    NSArray *nameArr = @[@"船票",@"周边",@"园区活动"];
+    NSArray *nameArr = @[@"船 票",@"周 边",@"园区活动"];
     NSArray *imgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_park_activity"];
     
     NSMutableArray *mArr = [NSMutableArray array];

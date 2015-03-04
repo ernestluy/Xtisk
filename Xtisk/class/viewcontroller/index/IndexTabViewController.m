@@ -2,7 +2,7 @@
 //  IndexTabViewController.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/3.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -130,6 +130,8 @@
     [gridMainView setHeaderView:headerView];
     
     tLyCollectionView = gridMainView.tCollectionView;
+    [tLyCollectionView setNeedBottomFlush];
+    [tLyCollectionView setNeedTopFlush];
     tLyCollectionView.lyDelegate = self;
     
     [self.view addSubview:gridMainView];
@@ -140,8 +142,8 @@
 //    [sc setNums:7.5];
 //    sc.backgroundColor = [UIColor clearColor];
 //    [self.view addSubview:sc];
-    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
-    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
+//    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
+//    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -152,6 +154,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    if (!isRequestSucMark) {
+        [tLyCollectionView upToStartFlush];
+    }
     
 }
 
@@ -250,6 +255,7 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
+                    isRequestSucMark = YES;
                     NSDictionary *tmpDic = (NSDictionary *)br.data;
                     NSArray *posterList = [tmpDic objectForKey:IndexPosterList];//@"posterList"
                     if (posterList) {
@@ -264,7 +270,7 @@
             }else{
                 //XT_SHOWALERT(@"请求失败");
             }
-            [tLyCollectionView flushDone];
+            [tLyCollectionView flushDoneStatus:NO];
             break;
         }
         case HttpRequestType_XT_RECOMMENDLIST:{
@@ -272,6 +278,7 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
+                    isRequestSucMark = YES;
                     NSDictionary *tmpDic = (NSDictionary *)br.data;
                     NSArray *tmpArr = [tmpDic objectForKey:IndexRecomList];
                     if (tmpArr== nil || tmpArr.count == 0) {
@@ -288,7 +295,7 @@
             }else{
                 //XT_SHOWALERT(@"请求失败");
             }
-            [tLyCollectionView flushDone];
+            [tLyCollectionView flushDoneStatus:NO];
         }
         default:
             break;

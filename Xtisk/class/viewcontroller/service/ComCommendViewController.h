@@ -7,8 +7,11 @@
 //
 
 #import "SecondaryViewController.h"
+#import "PublicDefine.h"
+@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate>
 
-@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>
-
-@property(nonatomic,strong)IBOutlet UITableView *tTableView;
+@property(nonatomic,strong)IBOutlet LYTableView *tTableView;
+@property(nonatomic) int storeId;
+@property(nonatomic) int activityId;
+@property(nonatomic) int vcType;
 @end

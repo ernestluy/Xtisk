@@ -145,7 +145,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     [self.tCollectionView judgeDragIng];
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"drag end");
+//    NSLog(@"drag end");
     [self.tCollectionView judgeDragEnd];
     
 }
@@ -176,6 +176,8 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     RecommendItem *ri = [tDataArr objectAtIndex:indexPath.row];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:ri.recomPic];
     if (!tImg) {
+        pcc.imageBg.contentMode = DefaultImageViewInitMode;
+        pcc.imageBg.image = [UIImage imageNamed:@"down_img"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:ri.recomPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];

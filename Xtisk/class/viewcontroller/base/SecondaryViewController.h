@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SecondaryViewController : UIViewController
-
+{
+    BOOL isRequestSucMark;
+    
+    int curPage;
+    int tCount;
+}
 @end

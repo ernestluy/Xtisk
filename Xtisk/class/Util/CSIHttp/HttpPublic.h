@@ -35,6 +35,7 @@ typedef enum HttpRequestType{
     HttpRequestType_XT_ACTIVITYCOMMENTS,
     HttpRequestType_XT_FAVORITEACTIVITY,//此处有一样的，待定
     
+    HttpRequestType_XT_JOINACTIVITY,
     HttpRequestType_XT_QUERYACTIVITYJOININFO,
     HttpRequestType_XT_UPDATEACTIVITYJOININFO,
     HttpRequestType_XT_CANCELACTIVITYJOIN,

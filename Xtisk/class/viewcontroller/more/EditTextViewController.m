@@ -2,7 +2,7 @@
 //  EditTextViewController.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/9.
+//  Created by 卢一 on 15/2/9.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -42,6 +42,9 @@
     }else if (tType == PrivateEditTextAdvise){
         self.title = @"建议反馈";
         limitNum = 160;
+    }else if (tType == PrivateEditTextActivity){
+        self.title = @"活动评价";
+        limitNum = 160;
     }
     self.labWarnning.text  = [NSString stringWithFormat:@"%d",limitNum];
     self.tTextView.layer.borderWidth = 1;
@@ -76,6 +79,8 @@
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
     if (PrivateEditTextFoodCommend == tType) {
         [[[HttpService sharedInstance] getRequestStoreComments:self storeId:int2str(self.storeId) content:self.tTextView.text]startAsynchronous];
+    }else if (PrivateEditTextActivity == tType){
+        [[[HttpService sharedInstance] getRequestActivityComments:self activityId:int2str(self.activityId) content:self.tTextView.text]startAsynchronous];
     }
 //    [self.navigationController popViewControllerAnimated:YES];
 }
@@ -106,8 +111,9 @@
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
     switch (request.m_requestType) {
-        
+        case HttpRequestType_XT_ACTIVITYCOMMENTS:
         case HttpRequestType_XT_STORECOMMENTS:{
             if ( HttpResponseTypeFinished == responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];

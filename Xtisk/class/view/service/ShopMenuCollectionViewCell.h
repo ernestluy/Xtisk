@@ -15,4 +15,6 @@
 @property(nonatomic,weak)IBOutlet UILabel *labTitle;
 @property(nonatomic,weak)IBOutlet UILabel *labJg;
 @property(nonatomic,weak)IBOutlet StarCommendView *viewStar;
+
+-(void)setData:(MenuItem*)item;
 @end

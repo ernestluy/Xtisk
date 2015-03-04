@@ -17,5 +17,7 @@
 @property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
 @property(nonatomic,weak)IBOutlet StarCommendView *viewStar;
 
+@property(nonatomic,weak)UIImageView *imgTjc;
+
 -(void)setData:(MenuItem *)item;
 @end

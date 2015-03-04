@@ -8,7 +8,8 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface ActivityDetailViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate,UIWebViewDelegate>
+#import "LoginViewController.h"
+@interface ActivityDetailViewController : SecondaryViewController<UMSocialUIDelegate,UMSocialShakeDelegate,UIWebViewDelegate,AsyncHttpRequestDelegate,LoginViewControllerDelegate>
 
 
 
@@ -16,7 +17,7 @@
 @property(nonatomic,weak)IBOutlet UIButton *btnSignUp;
 @property(nonatomic,weak)IBOutlet UIButton *btnPraise;
 @property(nonatomic,weak)IBOutlet UIButton *btnCommend;
-
+@property(nonatomic,strong)ActivityItem *mActivityItem;
 -(id)initWithType:(int)t;
 
 -(IBAction)toSignUp:(id)sender;

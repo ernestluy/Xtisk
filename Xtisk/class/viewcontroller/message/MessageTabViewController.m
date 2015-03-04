@@ -2,13 +2,15 @@
 //  MessageTabViewController.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/3.
+//  Created by 卢一 on 15/2/3.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
 #import "MessageTabViewController.h"
 #import "LYTableView.h"
 #import "MsgTicketListViewController.h"
+#import "PublicDefine.h"
+#import "ActivityViewController.h"
 #define MSG_TAB_HEIGHT 50.0
 @interface MessageTabViewController ()
 {
@@ -98,6 +100,9 @@
     if (1 == indexPath.section &&  0 == indexPath.row) {
         MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];
         [self.navigationController pushViewController:mt animated:YES];
+    }else if(1 == indexPath.section &&  1 == indexPath.row){
+        ActivityViewController *ac = [[ActivityViewController alloc]init];
+        [self.navigationController pushViewController:ac animated:YES];
     }
     
 }
@@ -113,7 +118,7 @@
     [lyt judgeDragIng];
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"drag end");
+//    NSLog(@"drag end");
     LYTableView *lyt = (LYTableView *)self.tTableView;
     [lyt judgeDragEnd];
 

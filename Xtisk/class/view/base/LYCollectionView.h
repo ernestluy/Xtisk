@@ -12,14 +12,20 @@
 
 @property(nonatomic)BOOL isCanFlush;
 @property(nonatomic,weak)id<LYFlushViewDelegate> lyDelegate;
+@property(nonatomic)int flushDirType;
 -(void)setIsDraging:(BOOL)b;
 -(void)judgeDragIng;
 -(void)judgeDragEnd;
 -(void)reloadUpDragFlushCtl;
 -(void)reloadDownDragFlushCtl;
 
+-(void)upToStartFlush;
+
 -(void)changeToNormalStatus;
 -(void)changeToFlushStatus;
 
--(void)flushDone;
+-(void)setNeedTopFlush;
+-(void)setNeedBottomFlush;
+
+-(void)flushDoneStatus:(BOOL)resp;
 @end

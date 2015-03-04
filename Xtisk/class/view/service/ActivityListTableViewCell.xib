@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="pMo-2h-fKb">
-                        <rect key="frame" x="10" y="10" width="300" height="120"/>
+                        <rect key="frame" x="10" y="5" width="300" height="120"/>
                     </imageView>
                 </subviews>
             </tableViewCellContentView>

@@ -22,12 +22,17 @@
     BOOL isDraging;
     
     BOOL isFlush;
+    
+    BOOL isNeedUpFlush;
+    BOOL isNeedDownFlush;
+    
+    
 }
 
 -(void)initSet;
 @end
 @implementation LYCollectionView
-
+@synthesize flushDirType;
 /*
  <LYTableView: 0x7fc51a8ec800; baseClass = UITableView; frame = (0 0; 320 455); clipsToBounds = YES; autoresize = RM+BM; gestureRecognizers = <NSArray: 0x7fc51964e730>; layer = <CALayer: 0x7fc5196308e0>; contentOffset: {0, 0}; contentSize: {320, 485}>
  */
@@ -55,20 +60,63 @@
 -(void)initSet{
     isFlush = NO;
     isDraging = NO;
+    isNeedUpFlush = NO;
+    isNeedDownFlush = NO;
     [self reloadUpDragFlushCtl];
 }
 -(void)reloadData{
     [super reloadData];
-    NSLog(@"reloadData");
+//    NSLog(@"reloadData");
     self.isCanFlush = YES;
 }
 -(void)setIsDraging:(BOOL)b{
     isDraging = b;
 }
 
+-(void)setNeedTopFlush{
+    isNeedUpFlush = YES;
+    [self reloadUpDragFlushCtl];
+}
+-(void)setNeedBottomFlush{
+    isNeedDownFlush = YES;
+    [self reloadData];
+}
+
 -(void)flushDone{
     [self changeToNormalStatus];
 }
+
+-(void)flushDoneStatus:(BOOL)resp{
+    if (resp) {
+        if (flushDirType == FlushDirUp) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            }completion:^(BOOL finished){
+                
+            }];
+        }else if (flushDirType == FlushDirDown){
+            CGFloat tY = self.contentOffset.y;
+            self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            self.contentOffset = CGPointMake(0, tY);
+        }
+        [self upFlushToNormal];
+        [self downFlushToNormal];
+        if (flushDirType == FlushDirUp) {
+            if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(flushUpEnd:)]) {
+                [self.lyDelegate flushUpEnd:self];
+            }
+        }else if (flushDirType == FlushDirDown) {
+            if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(flushDownEnd:)]) {
+                [self.lyDelegate flushDownEnd:self];
+            }
+        }
+        flushDirType = FlushDirNormal;
+    }else{
+        [self changeToNormalStatus];
+    }
+}
+
+
 #pragma mark -  回复正常状态
 -(void)changeToNormalStatus{
     NSLog(@"changeToNormalStatus");
@@ -77,6 +125,16 @@
     }completion:^(BOOL finished){
         [self upFlushToNormal];
         [self downFlushToNormal];
+        if (flushDirType == FlushDirUp) {
+            if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(flushUpEnd:)]) {
+                [self.lyDelegate flushUpEnd:self];
+            }
+        }else if (flushDirType == FlushDirDown) {
+            if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(flushDownEnd:)]) {
+                [self.lyDelegate flushDownEnd:self];
+            }
+        }
+        flushDirType = FlushDirNormal;
     }];
 }
 -(void)changeToFlushStatus{
@@ -90,12 +148,18 @@
         return;
     }
     if (self.contentOffset.y <0) {//下拉
+        if (!isNeedUpFlush) {
+            return;
+        }
         if (self.contentOffset.y <=-LY_DOWN_FLUSH_HEIGHT) {
             [self promptUpDragFlush];//提示放开就刷新
         }else{
             [self upDragToNormal];//恢复
         }
     }else{//上拉
+        if (!isNeedDownFlush) {
+            return;
+        }
         if (self.contentSize.height<=self.frame.size.height) {
 //            NSLog(@"单页已经显示完，不需要刷新，返回");
             return;
@@ -114,12 +178,18 @@
         return;
     }
     if (self.contentOffset.y <0) {//下拉
+        if (!isNeedUpFlush) {
+            return;
+        }
         if (self.contentOffset.y <=-LY_DOWN_FLUSH_HEIGHT) {
             [self upToStartFlush];//刷新
         }else{
             [self upDragToNormal];//恢复
         }
     }else{//上拉
+        if (!isNeedDownFlush) {
+            return;
+        }
         if (self.contentSize.height<=self.frame.size.height) {
             NSLog(@"单页已经显示完，不需要刷新，返回");
             return;
@@ -140,6 +210,9 @@
 
 #pragma mark - 下拉刷新初始化界面
 -(void)reloadUpDragFlushCtl{
+    if (!isNeedUpFlush) {
+        return;
+    }
     CGRect bounds = [UIScreen mainScreen].bounds;
     if (viewUpDrag == nil) {
         
@@ -179,6 +252,7 @@
     [acUpDrag startAnimating];
     labelUpDrag.text = UP_DRAG_FLUSH_DOING;
     self.contentInset = UIEdgeInsetsMake(LY_DOWN_FLUSH_HEIGHT, 0, 0, 0);
+    flushDirType = FlushDirUp;
     [self changeToFlushStatus];
     if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(startToFlushUp:)]) {
         [self.lyDelegate startToFlushUp:self];
@@ -205,6 +279,9 @@
 
 #pragma mark - 上拉刷新初始化界面
 -(void)reloadDownDragFlushCtl{
+    if (!isNeedDownFlush) {
+        return;
+    }
     CGSize cSize = self.contentSize;
     CGRect bounds = [UIScreen mainScreen].bounds;
     if (viewDownDrag == nil) {
@@ -253,6 +330,7 @@
     [acDownDrag startAnimating];
     labelDownDrag.text = DOWN_DRAG_FLUSH_DOING;
     self.contentInset = UIEdgeInsetsMake(0, 0, LY_DOWN_FLUSH_HEIGHT, 0);
+    flushDirType = FlushDirDown;
     [self changeToFlushStatus];
     if (self.lyDelegate && [self.lyDelegate respondsToSelector:@selector(startToFlushDown:)]) {
         [self.lyDelegate startToFlushDown:self];

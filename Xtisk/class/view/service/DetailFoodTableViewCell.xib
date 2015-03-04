@@ -19,13 +19,13 @@
                         <color key="backgroundColor" red="0.96427162247474751" green="0.96427162247474751" blue="0.96427162247474751" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="天府勾魂面" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO6-gN-R8t">
-                        <rect key="frame" x="91" y="7" width="84" height="18"/>
+                        <rect key="frame" x="91" y="7" width="160" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="up_cn.png" translatesAutoresizingMaskIntoConstraints="NO" id="LyF-Qb-BOe">
-                        <rect key="frame" x="171" y="7" width="17" height="17"/>
+                        <rect key="frame" x="171" y="8" width="17" height="17"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="￥22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycJ-Va-dKT">
                         <rect key="frame" x="254" y="19" width="53" height="21"/>
