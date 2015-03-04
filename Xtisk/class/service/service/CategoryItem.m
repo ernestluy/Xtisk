@@ -2,7 +2,7 @@
 //  categoryItem.m
 //  Xtisk
 //
-//  Created by zzt on 15/2/10.
+//  Created by 卢一 on 15/2/10.
 //  Copyright (c) 2015年 卢一. All rights reserved.
 //
 
@@ -43,5 +43,13 @@
         ci.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];
     }
     return ci;
+}
+
+
++(CategoryItem *)createRootCategory{
+    CategoryItem *item = [[CategoryItem alloc]init];
+    item.childList = @[];
+    item.categoryName = @"周 边";
+    return item;
 }
 @end

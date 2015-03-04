@@ -7,9 +7,9 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface ActivityViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>{
+#import "PublicDefine.h"
+@interface ActivityViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,LYFlushViewDelegate,AsyncHttpRequestDelegate>{
     
 }
-@property(nonatomic,strong)IBOutlet UITableView *tTableView;
+@property(nonatomic,strong)IBOutlet LYTableView *tTableView;
 @end

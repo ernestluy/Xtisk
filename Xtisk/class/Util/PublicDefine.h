@@ -15,6 +15,9 @@
 #import "XTFileManager.h"
 #import "UMSocial.h"
 
+#import "LYTableView.h"
+#import "LYCollectionView.h"
+
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "BMapKit.h"
@@ -108,10 +111,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 
 
+#define GuideMark @"GuideMark"
+
 #pragma mark - service str
 #define IndexRecomList  @"recomList"
 #define IndexPosterList  @"posterList"
+#define CategoryRoot  @"CategoryRoot"
 
+
+#define DefaultPageSize 20
+#define DefaultEnableAlhpe 0.5
 
 #define _NOTHING  (-1)
 
@@ -144,11 +153,12 @@ typedef enum {
 }XtServiceType;
 
 typedef enum  {
-    PrivateEditTextNick,
-    PrivateEditTextSign,
-    PrivateEditTextCom,
-    PrivateEditTextFoodCommend,
-    PrivateEditTextAdvise
+    PrivateEditTextNick,//昵称
+    PrivateEditTextSign,//签名
+    PrivateEditTextCom,//公司简介
+    PrivateEditTextFoodCommend,//店家
+    PrivateEditTextAdvise,//建议
+    PrivateEditTextActivity //活动评价
 } PrivateEditTextType;
 
 typedef enum  {
@@ -181,6 +191,16 @@ typedef enum  {
     StationDest
 }StationSelectType ;
 
+typedef enum  {
+    ActivityVcSignUp = 0,
+    ActivityVcBrow,
+    ActivityVcEdit
+}ActivityVcType ;
+
+typedef enum  {
+    CommendVcStore = 0,
+    CommendVcActivity
+}CommendVcType ;
 
 
 #define IshekouWXAppId     @"wxd930ea5d5a258f4f"
@@ -201,14 +221,24 @@ typedef enum  {
 #define DefaultRequestException  @"请求异常"
 #define GetVerifyCodeWaitingTime 10
 
+#define DefaultImageMinSize 1000
+
 #define XT_CORNER_RADIUS  5
 #define XT_CELL_CORNER_RADIUS 8
+
+
+typedef enum  {
+    FlushDirNormal,
+    FlushDirUp,
+    FlushDirDown
+}FlushDirType ;
+
 #define LY_DOWN_FLUSH_HEIGHT 54.0
 #define DOWN_DRAG_FLUSH_NORMAL @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_WILL_START @"上拉可以刷新"
 #define DOWN_DRAG_FLUSH_DOING @"正在刷新中"
 
-#define RELEASE_DRAG_TO_FLUSH @"松开开始刷新"
+#define RELEASE_DRAG_TO_FLUSH @"松开立即刷新"
 
 #define UP_DRAG_FLUSH_NORMAL @"下拉可以刷新"
 #define UP_DRAG_FLUSH_WILL_START @"下拉可以刷新"

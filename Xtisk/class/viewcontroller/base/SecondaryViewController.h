@@ -11,5 +11,8 @@
 @interface SecondaryViewController : UIViewController
 {
     BOOL isRequestSucMark;
+    
+    int curPage;
+    int tCount;
 }
 @end

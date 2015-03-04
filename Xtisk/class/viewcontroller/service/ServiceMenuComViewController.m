@@ -35,9 +35,11 @@
     
     
     if (ServiceFirst == level) {
-        self.categoryItem = [[CategoryItem alloc]init];
-        self.categoryItem.childList = @[];
-        self.categoryItem.categoryName = @"周 边";
+        if ([HttpService sharedInstance].gCategoryItem) {
+            self.categoryItem = [HttpService sharedInstance].gCategoryItem;
+        }else{
+            self.categoryItem = [CategoryItem createRootCategory];
+        }
     }
     return self;
 }
@@ -49,7 +51,13 @@
     isRequestSuc = NO;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     CGRect bounds = [UIScreen mainScreen].bounds;
-    self.tCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64)  collectionViewLayout:layout];
+    self.tCollectionView = [[LYCollectionView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64)  collectionViewLayout:layout];
+    
+    self.tCollectionView.lyDelegate = self;
+    if (ServiceFirst == self.menuLevel) {
+        [self.tCollectionView setNeedTopFlush];
+        [self.tCollectionView setNeedBottomFlush];
+    }
     
     //    self.tCollectionView.bounces = NO;
     [self.view addSubview:self.tCollectionView];
@@ -90,25 +98,51 @@
 }
 
 -(void)requestData{
-    if (ServiceFirst == menuLevel && !isRequestSuc) {
-        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
-        [[[HttpService sharedInstance] getRequestCategoryTypeList:self parentCategoryId:nil]startAsynchronous];
-    }
+    [[[HttpService sharedInstance] getRequestCategoryTypeList:self parentCategoryId:nil]startAsynchronous];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requestData];
+    
     if (ServiceFirst == menuLevel ){
         self.title = @"周 边";
     }else{
         self.title = self.categoryItem.categoryName;
     }
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (ServiceFirst == menuLevel  && !isRequestSuc && ![HttpService sharedInstance].gCategoryItem){
+        [self.tCollectionView upToStartFlush];
+    }
+    
 }
-
+#pragma mark - LYFlushViewDelegate
+- (void)startToFlushUp:(NSObject *)ly{
+    [self requestData];
+}
+- (void)flushUpEnd:(NSObject *)ly{
+    
+}
+- (void)startToFlushDown:(NSObject *)ly{
+    
+}
+- (void)flushDownEnd:(NSObject *)ly{
+    
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [self.tCollectionView setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    [self.tCollectionView judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //    NSLog(@"drag end");
+    [self.tCollectionView judgeDragEnd];
+    
+}
 #pragma mark - collection数据源代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -131,13 +165,15 @@
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tCategoryItem.categoryImageUrl];
     if (!tImg) {
         cc.imageBg.contentMode = DefaultImageViewInitMode;
-        cc.imageBg.image = [UIImage imageNamed:@"down_img"];
+        cc.imageBg.image = [UIImage imageNamed:@"down_img_small"];
+        
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:tCategoryItem.categoryImageUrl
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
         request.tTag = (int)indexPath.row;
         request.indexPath = indexPath;
         [request startAsynchronous];
+         
     }else{
         cc.imageBg.contentMode = DefaultImageViewContentMode;
         cc.imageBg.image = tImg;
@@ -245,15 +281,21 @@
                     NSArray *tmpArr = [dic objectForKey:@"categoryList"];
                     if (dic) {
                         self.categoryItem.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];
+                        [HttpService sharedInstance].gCategoryItem = self.categoryItem;
                         [self.tCollectionView reloadData];
                     }
+                    [self.tCollectionView flushDoneStatus:YES];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [self.tCollectionView flushDoneStatus:NO];
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");
+                [self.tCollectionView flushDoneStatus:NO];
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 NSLog(@"请求失败");
             }
+            
             break;
         }
         default:

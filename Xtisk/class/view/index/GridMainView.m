@@ -145,7 +145,7 @@ NSString *const ttCollectionViewCellIdentifier = @"Cell";
     [self.tCollectionView judgeDragIng];
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"drag end");
+//    NSLog(@"drag end");
     [self.tCollectionView judgeDragEnd];
     
 }

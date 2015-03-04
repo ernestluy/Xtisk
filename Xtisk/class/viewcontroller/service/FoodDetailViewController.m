@@ -332,6 +332,7 @@
         NSLog(@"网友评价");
         ComCommendViewController *ccc = [[ComCommendViewController alloc]init];
         ccc.storeId = self.mStoreItem.storeId;
+        ccc.vcType = CommendVcStore;
         [self.navigationController pushViewController:ccc animated:YES];
     }
     

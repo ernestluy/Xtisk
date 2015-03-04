@@ -89,6 +89,12 @@
 		764D60A81A8B3EB300B186A5 /* reg_get_ver_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764D60A71A8B3EB300B186A5 /* reg_get_ver_code@2x.png */; };
 		764D60AC1A8B4EFE00B186A5 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764D60AA1A8B4EFE00B186A5 /* SettingViewController.m */; };
 		764D60AD1A8B4EFE00B186A5 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764D60AB1A8B4EFE00B186A5 /* SettingViewController.xib */; };
+		7664BA9E1AA6D00400E59DF0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA981AA6D00400E59DF0 /* Default-568h@2x.png */; };
+		7664BA9F1AA6D00400E59DF0 /* icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA991AA6D00400E59DF0 /* icon-29@2x.png */; };
+		7664BAA01AA6D00400E59DF0 /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9A1AA6D00400E59DF0 /* icon-40@2x.png */; };
+		7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */; };
+		7664BAA21AA6D00400E59DF0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9C1AA6D00400E59DF0 /* icon.png */; };
+		7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9D1AA6D00400E59DF0 /* icon@2x.png */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -122,6 +128,11 @@
 		767B6FD41AA55F1700D0FA54 /* TicketQueryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */; };
 		767B6FD51AA55F1700D0FA54 /* TicketQueryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */; };
 		767B6FD71AA57F5B00D0FA54 /* good_commend_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */; };
+		767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD81AA5B46700D0FA54 /* guide_1@2x.png */; };
+		767B6FDD1AA5B46700D0FA54 /* guide_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD91AA5B46700D0FA54 /* guide_2@2x.png */; };
+		767B6FDE1AA5B46700D0FA54 /* guide_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */; };
+		767B6FDF1AA5B46700D0FA54 /* guide_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */; };
+		767B6FE21AA5B47800D0FA54 /* CustomMenuTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */; };
 		76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */; };
 		76C87C941A8C3D8300843060 /* AboutIshekouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */; };
 		76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C961A8C466E00843060 /* ModifyPsdViewController.m */; };
@@ -172,7 +183,6 @@
 		76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D201A8CA8E700843060 /* CoreGraphics.framework */; };
 		ED2586E11A7D14A1008EB344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E01A7D14A1008EB344 /* main.m */; };
 		ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E31A7D14A1008EB344 /* AppDelegate.m */; };
-		ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E61A7D14A1008EB344 /* ViewController.m */; };
 		ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2586E81A7D14A1008EB344 /* Main.storyboard */; };
 		ED2586EC1A7D14A1008EB344 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED2586EB1A7D14A1008EB344 /* Images.xcassets */; };
 		ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED2586ED1A7D14A1008EB344 /* LaunchScreen.xib */; };
@@ -474,6 +484,12 @@
 		764D60A91A8B4EFE00B186A5 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		764D60AA1A8B4EFE00B186A5 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		764D60AB1A8B4EFE00B186A5 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		7664BA981AA6D00400E59DF0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7664BA991AA6D00400E59DF0 /* icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-29@2x.png"; sourceTree = "<group>"; };
+		7664BA9A1AA6D00400E59DF0 /* icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40@2x.png"; sourceTree = "<group>"; };
+		7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
+		7664BA9C1AA6D00400E59DF0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7664BA9D1AA6D00400E59DF0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -525,6 +541,12 @@
 		767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketQueryListViewController.m; sourceTree = "<group>"; };
 		767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryListViewController.xib; sourceTree = "<group>"; };
 		767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "good_commend_yes@2x.png"; sourceTree = "<group>"; };
+		767B6FD81AA5B46700D0FA54 /* guide_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_1@2x.png"; sourceTree = "<group>"; };
+		767B6FD91AA5B46700D0FA54 /* guide_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_2@2x.png"; sourceTree = "<group>"; };
+		767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_3@2x.png"; sourceTree = "<group>"; };
+		767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_4@2x.png"; sourceTree = "<group>"; };
+		767B6FE01AA5B47800D0FA54 /* CustomMenuTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuTutorialController.h; sourceTree = "<group>"; };
+		767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuTutorialController.m; sourceTree = "<group>"; };
 		76C87C901A8C3D8300843060 /* AboutIshekouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutIshekouViewController.h; sourceTree = "<group>"; };
 		76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutIshekouViewController.m; sourceTree = "<group>"; };
 		76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutIshekouViewController.xib; sourceTree = "<group>"; };
@@ -609,8 +631,6 @@
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED2586E21A7D14A1008EB344 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ED2586E31A7D14A1008EB344 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED2586E51A7D14A1008EB344 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ED2586E61A7D14A1008EB344 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ED2586E91A7D14A1008EB344 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED2586EB1A7D14A1008EB344 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ED2586EE1A7D14A1008EB344 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -945,6 +965,8 @@
 		764D5FF41A83345F00B186A5 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				767B6FE01AA5B47800D0FA54 /* CustomMenuTutorialController.h */,
+				767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */,
 				764D602F1A88598500B186A5 /* InfoViewController.h */,
 				764D60301A88598500B186A5 /* InfoViewController.m */,
 				764D5FF51A83345F00B186A5 /* CustomNavigationController.h */,
@@ -1055,6 +1077,19 @@
 				760BF24D1A9EE7300088DBA2 /* MenuItem.m */,
 			);
 			path = service;
+			sourceTree = "<group>";
+		};
+		7664BA971AA6D00400E59DF0 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				7664BA981AA6D00400E59DF0 /* Default-568h@2x.png */,
+				7664BA991AA6D00400E59DF0 /* icon-29@2x.png */,
+				7664BA9A1AA6D00400E59DF0 /* icon-40@2x.png */,
+				7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */,
+				7664BA9C1AA6D00400E59DF0 /* icon.png */,
+				7664BA9D1AA6D00400E59DF0 /* icon@2x.png */,
+			);
+			path = icon;
 			sourceTree = "<group>";
 		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
@@ -1493,12 +1528,11 @@
 		ED2586DD1A7D14A1008EB344 /* Xtisk */ = {
 			isa = PBXGroup;
 			children = (
+				7664BA971AA6D00400E59DF0 /* icon */,
 				ED25875F1A7FABF7008EB344 /* res */,
 				ED2587041A7D15C9008EB344 /* class */,
 				ED2586E21A7D14A1008EB344 /* AppDelegate.h */,
 				ED2586E31A7D14A1008EB344 /* AppDelegate.m */,
-				ED2586E51A7D14A1008EB344 /* ViewController.h */,
-				ED2586E61A7D14A1008EB344 /* ViewController.m */,
 				ED2586E81A7D14A1008EB344 /* Main.storyboard */,
 				ED2586EB1A7D14A1008EB344 /* Images.xcassets */,
 				ED2586ED1A7D14A1008EB344 /* LaunchScreen.xib */,
@@ -1656,6 +1690,10 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				767B6FD81AA5B46700D0FA54 /* guide_1@2x.png */,
+				767B6FD91AA5B46700D0FA54 /* guide_2@2x.png */,
+				767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */,
+				767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */,
 				767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */,
 				EDE4B4221AA176C40098CCF6 /* line_white.png */,
 				760BF24F1A9F1C920088DBA2 /* down_img_small@2x.png */,
@@ -1869,6 +1907,7 @@
 				ED8C78151A94F44A009C8286 /* ActivityListTableViewCell.xib in Resources */,
 				7678129F1A80A71500CB4B08 /* tab_bar_1@2x.png in Resources */,
 				ED8C77AF1A91F5B8009C8286 /* radiu_done@2x.png in Resources */,
+				7664BA9E1AA6D00400E59DF0 /* Default-568h@2x.png in Resources */,
 				764D60A81A8B3EB300B186A5 /* reg_get_ver_code@2x.png in Resources */,
 				ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */,
 				ED8C783A1A96F6CD009C8286 /* share_arrow@2x.png in Resources */,
@@ -1877,6 +1916,7 @@
 				ED8C77E61A931A0F009C8286 /* FoodDetailHeader.xib in Resources */,
 				767812D21A81F9FC00CB4B08 /* 1-3.jpg in Resources */,
 				ED8C779D1A861EFB009C8286 /* grayArrow@2x.png in Resources */,
+				767B6FDF1AA5B46700D0FA54 /* guide_4@2x.png in Resources */,
 				760BF1EF1A8D902D0088DBA2 /* down_img@2x.png in Resources */,
 				7678128C1A809FE700CB4B08 /* IndexTabViewController.xib in Resources */,
 				764D602B1A884CD800B186A5 /* icon_index@2x.png in Resources */,
@@ -1898,6 +1938,7 @@
 				ED8C77FD1A94D47B009C8286 /* bad_star@2x.png in Resources */,
 				ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */,
 				76C87CF41A8CA43E00843060 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */,
 				767812D01A81F9FC00CB4B08 /* 1-1.jpg in Resources */,
 				ED8C78321A96F149009C8286 /* ActivityDetailViewController.xib in Resources */,
 				764D60A61A8B2D2800B186A5 /* default_header_black@2x.png in Resources */,
@@ -1923,6 +1964,7 @@
 				ED8C77EC1A9367E3009C8286 /* good_commend@2x.png in Resources */,
 				ED8C78281A9631DC009C8286 /* ac_delete@2x.png in Resources */,
 				ED8C77FE1A94D47B009C8286 /* good_star@2x.png in Resources */,
+				767B6FDE1AA5B46700D0FA54 /* guide_3@2x.png in Resources */,
 				EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */,
 				EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */,
 				ED8C77CC1A930692009C8286 /* near_food_2@2x.png in Resources */,
@@ -1934,11 +1976,13 @@
 				764D60471A88919200B186A5 /* PrivateViewController.xib in Resources */,
 				ED8C77F11A9369BB009C8286 /* FoodDetailViewController.xib in Resources */,
 				76C87C991A8C466E00843060 /* ModifyPsdViewController.xib in Resources */,
+				7664BAA21AA6D00400E59DF0 /* icon.png in Resources */,
 				EDE4B4231AA176C40098CCF6 /* line_white.png in Resources */,
 				760BF1E61A8CB7B60088DBA2 /* BaiduMapViewController.xib in Resources */,
 				76C87CED1A8CA43E00843060 /* UMSCommentInputController.xib in Resources */,
 				764D60A41A8B251500B186A5 /* msg_ticket_cell_icon@2x.png in Resources */,
 				764D608E1A8AEBEE00B186A5 /* more_heaer_bg.png in Resources */,
+				767B6FDD1AA5B46700D0FA54 /* guide_2@2x.png in Resources */,
 				ED8C77CA1A930691009C8286 /* near_food_0@2x.png in Resources */,
 				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
 				76C87CF11A8CA43E00843060 /* UMSLoginViewController.xib in Resources */,
@@ -1947,6 +1991,7 @@
 				764D609E1A8B1F0400B186A5 /* service_icon_car_pool@2x.png in Resources */,
 				764D609C1A8AF41C00B186A5 /* login_tf_psd_head@2x.png in Resources */,
 				ED8C77B31A92F16B009C8286 /* private_edit@2x.png in Resources */,
+				7664BA9F1AA6D00400E59DF0 /* icon-29@2x.png in Resources */,
 				ED8C77D31A930BA9009C8286 /* FoodListViewController.xib in Resources */,
 				76C87C941A8C3D8300843060 /* AboutIshekouViewController.xib in Resources */,
 				764D60091A8343C400B186A5 /* ServiceItemCell.xib in Resources */,
@@ -1956,6 +2001,7 @@
 				ED2587621A7FABF7008EB344 /* login_expend.png in Resources */,
 				764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */,
 				764D60421A888E9000B186A5 /* scan_line@2x.png in Resources */,
+				7664BAA01AA6D00400E59DF0 /* icon-40@2x.png in Resources */,
 				76C87D011A8CA43E00843060 /* ios-social-sdk-shake.html in Resources */,
 				764D60891A8AEBEE00B186A5 /* more_cell_activity_icon@2x.png in Resources */,
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1991,6 +2037,8 @@
 				ED8C78451A970CDE009C8286 /* about_coo@2x.png in Resources */,
 				764D60971A8AF41C00B186A5 /* login_reg@2x.png in Resources */,
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
+				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
+				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
 				760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */,
@@ -2024,7 +2072,6 @@
 				ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */,
 				760BF1E91A8CB7F90088DBA2 /* ForC++.m in Sources */,
 				764D60381A887CD400B186A5 /* PosterItem.m in Sources */,
-				ED2586E71A7D14A1008EB344 /* ViewController.m in Sources */,
 				ED8C78181A959BCA009C8286 /* FoodShopAllMenuViewController.m in Sources */,
 				ED2587461A7D1B4A008EB344 /* FMDatabase.m in Sources */,
 				ED8C77A01A861F52009C8286 /* LYFlushDefine.m in Sources */,
@@ -2047,6 +2094,7 @@
 				764D5FFB1A83345F00B186A5 /* CustomNavigationController.m in Sources */,
 				767812681A806C3200CB4B08 /* RegViewController.m in Sources */,
 				767812791A80939A00CB4B08 /* HttpService.m in Sources */,
+				767B6FE21AA5B47800D0FA54 /* CustomMenuTutorialController.m in Sources */,
 				ED2587171A7D1857008EB344 /* GDataXMLNode.m in Sources */,
 				760BF24E1A9EE7300088DBA2 /* MenuItem.m in Sources */,
 				ED25875A1A7FAA0C008EB344 /* ExtendsView.m in Sources */,
@@ -2247,6 +2295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: yi lu (QTA63L2J97)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yi lu (QTA63L2J97)";
@@ -2262,7 +2311,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = Xtisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2282,10 +2331,10 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "860228a7-517f-4bed-9b75-29d49a38720c";
+				PROVISIONING_PROFILE = "ec525738-957d-4b11-b5f2-53c9e51f7e53";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -2294,6 +2343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yi lu (FT5GU86TL3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yi lu (FT5GU86TL3)";
@@ -2309,7 +2359,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = Xtisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2329,10 +2379,10 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17fbc197-0a80-4f7d-ba89-dacfc6f4b310";
+				PROVISIONING_PROFILE = "b7aaf1f3-0794-4be1-ada3-e75128b0a863";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
