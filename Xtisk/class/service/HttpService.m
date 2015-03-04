@@ -181,12 +181,12 @@ static HttpService *httpServiceInstance = nil;
                                                                        type:HttpRequestType_XT_JOINACTIVITY];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"activityId=%@&",activityId];
-    [mContentStr stringByAppendingFormat:@"joinName=%@&",jInfo.joinName];
-    [mContentStr stringByAppendingFormat:@"joinPhone=%@&",jInfo.joinPhone];
-    [mContentStr stringByAppendingFormat:@"joinGender=%@&",jInfo.joinGender];
-    [mContentStr stringByAppendingFormat:@"joinEmail=%@",jInfo.joinEmail];
-    
+    [mContentStr appendFormat:@"activityId=%@&",activityId];
+    [mContentStr appendFormat:@"joinName=%@&",jInfo.joinName];
+    [mContentStr appendFormat:@"joinPhone=%@&",jInfo.joinPhone];
+    [mContentStr appendFormat:@"joinGender=%@&",jInfo.joinGender];
+    [mContentStr appendFormat:@"joinEmail=%@",jInfo.joinEmail];
+    NSLog(@"mContentStr%@",mContentStr );
     NSData *data = [Util strToData:mContentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
@@ -217,11 +217,11 @@ static HttpService *httpServiceInstance = nil;
                                                                        type:HttpRequestType_XT_UPDATEACTIVITYJOININFO];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"activityId=%@&",activityId];
-    [mContentStr stringByAppendingFormat:@"joinName=%@&",jInfo.joinName];
-    [mContentStr stringByAppendingFormat:@"joinPhone=%@&",jInfo.joinPhone];
-    [mContentStr stringByAppendingFormat:@"joinGender=%@&",jInfo.joinGender];
-    [mContentStr stringByAppendingFormat:@"joinEmail=%@",jInfo.joinEmail];
+    [mContentStr appendFormat:@"activityId=%@&",activityId];
+    [mContentStr appendFormat:@"joinName=%@&",jInfo.joinName];
+    [mContentStr appendFormat:@"joinPhone=%@&",jInfo.joinPhone];
+    [mContentStr appendFormat:@"joinGender=%@&",jInfo.joinGender];
+    [mContentStr appendFormat:@"joinEmail=%@",jInfo.joinEmail];
     
     NSData *data = [Util strToData:mContentStr];
     [request appendPostData:data];
@@ -393,16 +393,16 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_UPDATEPERSON];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr stringByAppendingFormat:@"imageFileName=%@&",user.headImageUrl];
-    [mContentStr stringByAppendingFormat:@"nickName=%@&",user.nickName];
-    [mContentStr stringByAppendingFormat:@"signature=%@&",user.signature];
-    [mContentStr stringByAppendingFormat:@"gender=%@&",user.gender];
-    [mContentStr stringByAppendingFormat:@"birthday=%@&",user.birthday];
-    [mContentStr stringByAppendingFormat:@"maritalStatus=%@&",user.maritalStatus];
-    [mContentStr stringByAppendingFormat:@"enterprise=%@&",user.enterprise];
+    [mContentStr appendFormat:@"imageFileName=%@&",user.headImageUrl];
+    [mContentStr appendFormat:@"nickName=%@&",user.nickName];
+    [mContentStr appendFormat:@"signature=%@&",user.signature];
+    [mContentStr appendFormat:@"gender=%@&",user.gender];
+    [mContentStr appendFormat:@"birthday=%@&",user.birthday];
+    [mContentStr appendFormat:@"maritalStatus=%@&",user.maritalStatus];
+    [mContentStr appendFormat:@"enterprise=%@&",user.enterprise];
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [Util strToData:sendStr];
@@ -435,7 +435,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_LOGIN];
 //    NSMutableString *contentStr = [NSMutableString string];
-//    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+//    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@",name,psd];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
@@ -452,7 +452,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_REG];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&password=%@&authCode=%@",account,psd,authCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
@@ -467,7 +467,7 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_GETSMSCODE];
     //    NSMutableString *contentStr = [NSMutableString string];
-    //    [contentStr stringByAppendingFormat:@"phone=%@&password=%@",name,psd];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     NSString *contentStr = [NSString stringWithFormat:@"phone=%@&method=%@&smsCode=%@",account,method,smsCode];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];

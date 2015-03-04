@@ -55,9 +55,16 @@
     UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
     [self.navigationItem setRightBarButtonItem:ritem];
     
+    UIButton *btnTmp = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnTmp.frame = CGRectMake(100, 100, 100, 100);
+    btnTmp.backgroundColor = [UIColor orangeColor];
+    [btnTmp addTarget:self action:@selector(toBrowCommendList:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnTmp];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
     [SVProgressHUD showWithStatus:@"正在加载..." ];
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -73,11 +80,7 @@
     
     
     
-    UIButton *btnTmp = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnTmp.frame = CGRectMake(100, 100, 100, 100);
-    btnTmp.backgroundColor = [UIColor orangeColor];
-    [btnTmp addTarget:self action:@selector(toBrowCommendList:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnTmp];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
