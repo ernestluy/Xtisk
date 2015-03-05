@@ -94,6 +94,15 @@
 		7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */; };
 		7664BAA21AA6D00400E59DF0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9C1AA6D00400E59DF0 /* icon.png */; };
 		7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9D1AA6D00400E59DF0 /* icon@2x.png */; };
+		7664BAA61AA7E26A00E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */; };
+		7664BAAA1AA7E81000E59DF0 /* TicketSerivice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAA91AA7E81000E59DF0 /* TicketSerivice.m */; };
+		7664BAAE1AA7EAE200E59DF0 /* TicketListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAAC1AA7EAE200E59DF0 /* TicketListTableViewCell.m */; };
+		7664BAAF1AA7EAE200E59DF0 /* TicketListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAAD1AA7EAE200E59DF0 /* TicketListTableViewCell.xib */; };
+		7664BAB21AA7F1AC00E59DF0 /* ShipLineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAB11AA7F1AC00E59DF0 /* ShipLineItem.m */; };
+		7664BAB51AA7F2ED00E59DF0 /* VoyageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAB41AA7F2ED00E59DF0 /* VoyageItem.m */; };
+		7664BAB81AA7F55F00E59DF0 /* SeatRankPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAB71AA7F55F00E59DF0 /* SeatRankPrice.m */; };
+		7664BABB1AA7F9A000E59DF0 /* TicketOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */; };
+		7664BABE1AA7FAC200E59DF0 /* TicketInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -295,7 +304,6 @@
 		EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */; };
 		EDE4B3E21AA0C2C50098CCF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */; };
 		EDE4B4231AA176C40098CCF6 /* line_white.png in Resources */ = {isa = PBXBuildFile; fileRef = EDE4B4221AA176C40098CCF6 /* line_white.png */; };
-		EDE524BA1AA4941D00A1A65B /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE524B91AA4941D00A1A65B /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -489,6 +497,22 @@
 		7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
 		7664BA9C1AA6D00400E59DF0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7664BA9D1AA6D00400E59DF0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		7664BAA81AA7E81000E59DF0 /* TicketSerivice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketSerivice.h; sourceTree = "<group>"; };
+		7664BAA91AA7E81000E59DF0 /* TicketSerivice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketSerivice.m; sourceTree = "<group>"; };
+		7664BAAB1AA7EAE200E59DF0 /* TicketListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketListTableViewCell.h; sourceTree = "<group>"; };
+		7664BAAC1AA7EAE200E59DF0 /* TicketListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketListTableViewCell.m; sourceTree = "<group>"; };
+		7664BAAD1AA7EAE200E59DF0 /* TicketListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketListTableViewCell.xib; sourceTree = "<group>"; };
+		7664BAB01AA7F1AC00E59DF0 /* ShipLineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipLineItem.h; sourceTree = "<group>"; };
+		7664BAB11AA7F1AC00E59DF0 /* ShipLineItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipLineItem.m; sourceTree = "<group>"; };
+		7664BAB31AA7F2ED00E59DF0 /* VoyageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoyageItem.h; sourceTree = "<group>"; };
+		7664BAB41AA7F2ED00E59DF0 /* VoyageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoyageItem.m; sourceTree = "<group>"; };
+		7664BAB61AA7F55F00E59DF0 /* SeatRankPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeatRankPrice.h; sourceTree = "<group>"; };
+		7664BAB71AA7F55F00E59DF0 /* SeatRankPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeatRankPrice.m; sourceTree = "<group>"; };
+		7664BAB91AA7F9A000E59DF0 /* TicketOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketOrder.h; sourceTree = "<group>"; };
+		7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketOrder.m; sourceTree = "<group>"; };
+		7664BABC1AA7FAC200E59DF0 /* TicketInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketInfoItem.h; sourceTree = "<group>"; };
+		7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketInfoItem.m; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -798,7 +822,6 @@
 		EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailContentView.xib; sourceTree = "<group>"; };
 		EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EDE4B4221AA176C40098CCF6 /* line_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_white.png; sourceTree = "<group>"; };
-		EDE524B91AA4941D00A1A65B /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -825,7 +848,7 @@
 				764D603D1A888A4700B186A5 /* libiconv.dylib in Frameworks */,
 				76C87D051A8CA43E00843060 /* libSocialWhatsapp.a in Frameworks */,
 				76C87D061A8CA43E00843060 /* libSocialYiXin.a in Frameworks */,
-				EDE524BA1AA4941D00A1A65B /* libbaidumapapi.a in Frameworks */,
+				7664BAA61AA7E26A00E59DF0 /* libbaidumapapi.a in Frameworks */,
 				76C87D001A8CA43E00843060 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
 				76C87D041A8CA43E00843060 /* libWeChatSDK.a in Frameworks */,
 				76C87CFB1A8CA43E00843060 /* TencentOpenAPI.framework in Frameworks */,
@@ -860,7 +883,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				EDE524B81AA4941D00A1A65B /* Release-iphonesimulator */,
+				7664BAA41AA7E26A00E59DF0 /* Release-iphoneos */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -1030,6 +1053,9 @@
 				ED8C781C1A95F7BF009C8286 /* ShopMenuCollectionViewCell.h */,
 				ED8C781D1A95F7BF009C8286 /* ShopMenuCollectionViewCell.m */,
 				ED8C781E1A95F7BF009C8286 /* ShopMenuCollectionViewCell.xib */,
+				7664BAAB1AA7EAE200E59DF0 /* TicketListTableViewCell.h */,
+				7664BAAC1AA7EAE200E59DF0 /* TicketListTableViewCell.m */,
+				7664BAAD1AA7EAE200E59DF0 /* TicketListTableViewCell.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1083,6 +1109,34 @@
 			path = icon;
 			sourceTree = "<group>";
 		};
+		7664BAA41AA7E26A00E59DF0 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphoneos";
+			path = "libs/Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		7664BAA71AA7E7F900E59DF0 /* ticket */ = {
+			isa = PBXGroup;
+			children = (
+				7664BAA81AA7E81000E59DF0 /* TicketSerivice.h */,
+				7664BAA91AA7E81000E59DF0 /* TicketSerivice.m */,
+				7664BAB01AA7F1AC00E59DF0 /* ShipLineItem.h */,
+				7664BAB11AA7F1AC00E59DF0 /* ShipLineItem.m */,
+				7664BAB31AA7F2ED00E59DF0 /* VoyageItem.h */,
+				7664BAB41AA7F2ED00E59DF0 /* VoyageItem.m */,
+				7664BAB61AA7F55F00E59DF0 /* SeatRankPrice.h */,
+				7664BAB71AA7F55F00E59DF0 /* SeatRankPrice.m */,
+				7664BAB91AA7F9A000E59DF0 /* TicketOrder.h */,
+				7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */,
+				7664BABC1AA7FAC200E59DF0 /* TicketInfoItem.h */,
+				7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */,
+			);
+			path = ticket;
+			sourceTree = "<group>";
+		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1154,7 @@
 		767812751A80933500CB4B08 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7664BAA71AA7E7F900E59DF0 /* ticket */,
 				760BF28D1AA3F3680088DBA2 /* message */,
 				764D60321A887C9D00B186A5 /* service */,
 				ED8C77A41A862752009C8286 /* index */,
@@ -1808,15 +1863,6 @@
 			path = message;
 			sourceTree = "<group>";
 		};
-		EDE524B81AA4941D00A1A65B /* Release-iphonesimulator */ = {
-			isa = PBXGroup;
-			children = (
-				EDE524B91AA4941D00A1A65B /* libbaidumapapi.a */,
-			);
-			name = "Release-iphonesimulator";
-			path = "libs/Release-iphonesimulator";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1997,6 +2043,7 @@
 				764D60091A8343C400B186A5 /* ServiceItemCell.xib in Resources */,
 				767812911A80A00F00CB4B08 /* MessageTabViewController.xib in Resources */,
 				764D609A1A8AF41C00B186A5 /* login_submit@2x.png in Resources */,
+				7664BAAF1AA7EAE200E59DF0 /* TicketListTableViewCell.xib in Resources */,
 				7678127E1A8096FC00CB4B08 /* LostPsdViewController.xib in Resources */,
 				ED2587621A7FABF7008EB344 /* login_expend.png in Resources */,
 				764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */,
@@ -2062,6 +2109,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7664BAAE1AA7EAE200E59DF0 /* TicketListTableViewCell.m in Sources */,
 				ED25872F1A7D185D008EB344 /* NSData+AES256.m in Sources */,
 				764D60191A836DD600B186A5 /* XTFileManager.m in Sources */,
 				764D5FFC1A83345F00B186A5 /* MainTabBarViewController.m in Sources */,
@@ -2099,21 +2147,26 @@
 				760BF24E1A9EE7300088DBA2 /* MenuItem.m in Sources */,
 				ED25875A1A7FAA0C008EB344 /* ExtendsView.m in Sources */,
 				767812C11A80BCD100CB4B08 /* UcmDispatchCenter.m in Sources */,
+				7664BAB81AA7F55F00E59DF0 /* SeatRankPrice.m in Sources */,
 				764D60AC1A8B4EFE00B186A5 /* SettingViewController.m in Sources */,
 				7678128B1A809FE700CB4B08 /* IndexTabViewController.m in Sources */,
 				ED2587471A7D1B4A008EB344 /* FMDatabaseAdditions.m in Sources */,
 				ED7791E91A85CE40003ADF27 /* LYTableView.m in Sources */,
+				7664BAAA1AA7E81000E59DF0 /* TicketSerivice.m in Sources */,
 				ED8C77F91A94D36D009C8286 /* DetailFoodTableViewCell.m in Sources */,
 				764D60311A88598500B186A5 /* InfoViewController.m in Sources */,
 				764D60701A89EDBD00B186A5 /* StoreItem.m in Sources */,
 				ED8C780C1A94E34D009C8286 /* DetailFoodCommendTableViewCell.m in Sources */,
 				ED8C77A31A8625AB009C8286 /* AsyncImgDownLoadRequest.m in Sources */,
 				ED8C78141A94F44A009C8286 /* ActivityListTableViewCell.m in Sources */,
+				7664BABB1AA7F9A000E59DF0 /* TicketOrder.m in Sources */,
 				764D60401A888B3F00B186A5 /* QRCodeScanViewController.m in Sources */,
 				ED8C779B1A8617D5009C8286 /* LYCollectionView.m in Sources */,
 				767812731A808F1D00CB4B08 /* CSIHttpRequest.m in Sources */,
 				ED8C77F01A9369BB009C8286 /* FoodDetailViewController.m in Sources */,
+				7664BAB51AA7F2ED00E59DF0 /* VoyageItem.m in Sources */,
 				ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */,
+				7664BAB21AA7F1AC00E59DF0 /* ShipLineItem.m in Sources */,
 				767812901A80A00F00CB4B08 /* MessageTabViewController.m in Sources */,
 				ED8C781F1A95F7BF009C8286 /* ShopMenuCollectionViewCell.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
@@ -2140,6 +2193,7 @@
 				7678127D1A8096FC00CB4B08 /* LostPsdViewController.m in Sources */,
 				ED8C782C1A96D21E009C8286 /* MyActivityTableViewCell.m in Sources */,
 				ED8C78101A94EDA9009C8286 /* ComCommendViewController.m in Sources */,
+				7664BABE1AA7FAC200E59DF0 /* TicketInfoItem.m in Sources */,
 				ED8C77D71A930D62009C8286 /* FoodListTableViewCell.m in Sources */,
 				EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */,
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
@@ -2329,7 +2383,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2377,7 +2431,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

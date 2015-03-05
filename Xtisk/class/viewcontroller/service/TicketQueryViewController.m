@@ -105,6 +105,7 @@
 
 -(void)submitQuery:(id)sender{
     NSLog(@"submitQuery");
+    [TicketSerivice sharedInstance].ticketQueryType = ticketDirType;
     TicketQueryListViewController *tl = [[TicketQueryListViewController alloc]init];
     [self.navigationController pushViewController:tl animated:YES];
 }
@@ -165,6 +166,11 @@
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (TICKET_QUERY_ONE == ticketDirType) {
+        return 1;
+    }else if (TICKET_QUERY_RETURN == ticketDirType) {
+        return 2;
+    }
     return 1;
 }
 
@@ -174,9 +180,13 @@
     if (TICKET_QUERY_ONE == ticketDirType) {
         return 2;
     }else if (TICKET_QUERY_RETURN == ticketDirType) {
-        return 3;
+        if (0 == section) {
+            return 2;
+        }else{
+            return 1;
+        }
     }
-    return 2;
+    return 1;
 }
 
 
@@ -189,7 +199,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textColor = defaultTextColor;
-        if (0 == indexPath.row) {
+        if (0 == indexPath.section && 0 == indexPath.row) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             CGRect bounds = [UIScreen mainScreen].bounds;
@@ -207,17 +217,15 @@
             [btnOriginStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
             [btnDestStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
             
-        }else if(1 == indexPath.row){
-            cell.textLabel.text = @"出发:";
-            CGRect tRect = CGRectMake(60, 0, 170, TQV_HEIGHT);
+        }else if(0 == indexPath.section && 1 == indexPath.row){
+            CGRect tRect = CGRectMake(20, 0,200, TQV_HEIGHT);
             labelStartTime = [[UILabel alloc]initWithFrame:tRect];
             labelStartTime.textAlignment = NSTextAlignmentLeft;
             labelStartTime.textColor = defaultTextColor;
             labelStartTime.text = [queryDateFormatter stringFromDate:[NSDate date]];
             [cell addSubview:labelStartTime];
-        }else if(2 == indexPath.row){
-            cell.textLabel.text = @"返回:";
-            CGRect tRect = CGRectMake(60, 0, 170, TQV_HEIGHT);
+        }else if(1 == indexPath.section && 0 == indexPath.row){
+            CGRect tRect = CGRectMake(20, 0, 200, TQV_HEIGHT);
             labelEndTime = [[UILabel alloc]initWithFrame:tRect];
             labelEndTime.textAlignment = NSTextAlignmentLeft;
             labelEndTime.textColor = defaultTextColor;
@@ -228,7 +236,7 @@
     }
     
     
-    if(2 == indexPath.row){
+    if(1 == indexPath.section && 0 == indexPath.row){
         NSDate *fDate = [queryDateFormatter dateFromString:labelStartTime.text];
         NSDate *bDate = [queryDateFormatter dateFromString:labelEndTime.text];
         NSComparisonResult r = [fDate compare:bDate];
@@ -245,6 +253,17 @@
 
 #pragma mark - UITableViewDelegate
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (0 == section) {
+        return @"启程";
+    }else if (1 == section){
+        return @"返程";
+    }
+    return @"";
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return TQV_HEIGHT;
 }
@@ -254,13 +273,25 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (0 == indexPath.row) {
-        
-    }else if(1 == indexPath.row){
-        [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:startPicker];
-    }else if(2 == indexPath.row){
-        [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:endPicker];
+    switch (indexPath.section) {
+        case 0:{
+            if (0 == indexPath.row) {
+                
+            }else if(1 == indexPath.row){
+                [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:startPicker];
+            }
+            break;
+        }
+        case 1:{
+            if(0 == indexPath.row){
+                [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:endPicker];
+            }
+            break;
+        }
+        default:
+            break;
     }
+    
     
 }
 #pragma mark - UIPickerViewDelegate

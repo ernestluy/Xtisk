@@ -37,7 +37,7 @@
 #import "FavoriteItem.h"
 #import "JoinInfo.h"
 #import "CTLCustom.h"
-
+#import "TicketSerivice.h"
 
 BMKMapManager* _mapManager;
 
@@ -212,10 +212,8 @@ typedef enum  {
 #define DefaultCellFont [UIFont systemFontOfSize:15]
 
 #define DefaultImageViewContentMode UIViewContentModeScaleToFill//UIViewContentModeScaleAspectFill//
-<<<<<<< HEAD
-=======
-#define DefaultImageViewInitMode UIViewContentModeCenter//UIViewContentModeScaleToFill//
->>>>>>> 606fa715407fca8f7212294ba2cafd7226e92154
+#define DefaultImageViewInitMode    UIViewContentModeCenter//UIViewContentModeScaleToFill//
+
 
 #define DefaultRequestPrompt  @"请求中..."
 #define DefaultRequestDonePromptTime 1.1

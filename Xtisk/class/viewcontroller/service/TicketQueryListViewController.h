@@ -7,7 +7,7 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface TicketQueryListViewController : SecondaryViewController
+#import "PublicDefine.h"
+@interface TicketQueryListViewController : SecondaryViewController<AsyncHttpRequestDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @end
