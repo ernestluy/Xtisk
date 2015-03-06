@@ -46,6 +46,8 @@
     NSArray *genderArr;
     NSArray *marritalArr;
     
+    IUser *tUser;
+    
 }
 -(void)datePickerAction:(id)sender;
 @end
@@ -55,6 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    tUser = [SettingService sharedInstance].iUser;
     CGRect bounds = [[UIScreen mainScreen] applicationFrame];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
         bounds = [[UIScreen mainScreen] bounds];
@@ -103,11 +106,14 @@
             }
             
             labBirthDate.text = [dateFormatter stringFromDate:birthPicker.date];
+            tUser.birthday = labBirthDate.text;
             birthPicker = nil;
             if (self.tPopView) {
                 [self.tPopView dismiss];
                 self.tPopView = nil;
             }
+            [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+            [[[HttpService sharedInstance]getRequestUpdatePerson:self user:tUser]startAsynchronous];
             break;
         }
         default:
@@ -133,7 +139,7 @@
     labSex.text = user.gender;
     labBirthDate.text = user.birthday;
     labMarStatus.text = user.maritalStatus;
-    labCom.text = user.account;
+    labCom.text = user.enterprise;
     
     headerImageView.image = [UIImage imageNamed:@"default_header_gray"];
 }
@@ -145,6 +151,9 @@
     }else if(PrivateEditTextCom == ty) {
         NSLog(@"企业");
         labCom.text = str;
+    }else if(PrivateEditTextNick == ty) {
+        NSLog(@"昵称");
+        labNick.text = str;
     }
 }
 #pragma mark - UITableViewDataSource
@@ -189,6 +198,15 @@
 //                    headerImageView.layer.borderWidth = 0.7;
                     headerImageView.image = [UIImage imageNamed:@"default_header_gray"];
                     [cell addSubview:headerImageView];
+                    
+                    if (tUser.headImageUrl && tUser.headImageUrl.length >3) {
+                        UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tUser.headImageUrl];
+                        if (!tImg) {
+                            AsyncImgDownLoadRequest *request = [[HttpService sharedInstance] getImgRequest:self url:tUser.headImageUrl];
+                            [request startAsynchronous];
+                        }
+                    }
+                    
                     break;
                 }
                 case 1:{
@@ -236,7 +254,7 @@
                 case 3:{
                     labCom= [CTLCustom getCusRightLabel:cRect];
                     [cell addSubview:labCom];
-                    labCom.text = [SettingService sharedInstance].iUser.account;
+                    labCom.text = [SettingService sharedInstance].iUser.enterprise;
                     break;
                 }
                 case 4:{
@@ -361,20 +379,30 @@
         int ir = (int)[mgPickerView selectedRowInComponent:0];
         mgPickerView = nil;
         NSString *rStr = [genderArr objectAtIndex:ir];
+        labSex.text = rStr;
+        tUser.gender = rStr;
         NSLog(@"%@",rStr);
         if (self.tPopView) {
             [self.tPopView dismiss];
             self.tPopView = nil;
         }
+        
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance]getRequestUpdatePerson:self user:tUser]startAsynchronous];
     }else if (1 == pickerType){
         int ir = (int)[mgPickerView selectedRowInComponent:0];
         mgPickerView = nil;
         NSString *rStr = [marritalArr objectAtIndex:ir];
+        labMarStatus.text = rStr;
+        tUser.maritalStatus = rStr;
         NSLog(@"%@",rStr);
         if (self.tPopView) {
             [self.tPopView dismiss];
             self.tPopView = nil;
         }
+        
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+        [[[HttpService sharedInstance]getRequestUpdatePerson:self user:tUser]startAsynchronous];
     }
 }
 #pragma mark - UIPickerView 姓别、婚姻状况
@@ -545,6 +573,28 @@
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
     [SVProgressHUD dismiss];
     switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <DefaultImageMinSize) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                UIImage *rImage = [UIImage imageWithData:data];
+                [XTFileManager saveTmpFolderFileWithUrlPath:[SettingService sharedInstance].iUser.headImageUrl with:rImage];
+                headerImageView.contentMode = DefaultImageViewContentMode;
+                headerImageView.image = rImage;
+                
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
         case HttpRequestType_XT_LOGOUT:{
             if (HttpResponseTypeFinished ==  responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
@@ -566,6 +616,30 @@
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
             }
             break;
+        }
+        case HttpRequestType_XT_UPDATEPERSON:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSString *tStr = @"修改信息成功";
+//                    if (tType == PrivateEditTextCom){
+//                        tStr = @"修改企业信息成功";
+//                    }else if (tType == PrivateEditTextNick){
+//                        tStr = @"修改昵称成功";
+//                    }else if (tType == PrivateEditTextSign){
+//                        tStr = @"修改签名成功";
+//                    }
+                    [SVProgressHUD showSuccessWithStatus:tStr duration:DefaultRequestDonePromptTime];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showSuccessWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
         }
         default:{
             

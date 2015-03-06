@@ -16,4 +16,7 @@
 
 +(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId;
 +(int)executeSqlsWithArray:(NSArray *)sqlArr;
++(NSString *)getInsertSqlWithItem:(PushMessageItem *)item;
+
++(NSArray *)getInsertSqlsWithArr:(NSArray *)arr;
 @end

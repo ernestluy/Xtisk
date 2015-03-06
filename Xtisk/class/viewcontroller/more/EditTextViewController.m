@@ -82,7 +82,22 @@
     }else if (PrivateEditTextActivity == tType){//活动评论
         [[[HttpService sharedInstance] getRequestActivityComments:self activityId:int2str(self.activityId) content:self.tTextView.text]startAsynchronous];
     }else if (PrivateEditTextAdvise == tType){//建议反馈
+        /*
+         {"id":905,"dateUpdate":"2015-03-06 17:43:28","dateCreate":"2015-03-06 17:43:28","status":"Y","content":"建议反馈","reply":null,"user":null}
+         */
         [[[HttpService sharedInstance]getRequestSuggestion:self content:self.tTextView.text]startAsynchronous];
+    }else if (tType == PrivateEditTextCom || tType == PrivateEditTextNick || tType == PrivateEditTextSign){
+        
+        IUser *tUser = [SettingService sharedInstance].iUser;
+        if (tType == PrivateEditTextCom) {
+            tUser.enterprise = self.tTextView.text;
+        }else if (tType == PrivateEditTextNick) {
+            tUser.nickName = self.tTextView.text;
+        }else if (tType == PrivateEditTextSign) {
+            tUser.signature = self.tTextView.text;
+        }
+        
+        [[[HttpService sharedInstance]getRequestUpdatePerson:self user:tUser]startAsynchronous];
     }
 //    [self.navigationController popViewControllerAnimated:YES];
 }
@@ -149,6 +164,30 @@
                 NSLog(@"请求失败");
             }
             break;
+        }
+        case HttpRequestType_XT_UPDATEPERSON:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSString *tStr = @"修改企业信息成功";
+                    if (tType == PrivateEditTextCom){
+                        tStr = @"修改企业信息成功";
+                    }else if (tType == PrivateEditTextNick){
+                        tStr = @"修改昵称成功";
+                    }else if (tType == PrivateEditTextSign){
+                        tStr = @"修改签名成功";
+                    }
+                    [SVProgressHUD showSuccessWithStatus:tStr duration:DefaultRequestDonePromptTime];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showSuccessWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
         }
         default:
             break;

@@ -17,8 +17,7 @@
 @property(nonatomic,copy)NSString *gender;
 @property(nonatomic,copy)NSString *birthday;
 @property(nonatomic,copy)NSString *maritalStatus;
-@property(nonatomic,copy)NSString *enterprise;
-@property(nonatomic,copy)NSString *account;//企业
+@property(nonatomic,copy)NSString *enterprise;//企业
 
 
 +(IUser *)getIUserWithDic:(NSDictionary *)dic;

@@ -30,7 +30,5 @@
 
 
 
-+(NSString *)getInsertSqlWithItem:(PushMessageItem *)item;
 
-+(NSArray *)getInsertSqlsWithArr:(NSArray *)arr;
 @end

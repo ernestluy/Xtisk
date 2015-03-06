@@ -403,13 +403,13 @@ static HttpService *httpServiceInstance = nil;
     //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
     
     NSMutableString *mContentStr = [NSMutableString string];
-    [mContentStr appendFormat:@"imageFileName=%@&",user.headImageUrl];
+    [mContentStr appendFormat:@"imageFileUrl=%@&",user.headImageUrl];
     [mContentStr appendFormat:@"nickName=%@&",user.nickName];
     [mContentStr appendFormat:@"signature=%@&",user.signature];
     [mContentStr appendFormat:@"gender=%@&",user.gender];
     [mContentStr appendFormat:@"birthday=%@&",user.birthday];
     [mContentStr appendFormat:@"maritalStatus=%@&",user.maritalStatus];
-    [mContentStr appendFormat:@"enterprise=%@&",user.enterprise];
+    [mContentStr appendFormat:@"enterprise=%@",user.enterprise];
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [Util strToData:sendStr];
