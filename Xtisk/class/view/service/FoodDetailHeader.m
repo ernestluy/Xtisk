@@ -61,7 +61,9 @@
 
     [self setFavoriteStatus:storeItem.isFavorite];
 }
-
+-(void)setLabPjNum:(int)n{
+    self.labPj.text = [NSString stringWithFormat:@"评价%d",n];
+}
 //设置点赞状态
 -(void)setFavoriteStatus:(BOOL)b{
     if (b) {

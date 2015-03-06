@@ -204,15 +204,43 @@
     jInfo.joinGender = labGender.text;
     return jInfo;
 }
+-(BOOL)judgeTextFieldFormat{
+    
+    if (tfNme.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"姓名不能为空" duration:2];
+        return NO;
+    }
+    
+    if (tfTel.text.length == 0||tfTel.text.length>50) {
+        [SVProgressHUD showErrorWithStatus:@"手机号码格式不对" duration:2];
+        return NO;
+    }
+    
+    if (tfEmail.text.length == 0 ||tfEmail.text.length>100) {
+        [SVProgressHUD showErrorWithStatus:@"邮箱格式不对" duration:2];
+        return NO;
+    }
+    
+    return YES;
+}
+
 -(void)signUp:(id)sender{
     NSLog(@"signUp");
     if (ActivityVcBrow == self.signUpInfoType){
         [self toCancel:nil];
     }else if (ActivityVcEdit==self.signUpInfoType){
+        
+        if (![self judgeTextFieldFormat]) {
+            return;
+        }
+        
         JoinInfo *jInfo = [self getJoinInfo];
         [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [[[HttpService sharedInstance]getRequestUpdateActivityJoinInfo:self activityId:int2str(self.mActivityItem.activityId) joinInfo:jInfo]startAsynchronous];
     }else if (ActivityVcSignUp==self.signUpInfoType){
+        if (![self judgeTextFieldFormat]) {
+            return;
+        }
         JoinInfo *jInfo = [self getJoinInfo];
         [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [[[HttpService sharedInstance]getRequestJoinActivity:self activityId:int2str(self.mActivityItem.activityId) joinInfo:jInfo]startAsynchronous];
@@ -271,10 +299,23 @@
     return YES;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (range.location >= 40)
-    {
-        return NO;
+    if (tfEmail == textField) {
+        if (range.location >= 100)
+        {
+            return NO;
+        }
+    }else if (tfNme == textField){
+        if (range.location >= 40)
+        {
+            return NO;
+        }
+    }else if (tfTel == textField){
+        if (range.location >= 20)
+        {
+            return NO;
+        }
     }
+    
     return YES;
 }
 

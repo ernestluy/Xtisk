@@ -51,6 +51,9 @@
 @property(nonatomic,copy)NSString *storeAddress;//	String	否	店铺地址
 @property(nonatomic)BOOL isFavorite;//	Boolean	否	是否已点赞（true|false）
 
+@property(nonatomic)float longitude;//	经度
+@property(nonatomic)float latitude;//	纬度
+
 @property(nonatomic,copy)NSArray *recomDishes;//	Json Array	否	推荐菜品信息列表
 
 //获取商家列表

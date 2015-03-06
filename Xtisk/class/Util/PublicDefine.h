@@ -38,6 +38,8 @@
 #import "JoinInfo.h"
 #import "CTLCustom.h"
 #import "TicketSerivice.h"
+#import "VoyageRequestPar.h"
+#import "PushMessageItem.h"
 
 BMKMapManager* _mapManager;
 
@@ -202,6 +204,11 @@ typedef enum  {
     CommendVcActivity
 }CommendVcType ;
 
+typedef enum  {
+    TicketVoyageStepFirst = 0,
+    TicketVoyageStepSecond
+}TicketVoyageStepType ;
+
 
 #define IshekouWXAppId     @"wxd930ea5d5a258f4f"
 #define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
@@ -216,7 +223,7 @@ typedef enum  {
 
 
 #define DefaultRequestPrompt  @"请求中..."
-#define DefaultRequestDonePromptTime 1.1
+#define DefaultRequestDonePromptTime 1.5
 #define DefaultRequestFaile  @"请求失败"
 #define DefaultRequestFaileToAgain  @"请求失败，请重新请求"
 #define DefaultRequestException  @"请求异常"

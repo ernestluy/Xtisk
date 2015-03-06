@@ -14,6 +14,7 @@
 @end
 @interface Util : NSObject
 
++(NSString *)strToUrlStr:(NSString *)str;
 
 +(NSData *)strToData:(NSString *)str;
 

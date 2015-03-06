@@ -85,5 +85,44 @@ static NSString* documentDir = nil;
     return TRUE;
 }
 
++ (BOOL) queryWithSql:(NSString*) sql inDBOfPath:(NSString*) dbPath{
+    FMDatabase * db = [FMDatabase databaseWithPath:dbPath];
+    if ([db open]) {
+        //NSLog(@"the query sql is %@",sql);
+        FMResultSet * rs = [db executeQuery:sql];
+        if([rs next])
+        {
+            [db close];
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
++ (int) updateWithSqls:(NSArray*) sqls inDBOfPath:(NSString*) dbPath{
+    FMDatabaseQueue* myQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
+    FMDatabase* myDB = [FMDatabase databaseWithPath:dbPath];
+    
+    if(!myQueue || !myDB){
+        return FALSE;
+    }
+    
+    __block int successCount = 0;
+    
+    [myQueue inTransaction:^(FMDatabase* myDB, BOOL* rollback){
+        int count = (int)[sqls count];
+        NSString* sql;
+        for(int i = 0; i < count; i++){
+            sql = [sqls objectAtIndex:i];
+            if(sql){
+                if([myDB executeUpdate:sql]){
+                    successCount++;
+                }
+            }
+        }
+    }];
+    
+    return successCount;
+}
 
 @end

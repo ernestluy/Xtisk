@@ -9,6 +9,7 @@
 #import "TicketQueryListViewController.h"
 #import "PublicDefine.h"
 #import "TicketListTableViewCell.h"
+#import "TicketVoyageEditViewController.h"
 
 #define kTicketListTableViewCell @"kTicketListTableViewCell"
 #define TicketListCellHeight 50.0
@@ -137,7 +138,9 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
+    tvv.tStep = TicketVoyageStepFirst;
+    [self.navigationController pushViewController:tvv animated:YES];
     
 }
 

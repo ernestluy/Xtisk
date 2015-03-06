@@ -69,6 +69,13 @@ static HttpService *httpServiceInstance = nil;
     BaseResponse *br = [BaseResponse getBaseResponseWithDic:[Util getObjWithJsonData:data]];
     return br;
 }
+
+-(AsyncImgDownLoadRequest *)getImgRequest:(id<AsyncHttpRequestDelegate>)delegate url:(NSString *)str{
+    AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:str
+                                                                                   target:delegate
+                                                                                     type:HttpRequestType_Img_LoadDown];
+    return request;
+}
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate {
     
@@ -495,10 +502,72 @@ static HttpService *httpServiceInstance = nil;
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/suggestion",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
-                                                                       type:HttpRequestType_XT_RESETPSD];
+                                                                       type:HttpRequestType_XT_SUGGESTION];
     //content	String	300	否	建议反馈内容
     NSString *contentStr = [NSString stringWithFormat:@"content=%@",content];
     NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.5.1 获取航线列表
+-(AsyncHttpRequest *)getRequestQueryShipLine:(id<AsyncHttpRequestDelegate>)delegate{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/tickets/queryShipLine",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERY_SHIP_LINE];
+    [request setRequestMethod:@"GET"];
+    return request;
+}
+
+#pragma mark - 4.3.5.2 获取航程信息
+-(AsyncHttpRequest *)getRequestQueryVoyage:(id<AsyncHttpRequestDelegate>)delegate info:(VoyageRequestPar *)par{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/tickets/queryVoyage",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERY_VOYAGE];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendFormat:@"sailDate=%@&",par.sailDate];
+    [mContentStr appendFormat:@"sailDateReturn=%@&",par.sailDateReturn];
+    [mContentStr appendFormat:@"fromPortCode=%@&",par.fromPortCode];
+    [mContentStr appendFormat:@"toPortCode=%@&",par.toPortCode];
+    [mContentStr appendFormat:@"fromPortCodeReturn=%@&",par.fromPortCodeReturn];
+    [mContentStr appendFormat:@"toPortCodeReturn=%@&",par.toPortCodeReturn];
+    [mContentStr appendFormat:@"currencyCode=%@&",par.currencyCode];
+    [mContentStr appendFormat:@"isRoundtrip=%@&",par.isRoundtrip];
+    [mContentStr appendFormat:@"lang=%@&",par.lang];
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.5.3 船票下订单
+-(AsyncHttpRequest *)getRequestSubmitBooking:(id<AsyncHttpRequestDelegate>)delegate info:(TicketOrder *)order{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/tickets/queryVoyage",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_SUBMIT_BOOKING];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendFormat:@"name=%@&",order.name];
+    [mContentStr appendFormat:@"email=%@&",order.email];
+    [mContentStr appendFormat:@"address=%@&",order.address];
+    [mContentStr appendFormat:@"phone=%@&",order.phone];
+    [mContentStr appendFormat:@"cardNum=%@&",order.cardNum];
+    [mContentStr appendFormat:@"lang=%@&",order.lang];
+    [mContentStr appendFormat:@"total_fee=%.1f&",order.total_fee];
+    [mContentStr appendFormat:@"discount_fee=%.1f&",order.discount_fee];
+    [mContentStr appendFormat:@"tickets=%@&",order.tickets];
+
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
     return request;

@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"活动详情";
-    [self loadRemoteUrl:@"http://www.sina.com.cn"];
+//    [self loadRemoteUrl:@"http://www.sina.com.cn"];
     
     
     CGRect bounds = [UIScreen mainScreen].bounds;
@@ -150,9 +150,14 @@
 
 -(void)toShare{
     NSLog(@"toShare");
-    [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:@"http://code4app.com/"];
+    NSString *tUrl = [NSString stringWithFormat:@"http://%@/%@",SERVICE_HOME,self.mActivityItem.shareUrl];
+    if (!self.mActivityItem.shareUrl || self.mActivityItem.shareUrl.length<5) {
+        tUrl = @"http://udm.ishekou.com:82/DownloadAction!toDownloadPage.action";
+    }
+    
+    [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:tUrl];
     NSArray *tmpArr = @[UMShareToSina,UMShareToTencent,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite];
-    NSString *shareText = @"程序员最 傻逼 的事情就是：重复造轮子。我们不需要造轮子，我们应该将我们的聪明才智发挥到其他更 牛逼 的创意上去。所以，我们做了 Code4App。 http://code4app.com/";             //分享内嵌文字
+    NSString *shareText = @"热门活动";             //分享内嵌文字
     UIImage *shareImage = [UIImage imageNamed:@"service_icon_near"];          //分享内嵌图片
     
     //调用快速分享接口
@@ -311,6 +316,8 @@
                     ActivityItem *ai = [ActivityItem getActivityItemWithDic:dic];
                     if (ai) {
                         self.mActivityItem = ai;
+                        NSString *tUrl = [NSString stringWithFormat:@"http://%@/%@",SERVICE_HOME,self.mActivityItem.shareUrl];
+                        [self loadRemoteUrl:tUrl];
                     }
                     [self flushUIData];
                 }else{

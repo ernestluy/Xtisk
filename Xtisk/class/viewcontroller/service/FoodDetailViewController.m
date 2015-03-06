@@ -83,9 +83,13 @@
     btnCall.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [callView addSubview:btnCall];
     isRequestSuc = NO;
+    
+    [self flushUI];
+}
+
+-(void)flushUI{
     [self setDataWithStoreInfo:self.mStoreItem];
-    
-    
+
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:self.mStoreItem.storeMiniPic];
     if (!tImg) {
         foodDetailHeader.imgHeader.contentMode = DefaultImageViewInitMode;
@@ -100,6 +104,7 @@
         foodDetailHeader.imgHeader.image = tImg;
     }
     
+    [self.tTableView reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -109,6 +114,7 @@
 }
 -(void)setDataWithStoreInfo:(StoreItem*)store{
     [foodDetailHeader setStoreDetailData:store];
+    [foodDetailHeader setLabPjNum:totalCom];
     [btnCall setTitle:store.storePhone forState:UIControlStateNormal];
     if (labTaddress) {
         labTaddress.text = [NSString stringWithFormat:@"地址:%@",self.mStoreItem.storeAddress];
@@ -319,7 +325,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (0 == indexPath.row && 0 == indexPath.section) {
         [[SettingService sharedInstance] PermissionBaiduMap];
-        BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:113.922 lat:22.497];
+        BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:self.mStoreItem.longitude lat:self.mStoreItem.latitude];//113.922  22.497
         [self.navigationController pushViewController:bv animated:YES];
 
     }else if (0 == indexPath.row && 1 == indexPath.section) {
@@ -390,8 +396,8 @@
                         StoreItem *tmpStoreItem = [StoreItem getStoreItemWith:dic];
                         if (tmpStoreItem) {
                             self.mStoreItem = tmpStoreItem;
-                            [self setDataWithStoreInfo:self.mStoreItem];
-                            [self.tTableView reloadData];
+                            [self flushUI];
+                            
                         }
                     }
                     
@@ -443,8 +449,8 @@
                     totalCom = [[dic objectForKey:@"total"] intValue];
                     NSArray *tmpComArr = [dic objectForKey:@"items"];
                     comArr = [CommentsItem getCommentsItemsWithArr:tmpComArr];
-                    [self.tTableView reloadData];
-                    
+//                    [self.tTableView reloadData];
+                    [self flushUI];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }

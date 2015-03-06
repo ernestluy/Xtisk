@@ -56,6 +56,7 @@
     self.title = self.categoryItem.categoryName;
     [self requestListData];
 }
+
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
     [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId pageNo:1 pageSize:DefaultPageSize]startAsynchronous];

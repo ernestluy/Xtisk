@@ -50,6 +50,10 @@ typedef enum HttpRequestType{
     HttpRequestType_XT_QUERYMYACTIVITY,
     HttpRequestType_XT_UPDATEMYPASSWORD,
     
+    HttpRequestType_XT_QUERY_SHIP_LINE,
+    HttpRequestType_XT_QUERY_VOYAGE,
+    HttpRequestType_XT_SUBMIT_BOOKING,
+    
     HttpRequestType_Img_LoadDown,
     
 }HttpRequestType;

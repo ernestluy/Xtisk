@@ -25,6 +25,6 @@
 -(void)setUIInit;
 
 -(void)setStoreDetailData:(StoreItem *)storeItem;
-
+-(void)setLabPjNum:(int)n;
 -(void)setFavoriteStatus:(BOOL)b;
 @end

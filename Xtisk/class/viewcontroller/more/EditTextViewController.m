@@ -77,10 +77,12 @@
         [self.tDelegate editTextDone:self.tTextView.text type:tType];
     }
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
-    if (PrivateEditTextFoodCommend == tType) {
+    if (PrivateEditTextFoodCommend == tType) {//店铺评论
         [[[HttpService sharedInstance] getRequestStoreComments:self storeId:int2str(self.storeId) content:self.tTextView.text]startAsynchronous];
-    }else if (PrivateEditTextActivity == tType){
+    }else if (PrivateEditTextActivity == tType){//活动评论
         [[[HttpService sharedInstance] getRequestActivityComments:self activityId:int2str(self.activityId) content:self.tTextView.text]startAsynchronous];
+    }else if (PrivateEditTextAdvise == tType){//建议反馈
+        [[[HttpService sharedInstance]getRequestSuggestion:self content:self.tTextView.text]startAsynchronous];
     }
 //    [self.navigationController popViewControllerAnimated:YES];
 }
@@ -122,10 +124,28 @@
                     [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
                     [self.navigationController popViewControllerAnimated:YES];
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showSuccessWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_SUGGESTION:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    [SVProgressHUD showSuccessWithStatus:@"反馈建议提交成功" duration:DefaultRequestDonePromptTime];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showSuccessWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 NSLog(@"请求失败");
             }
             break;

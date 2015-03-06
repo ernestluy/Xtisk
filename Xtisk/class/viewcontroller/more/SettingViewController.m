@@ -39,7 +39,9 @@
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
+    if (![[SettingService sharedInstance] isLogin]) {
+        return 1;
+    }
     return 3;
 }
 

@@ -11,6 +11,7 @@
 #import "MsgTicketListViewController.h"
 #import "PublicDefine.h"
 #import "ActivityViewController.h"
+#import "MessageListViewController.h"
 #define MSG_TAB_HEIGHT 50.0
 @interface MessageTabViewController ()
 {
@@ -97,6 +98,10 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (0 == indexPath.section && 0 == indexPath.row) {
+        MessageListViewController *mc = [[MessageListViewController alloc] init];
+        [self.navigationController pushViewController:mc animated:YES];
+    }
     if (1 == indexPath.section &&  0 == indexPath.row) {
         MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];
         [self.navigationController pushViewController:mt animated:YES];

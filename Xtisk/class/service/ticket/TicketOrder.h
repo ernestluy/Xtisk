@@ -26,4 +26,5 @@
 //@property(nonatomic,copy)NSString *serviceTitle;
 //@property(nonatomic,copy)NSString *serviceTitle;
 //@property(nonatomic,copy)NSString *serviceTitle;
+
 @end

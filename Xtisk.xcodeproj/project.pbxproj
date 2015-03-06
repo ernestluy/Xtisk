@@ -94,7 +94,6 @@
 		7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */; };
 		7664BAA21AA6D00400E59DF0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9C1AA6D00400E59DF0 /* icon.png */; };
 		7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BA9D1AA6D00400E59DF0 /* icon@2x.png */; };
-		7664BAA61AA7E26A00E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */; };
 		7664BAAA1AA7E81000E59DF0 /* TicketSerivice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAA91AA7E81000E59DF0 /* TicketSerivice.m */; };
 		7664BAAE1AA7EAE200E59DF0 /* TicketListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAAC1AA7EAE200E59DF0 /* TicketListTableViewCell.m */; };
 		7664BAAF1AA7EAE200E59DF0 /* TicketListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAAD1AA7EAE200E59DF0 /* TicketListTableViewCell.xib */; };
@@ -103,6 +102,28 @@
 		7664BAB81AA7F55F00E59DF0 /* SeatRankPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAB71AA7F55F00E59DF0 /* SeatRankPrice.m */; };
 		7664BABB1AA7F9A000E59DF0 /* TicketOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */; };
 		7664BABE1AA7FAC200E59DF0 /* TicketInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */; };
+		7664BAC11AA801F600E59DF0 /* VoyageRequestPar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAC01AA801F600E59DF0 /* VoyageRequestPar.m */; };
+		7664BACD1AA8236A00E59DF0 /* ticket_add_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */; };
+		7664BACE1AA8236A00E59DF0 /* ticket_add_touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */; };
+		7664BACF1AA8236A00E59DF0 /* ticket_add_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */; };
+		7664BAD01AA8236A00E59DF0 /* ticket_del_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */; };
+		7664BAD11AA8236A00E59DF0 /* ticket_del_touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */; };
+		7664BAD21AA8236A00E59DF0 /* ticket_del_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */; };
+		7664BAD31AA8236A00E59DF0 /* ticket_order_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */; };
+		7664BAD41AA8236A00E59DF0 /* ticket_order_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */; };
+		7664BAD51AA8236A00E59DF0 /* ticket_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */; };
+		7664BAD61AA8236A00E59DF0 /* ticket_x_touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BACB1AA8236A00E59DF0 /* ticket_x_touch.png */; };
+		7664BAD71AA8236A00E59DF0 /* ticket_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BACC1AA8236A00E59DF0 /* ticket_x.png */; };
+		7664BADB1AA8296F00E59DF0 /* TicketVoyageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAD91AA8296F00E59DF0 /* TicketVoyageEditViewController.m */; };
+		7664BADC1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BADA1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib */; };
+		7664BAE01AA82DED00E59DF0 /* TicketOrderEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BADE1AA82DED00E59DF0 /* TicketOrderEditViewController.m */; };
+		7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BADF1AA82DED00E59DF0 /* TicketOrderEditViewController.xib */; };
+		7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BAE31AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a */; };
+		7664BAE81AA947B600E59DF0 /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAE71AA947B600E59DF0 /* MessageListViewController.m */; };
+		7664BB691AA982DE00E59DF0 /* StringOper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB681AA982DE00E59DF0 /* StringOper.m */; };
+		7664BB6E1AA98A7500E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BB6D1AA98A7500E59DF0 /* libbaidumapapi.a */; };
+		7664BB711AA98EDD00E59DF0 /* MessageDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */; };
+		7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB731AA98F3100E59DF0 /* PushMessageItem.m */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -497,7 +518,6 @@
 		7664BA9B1AA6D00400E59DF0 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
 		7664BA9C1AA6D00400E59DF0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7664BA9D1AA6D00400E59DF0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		7664BAA81AA7E81000E59DF0 /* TicketSerivice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketSerivice.h; sourceTree = "<group>"; };
 		7664BAA91AA7E81000E59DF0 /* TicketSerivice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketSerivice.m; sourceTree = "<group>"; };
 		7664BAAB1AA7EAE200E59DF0 /* TicketListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketListTableViewCell.h; sourceTree = "<group>"; };
@@ -513,6 +533,36 @@
 		7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketOrder.m; sourceTree = "<group>"; };
 		7664BABC1AA7FAC200E59DF0 /* TicketInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketInfoItem.h; sourceTree = "<group>"; };
 		7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketInfoItem.m; sourceTree = "<group>"; };
+		7664BABF1AA801F600E59DF0 /* VoyageRequestPar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoyageRequestPar.h; sourceTree = "<group>"; };
+		7664BAC01AA801F600E59DF0 /* VoyageRequestPar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoyageRequestPar.m; sourceTree = "<group>"; };
+		7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_invalid.png; sourceTree = "<group>"; };
+		7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_touch.png; sourceTree = "<group>"; };
+		7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_valid.png; sourceTree = "<group>"; };
+		7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_invalid.png; sourceTree = "<group>"; };
+		7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_touch.png; sourceTree = "<group>"; };
+		7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_valid.png; sourceTree = "<group>"; };
+		7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_order_no@2x.png"; sourceTree = "<group>"; };
+		7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_order_yes.png; sourceTree = "<group>"; };
+		7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_switch@2x.png"; sourceTree = "<group>"; };
+		7664BACB1AA8236A00E59DF0 /* ticket_x_touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_x_touch.png; sourceTree = "<group>"; };
+		7664BACC1AA8236A00E59DF0 /* ticket_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_x.png; sourceTree = "<group>"; };
+		7664BAD81AA8296F00E59DF0 /* TicketVoyageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketVoyageEditViewController.h; sourceTree = "<group>"; };
+		7664BAD91AA8296F00E59DF0 /* TicketVoyageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketVoyageEditViewController.m; sourceTree = "<group>"; };
+		7664BADA1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketVoyageEditViewController.xib; sourceTree = "<group>"; };
+		7664BADD1AA82DED00E59DF0 /* TicketOrderEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketOrderEditViewController.h; sourceTree = "<group>"; };
+		7664BADE1AA82DED00E59DF0 /* TicketOrderEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketOrderEditViewController.m; sourceTree = "<group>"; };
+		7664BADF1AA82DED00E59DF0 /* TicketOrderEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketOrderEditViewController.xib; sourceTree = "<group>"; };
+		7664BAE31AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
+		7664BAE41AA8523800E59DF0 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		7664BAE61AA947B600E59DF0 /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
+		7664BAE71AA947B600E59DF0 /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
+		7664BB671AA982DE00E59DF0 /* StringOper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringOper.h; sourceTree = "<group>"; };
+		7664BB681AA982DE00E59DF0 /* StringOper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringOper.m; sourceTree = "<group>"; };
+		7664BB6D1AA98A7500E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		7664BB6F1AA98EDD00E59DF0 /* MessageDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDBManager.h; sourceTree = "<group>"; };
+		7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDBManager.m; sourceTree = "<group>"; };
+		7664BB721AA98F3100E59DF0 /* PushMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageItem.h; sourceTree = "<group>"; };
+		7664BB731AA98F3100E59DF0 /* PushMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageItem.m; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -839,6 +889,7 @@
 				76C87D191A8CA8BD00843060 /* CoreTelephony.framework in Frameworks */,
 				76C87D171A8CA8B300843060 /* Security.framework in Frameworks */,
 				76C87D151A8CA8A600843060 /* OpenGLES.framework in Frameworks */,
+				7664BB6E1AA98A7500E59DF0 /* libbaidumapapi.a in Frameworks */,
 				76C87D131A8CA89300843060 /* Social.framework in Frameworks */,
 				76C87D111A8CA88B00843060 /* Accounts.framework in Frameworks */,
 				76C87D0F1A8CA88100843060 /* AudioToolbox.framework in Frameworks */,
@@ -848,7 +899,6 @@
 				764D603D1A888A4700B186A5 /* libiconv.dylib in Frameworks */,
 				76C87D051A8CA43E00843060 /* libSocialWhatsapp.a in Frameworks */,
 				76C87D061A8CA43E00843060 /* libSocialYiXin.a in Frameworks */,
-				7664BAA61AA7E26A00E59DF0 /* libbaidumapapi.a in Frameworks */,
 				76C87D001A8CA43E00843060 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
 				76C87D041A8CA43E00843060 /* libWeChatSDK.a in Frameworks */,
 				76C87CFB1A8CA43E00843060 /* TencentOpenAPI.framework in Frameworks */,
@@ -856,6 +906,7 @@
 				76C87CFA1A8CA43E00843060 /* libSocialQQ.a in Frameworks */,
 				76C87CF81A8CA43E00843060 /* libSocialLine.a in Frameworks */,
 				76C87D031A8CA43E00843060 /* libSocialWechat.a in Frameworks */,
+				7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				76C87CF61A8CA43E00843060 /* libSocialInstagram.a in Frameworks */,
 				76C87CFD1A8CA43E00843060 /* libSocialTumblr.a in Frameworks */,
 				76C87D021A8CA43E00843060 /* libUMSocial_Sdk_Shake_1.0.a in Frameworks */,
@@ -883,7 +934,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				7664BAA41AA7E26A00E59DF0 /* Release-iphoneos */,
+				7664BB6C1AA98A7500E59DF0 /* Release-iphonesimulator */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -972,6 +1023,10 @@
 		760BF28D1AA3F3680088DBA2 /* message */ = {
 			isa = PBXGroup;
 			children = (
+				7664BB6F1AA98EDD00E59DF0 /* MessageDBManager.h */,
+				7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */,
+				7664BB721AA98F3100E59DF0 /* PushMessageItem.h */,
+				7664BB731AA98F3100E59DF0 /* PushMessageItem.m */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1109,15 +1164,6 @@
 			path = icon;
 			sourceTree = "<group>";
 		};
-		7664BAA41AA7E26A00E59DF0 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				7664BAA51AA7E26A00E59DF0 /* libbaidumapapi.a */,
-			);
-			name = "Release-iphoneos";
-			path = "libs/Release-iphoneos";
-			sourceTree = "<group>";
-		};
 		7664BAA71AA7E7F900E59DF0 /* ticket */ = {
 			isa = PBXGroup;
 			children = (
@@ -1133,8 +1179,37 @@
 				7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */,
 				7664BABC1AA7FAC200E59DF0 /* TicketInfoItem.h */,
 				7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */,
+				7664BABF1AA801F600E59DF0 /* VoyageRequestPar.h */,
+				7664BAC01AA801F600E59DF0 /* VoyageRequestPar.m */,
 			);
 			path = ticket;
+			sourceTree = "<group>";
+		};
+		7664BAE21AA8523800E59DF0 /* UMessage_Sdk_1.1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				7664BAE31AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a */,
+				7664BAE41AA8523800E59DF0 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.1.0;
+			sourceTree = "<group>";
+		};
+		7664BB661AA982C700E59DF0 /* IM */ = {
+			isa = PBXGroup;
+			children = (
+				7664BB671AA982DE00E59DF0 /* StringOper.h */,
+				7664BB681AA982DE00E59DF0 /* StringOper.m */,
+			);
+			path = IM;
+			sourceTree = "<group>";
+		};
+		7664BB6C1AA98A7500E59DF0 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				7664BB6D1AA98A7500E59DF0 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphonesimulator";
+			path = "libs/Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
@@ -1192,6 +1267,8 @@
 				EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */,
 				EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */,
 				EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */,
+				7664BAE61AA947B600E59DF0 /* MessageListViewController.h */,
+				7664BAE71AA947B600E59DF0 /* MessageListViewController.m */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1261,6 +1338,12 @@
 				767B6FD11AA55F1700D0FA54 /* TicketQueryListViewController.h */,
 				767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */,
 				767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */,
+				7664BAD81AA8296F00E59DF0 /* TicketVoyageEditViewController.h */,
+				7664BAD91AA8296F00E59DF0 /* TicketVoyageEditViewController.m */,
+				7664BADA1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib */,
+				7664BADD1AA82DED00E59DF0 /* TicketOrderEditViewController.h */,
+				7664BADE1AA82DED00E59DF0 /* TicketOrderEditViewController.m */,
+				7664BADF1AA82DED00E59DF0 /* TicketOrderEditViewController.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1306,6 +1389,7 @@
 		767812C81A81F9E000CB4B08 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7664BB661AA982C700E59DF0 /* IM */,
 				ED8C78541A973942009C8286 /* message */,
 				764D60021A833C5C00B186A5 /* login */,
 				764D60041A833C5C00B186A5 /* service */,
@@ -1627,6 +1711,7 @@
 		ED25870C1A7D166D008EB344 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7664BAE21AA8523800E59DF0 /* UMessage_Sdk_1.1.0 */,
 				760BF1FB1A8DCFF00088DBA2 /* BaiduMap */,
 				76C87C9A1A8CA43E00843060 /* UM */,
 				ED2587661A80F961008EB344 /* SVProgressHUD */,
@@ -1736,6 +1821,17 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */,
+				7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */,
+				7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */,
+				7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */,
+				7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */,
+				7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */,
+				7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */,
+				7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */,
+				7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */,
+				7664BACB1AA8236A00E59DF0 /* ticket_x_touch.png */,
+				7664BACC1AA8236A00E59DF0 /* ticket_x.png */,
 				767B6FD81AA5B46700D0FA54 /* guide_1@2x.png */,
 				767B6FD91AA5B46700D0FA54 /* guide_2@2x.png */,
 				767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */,
@@ -1956,6 +2052,7 @@
 				7664BA9E1AA6D00400E59DF0 /* Default-568h@2x.png in Resources */,
 				764D60A81A8B3EB300B186A5 /* reg_get_ver_code@2x.png in Resources */,
 				ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */,
+				7664BAD71AA8236A00E59DF0 /* ticket_x.png in Resources */,
 				ED8C783A1A96F6CD009C8286 /* share_arrow@2x.png in Resources */,
 				ED8C78061A94DFA6009C8286 /* tel_symbol@2x.png in Resources */,
 				764D60A31A8B251500B186A5 /* msg_ishekou_cell_icon@2x.png in Resources */,
@@ -1966,6 +2063,7 @@
 				760BF1EF1A8D902D0088DBA2 /* down_img@2x.png in Resources */,
 				7678128C1A809FE700CB4B08 /* IndexTabViewController.xib in Resources */,
 				764D602B1A884CD800B186A5 /* icon_index@2x.png in Resources */,
+				7664BAD41AA8236A00E59DF0 /* ticket_order_yes.png in Resources */,
 				764D60721A8A0E3900B186A5 /* base_white_back@2x.png in Resources */,
 				ED8C77CD1A930692009C8286 /* near_food_3@2x.png in Resources */,
 				767B6FD51AA55F1700D0FA54 /* TicketQueryListViewController.xib in Resources */,
@@ -1977,6 +2075,7 @@
 				767812D31A81F9FC00CB4B08 /* 1-4.jpg in Resources */,
 				764D60961A8AF41C00B186A5 /* login_header_bg@2x.png in Resources */,
 				ED2586EC1A7D14A1008EB344 /* Images.xcassets in Resources */,
+				7664BAD11AA8236A00E59DF0 /* ticket_del_touch.png in Resources */,
 				ED8C78201A95F7BF009C8286 /* ShopMenuCollectionViewCell.xib in Resources */,
 				ED8C77B81A92F58B009C8286 /* ServiceMenuComViewController.xib in Resources */,
 				767812D11A81F9FC00CB4B08 /* 1-2.jpg in Resources */,
@@ -1985,11 +2084,14 @@
 				ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */,
 				76C87CF41A8CA43E00843060 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */,
+				7664BAD21AA8236A00E59DF0 /* ticket_del_valid.png in Resources */,
 				767812D01A81F9FC00CB4B08 /* 1-1.jpg in Resources */,
+				7664BACD1AA8236A00E59DF0 /* ticket_add_invalid.png in Resources */,
 				ED8C78321A96F149009C8286 /* ActivityDetailViewController.xib in Resources */,
 				764D60A61A8B2D2800B186A5 /* default_header_black@2x.png in Resources */,
 				ED8C78041A94DACE009C8286 /* food_call_touch@2x.png in Resources */,
 				ED8C78371A96F6CD009C8286 /* activity_commend_btn@2x.png in Resources */,
+				7664BAD01AA8236A00E59DF0 /* ticket_del_invalid.png in Resources */,
 				ED8C77E81A9357E4009C8286 /* line_gray.png in Resources */,
 				7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */,
 				76C87CF01A8CA43E00843060 /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -2007,6 +2109,7 @@
 				ED8C782D1A96D21E009C8286 /* MyActivityTableViewCell.xib in Resources */,
 				ED8C77DC1A930E9D009C8286 /* good_yes_icon.png in Resources */,
 				764D607E1A8AE99A00B186A5 /* icon_more_selected@2x.png in Resources */,
+				7664BAD61AA8236A00E59DF0 /* ticket_x_touch.png in Resources */,
 				ED8C77EC1A9367E3009C8286 /* good_commend@2x.png in Resources */,
 				ED8C78281A9631DC009C8286 /* ac_delete@2x.png in Resources */,
 				ED8C77FE1A94D47B009C8286 /* good_star@2x.png in Resources */,
@@ -2015,6 +2118,7 @@
 				EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */,
 				ED8C77CC1A930692009C8286 /* near_food_2@2x.png in Resources */,
 				764D60A21A8B251500B186A5 /* msg_activity_cell_icon@2x.png in Resources */,
+				7664BACF1AA8236A00E59DF0 /* ticket_add_valid.png in Resources */,
 				ED8C77EA1A93650F009C8286 /* commend_icon@2x.png in Resources */,
 				76C87CFF1A8CA43E00843060 /* ios-social-sdk-shake.html in Resources */,
 				ED8C77BD1A92FD23009C8286 /* NearMenuCollectionViewCell.xib in Resources */,
@@ -2031,6 +2135,7 @@
 				767B6FDD1AA5B46700D0FA54 /* guide_2@2x.png in Resources */,
 				ED8C77CA1A930691009C8286 /* near_food_0@2x.png in Resources */,
 				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
+				7664BAD51AA8236A00E59DF0 /* ticket_switch@2x.png in Resources */,
 				76C87CF11A8CA43E00843060 /* UMSLoginViewController.xib in Resources */,
 				ED8C78471A970CDE009C8286 /* about_ishekou_logo@2x.png in Resources */,
 				767812961A80A02D00CB4B08 /* ServiceTabViewController.xib in Resources */,
@@ -2045,6 +2150,7 @@
 				764D609A1A8AF41C00B186A5 /* login_submit@2x.png in Resources */,
 				7664BAAF1AA7EAE200E59DF0 /* TicketListTableViewCell.xib in Resources */,
 				7678127E1A8096FC00CB4B08 /* LostPsdViewController.xib in Resources */,
+				7664BAD31AA8236A00E59DF0 /* ticket_order_no@2x.png in Resources */,
 				ED2587621A7FABF7008EB344 /* login_expend.png in Resources */,
 				764D60141A8360B900B186A5 /* TicketQueryViewController.xib in Resources */,
 				764D60421A888E9000B186A5 /* scan_line@2x.png in Resources */,
@@ -2054,6 +2160,7 @@
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
 				764D609B1A8AF41C00B186A5 /* login_tf_acc_head@2x.png in Resources */,
 				764D608A1A8AEBEE00B186A5 /* more_cell_recommend_icon@2x.png in Resources */,
+				7664BACE1AA8236A00E59DF0 /* ticket_add_touch.png in Resources */,
 				ED8C780D1A94E34D009C8286 /* DetailFoodCommendTableViewCell.xib in Resources */,
 				ED8C77F31A949AF3009C8286 /* address_cion@2x.png in Resources */,
 				764D607D1A8AE99A00B186A5 /* icon_index_selected@2x.png in Resources */,
@@ -2064,6 +2171,7 @@
 				760BF23D1A8DCFF00088DBA2 /* mapapi.bundle in Resources */,
 				76C87CEC1A8CA43E00843060 /* UMSCommentDetailController.xib in Resources */,
 				ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */,
+				7664BADC1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib in Resources */,
 				764D607F1A8AE99A00B186A5 /* icon_msg_selected@2x.png in Resources */,
 				ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */,
 				764D608B1A8AEBEE00B186A5 /* more_cell_scan_icon@2x.png in Resources */,
@@ -2087,6 +2195,7 @@
 				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
 				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
+				7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
 				760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */,
 				ED8C77CB1A930692009C8286 /* near_food_1@2x.png in Resources */,
@@ -2167,6 +2276,7 @@
 				7664BAB51AA7F2ED00E59DF0 /* VoyageItem.m in Sources */,
 				ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */,
 				7664BAB21AA7F1AC00E59DF0 /* ShipLineItem.m in Sources */,
+				7664BAE81AA947B600E59DF0 /* MessageListViewController.m in Sources */,
 				767812901A80A00F00CB4B08 /* MessageTabViewController.m in Sources */,
 				ED8C781F1A95F7BF009C8286 /* ShopMenuCollectionViewCell.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
@@ -2183,6 +2293,7 @@
 				ED2586E11A7D14A1008EB344 /* main.m in Sources */,
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
 				764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */,
+				7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */,
 				764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */,
 				ED8C78581A97397F009C8286 /* MsgTicketListTableViewCell.m in Sources */,
 				767812721A808F1D00CB4B08 /* AsyncHttpRequest.m in Sources */,
@@ -2201,9 +2312,11 @@
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
+				7664BB691AA982DE00E59DF0 /* StringOper.m in Sources */,
 				76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
+				7664BAC11AA801F600E59DF0 /* VoyageRequestPar.m in Sources */,
 				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
 				ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
@@ -2213,11 +2326,14 @@
 				764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */,
 				764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */,
 				767812811A80981000CB4B08 /* SettingService.m in Sources */,
+				7664BB711AA98EDD00E59DF0 /* MessageDBManager.m in Sources */,
 				764D60261A84A6CE00B186A5 /* HisLoginAcc.m in Sources */,
 				767812C71A80BDED00CB4B08 /* UcmHandleDataCenter.m in Sources */,
 				ED8C77E01A93139B009C8286 /* ActivityViewController.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,
+				7664BAE01AA82DED00E59DF0 /* TicketOrderEditViewController.m in Sources */,
 				764D60221A84A58500B186A5 /* HisAccSelectView.m in Sources */,
+				7664BADB1AA8296F00E59DF0 /* TicketVoyageEditViewController.m in Sources */,
 				EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2383,7 +2499,8 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2431,7 +2548,8 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

@@ -12,7 +12,8 @@
 #import "BaseResponse.h"
 #import "CategoryItem.h"
 #import "JoinInfo.h"
-
+#import "VoyageRequestPar.h"
+#import "TicketOrder.h"
 @interface HttpService : NSObject
 {
     
@@ -24,6 +25,10 @@
 +(NSString *)getErrorStrWithCode:(int)code;
 #pragma mark - 返回数据处理
 -(BaseResponse *)dealResponseData:(NSData *)data;
+
+-(AsyncImgDownLoadRequest *)getImgRequest:(id<AsyncHttpRequestDelegate>)delegate url:(NSString *)str;
+
+
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate ;
 #pragma mark - 4.3.1.2	获取推荐位
@@ -99,5 +104,13 @@
 #pragma mark - 4.3.4.14	建议反馈
 -(AsyncHttpRequest *)getRequestSuggestion :(id<AsyncHttpRequestDelegate>)delegate  content:(NSString *)content;
 
+#pragma mark - 4.3.5	船票
+#pragma mark - 4.3.5.1 获取航线列表
+-(AsyncHttpRequest *)getRequestQueryShipLine:(id<AsyncHttpRequestDelegate>)delegate;
 
+#pragma mark - 4.3.5.2 获取航程信息
+-(AsyncHttpRequest *)getRequestQueryVoyage:(id<AsyncHttpRequestDelegate>)delegate info:(VoyageRequestPar *)par;
+
+#pragma mark - 4.3.5.3 船票下订单
+-(AsyncHttpRequest *)getRequestSubmitBooking:(id<AsyncHttpRequestDelegate>)delegate info:(TicketOrder *)order;
 @end

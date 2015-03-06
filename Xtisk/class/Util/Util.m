@@ -52,6 +52,9 @@
 
 @end
 @implementation Util
++(NSString *)strToUrlStr:(NSString *)str{
+    return [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
 +(NSData *)strToData:(NSString *)str{
     char *cStr = (char *)[str cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cStr length:(strlen(cStr))];//+1

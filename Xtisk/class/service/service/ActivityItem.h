@@ -60,6 +60,8 @@
 @property(nonatomic)BOOL allowReview;//	Boolean	否	是否允许评论（true|false）
 @property(nonatomic)BOOL isJoin;//	Boolean	否	是否已报名（true|false）
 
+@property(nonatomic,copy)NSString *shareUrl;
+
 +(NSArray *)getActivityItemsWithArr:(NSArray *)arr;
 +(ActivityItem *)getActivityItemWithDic:(NSDictionary *)dic;
 @end

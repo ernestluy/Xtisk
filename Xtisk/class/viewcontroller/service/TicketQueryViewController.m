@@ -203,12 +203,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             CGRect bounds = [UIScreen mainScreen].bounds;
-            CGRect tRect = CGRectMake(0, 0, 110, TQV_HEIGHT);
+            CGRect tRect = CGRectMake(0, 0, 140, TQV_HEIGHT);
             btnOriginStation = [CTLCustom getButtonNormalWithRect:tRect];
             [btnOriginStation setTitle:[orginArr objectAtIndex:0] forState:UIControlStateNormal];
             btnOriginStation.tag = StationOrigin;
             [cell addSubview:btnOriginStation];
-            tRect = CGRectMake(bounds.size.width - 110, 0, 110, TQV_HEIGHT);
+            tRect = CGRectMake(bounds.size.width - 140, 0, 110, TQV_HEIGHT);
             btnDestStation = [CTLCustom getButtonNormalWithRect:tRect];
             [btnDestStation setTitle:[destArr objectAtIndex:0] forState:UIControlStateNormal];
             btnDestStation.tag = StationDest;
@@ -216,6 +216,11 @@
             
             [btnOriginStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
             [btnDestStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 0, 30, 30)];
+            imgView.image = [UIImage imageNamed:@"ticket_switch"];
+            imgView.center = CGPointMake(cell.bounds.size.width/2, cell.bounds.size.height/2);
+            [cell addSubview:imgView];
             
         }else if(0 == indexPath.section && 1 == indexPath.row){
             CGRect tRect = CGRectMake(20, 0,200, TQV_HEIGHT);
@@ -254,6 +259,9 @@
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (ticketDirType == TICKET_QUERY_ONE) {
+        return @"";
+    }
     if (0 == section) {
         return @"启程";
     }else if (1 == section){

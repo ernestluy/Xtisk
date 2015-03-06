@@ -18,6 +18,8 @@
 + (BOOL) checkDocumentDir;
 + (NSString *) getDocumentDir;
 
++ (BOOL) queryWithSql:(NSString*) sql inDBOfPath:(NSString*) dbPath;
 
++ (int) updateWithSqls:(NSArray*) sqls inDBOfPath:(NSString*) dbPath;
 @end
 

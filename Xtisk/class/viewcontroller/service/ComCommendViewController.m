@@ -28,7 +28,7 @@
     //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64);
     self.tTableView = [[LYTableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
-    self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tTableView];
     self.tTableView.dataSource = self;
     self.tTableView.delegate = self;
@@ -194,8 +194,10 @@
                     
                     if (mComArr.count == 0) {
                         labNote.hidden = NO;
+                        self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
                     }else{
                         labNote.hidden = YES;
+                        self.tTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
                     }
                     
                     [self.tTableView flushDoneStatus:YES];

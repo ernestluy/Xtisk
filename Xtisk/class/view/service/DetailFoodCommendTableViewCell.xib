@@ -35,7 +35,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gwk-bq-fmz">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gwk-bq-fmz">
                         <rect key="frame" x="15" y="118" width="305" height="1"/>
                     </imageView>
                 </subviews>

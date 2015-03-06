@@ -14,6 +14,7 @@
 #import "SettingService.h"
 #import "HisAccSelectView.h"
 #import "HisLoginAcc.h"
+#import "UMessage.h"
 #define EXTENDS_HEIGHT  70
 #define LOGIN_CELL_HEIGHT 50
 
@@ -149,7 +150,7 @@ typedef enum  {
     
     headerImgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"default_header"]];
     [tView addSubview:headerImgView];
-    headerImgView.center = CGPointMake(tView.bounds.size.width/2, tView.bounds.size.height/2);
+    headerImgView.center = CGPointMake(tView.bounds.size.width/2, tView.bounds.size.height/2 - 15);
     
     UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
     btnBack.frame = CGRectMake(5, 20 - edge, 40, 44);
@@ -162,8 +163,8 @@ typedef enum  {
     [tView addSubview:tLab];
     tLab.text = @"欢迎来到爱蛇口";
     tLab.textAlignment = NSTextAlignmentCenter;
-    tLab.font = [UIFont systemFontOfSize:16];
-    tLab.frame = CGRectMake(0, tView.bounds.size.height/2 +35, bounds.size.width, 24);
+    tLab.font = [UIFont systemFontOfSize:15];
+    tLab.frame = CGRectMake(0, tView.bounds.size.height/2 +25, bounds.size.width, 24);
     
     
     tTableView.tableHeaderView = tView;
@@ -269,15 +270,23 @@ typedef enum  {
         [nav popViewControllerAnimated:YES];
     }
     
-//    [self.navigationController popViewControllerAnimated:YES];
+    NSString *dfd = kUMessageAliasTypeSina;
     
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
-//    CustomNavigationController *nav = [[CustomNavigationController alloc]initWithRootViewController:mTabBar];
-//    nav.interactivePopGestureRecognizer.enabled = NO;
-//    
-//    appDelegate.window.rootViewController = nav;
-    
+    [UMessage addAlias:[SettingService sharedInstance].iUser.phone type:kUMessageAliasTypeSina response:^(id responseObject, NSError *error) {
+        if(responseObject)
+        {
+            NSLog(@"addAlias添加成功！");
+            [UMessage addTag:@[@"groupALL",@"sexAll"]
+                    response:^(id responseObject, NSInteger remain, NSError *error) {
+                        NSLog(@"添加成功！");
+                        
+                    }];
+        }
+        else
+        {
+            NSLog(@"addAlias%@",error.localizedDescription);
+        }
+    }];
 }
 
 

@@ -20,6 +20,12 @@
  */
 @implementation ActivityItem
 
+-(id)init{
+    self = [super init];
+    
+    self.allowJoin = YES;
+    return self;
+}
 
 +(NSArray *)getActivityItemsWithArr:(NSArray *)arr{
     
@@ -78,6 +84,7 @@
     ci.allowReview = [[dic objectForKey:@"allowReview"] boolValue];
     ci.isJoin = [[dic objectForKey:@"isJoin"] boolValue];
     
+    ci.shareUrl = [dic objectForKey:@"shareUrl"];
     return ci;
 }
 @end
