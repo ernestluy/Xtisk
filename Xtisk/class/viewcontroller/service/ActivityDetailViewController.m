@@ -235,6 +235,7 @@
     }
     EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
     ec.activityId = self.mActivityItem.activityId;
+    ec.mActivityItem = self.mActivityItem;
     [self.navigationController pushViewController:ec animated:YES];
 }
 
@@ -289,14 +290,9 @@
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
-                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
-                NSData *data = [request getResponseData];
-                //                if (!data || data.length <2000) {
-                //                    NSLog(@"请求图片失败");
-                //                    [request requestAgain];
-                //                    return;
-                //                }
-                NSLog(@"img.len:%d",(int)data.length);
+//                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+
+//                NSLog(@"img.len:%d",(int)data.length);
                 
                 
             }else{

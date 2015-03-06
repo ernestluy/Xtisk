@@ -95,7 +95,7 @@
     }else if (textFieldComfirm == textField){
         [textField resignFirstResponder];
     }else if (tfOldPsd == textField){
-        [textFieldPsd resignFirstResponder];
+        [textFieldPsd becomeFirstResponder];
     }
     return YES;
 }
@@ -110,7 +110,9 @@
                     NSLog(@"修改密码请求成功");
                     HisLoginAcc *la = [HisLoginAcc getLastAccLoginInfo];
                     la.psd = textFieldComfirm.text;
-                    [HisLoginAcc saveAccLoginInfo:la];
+//                    [HisLoginAcc saveAccLoginInfo:la];
+                    [HisLoginAcc saveLastAccLoginInfo:la];
+                    [self.navigationController popViewControllerAnimated:YES];
                     [SVProgressHUD showSuccessWithStatus:@"修改成功" duration:1.5];
                     
                 }else{

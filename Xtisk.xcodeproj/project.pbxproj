@@ -120,10 +120,8 @@
 		7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BADF1AA82DED00E59DF0 /* TicketOrderEditViewController.xib */; };
 		7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BAE31AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a */; };
 		7664BAE81AA947B600E59DF0 /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAE71AA947B600E59DF0 /* MessageListViewController.m */; };
-		7664BB691AA982DE00E59DF0 /* StringOper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB681AA982DE00E59DF0 /* StringOper.m */; };
 		7664BB711AA98EDD00E59DF0 /* MessageDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */; };
 		7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB731AA98F3100E59DF0 /* PushMessageItem.m */; };
-		7664BB771AA99DCE00E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BB761AA99DCE00E59DF0 /* libbaidumapapi.a */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -241,6 +239,7 @@
 		ED25876B1A80F961008EB344 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587691A80F961008EB344 /* SVProgressHUD.m */; };
 		ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25876E1A824088008EB344 /* CirculaScrollView.m */; };
 		ED2587721A8240BB008EB344 /* GridMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587711A8240BB008EB344 /* GridMainView.m */; };
+		ED2D48FE1AA9DCDA007CC065 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2D48FD1AA9DCDA007CC065 /* libbaidumapapi.a */; };
 		ED7791E91A85CE40003ADF27 /* LYTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7791E81A85CE40003ADF27 /* LYTableView.m */; };
 		ED8C779B1A8617D5009C8286 /* LYCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C779A1A8617D5009C8286 /* LYCollectionView.m */; };
 		ED8C779D1A861EFB009C8286 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8C779C1A861EFB009C8286 /* grayArrow@2x.png */; };
@@ -556,13 +555,10 @@
 		7664BAE41AA8523800E59DF0 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		7664BAE61AA947B600E59DF0 /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
 		7664BAE71AA947B600E59DF0 /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
-		7664BB671AA982DE00E59DF0 /* StringOper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringOper.h; sourceTree = "<group>"; };
-		7664BB681AA982DE00E59DF0 /* StringOper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringOper.m; sourceTree = "<group>"; };
 		7664BB6F1AA98EDD00E59DF0 /* MessageDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDBManager.h; sourceTree = "<group>"; };
 		7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDBManager.m; sourceTree = "<group>"; };
 		7664BB721AA98F3100E59DF0 /* PushMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageItem.h; sourceTree = "<group>"; };
 		7664BB731AA98F3100E59DF0 /* PushMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageItem.m; sourceTree = "<group>"; };
-		7664BB761AA99DCE00E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -759,6 +755,7 @@
 		ED25876E1A824088008EB344 /* CirculaScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirculaScrollView.m; sourceTree = "<group>"; };
 		ED2587701A8240BB008EB344 /* GridMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridMainView.h; sourceTree = "<group>"; };
 		ED2587711A8240BB008EB344 /* GridMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridMainView.m; sourceTree = "<group>"; };
+		ED2D48FD1AA9DCDA007CC065 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		ED7791E71A85CE40003ADF27 /* LYTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTableView.h; sourceTree = "<group>"; };
 		ED7791E81A85CE40003ADF27 /* LYTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTableView.m; sourceTree = "<group>"; };
 		ED8C77991A8617D5009C8286 /* LYCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYCollectionView.h; sourceTree = "<group>"; };
@@ -889,7 +886,7 @@
 				76C87D191A8CA8BD00843060 /* CoreTelephony.framework in Frameworks */,
 				76C87D171A8CA8B300843060 /* Security.framework in Frameworks */,
 				76C87D151A8CA8A600843060 /* OpenGLES.framework in Frameworks */,
-				7664BB771AA99DCE00E59DF0 /* libbaidumapapi.a in Frameworks */,
+				ED2D48FE1AA9DCDA007CC065 /* libbaidumapapi.a in Frameworks */,
 				76C87D131A8CA89300843060 /* Social.framework in Frameworks */,
 				76C87D111A8CA88B00843060 /* Accounts.framework in Frameworks */,
 				76C87D0F1A8CA88100843060 /* AudioToolbox.framework in Frameworks */,
@@ -934,7 +931,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				7664BB751AA99DCE00E59DF0 /* Release-iphoneos */,
+				ED2D48FC1AA9DCDA007CC065 /* Release-iphonesimulator */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -1194,24 +1191,6 @@
 			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
-		7664BB661AA982C700E59DF0 /* IM */ = {
-			isa = PBXGroup;
-			children = (
-				7664BB671AA982DE00E59DF0 /* StringOper.h */,
-				7664BB681AA982DE00E59DF0 /* StringOper.m */,
-			);
-			path = IM;
-			sourceTree = "<group>";
-		};
-		7664BB751AA99DCE00E59DF0 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				7664BB761AA99DCE00E59DF0 /* libbaidumapapi.a */,
-			);
-			name = "Release-iphoneos";
-			path = "libs/Release-iphoneos";
-			sourceTree = "<group>";
-		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1389,7 +1368,6 @@
 		767812C81A81F9E000CB4B08 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				7664BB661AA982C700E59DF0 /* IM */,
 				ED8C78541A973942009C8286 /* message */,
 				764D60021A833C5C00B186A5 /* login */,
 				764D60041A833C5C00B186A5 /* service */,
@@ -1935,6 +1913,15 @@
 			path = index;
 			sourceTree = "<group>";
 		};
+		ED2D48FC1AA9DCDA007CC065 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				ED2D48FD1AA9DCDA007CC065 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphonesimulator";
+			path = "libs/Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 		ED8C77A41A862752009C8286 /* index */ = {
 			isa = PBXGroup;
 			children = (
@@ -2312,7 +2299,6 @@
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
-				7664BB691AA982DE00E59DF0 /* StringOper.m in Sources */,
 				76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
@@ -2500,7 +2486,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2549,7 +2535,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

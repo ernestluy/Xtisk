@@ -75,6 +75,7 @@
         UILabel *tmpLabel = [CTLCustom getCusRightLabel:cRect];
         [cell addSubview:tmpLabel];
         tmpLabel.text = [detailArr objectAtIndex:indexPath.row];
+        tmpLabel.textColor = defaultTextColor;
         if (0 == indexPath.row || 3 == indexPath.row) {
             cell.selectionStyle =  UITableViewCellSelectionStyleNone;
         }
@@ -98,7 +99,10 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (1 == indexPath.row) {
+        NSString *telNum = [NSString stringWithFormat:@"tel://%@",[detailArr objectAtIndex:1]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
+    }
 }
 
 

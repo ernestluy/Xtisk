@@ -22,6 +22,7 @@
 @property(nonatomic)int tType;
 @property(nonatomic) int storeId;
 @property(nonatomic) int activityId;
-
+@property(nonatomic,strong)ActivityItem *mActivityItem;
+@property(nonatomic,strong) StoreItem *mStoreItem;
 -(id)initWithType:(int)type delegate:(id<EditTextViewDelegate>) delegate;
 @end

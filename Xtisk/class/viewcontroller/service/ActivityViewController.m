@@ -101,9 +101,9 @@
     ActivityItem *item = [mDataArr objectAtIndex:indexPath.row];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:item.activityPic];
     if (!tImg) {
-        //down_img_small.png
+        //down_img
         cell.imgHeader.contentMode = DefaultImageViewInitMode;
-        cell.imgHeader.image = [UIImage imageNamed:@"down_img_small"];
+        cell.imgHeader.image = [UIImage imageNamed:@"down_img"];
         AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:item.activityPic
                                                                                        target:self
                                                                                          type:HttpRequestType_Img_LoadDown];
@@ -147,11 +147,11 @@
             if (HttpResponseTypeFinished ==  responseCode) {
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
-                //                if (!data || data.length <2000) {
-                //                    NSLog(@"请求图片失败");
-                //                    [request requestAgain];
-                //                    return;
-                //                }
+                if (!data || data.length <DefaultImageMinSize) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
                 ActivityItem *item = [mDataArr objectAtIndex:ir.indexPath.row];

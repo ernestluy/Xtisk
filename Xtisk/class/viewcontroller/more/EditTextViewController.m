@@ -136,6 +136,11 @@
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 
                 if (ResponseCodeSuccess == br.code) {
+                    if (HttpRequestType_XT_ACTIVITYCOMMENTS == request.m_requestType) {
+                        self.mActivityItem.reviews += 1;
+                    }else if (HttpRequestType_XT_STORECOMMENTS == request.m_requestType) {
+                        self.mStoreItem.reviews += 1;
+                    }
                     [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
                     [self.navigationController popViewControllerAnimated:YES];
                 }else{

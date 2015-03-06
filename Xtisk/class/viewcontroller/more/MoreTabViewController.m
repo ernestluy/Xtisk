@@ -256,7 +256,7 @@
             if (HttpResponseTypeFinished ==  responseCode) {
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
-                if (!data || data.length <2000) {
+                if (!data || data.length <DefaultImageMinSize) {
                     NSLog(@"请求图片失败");
                     [request requestAgain];
                     return;

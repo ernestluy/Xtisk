@@ -84,7 +84,7 @@
     [callView addSubview:btnCall];
     isRequestSuc = NO;
     
-    [self flushUI];
+    
 }
 
 -(void)flushUI{
@@ -110,11 +110,14 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self flushUI];
     [self requestListData];
 }
+
+
 -(void)setDataWithStoreInfo:(StoreItem*)store{
     [foodDetailHeader setStoreDetailData:store];
-    [foodDetailHeader setLabPjNum:totalCom];
+//    [foodDetailHeader setLabPjNum:totalCom];
     [btnCall setTitle:store.storePhone forState:UIControlStateNormal];
     if (labTaddress) {
         labTaddress.text = [NSString stringWithFormat:@"地址:%@",self.mStoreItem.storeAddress];
@@ -137,6 +140,7 @@
     NSLog(@"toCommend");//评价
     EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
     et.storeId = self.mStoreItem.storeId;
+    et.mStoreItem = self.mStoreItem;
     if (![[SettingService sharedInstance] isLogin]) {
         LoginViewController *lv = [[LoginViewController alloc]initWithVc:et];
         lv.delegate = self;
@@ -353,7 +357,7 @@
             if (HttpResponseTypeFinished ==  responseCode) {
                 AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
-                if (!data || data.length <2000) {
+                if (!data || data.length <DefaultImageMinSize) {
                     NSLog(@"请求图片失败");
                     [request requestAgain];
                     return;
