@@ -13,6 +13,14 @@
 
 
 
+
+
++(int)executeSqlsWithArray:(NSArray *)sqlArr{
+    return [DBManager updateWithSqls:sqlArr inDBOfPath:kDATABASE_REAL_PATH];
+}
+
+
+#pragma mark - PushMessageItem
 +(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId{
     NSString *sql = [NSString stringWithFormat:@"select * from push_msg where  n.user_id = push_msg.productId = '%@'",pId];
     //NSLog(@"sql:%@",sql);
@@ -32,13 +40,13 @@
         if (rs) {
             if ([rs next]) {
                 PushMessageItem *pi = [[PushMessageItem alloc] init];
-                pi._id = [rs intForColumn:@"_id"];
-                pi.msgType = [rs stringForColumn:@"msgType"];
-                pi.productId = [rs stringForColumn:@"productId"];
-                pi.msgText = [rs stringForColumn:@"msgText"];
+                pi.sid = [rs intForColumn:@"sid"];
+                pi.pid = [rs intForColumn:@"pid"];
+                pi.type = [rs stringForColumn:@"type"];
+                pi.content = [rs stringForColumn:@"content"];
                 pi.account = [rs stringForColumn:@"account"];
-                pi.create_date = [rs stringForColumn:@"create_date"];
-                pi.server_date = [rs stringForColumn:@"server_date"];
+                pi.loc_create_date = [rs stringForColumn:@"loc_create_date"];
+                pi.dateCreate = [rs stringForColumn:@"dateCreate"];
                 [rs close];
                 [myDB close];
                 return pi;
@@ -52,34 +60,36 @@
     return nil;
 }
 
-+(int)executeSqlsWithArray:(NSArray *)sqlArr{
-    return [DBManager updateWithSqls:sqlArr inDBOfPath:kDATABASE_REAL_PATH];
-}
-
-+(NSString *)getInsertSqlWithItem:(PushMessageItem *)item{
++(NSString *)getInsertSqlWithPushMessageItem:(PushMessageItem *)item{
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:kDateTimeFormat];
     }
-    if (nil == item.server_date) {
-        item.server_date = [dateFormatter stringFromDate:[NSDate date]];
+    if (nil == item.dateCreate) {
+        item.dateCreate = [dateFormatter stringFromDate:[NSDate date]];
     }
-    if (nil == item.create_date) {
-        item.create_date = [dateFormatter stringFromDate:[NSDate date]];
+    if (nil == item.loc_create_date) {
+        item.loc_create_date = [dateFormatter stringFromDate:[NSDate date]];
     }
-    NSString *sql = [NSString stringWithFormat:@"insert into push_msg(msgType,productId,msgText,account,create_date,server_date) values('%@','%@','%@','%@','%@','%@')",item.msgType,item.msgType,item.msgType,item.msgType,item.create_date,item.server_date];
+    NSString *sql = [NSString stringWithFormat:@"insert into push_msg(pid,type,content,account,loc_create_date,dateCreate) values(%d,'%@','%@','%@','%@','%@')",item.pid,item.type,item.content,item.account,item.loc_create_date,item.dateCreate];
     return sql;
 }
 
-+(NSArray *)getInsertSqlsWithArr:(NSArray *)arr{
++(NSArray *)getInsertPushMessageItemsSqlsWithArr:(NSArray *)arr{
     NSMutableArray *mArr = [NSMutableArray array];
     
     for (int i = 0; i<mArr.count; i++) {
         PushMessageItem *item = [mArr objectAtIndex:i];
-        [mArr addObject:[DBManager getInsertSqlWithItem:item]];
+        [mArr addObject:[DBManager getInsertSqlWithPushMessageItem:item]];
     }
     return mArr;
+}
+
++(int)insertPushMessageItems:(NSArray *)arr{
+    NSArray *sqlsArr = [DBManager getInsertPushMessageItemsSqlsWithArr:arr];
+    int intOk = [DBManager executeSqlsWithArray:sqlsArr];
+    return intOk;
 }
 
 @end

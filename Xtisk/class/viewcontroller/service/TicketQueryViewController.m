@@ -25,14 +25,18 @@
     
     UIPickerView *pickerSelectDest;//destination
     
-    NSArray *orginArr;
-    NSArray *destArr;
+    NSArray *allLines;
+    
+    NSMutableArray *orginArr;
+    NSMutableArray *destArr;
     
     NSArray *pickData;
     
     StationSelectType stationSelectType;
     TicketQueryDirType   ticketDirType;
 }
+
+-(void)flushUI;
 -(void)stationSelectAction:(UIButton *)btn;
 @end
 
@@ -71,8 +75,8 @@
     [headerView addSubview:segmentedControl];
     self.tTableView.tableHeaderView = headerView;
     
-    orginArr = @[@"北京",@"上海",@"广州",@"深圳"];
-    destArr = @[@"香港",@"澳门",@"台湾"];
+    orginArr =  [NSMutableArray array];// @[@"北京",@"上海",@"广州",@"深圳"];
+    destArr = [NSMutableArray array];//@[@"香港",@"澳门",@"台湾"];
     
     pickerSelectDest = [[UIPickerView alloc] initWithFrame:CGRectMake((tRect.size.width - 200)/2, (tRect.size.height - 200)/2, 200, 200)];//tRect.size.width
     pickerSelectDest.showsSelectionIndicator = YES;
@@ -101,6 +105,45 @@
     labNote.numberOfLines = 0 ;
     labNote.lineBreakMode = NSLineBreakByWordWrapping;
     [footView addSubview:labNote];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"船票查询";
+    [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+}
+-(void)setOriginStationTitle:(NSString *)str{
+    [btnOriginStation setTitle:str forState:UIControlStateNormal];
+}
+
+-(void)setDestStationTitle:(NSString *)str{
+    [btnDestStation setTitle:str forState:UIControlStateNormal];
+}
+/*
+ {
+ "FROMPORTENAME": "She Kou",
+ "FROMPORTCODE": "SK",
+ "ISAIRPORTLINE": "0",
+ "TOPORTCODE": "HKM",
+ "TOPORTENAME": "HK-Macau Ferry Terminal",
+ "TOPORTCNAME": "香港港澳码头",
+ "FROMPORTTNAME": "蛇口港",
+ "LINECODE": "SK-HKM",
+ "TOPORTTNAME": "港澳碼頭",
+ "FROMPORTCNAME": "蛇口港"
+ }
+ */
+
+
+-(void)flushUI{
+
+    for (int i = 0; i<allLines.count; i++) {
+        ShipLineItem *line = [allLines objectAtIndex:i];
+        if ([line.LINECODE isEqualToString:@"SK-HKM"]) {
+            [self setOriginStationTitle:line.FROMPORTCNAME];
+            [self setDestStationTitle:line.TOPORTCNAME];
+        }
+    }
 }
 
 -(void)submitQuery:(id)sender{
@@ -134,10 +177,7 @@
     labelEndTime.text = [queryDateFormatter stringFromDate:startPicker.date];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.title = @"船票查询";
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -146,17 +186,73 @@
     stationSelectType = (int)btn.tag;
     switch (btn.tag) {
         case StationOrigin:{
+            
+            [orginArr removeAllObjects];
+            [destArr removeAllObjects];
+            int tSelectIndex = 0;
+            for (int i = 0; i<allLines.count; i++) {
+                ShipLineItem *line = [allLines objectAtIndex:i];
+                if ([orginArr containsObject:line.FROMPORTCNAME ]) {
+                    continue;
+                }
+                [orginArr addObject:line.FROMPORTCNAME];
+            }
+            for (int i = 0; i<orginArr.count; i++) {
+                NSString *tmpStr = [orginArr objectAtIndex:i];
+                //判断当前选择是第几项
+                if ([btnOriginStation.titleLabel.text isEqualToString:tmpStr]) {
+                    NSLog(@"位置:%d",i);
+                    tSelectIndex = i;
+                    break;
+                }
+            }
+            
+            
             pickData = orginArr;
             [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:pickerSelectDest];
             [pickerSelectDest reloadAllComponents];
-            [pickerSelectDest selectRow:0 inComponent:0 animated:YES];
+            [pickerSelectDest selectRow:tSelectIndex inComponent:0 animated:YES];
             break;
         }
         case StationDest:{
+            
+            int tSelectIndex = 0;
+            [destArr removeAllObjects];
+            for (int i = 0; i<allLines.count; i++) {
+                ShipLineItem *line = [allLines objectAtIndex:i];
+                if ([line.FROMPORTCNAME isEqualToString:btnOriginStation.titleLabel.text]) {
+                    [destArr addObject:line.TOPORTCNAME];
+                }
+                
+            }
+            
+            BOOL isContant = NO;
+            for (int i = 0; i<destArr.count; i++) {
+                NSString *destStr = [destArr objectAtIndex:i];
+                //判断当前选择是第几项
+                if ([destStr isEqualToString:btnDestStation.titleLabel.text]) {
+                    NSLog(@"位置:%d",i);
+                    tSelectIndex = i;
+                    isContant = YES;
+                    break;
+                }
+            }
+            
+            
+            //如果不包含
+            if (!isContant) {
+                tSelectIndex = 0;
+                if (destArr.count>0) {
+                    [self setDestStationTitle:[destArr objectAtIndex:0]];
+                }
+                
+            }
+            
+            
             pickData = destArr;
             [PopoverView showPopoverAtPoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 ) inView:self.view withContentView:pickerSelectDest];
             [pickerSelectDest reloadAllComponents];
-            [pickerSelectDest selectRow:0 inComponent:0 animated:YES];
+            [pickerSelectDest selectRow:tSelectIndex inComponent:0 animated:YES];
             break;
         }
         default:
@@ -205,12 +301,14 @@
             CGRect bounds = [UIScreen mainScreen].bounds;
             CGRect tRect = CGRectMake(0, 0, 140, TQV_HEIGHT);
             btnOriginStation = [CTLCustom getButtonNormalWithRect:tRect];
-            [btnOriginStation setTitle:[orginArr objectAtIndex:0] forState:UIControlStateNormal];
+            btnOriginStation.titleLabel.font = DefaultCellFont;
+//            btnOriginStation.backgroundColor = [UIColor lightGrayColor];
             btnOriginStation.tag = StationOrigin;
             [cell addSubview:btnOriginStation];
-            tRect = CGRectMake(bounds.size.width - 140, 0, 110, TQV_HEIGHT);
+            tRect = CGRectMake(bounds.size.width - 140, 0, 140, TQV_HEIGHT);
             btnDestStation = [CTLCustom getButtonNormalWithRect:tRect];
-            [btnDestStation setTitle:[destArr objectAtIndex:0] forState:UIControlStateNormal];
+            btnDestStation.titleLabel.font = DefaultCellFont;
+//            btnDestStation.backgroundColor = [UIColor lightGrayColor];
             btnDestStation.tag = StationDest;
             [cell addSubview:btnDestStation];
             
@@ -314,6 +412,35 @@
 //    labOriginStation.text = [orginArr objectAtIndex:row];
     if (StationOrigin == stationSelectType) {
         [btnOriginStation setTitle:[pickData objectAtIndex:row] forState:UIControlStateNormal];
+        
+        [destArr removeAllObjects];
+        for (int i = 0; i<allLines.count; i++) {
+            ShipLineItem *line = [allLines objectAtIndex:i];
+            if ([line.FROMPORTCNAME isEqualToString:btnOriginStation.titleLabel.text]) {
+                [destArr addObject:line.TOPORTCNAME];
+            }
+            
+        }
+        
+        BOOL isContant = NO;
+        for (int i = 0; i<destArr.count; i++) {
+            NSString *destStr = [destArr objectAtIndex:i];
+            //判断当前选择是第几项
+            if ([destStr isEqualToString:btnDestStation.titleLabel.text]) {
+                NSLog(@"包含该目的地:%@",destStr);
+                isContant = YES;
+                break;
+            }
+        }
+        
+        //如果不包含
+        if (!isContant) {NSLog(@"不包含该目的地，设置为第一项");
+            if (destArr.count>0) {
+                [self setDestStationTitle:[destArr objectAtIndex:0]];
+            }
+        }
+
+        
     }else if (StationDest == stationSelectType){
         [btnDestStation setTitle:[pickData objectAtIndex:row] forState:UIControlStateNormal];
     }
@@ -329,6 +456,54 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return pickData.count;
+}
+
+
+
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+            
+        case HttpRequestType_XT_UPDATEACTIVITYJOININFO:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    [SVProgressHUD showErrorWithStatus:@"修改报名信息成功" duration:DefaultRequestDonePromptTime];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERY_SHIP_LINE:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        allLines = [ShipLineItem getShipLineItemsWithArr:[dic objectForKey:@"shipLineList"]];
+                        [self flushUI];
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 

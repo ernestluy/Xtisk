@@ -40,6 +40,7 @@
 #import "TicketSerivice.h"
 #import "VoyageRequestPar.h"
 #import "PushMessageItem.h"
+#import "ShipLineItem.h"
 
 BMKMapManager* _mapManager;
 

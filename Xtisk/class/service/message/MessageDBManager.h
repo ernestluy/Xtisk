@@ -16,7 +16,10 @@
 
 +(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId;
 +(int)executeSqlsWithArray:(NSArray *)sqlArr;
-+(NSString *)getInsertSqlWithItem:(PushMessageItem *)item;
 
-+(NSArray *)getInsertSqlsWithArr:(NSArray *)arr;
+#pragma mark - PushMessageItem
++(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId;
++(NSString *)getInsertSqlWithPushMessageItem:(PushMessageItem *)item;
++(NSArray *)getInsertPushMessageItemsSqlsWithArr:(NSArray *)arr;
++(int)insertPushMessageItems:(NSArray *)arr;
 @end

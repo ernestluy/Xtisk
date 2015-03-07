@@ -48,11 +48,11 @@ create table PIM_CONTACT(
 
 /*ishekou*/
 create table push_msg(
-_id					 INTEGER primary key autoincrement,
-msgType              varchar(10),
-productId			 varchar(10),
-msgText              varchar(500),
+sid					 INTEGER primary key autoincrement,
+pid					 INTEGER,
+type                 varchar(10),
+content			     varchar(500),
 account              varchar(40),
-create_date          varchar(20),
-server_date          varchar(40)
+loc_create_date      varchar(20),
+dateCreate           varchar(20)
 );

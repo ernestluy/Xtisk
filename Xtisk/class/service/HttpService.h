@@ -115,4 +115,14 @@
 
 #pragma mark - 4.3.5.3 船票下订单
 -(AsyncHttpRequest *)getRequestSubmitBooking:(id<AsyncHttpRequestDelegate>)delegate info:(TicketOrder *)order;
+
+#pragma mark - 4.3.6  消息
+
+#pragma mark - 4.3.6.3根据消息id获取消息详情
+-(AsyncHttpRequest *)getRequestGetMsgById:(id<AsyncHttpRequestDelegate>)delegate msgId:(NSString *)msgId;
+
+#pragma mark - 4.3.6.4获取用户未读消息
+-(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType;
+
+
 @end

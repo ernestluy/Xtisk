@@ -8,6 +8,7 @@
 
 #import "MessageListViewController.h"
 #define kMessageListCell @"kMessageListCell"
+#import "MessageDBManager.h"
 @interface MessageListViewController ()
 {
     LYTableView *tTableView;
@@ -52,6 +53,11 @@
     [labTmp sizeToFit];
     CGRect tr = labTmp.frame;
     NSLog(@"over");
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
 }
 
 -(void)addData{
@@ -180,7 +186,7 @@
             }
             break;
         }
-        case HttpRequestType_XT_QUERYSTOREBYCATEGORY:{
+        case HttpRequestType_XT_GET_USER_UNREAD_MSG:{
             if ( HttpResponseTypeFinished == responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 
@@ -188,7 +194,10 @@
                     NSLog(@"请求成功");
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
-                        
+                        NSArray *tmpArr = [dic objectForKey:@"msgList"];
+                        NSArray *msgArr = [PushMessageItem getPushMessageItemsWithArr:tmpArr];
+                        int intSuc = [DBManager insertPushMessageItems:msgArr];
+                        NSLog(@"intSuc:%d",intSuc);
                     }
                     
                 }else{

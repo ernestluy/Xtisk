@@ -14,6 +14,7 @@
 +(UIButton *)getButtonNormalWithRect:(CGRect )rect{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitleColor:defaultTextColor forState:UIControlStateNormal];
+    btn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     btn.frame = rect;
 //    btn.backgroundColor = [UIColor yellowColor];
     return btn;

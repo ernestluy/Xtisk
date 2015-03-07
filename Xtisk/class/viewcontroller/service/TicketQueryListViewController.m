@@ -80,6 +80,10 @@
     [tTableView registerNib:[UINib nibWithNibName:@"TicketListTableViewCell" bundle:nil] forCellReuseIdentifier:kTicketListTableViewCell];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+}
 
 -(void)getLineInfo:(UIButton *)btn{
     NSLog(@"getLineInfo");
@@ -162,6 +166,26 @@
                 }
             }else{
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERYSTOREBYCATEGORY:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
                 NSLog(@"请求失败");
             }
             break;

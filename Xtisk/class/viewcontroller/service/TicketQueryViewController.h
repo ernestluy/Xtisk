@@ -7,8 +7,8 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface TicketQueryViewController : SecondaryViewController<UIPickerViewDataSource,UIPickerViewDelegate>
+#import "PublicDefine.h"
+@interface TicketQueryViewController : SecondaryViewController<UIPickerViewDataSource,UIPickerViewDelegate,AsyncHttpRequestDelegate>
 {
     UIDatePicker * startPicker;
     UIDatePicker * endPicker;

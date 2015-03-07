@@ -18,17 +18,19 @@
  create_date          varchar(20),
  server_date          varchar(40)
  */
-@property(nonatomic)int _id;
-@property(nonatomic,copy)NSString *msgType;
-@property(nonatomic,copy)NSString *serviceTitle;
-@property(nonatomic,copy)NSString *productId;
-@property(nonatomic,copy)NSString *msgText;
+@property(nonatomic)int sid;
+@property(nonatomic)int pid;
+@property(nonatomic,copy)NSString *type;
+@property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *account;
-@property(nonatomic,copy)NSString *create_date;
-@property(nonatomic,copy)NSString *server_date;
+@property(nonatomic,copy)NSString *loc_create_date;
+@property(nonatomic,copy)NSString *dateCreate;
 //@property(nonatomic,copy)NSString *serviceTitle;
 
 
+
+
++(NSArray *)getPushMessageItemsWithArr:(NSArray *)arr;
 
 
 @end

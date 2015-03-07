@@ -190,13 +190,31 @@
  };
  }]
  */
+
+/*
+ {
+ aps =     {
+ alert =         {
+ "action-loc-key" = "launch apns";//自定义数据
+ "loc-key" = "show text";//推送弹出框的显示内容
+ };
+ badge = 3;
+ sound = default;
+ };
+ custom1 = value1;
+ }
+ */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //关闭友盟自带的弹出框
     //    [UMessage setAutoAlert:NO];
  
     [UMessage didReceiveRemoteNotification:userInfo];
-    
+    if (userInfo) {
+        NSString *msgType = [userInfo objectForKey:@"msgType"];
+        NSString *productId = [userInfo objectForKey:@"productId"];
+        NSLog(@"didReceiveRemote msgType:%@,productId:%@",msgType,productId);
+    }
 //        self.userInfo = userInfo;
         //定制自定的的弹出框
         if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)

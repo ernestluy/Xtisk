@@ -239,7 +239,6 @@
 		ED25876B1A80F961008EB344 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587691A80F961008EB344 /* SVProgressHUD.m */; };
 		ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED25876E1A824088008EB344 /* CirculaScrollView.m */; };
 		ED2587721A8240BB008EB344 /* GridMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2587711A8240BB008EB344 /* GridMainView.m */; };
-		ED2D49011AAAAAC2007CC065 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2D49001AAAAAC2007CC065 /* libbaidumapapi.a */; };
 		ED2D49161AAAC844007CC065 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2D49041AAAC844007CC065 /* AFHTTPRequestOperation.m */; };
 		ED2D49171AAAC844007CC065 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2D49061AAAC844007CC065 /* AFHTTPRequestOperationManager.m */; };
 		ED2D49181AAAC844007CC065 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2D49081AAAC844007CC065 /* AFHTTPSessionManager.m */; };
@@ -328,6 +327,7 @@
 		ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C78571A97397F009C8286 /* MsgTicketListTableViewCell.xib */; };
 		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
 		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
+		EDBFF92E1AAAF14C00823344 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBFF92D1AAAF14C00823344 /* libbaidumapapi.a */; };
 		EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */; };
 		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
 		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
@@ -765,7 +765,6 @@
 		ED25876E1A824088008EB344 /* CirculaScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirculaScrollView.m; sourceTree = "<group>"; };
 		ED2587701A8240BB008EB344 /* GridMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridMainView.h; sourceTree = "<group>"; };
 		ED2587711A8240BB008EB344 /* GridMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridMainView.m; sourceTree = "<group>"; };
-		ED2D49001AAAAAC2007CC065 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		ED2D49031AAAC844007CC065 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		ED2D49041AAAC844007CC065 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		ED2D49051AAAC844007CC065 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -891,6 +890,7 @@
 		ED8C785A1A973C3C009C8286 /* MsgTicketListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTicketListViewController.h; sourceTree = "<group>"; };
 		ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTicketListViewController.m; sourceTree = "<group>"; };
 		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
+		EDBFF92D1AAAF14C00823344 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
 		EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
 		EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
@@ -917,7 +917,6 @@
 				76C87D191A8CA8BD00843060 /* CoreTelephony.framework in Frameworks */,
 				76C87D171A8CA8B300843060 /* Security.framework in Frameworks */,
 				76C87D151A8CA8A600843060 /* OpenGLES.framework in Frameworks */,
-				ED2D49011AAAAAC2007CC065 /* libbaidumapapi.a in Frameworks */,
 				76C87D131A8CA89300843060 /* Social.framework in Frameworks */,
 				76C87D111A8CA88B00843060 /* Accounts.framework in Frameworks */,
 				76C87D0F1A8CA88100843060 /* AudioToolbox.framework in Frameworks */,
@@ -934,6 +933,7 @@
 				76C87CFA1A8CA43E00843060 /* libSocialQQ.a in Frameworks */,
 				76C87CF81A8CA43E00843060 /* libSocialLine.a in Frameworks */,
 				76C87D031A8CA43E00843060 /* libSocialWechat.a in Frameworks */,
+				EDBFF92E1AAAF14C00823344 /* libbaidumapapi.a in Frameworks */,
 				7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				76C87CF61A8CA43E00843060 /* libSocialInstagram.a in Frameworks */,
 				76C87CFD1A8CA43E00843060 /* libSocialTumblr.a in Frameworks */,
@@ -962,7 +962,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				ED2D48FF1AAAAAC2007CC065 /* Release-iphoneos */,
+				EDBFF92C1AAAF14C00823344 /* Release-iphonesimulator */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -1946,15 +1946,6 @@
 			path = index;
 			sourceTree = "<group>";
 		};
-		ED2D48FF1AAAAAC2007CC065 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				ED2D49001AAAAAC2007CC065 /* libbaidumapapi.a */,
-			);
-			name = "Release-iphoneos";
-			path = "libs/Release-iphoneos";
-			sourceTree = "<group>";
-		};
 		ED2D49021AAAC844007CC065 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -2003,6 +1994,15 @@
 				EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */,
 			);
 			path = message;
+			sourceTree = "<group>";
+		};
+		EDBFF92C1AAAF14C00823344 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				EDBFF92D1AAAF14C00823344 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphonesimulator";
+			path = "libs/Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2554,7 +2554,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2603,7 +2603,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

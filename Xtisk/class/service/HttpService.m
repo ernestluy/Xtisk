@@ -592,4 +592,44 @@ static HttpService *httpServiceInstance = nil;
     [request setRequestMethod:@"POST"];
     return request;
 }
+
+
+#pragma mark - 4.3.6  消息
+
+#pragma mark - 4.3.6.3根据消息id获取消息详情
+-(AsyncHttpRequest *)getRequestGetMsgById:(id<AsyncHttpRequestDelegate>)delegate msgId:(NSString *)msgId{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/push/getMsgById",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_GET_MSG_BY_ID];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendFormat:@"msgId=%@&",msgId];
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+
+#pragma mark - 4.3.6.4获取用户未读消息
+-(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/push/getUserUnreadMsg?type=%@",SERVICE_HOME,tType];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_GET_USER_UNREAD_MSG];
+    
+//    NSMutableString *mContentStr = [NSMutableString string];
+//    [mContentStr appendFormat:@"type=%@&",tType];
+//    
+//    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSData *data = [Util strToData:sendStr];
+//    [request appendPostData:data];
+    [request setRequestMethod:@"GET"];
+    return request;
+}
 @end
