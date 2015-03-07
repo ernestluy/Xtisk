@@ -49,6 +49,7 @@
         MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
         [nav pushViewController:mTabBar animated:NO];
     }else{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         CustomMenuTutorialController *cc = [[CustomMenuTutorialController alloc]init];
         [nav pushViewController:cc animated:NO];
     }
@@ -58,7 +59,7 @@
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [XTFileManager shareInstance];
     [DBManager initDB];
     

@@ -148,6 +148,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"首页";
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [gridMainView initFlushCtl];
     
 }

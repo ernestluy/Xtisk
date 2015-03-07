@@ -39,4 +39,6 @@
 - (NSData *)getResponseData;
 
 -(void)setHttpsRequest;
+
+- (void)uploadImage:(NSString*)urlstring image:(UIImage*)image params:(NSDictionary*)body;
 @end

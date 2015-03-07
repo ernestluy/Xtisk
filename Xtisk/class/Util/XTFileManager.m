@@ -57,6 +57,17 @@
     return isDir;
 }
 
++(BOOL)deleteFileAtPath:(NSString *)filePath{
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager removeItemAtPath:filePath error:&error] != YES){
+        
+        NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        return NO;
+    }
+    return YES;
+}
+
 +(BOOL)writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath
 {
     if ((image == nil) || (aPath == nil) || ([aPath isEqualToString:@""]))
@@ -106,4 +117,20 @@
     NSString *tp = PathTmpFile(path);
     [XTFileManager writeImage:img toFileAtPath:tp];
 }
+
+
++(UIImage *)getDocFolderFileWithUrlPath:(NSString *)path{
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathDocFile(path);
+    return [UIImage imageWithContentsOfFile:tp];
+}
++(void)saveDocFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img{
+    if (!img) {
+        return;
+    }
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathDocFile(path);
+    [XTFileManager writeImage:img toFileAtPath:tp];
+}
+
 @end

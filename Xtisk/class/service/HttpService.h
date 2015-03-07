@@ -28,6 +28,8 @@
 
 -(AsyncImgDownLoadRequest *)getImgRequest:(id<AsyncHttpRequestDelegate>)delegate url:(NSString *)str;
 
+-(AsyncHttpRequest *)getRequestUploadImage:(id<AsyncHttpRequestDelegate>)delegate url:(NSString*)urlstring image:(UIImage*)image;
+
 
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate ;

@@ -54,6 +54,8 @@ typedef enum HttpRequestType{
     HttpRequestType_XT_QUERY_VOYAGE,
     HttpRequestType_XT_SUBMIT_BOOKING,
     
+    
+    HttpRequestType_XT_UPDATE_IMG,
     HttpRequestType_Img_LoadDown,
     
 }HttpRequestType;

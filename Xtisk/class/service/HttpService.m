@@ -76,6 +76,24 @@ static HttpService *httpServiceInstance = nil;
                                                                                      type:HttpRequestType_Img_LoadDown];
     return request;
 }
+
+-(AsyncHttpRequest *)getRequestUploadImage:(id<AsyncHttpRequestDelegate>)delegate url:(NSString*)urlstring image:(UIImage*)image{
+//    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/uploadImage",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_UPDATE_IMG];
+    //[mutableHeaders setValue:[NSString stringWithFormat:@"form-data; name=\"%@\"; filename=\"%@\"", name, fileName] forKey:@"Content-Disposition"];
+//    NSString *nValue = [NSString stringWithFormat:@"form-data; name=\"%@\"; filename=\"%@\"", @"imageFile", @"avatar.jpg"];
+////    [mutableHeaders setValue:mimeType forKey:@"Content-Type"];
+//    [request.urlRequest addValue:nValue forHTTPHeaderField:@"Content-Disposition"];
+//    [request.urlRequest addValue:@"image/jpg" forHTTPHeaderField:@"Content-Type"];
+//    [request appendPostData:imageData];
+//    [request setRequestMethod:@"POST"];
+    [request uploadImage:urlStr image:image params:nil];
+    return request;
+}
+
 #pragma mark - 4.3.1.1	获取海报
 -(AsyncHttpRequest *)getRequestPosterList:(id<AsyncHttpRequestDelegate>)delegate {
     
@@ -95,6 +113,8 @@ static HttpService *httpServiceInstance = nil;
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_RECOMMENDLIST];
     
+//    [request appendPostData:data];
+//    [request setRequestMethod:@"POST"];
     [request setRequestMethod:@"GET"];
     
     return request;

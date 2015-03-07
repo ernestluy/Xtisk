@@ -9,6 +9,9 @@
 #import "AsyncHttpRequest.h"
 #import "HttpPublic.h"
 
+#import "AFHTTPRequestOperation.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 #define Time_Out_Seconds 15
 
 
@@ -166,6 +169,64 @@
     
     [self.urlRequest addValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
 }
+- (void)uploadImage:(NSString*)urlstring image:(UIImage*)image params:(NSDictionary*)body{
+    
+    
+//    NSData *imageData = UIImagePNGRepresentation(image);
+
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    //转码成UTF-8  否则可能会出现错误
+    NSString *URLTmp = [urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    //  NSDictionary *body = nil;
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:URLTmp parameters:body constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:imageData name:@"imageFile" fileName:@"imageFile.jpg" mimeType:@"image/jpg"];
+        
+    } error:nil];
+    
+    
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSProgress *progress = nil;
+    
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        if (error) {
+            
+            if (m_asyncHttpRequestDelegate) {
+                NSLog(@"error:%@",[self.error description]);
+                [m_asyncHttpRequestDelegate requestDidFinish:self code:HttpResponseTypeFailed];
+            }
+            
+            
+        } else {
+            
+            NSLog(@"%@",responseObject);
+            if (self.receviedData == nil) {
+                self.receviedData = [NSMutableData data ];
+            }
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                [self.receviedData  appendData:responseObject];
+            }
+            
+            if (m_asyncHttpRequestDelegate) {
+                NSLog(@"error:%@",[self.error description]);
+                [m_asyncHttpRequestDelegate requestDidFinish:self code:HttpResponseTypeFinished];
+            }
+        }
+        
+    }];
+    
+    
+    [uploadTask resume];
+}
+
 -(void)dealloc{
 	[responseStringData release];
 	[m_asyncHttpRequestDelegate release];

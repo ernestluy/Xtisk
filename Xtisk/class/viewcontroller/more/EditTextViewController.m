@@ -28,13 +28,16 @@
     // Do any additional setup after loading the view from its nib.
     if (tType == PrivateEditTextNick) {
         self.title = @"昵称";
+        self.tTextView.text = [SettingService sharedInstance].iUser.nickName;
         limitNum = 15;
     }
     else if (tType == PrivateEditTextSign) {
         self.title = @"修改签名";
+        self.tTextView.text = [SettingService sharedInstance].iUser.signature;
         limitNum = 32;
     }else if (tType == PrivateEditTextCom){
         self.title = @"企业";
+        self.tTextView.text = [SettingService sharedInstance].iUser.enterprise;
         limitNum = 32;
     }else if (tType == PrivateEditTextFoodCommend){
         self.title = @"评价";

@@ -200,10 +200,13 @@
                     [cell addSubview:headerImageView];
                     
                     if (tUser.headImageUrl && tUser.headImageUrl.length >3) {
-                        UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:tUser.headImageUrl];
+                        UIImage *tImg = [XTFileManager getDocFolderFileWithUrlPath:tUser.headImageUrl];
                         if (!tImg) {
                             AsyncImgDownLoadRequest *request = [[HttpService sharedInstance] getImgRequest:self url:tUser.headImageUrl];
                             [request startAsynchronous];
+                        }else{
+                            headerImageView.contentMode = DefaultImageViewContentMode;
+                            headerImageView.image = tImg;
                         }
                     }
                     
@@ -558,6 +561,8 @@
     headerImageView.image = rImg;
     [XTFileManager writeImage:rImg toFileAtPath:PathDocFile(@"myheader.jpg")];
     
+//    [[[HttpService sharedInstance] getRequestUploadImage:self url:nil image:rImg]startAsynchronous];
+    [[HttpService sharedInstance] getRequestUploadImage:self url:nil image:rImg];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -584,7 +589,7 @@
                 }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
-                [XTFileManager saveTmpFolderFileWithUrlPath:[SettingService sharedInstance].iUser.headImageUrl with:rImage];
+                [XTFileManager saveDocFolderFileWithUrlPath:[SettingService sharedInstance].iUser.headImageUrl with:rImage];
                 headerImageView.contentMode = DefaultImageViewContentMode;
                 headerImageView.image = rImage;
                 
@@ -593,6 +598,37 @@
                 [request requestAgain];
                 NSLog(@"请求图片失败");
             }
+            break;
+        }
+        case HttpRequestType_XT_UPDATE_IMG:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"上传成功");
+                    //{"imageFileUrl":"upload/common/2015_03_07/325190f6974d45d79da5ce12d908cbc0.jpg"}
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    NSString *tmpUrl = [dic objectForKey:@"imageFileUrl"];
+                    
+                    if ([SettingService sharedInstance].iUser.headImageUrl && [SettingService sharedInstance].iUser.headImageUrl.length>3) {
+                        NSString*ttt = [[SettingService sharedInstance].iUser.headImageUrl stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+                        BOOL b =  [XTFileManager deleteFileAtPath:PathDocFile(ttt)];
+                        NSLog(@"b:%d",b);
+                    }
+                    
+                    [SettingService sharedInstance].iUser.headImageUrl = tmpUrl;
+                    [[[HttpService sharedInstance] getRequestUpdatePerson:self user:[SettingService sharedInstance].iUser]startAsynchronous];
+                    [SVProgressHUD showSuccessWithStatus:@"修改头像成功" duration:DefaultRequestDonePromptTime];
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+                
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:1.5];
+            }
+            break;
             break;
         }
         case HttpRequestType_XT_LOGOUT:{
@@ -631,7 +667,7 @@
 //                        tStr = @"修改签名成功";
 //                    }
                     [SVProgressHUD showSuccessWithStatus:tStr duration:DefaultRequestDonePromptTime];
-                    [self.navigationController popViewControllerAnimated:YES];
+//                    [self.navigationController popViewControllerAnimated:YES];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
