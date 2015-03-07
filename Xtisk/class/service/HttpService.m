@@ -391,7 +391,7 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.4.4	查看我报名的活动列表
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/queryMyActivity",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/queryMyActivity",SERVICE_HOME];
     urlStr = [NSString stringWithFormat:@"%@?pageNo=%d&pageSize=%d",urlStr,pageNo,pageSize];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
@@ -551,11 +551,11 @@ static HttpService *httpServiceInstance = nil;
     
     NSMutableString *mContentStr = [NSMutableString string];
     [mContentStr appendFormat:@"sailDate=%@&",par.sailDate];
-    [mContentStr appendFormat:@"sailDateReturn=%@&",par.sailDateReturn];
+//    [mContentStr appendFormat:@"sailDateReturn=%@&",par.sailDateReturn];
     [mContentStr appendFormat:@"fromPortCode=%@&",par.fromPortCode];
     [mContentStr appendFormat:@"toPortCode=%@&",par.toPortCode];
-    [mContentStr appendFormat:@"fromPortCodeReturn=%@&",par.fromPortCodeReturn];
-    [mContentStr appendFormat:@"toPortCodeReturn=%@&",par.toPortCodeReturn];
+//    [mContentStr appendFormat:@"fromPortCodeReturn=%@&",par.fromPortCodeReturn];
+//    [mContentStr appendFormat:@"toPortCodeReturn=%@&",par.toPortCodeReturn];
     [mContentStr appendFormat:@"currencyCode=%@&",par.currencyCode];
     [mContentStr appendFormat:@"isRoundtrip=%@&",par.isRoundtrip];
     [mContentStr appendFormat:@"lang=%@&",par.lang];

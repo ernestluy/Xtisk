@@ -28,7 +28,6 @@
 @property(nonatomic,copy)NSString *activityBeginTime;
 @property(nonatomic,copy)NSString *activityEndTime;
 
-@property(nonatomic,copy)NSString *status;//	String		活动状态
 /*
  {
  "reviews": 0,

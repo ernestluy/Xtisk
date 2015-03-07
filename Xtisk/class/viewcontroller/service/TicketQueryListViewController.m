@@ -80,9 +80,13 @@
     [tTableView registerNib:[UINib nibWithNibName:@"TicketListTableViewCell" bundle:nil] forCellReuseIdentifier:kTicketListTableViewCell];
 }
 
+-(void)requestData{
+    
+    [[[HttpService sharedInstance] getRequestQueryVoyage:self info:nil]startAsynchronous];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+    
 }
 
 -(void)getLineInfo:(UIButton *)btn{

@@ -328,6 +328,7 @@
 		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
 		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
 		EDBFF92E1AAAF14C00823344 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBFF92D1AAAF14C00823344 /* libbaidumapapi.a */; };
+		EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCA83221AAB45C500AD2FB3 /* MyActivity.m */; };
 		EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */; };
 		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
 		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
@@ -891,6 +892,8 @@
 		ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTicketListViewController.m; sourceTree = "<group>"; };
 		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
 		EDBFF92D1AAAF14C00823344 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		EDCA83211AAB45C500AD2FB3 /* MyActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivity.h; sourceTree = "<group>"; };
+		EDCA83221AAB45C500AD2FB3 /* MyActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivity.m; sourceTree = "<group>"; };
 		EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
 		EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
 		EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
@@ -1239,6 +1242,7 @@
 		767812751A80933500CB4B08 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				EDCA83201AAB45AF00AD2FB3 /* more */,
 				7664BAA71AA7E7F900E59DF0 /* ticket */,
 				760BF28D1AA3F3680088DBA2 /* message */,
 				764D60321A887C9D00B186A5 /* service */,
@@ -2005,6 +2009,15 @@
 			path = "libs/Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
+		EDCA83201AAB45AF00AD2FB3 /* more */ = {
+			isa = PBXGroup;
+			children = (
+				EDCA83211AAB45C500AD2FB3 /* MyActivity.h */,
+				EDCA83221AAB45C500AD2FB3 /* MyActivity.m */,
+			);
+			path = more;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2362,6 +2375,7 @@
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
 				76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */,
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
+				EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
 				ED2D491E1AAAC844007CC065 /* AFURLSessionManager.m in Sources */,

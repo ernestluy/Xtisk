@@ -44,7 +44,6 @@
         ci.activityBeginTime = [dic objectForKey:@"activityBeginTime"];
         ci.activityEndTime = [dic objectForKey:@"activityEndTime"];
         
-        
         [mArr addObject:ci];
     }
     return mArr;

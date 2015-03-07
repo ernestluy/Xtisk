@@ -19,6 +19,8 @@
     
     UIBarButtonItem * doneItem;
     UIBarButtonItem * delItem;
+    
+    NSArray *allMyActivityArr;
 }
 @end
 
@@ -96,6 +98,8 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    [[[HttpService sharedInstance] getRequestQueryMyActivity:self pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
 }
 
 -(void)doneDelete:(id)sender{
@@ -130,6 +134,10 @@
     }
 }
 
+
+-(void)flushUI{
+    [tTableView reloadData];
+}
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -190,9 +198,39 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+          
+        case HttpRequestType_XT_QUERYMYACTIVITY:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        int tTotal = [[dic objectForKey:@"total"] intValue];
+                        //改为items
+                        NSArray *tmpArr = [dic objectForKey:@"items"];
+                        allMyActivityArr = [MyActivity getMyActivitysWithArr:tmpArr];
+                        [self flushUI];
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 

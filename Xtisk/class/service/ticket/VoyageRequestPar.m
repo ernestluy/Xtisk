@@ -9,5 +9,12 @@
 #import "VoyageRequestPar.h"
 
 @implementation VoyageRequestPar
-
+-(id)init{
+    
+    self = [super init];
+    self.currencyCode = @"RMB";
+    self.isRoundtrip = @"0";
+    self.lang = @"C";
+    return self;
+}
 @end
