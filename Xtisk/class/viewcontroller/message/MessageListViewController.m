@@ -60,6 +60,31 @@
     [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
 }
 
+
+/**
+ @method 获取指定宽度width的字符串在UITextView上的高度
+ @param textView 待计算的UITextView
+ @param Width 限制字符串显示区域的宽度
+ @result float 返回的高度
+ */
+- (float) heightForString:(UITextView *)textView andWidth:(float)width{
+    CGSize sizeToFit = [textView sizeThatFits:CGSizeMake(width, MAXFLOAT)];
+    return sizeToFit.height;
+}
+
+/**
+ @method 获取指定宽度情况ixa，字符串value的高度
+ @param value 待计算的字符串
+ @param fontSize 字体的大小
+ @param andWidth 限制字符串显示区域的宽度
+ @result float 返回的高度
+ */
+- (float) heightForString:(NSString *)value fontSize:(float)fontSize andWidth:(float)width
+{
+    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
+    return sizeToFit.height;
+}
+
 -(void)addData{
     for (int i = 0; i<5; i++) {
         [mDataArr addObject:[self getRandomStr]];
