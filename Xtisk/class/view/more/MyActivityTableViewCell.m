@@ -20,4 +20,10 @@
     // Configure the view for the selected state
 }
 
+-(void)setData:(MyActivity *)ac{
+    self.labTitle.text = ac.activityTitle;
+    self.labSignUpTime.text = [NSString stringWithFormat:@"活动时间:%@",ac.joinDate];
+    self.labAcLast.text = [NSString stringWithFormat:@"活动时间:%@ 至 %@",ac.activityBeginTime,ac.activityEndTime];
+    self.labStatus.text = ac.status;
+}
 @end

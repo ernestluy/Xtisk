@@ -46,6 +46,7 @@
     self.window.rootViewController = nav;
     NSObject *obj = [[NSUserDefaults standardUserDefaults] objectForKey:GuideMark];
     if (obj) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         MainTabBarViewController *mTabBar = [[MainTabBarViewController alloc]init];
         [nav pushViewController:mTabBar animated:NO];
     }else{

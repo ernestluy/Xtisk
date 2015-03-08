@@ -9,6 +9,7 @@
 #import "MyActivityViewController.h"
 #import "PublicDefine.h"
 #import "MyActivityTableViewCell.h"
+#import "ActivityDetailViewController.h"
 #define TheCellId  @"cell"
 @interface MyActivityViewController ()
 {
@@ -98,7 +99,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
     [[[HttpService sharedInstance] getRequestQueryMyActivity:self pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
 }
 
@@ -142,7 +143,7 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return tAcount;
+    return allMyActivityArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -170,9 +171,10 @@
 -(UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:TheCellId];
+    MyActivityTableViewCell * cell = (MyActivityTableViewCell*)[tv dequeueReusableCellWithIdentifier:TheCellId];
 
-    
+    MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+    [cell setData:ma];
     return cell;
 }
 
@@ -195,7 +197,11 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ActivityDetailViewController *ac = [[ActivityDetailViewController alloc] init];
+    MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
     
+    ac.mActivityItem = [ma aClone];
+    [self.navigationController pushViewController:ac animated:YES];
 }
 
 
@@ -223,8 +229,8 @@
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
             }else{
-                //XT_SHOWALERT(@"请求失败");
                 NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
         }

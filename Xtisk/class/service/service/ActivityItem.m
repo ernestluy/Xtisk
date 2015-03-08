@@ -86,4 +86,27 @@
     ci.shareUrl = [dic objectForKey:@"shareUrl"];
     return ci;
 }
+
+-(ActivityItem *)aClone{
+    ActivityItem *ci = [[ActivityItem alloc]init];
+    ci.activityId = self.activityId;
+    ci.activityTitle = self.activityTitle;
+    ci.activityTime = self.activityTime;
+    ci.activityPic = self.activityPic;
+    ci.favorite = self.favorite;
+    ci.activityBeginTime = self.activityBeginTime;
+    ci.activityEndTime = self.activityEndTime;
+    ci.reviews = self.reviews;
+    ci.isFull = self.isFull;
+    ci.activityInfo = self.activityInfo;
+    ci.activityBeginJoinTime = self.activityBeginJoinTime;
+    ci.isFavorite = self.isFavorite;
+    ci.activityEndJoinTime = self.activityEndJoinTime;
+    ci.allowJoin = self.allowJoin;
+    ci.allowReview = self.allowReview;
+    ci.isJoin = self.isJoin;
+    
+    ci.shareUrl = ci.shareUrl;
+    return ci;
+}
 @end

@@ -11,7 +11,17 @@
 {
     
 }
-@property(nonatomic)int   ticketQueryType;
+@property(nonatomic,copy)NSArray *   allShipLines;  //所有的航线
+
+
+@property(nonatomic)int   ticketQueryType;//单程、往返
+
+@property(nonatomic,copy)NSString *   fromPort;   //始发点
+@property(nonatomic,copy)NSString *   toPort;   //目的地
+
+@property(nonatomic,copy)NSString *   toDate;   //去的日期
+@property(nonatomic,copy)NSString *   returnDate;  //返回的日期
+
 
 +(TicketSerivice *)sharedInstance;
 @end

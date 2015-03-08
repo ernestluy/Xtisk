@@ -105,12 +105,26 @@
     labNote.numberOfLines = 0 ;
     labNote.lineBreakMode = NSLineBreakByWordWrapping;
     [footView addSubview:labNote];
+    
+    tRect = CGRectMake(0, 0, 140, TQV_HEIGHT);
+    btnOriginStation = [CTLCustom getButtonNormalWithRect:tRect];
+    btnOriginStation.titleLabel.font = DefaultCellFont;
+    btnOriginStation.tag = StationOrigin;
+    tRect = CGRectMake(bounds.size.width - 140, 0, 140, TQV_HEIGHT);
+    btnDestStation = [CTLCustom getButtonNormalWithRect:tRect];
+    btnDestStation.titleLabel.font = DefaultCellFont;
+    btnDestStation.tag = StationDest;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.title = @"船票查询";
-    [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+    if (![TicketSerivice sharedInstance].allShipLines) {
+        [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+    }else{
+        allLines = [TicketSerivice sharedInstance].allShipLines;
+    }
+    [self flushUI];
 }
 -(void)setOriginStationTitle:(NSString *)str{
     [btnOriginStation setTitle:str forState:UIControlStateNormal];
@@ -149,6 +163,15 @@
 -(void)submitQuery:(id)sender{
     NSLog(@"submitQuery");
     [TicketSerivice sharedInstance].ticketQueryType = ticketDirType;
+    
+    [TicketSerivice sharedInstance].fromPort = btnOriginStation.titleLabel.text;
+    [TicketSerivice sharedInstance].toPort = btnDestStation.titleLabel.text;
+    
+    [TicketSerivice sharedInstance].toDate = labelStartTime.text;
+    [TicketSerivice sharedInstance].returnDate = labelEndTime.text;
+    
+    
+    
     TicketQueryListViewController *tl = [[TicketQueryListViewController alloc]init];
     [self.navigationController pushViewController:tl animated:YES];
 }
@@ -298,18 +321,8 @@
         if (0 == indexPath.section && 0 == indexPath.row) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            CGRect bounds = [UIScreen mainScreen].bounds;
-            CGRect tRect = CGRectMake(0, 0, 140, TQV_HEIGHT);
-            btnOriginStation = [CTLCustom getButtonNormalWithRect:tRect];
-            btnOriginStation.titleLabel.font = DefaultCellFont;
-//            btnOriginStation.backgroundColor = [UIColor lightGrayColor];
-            btnOriginStation.tag = StationOrigin;
             [cell addSubview:btnOriginStation];
-            tRect = CGRectMake(bounds.size.width - 140, 0, 140, TQV_HEIGHT);
-            btnDestStation = [CTLCustom getButtonNormalWithRect:tRect];
-            btnDestStation.titleLabel.font = DefaultCellFont;
-//            btnDestStation.backgroundColor = [UIColor lightGrayColor];
-            btnDestStation.tag = StationDest;
+            
             [cell addSubview:btnDestStation];
             
             [btnOriginStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -489,6 +502,7 @@
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
                         allLines = [ShipLineItem getShipLineItemsWithArr:[dic objectForKey:@"shipLineList"]];
+                        [TicketSerivice sharedInstance].allShipLines = allLines;
                         [self flushUI];
                     }
                     

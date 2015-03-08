@@ -63,4 +63,7 @@
 
 +(NSArray *)getActivityItemsWithArr:(NSArray *)arr;
 +(ActivityItem *)getActivityItemWithDic:(NSDictionary *)dic;
+
+
+-(ActivityItem *)aClone;
 @end
