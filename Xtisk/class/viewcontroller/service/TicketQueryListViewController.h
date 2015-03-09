@@ -10,4 +10,5 @@
 #import "PublicDefine.h"
 @interface TicketQueryListViewController : SecondaryViewController<AsyncHttpRequestDelegate,UITableViewDataSource,UITableViewDelegate>
 
+@property(nonatomic)TicketVoyageStepType tStep;
 @end

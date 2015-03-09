@@ -22,4 +22,5 @@
 +(NSString *)getInsertSqlWithPushMessageItem:(PushMessageItem *)item;
 +(NSArray *)getInsertPushMessageItemsSqlsWithArr:(NSArray *)arr;
 +(int)insertPushMessageItems:(NSArray *)arr;
++(NSArray *)queryPushMessageItemWithAccount:(NSString *)account;
 @end

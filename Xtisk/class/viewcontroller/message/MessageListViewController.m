@@ -13,9 +13,11 @@
 {
     LYTableView *tTableView;
     NSMutableArray *mDataArr;
-    UILabel *labTmp;
+
     int fontSize;
     UIFont *fontMsg;
+    
+    int maxWidth;
 }
 @end
 
@@ -42,21 +44,22 @@
 //    [tTableView registerNib:[UINib nibWithNibName:@"MsgTicketListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [tTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kMessageListCell];
     [self.view addSubview:tTableView];
-    [self addData];
     
-    labTmp = [[UILabel alloc]init] ;
-    labTmp.frame = CGRectMake(0, 0, 300, 20);
-    labTmp.font = fontMsg;
-    labTmp.numberOfLines = 0;
-    labTmp.lineBreakMode = NSLineBreakByWordWrapping;
-    labTmp.text = [self getRandomStr];
-    [labTmp sizeToFit];
-    CGRect tr = labTmp.frame;
+    maxWidth = 150;
+//    CGRect tr = labTmp.frame;
     NSLog(@"over");
+    NSArray *tmpMsgArr = [DBManager queryPushMessageItemWithAccount:[SettingService sharedInstance].iUser.phone];
+    if (tmpMsgArr) {
+        [mDataArr addObjectsFromArray:tmpMsgArr];
+    }
+    
+    self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+    tTableView.backgroundColor = [UIColor clearColor];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
 }
 
@@ -79,12 +82,25 @@
  @param andWidth 限制字符串显示区域的宽度
  @result float 返回的高度
  */
-- (float) heightForString:(NSString *)value fontSize:(float)fontSize andWidth:(float)width
+- (float) heightForString:(NSString *)value fontSize:(float)pFontSize andWidth:(float)width
 {
-    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
+    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:pFontSize] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
     return sizeToFit.height;
 }
+- (CGSize) sizeForString:(NSString *)value fontSize:(float)pFontSize andWidth:(float)width
+{
+    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:pFontSize] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
+    return sizeToFit;
+}
 
+-(void)flushUI{
+    [tTableView reloadData];
+    if (mDataArr.count>0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(mDataArr.count - 1) inSection:0];
+        [tTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
+}
 -(void)addData{
     for (int i = 0; i<5; i++) {
         [mDataArr addObject:[self getRandomStr]];
@@ -146,29 +162,56 @@
     UITableViewCell * cell = (UITableViewCell*)[tv dequeueReusableCellWithIdentifier:kMessageListCell];
     
     int tTag = 1001;
+    int iconTag = 1002;
+    int frameTag = 1003;
+    
     CGRect bounds = [UIScreen mainScreen].bounds;
     UILabel *labMsg = ( UILabel *) [cell viewWithTag:tTag];
+    UIImageView *frameImgView = (UIImageView *)[cell viewWithTag:frameTag];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [ UIColor clearColor];
+    int insetH = 14;
+    
     if (labMsg == nil) {
         labMsg = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, bounds.size.width - 20, 50)];
         labMsg.numberOfLines = 0;
         labMsg.lineBreakMode = NSLineBreakByWordWrapping;
+        labMsg.textColor = _rgb2uic(0x707070, 1);
         [cell addSubview:labMsg];
-        labMsg.backgroundColor = [UIColor lightGrayColor];
+        labMsg.tag = tTag;
         labMsg.font = fontMsg;
+        
+        UIImageView *shekouImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 2 + insetH/2, 27, 27)];
+        shekouImgView.image = [UIImage imageNamed:@"msg_shekou_icon"];
+        [cell addSubview:shekouImgView];
+        
+        frameImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 2, 27, 27)];
+        
+        frameImgView.tag = frameTag;
+//        frameImgView.backgroundColor = [UIColor yellowColor];
+        [cell addSubview:frameImgView];
+        [cell sendSubviewToBack:frameImgView];
     }
-    NSString *tStr = [mDataArr objectAtIndex:indexPath.row];
-    labMsg.text = tStr;
-    [labMsg sizeToFit];
+    PushMessageItem *item = [mDataArr objectAtIndex:indexPath.row];
+    NSString *tContent = [item.content stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    labMsg.text = tContent;
+    //18
+    
+    labMsg.frame = CGRectMake(60, 7 + insetH/2, item.tSize.width, item.tSize.height);
+    frameImgView.frame = CGRectMake(45, 2 + insetH/2, item.tSize.width + 20, item.tSize.height + 13);
+    UIImage* tImage =  [UIImage imageNamed:@"msg_im_frame"];
+    tImage = [tImage stretchableImageWithLeftCapWidth:22 topCapHeight:25];
+    frameImgView.image = tImage;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    labTmp.text = [mDataArr objectAtIndex:indexPath.row];
-    [labTmp sizeToFit];
-    return labTmp.frame.size.height+15;
-//    return DEFAULT_CELL_HEIGHT;
+
+    PushMessageItem *item = [mDataArr objectAtIndex:indexPath.row];
+    item.tSize = [self sizeForString:item.content fontSize:fontSize andWidth:maxWidth];
+    return item.tSize.height + 15 + 14;
 }
 
 
@@ -187,7 +230,7 @@
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
-                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+//                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
                 if (!data || data.length <DefaultImageMinSize) {
                     NSLog(@"请求图片失败");
@@ -217,12 +260,17 @@
                 
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-                    NSDictionary *dic = (NSDictionary *)br.data;
-                    if (dic) {
-                        NSArray *tmpArr = [dic objectForKey:@"msgList"];
+                    NSArray *tmpArr = (NSArray *)br.data;
+                    if (tmpArr) {
                         NSArray *msgArr = [PushMessageItem getPushMessageItemsWithArr:tmpArr];
+                        [PushMessageItem setPushMessageItemsIsRead:YES arr:msgArr];
+                        if (msgArr) {
+                            [mDataArr addObjectsFromArray:msgArr];
+                        }
                         int intSuc = [DBManager insertPushMessageItems:msgArr];
                         NSLog(@"intSuc:%d",intSuc);
+                        [self flushUI];
+                        
                     }
                     
                 }else{

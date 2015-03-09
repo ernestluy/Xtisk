@@ -19,7 +19,27 @@
  create_date          varchar(20),
  server_date          varchar(40)
  */
+-(id)init{
+    self = [super init];
+    self.account = [SettingService sharedInstance].iUser.phone;
+    self.isRead = NO;
+    return self;
+}
 
+/*
+ {
+ "id": 858,
+ "dateUpdate": "2015-03-06 16:33:52",
+ "dateCreate": "2015-03-06 16:33:52",
+ "status": "Y",
+ "content": "323232",
+ "pushStatus": "1",
+ "type": "1",
+ "sum": 3,
+ "success": null,
+ "failure": null
+ }
+ */
 +(NSArray *)getPushMessageItemsWithArr:(NSArray *)arr{
     if (!arr) {
         return nil;
@@ -42,5 +62,15 @@
         [mArr addObject:ci];
     }
     return mArr;
+}
+
++(void)setPushMessageItemsIsRead:(BOOL)b arr:(NSArray *)arr{
+    if (!arr) {
+        return;
+    }
+    for (int i = 0; i<arr.count;i++) {
+        PushMessageItem * ci = [[PushMessageItem alloc]init];
+        ci.isRead = YES;
+    }
 }
 @end

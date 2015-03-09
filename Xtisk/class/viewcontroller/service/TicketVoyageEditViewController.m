@@ -9,6 +9,7 @@
 #import "TicketVoyageEditViewController.h"
 #import "TicketSerivice.h"
 #import "TicketOrderEditViewController.h"
+#import "TicketQueryListViewController.h"
 #define kTicketVoyageTableViewCell @"kTicketVoyageTableViewCell"
 @interface TicketVoyageEditViewController ()
 {
@@ -53,7 +54,9 @@
 -(void)toNextStep:(id)sender{
     if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType) {
         if (TicketVoyageStepFirst == tStep) {
-            TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
+//            TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
+//            tvv.tStep = TicketVoyageStepSecond;
+            TicketQueryListViewController *tvv = [[TicketQueryListViewController alloc] init];
             tvv.tStep = TicketVoyageStepSecond;
             [self.navigationController pushViewController:tvv animated:YES];
         }else if(TicketVoyageStepSecond == tStep){

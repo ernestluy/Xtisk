@@ -42,6 +42,7 @@
 #import "PushMessageItem.h"
 #import "ShipLineItem.h"
 #import "MyActivity.h"
+#import "VoyageItem.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关

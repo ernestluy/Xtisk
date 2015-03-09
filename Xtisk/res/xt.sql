@@ -54,5 +54,6 @@ type                 varchar(10),
 content			     varchar(500),
 account              varchar(40),
 loc_create_date      varchar(20),
-dateCreate           varchar(20)
+dateCreate           varchar(20),
+isRead               INTEGER
 );

@@ -618,7 +618,10 @@ static HttpService *httpServiceInstance = nil;
 #pragma mark - 4.3.6.4获取用户未读消息
 -(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType{
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/push/getUserUnreadMsg?type=%@",SERVICE_HOME,tType];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/push/userUnreadMsg",SERVICE_HOME];
+    if (tType && tType.length >0) {
+        urlStr = [NSString stringWithFormat:@"http://%@/push/userUnreadMsg?type=%@",SERVICE_HOME,tType];
+    }
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_GET_USER_UNREAD_MSG];

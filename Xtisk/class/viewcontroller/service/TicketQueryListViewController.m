@@ -19,11 +19,13 @@
     int selectedIndex;
     
     UITableView *tTableView;
+    
+    NSArray *voyageLines;
 }
 @end
 
 @implementation TicketQueryListViewController
-
+@synthesize tStep;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -78,15 +80,26 @@
     tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [tTableView registerNib:[UINib nibWithNibName:@"TicketListTableViewCell" bundle:nil] forCellReuseIdentifier:kTicketListTableViewCell];
+    
+    [[btnArr objectAtIndex:1] setTitle:[TicketSerivice sharedInstance].fromDate forState:UIControlStateNormal];
 }
 
 -(void)requestData{
+    TicketSerivice *tSerivice = [TicketSerivice sharedInstance];
+    VoyageRequestPar *vrp = [[VoyageRequestPar alloc]init];
+    vrp.sailDate = tSerivice.fromDate;
+    vrp.fromPortCode = tSerivice.fromPort;
+    vrp.toPortCode = tSerivice.toPort;
     
-    [[[HttpService sharedInstance] getRequestQueryVoyage:self info:nil]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryVoyage:self info:vrp]startAsynchronous];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self requestData];
+}
+
+-(void)flushUI{
+    [tTableView reloadData];
 }
 
 -(void)getLineInfo:(UIButton *)btn{
@@ -147,7 +160,7 @@
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
-    tvv.tStep = TicketVoyageStepFirst;
+    tvv.tStep = self.tStep;
     [self.navigationController pushViewController:tvv animated:YES];
     
 }
@@ -158,16 +171,22 @@
     [SVProgressHUD dismiss];
     switch (request.m_requestType) {
             
-        case HttpRequestType_XT_UPDATEACTIVITYJOININFO:{
+        case HttpRequestType_XT_QUERY_VOYAGE:{
             if ( HttpResponseTypeFinished == responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
-                
                 if (ResponseCodeSuccess == br.code) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                    [SVProgressHUD showErrorWithStatus:@"修改报名信息成功" duration:DefaultRequestDonePromptTime];
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        NSArray *tmpArr = [dic objectForKey:@"VOYAGE"];
+                        voyageLines = [VoyageItem getVoyageItemsWithArr:tmpArr];
+                        NSLog(@"请求成功");
+                    }
+                    
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
+                
             }else{
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 NSLog(@"请求失败");
@@ -180,10 +199,7 @@
                 
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
-                    NSDictionary *dic = (NSDictionary *)br.data;
-                    if (dic) {
-                        
-                    }
+                    
                     
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];

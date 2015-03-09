@@ -122,6 +122,9 @@
 		7664BAE81AA947B600E59DF0 /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAE71AA947B600E59DF0 /* MessageListViewController.m */; };
 		7664BB711AA98EDD00E59DF0 /* MessageDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */; };
 		7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB731AA98F3100E59DF0 /* PushMessageItem.m */; };
+		7664BB7A1AAD627500E59DF0 /* BadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB791AAD627500E59DF0 /* BadgeView.m */; };
+		7664BB7F1AAD6B8300E59DF0 /* msg_im_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */; };
+		7664BB801AAD6B8300E59DF0 /* msg_shekou_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -570,6 +573,10 @@
 		7664BB701AA98EDD00E59DF0 /* MessageDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDBManager.m; sourceTree = "<group>"; };
 		7664BB721AA98F3100E59DF0 /* PushMessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageItem.h; sourceTree = "<group>"; };
 		7664BB731AA98F3100E59DF0 /* PushMessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageItem.m; sourceTree = "<group>"; };
+		7664BB781AAD627500E59DF0 /* BadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeView.h; sourceTree = "<group>"; };
+		7664BB791AAD627500E59DF0 /* BadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeView.m; sourceTree = "<group>"; };
+		7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "msg_im_frame@2x.png"; sourceTree = "<group>"; };
+		7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "msg_shekou_icon@2x.png"; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -1836,6 +1843,8 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */,
+				7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */,
 				7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */,
 				7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */,
 				7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */,
@@ -1996,6 +2005,8 @@
 				EDD99D1C1A97B06500DFF260 /* TicketDetailContentView.h */,
 				EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */,
 				EDD99D1F1A97B06F00DFF260 /* TicketDetailContentView.xib */,
+				7664BB781AAD627500E59DF0 /* BadgeView.h */,
+				7664BB791AAD627500E59DF0 /* BadgeView.m */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -2138,6 +2149,7 @@
 				ED8C78201A95F7BF009C8286 /* ShopMenuCollectionViewCell.xib in Resources */,
 				ED8C77B81A92F58B009C8286 /* ServiceMenuComViewController.xib in Resources */,
 				767812D11A81F9FC00CB4B08 /* 1-2.jpg in Resources */,
+				7664BB801AAD6B8300E59DF0 /* msg_shekou_icon@2x.png in Resources */,
 				76C87CFC1A8CA43E00843060 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				ED8C77FD1A94D47B009C8286 /* bad_star@2x.png in Resources */,
 				ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */,
@@ -2167,6 +2179,7 @@
 				ED8C77DB1A930E9D009C8286 /* good_none_icon.png in Resources */,
 				ED8C782D1A96D21E009C8286 /* MyActivityTableViewCell.xib in Resources */,
 				ED8C77DC1A930E9D009C8286 /* good_yes_icon.png in Resources */,
+				7664BB7F1AAD6B8300E59DF0 /* msg_im_frame@2x.png in Resources */,
 				764D607E1A8AE99A00B186A5 /* icon_more_selected@2x.png in Resources */,
 				7664BAD61AA8236A00E59DF0 /* ticket_x_touch.png in Resources */,
 				ED8C77EC1A9367E3009C8286 /* good_commend@2x.png in Resources */,
@@ -2347,6 +2360,7 @@
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
 				ED2587491A7D1B4A008EB344 /* FMDatabaseQueue.m in Sources */,
 				ED2587181A7D1857008EB344 /* NSDate+utils.m in Sources */,
+				7664BB7A1AAD627500E59DF0 /* BadgeView.m in Sources */,
 				764D60511A89CC6800B186A5 /* IUser.m in Sources */,
 				ED8C78231A96183D009C8286 /* MyActivityViewController.m in Sources */,
 				760BF2421A8DD0410088DBA2 /* GeocodeDemoViewController.mm in Sources */,

@@ -23,6 +23,8 @@
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
+#define isNeedDelDB NO
+
 @interface AppDelegate ()
 
 @end
@@ -62,6 +64,9 @@
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [XTFileManager shareInstance];
+    if (isNeedDelDB) {
+        [XTFileManager deleteFileAtPath:kDATABASE_REAL_PATH];
+    }
     [DBManager initDB];
     
     [PosterItem getPosterData];

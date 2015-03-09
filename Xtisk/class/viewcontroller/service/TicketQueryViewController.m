@@ -163,16 +163,40 @@
 -(void)submitQuery:(id)sender{
     NSLog(@"submitQuery");
     [TicketSerivice sharedInstance].ticketQueryType = ticketDirType;
+    if (btnOriginStation.titleLabel.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"始发站没有设置" duration:1.5];
+        return;
+    }
     
-    [TicketSerivice sharedInstance].fromPort = btnOriginStation.titleLabel.text;
-    [TicketSerivice sharedInstance].toPort = btnDestStation.titleLabel.text;
+    if (btnDestStation.titleLabel.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"终点站没有设置" duration:1.5];
+        return;
+    }
     
-    [TicketSerivice sharedInstance].toDate = labelStartTime.text;
+    for (int i = 0; i<allLines.count; i++) {
+        ShipLineItem *item = [allLines objectAtIndex:i];
+        if ([item.FROMPORTCNAME isEqualToString:btnOriginStation.titleLabel.text] &&
+            [item.TOPORTCNAME isEqualToString:btnDestStation.titleLabel.text]) {
+            [TicketSerivice sharedInstance].tLine = item;
+            
+            [TicketSerivice sharedInstance].fromPort = item.FROMPORTCODE;
+            [TicketSerivice sharedInstance].toPort = item.TOPORTCODE;
+            
+            break;
+        }
+    }
+    
+//    [TicketSerivice sharedInstance].fromPort = btnOriginStation.titleLabel.text;
+//    [TicketSerivice sharedInstance].toPort = btnDestStation.titleLabel.text;
+    
+    [TicketSerivice sharedInstance].fromDate = labelStartTime.text;
     [TicketSerivice sharedInstance].returnDate = labelEndTime.text;
     
     
     
+    
     TicketQueryListViewController *tl = [[TicketQueryListViewController alloc]init];
+    tl.tStep = TicketVoyageStepFirst;
     [self.navigationController pushViewController:tl animated:YES];
 }
 

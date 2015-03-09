@@ -570,7 +570,7 @@ typedef enum  {
                         }
                         [SettingService sharedInstance].iUser = user;
                         [[SettingService sharedInstance] setLoginJSessionid];
-                        [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:DefaultRequestDonePromptTime];
+                        [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1];
                         [self loginSucInto];
                     }
                     
