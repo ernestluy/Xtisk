@@ -635,4 +635,28 @@ static HttpService *httpServiceInstance = nil;
     [request setRequestMethod:@"GET"];
     return request;
 }
+
+#pragma mark -  把ios的token发到tms
+-(AsyncHttpRequest *)getRequestUploadDeviceId:(id<AsyncHttpRequestDelegate>)delegate token:(NSString *)token{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/uploadDeviceId",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_UPLOAD_DEVICE_TOKEN];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendFormat:@"deviceId=%@&",token];
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+
+
+
+
+
+
 @end

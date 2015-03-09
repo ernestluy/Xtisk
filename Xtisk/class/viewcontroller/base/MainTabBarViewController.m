@@ -15,6 +15,8 @@
 #import "MoreTabViewController.h"
 #import "SettingService.h"
 #import "LoginViewController.h"
+#import "DBManager.h"
+#import "MessageDBManager.h"
 typedef enum {
     TAB_BAR_INDEX = 0,
     TAB_BAR_MSG,
@@ -26,6 +28,10 @@ typedef enum {
 {
     UIView *tTitleView;
     UIImageView *tImgView;
+    
+    UIViewController *msgVc;
+    
+    BOOL isRequestSuc;
 }
 @end
 
@@ -40,6 +46,10 @@ typedef enum {
         tTitleView = nil;
     }
     return self;
+}
+
+-(void)dealloc{
+    NSLog(@"MainTabBarViewController dealloc");
 }
 -(void)viewDidUnload{
     [super viewDidUnload];
@@ -58,11 +68,16 @@ typedef enum {
         [self.navigationController.navigationBar.topItem setTitleView:tImgView];
     }
     
+//    if (!isRequestSuc && [[SettingService sharedInstance] isLogin]) {
+//        [self requestMsgData];
+//    }
 }
 - (void)viewDidLoad
 {
 
     [super viewDidLoad];
+    isRequestSuc = NO;
+    
     tImgView = [[UIImageView alloc]init];
     UIImage *image = [UIImage imageNamed:@"index_header_icon"];
     tImgView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
@@ -80,6 +95,7 @@ typedef enum {
             ctl = [[IndexTabViewController alloc] initWithNibName:[xibArray objectAtIndex:i] bundle:nil];
         }else if(i == TAB_BAR_MSG){
             ctl = [[MessageTabViewController alloc] initWithNibName:[xibArray objectAtIndex:i] bundle:nil];
+            msgVc = ctl;
         }else if(i == TAB_BAR_SERVICE){
             
             ctl = [[ServiceTabViewController alloc] initWithNibName:[xibArray objectAtIndex:i] bundle:nil];
@@ -101,6 +117,7 @@ typedef enum {
         
 //        ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg tag:i];
         ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:[btnName objectAtIndex:i] image:imageBg selectedImage:imageSelectedBg];
+//        ctl.tabBarItem.badgeValue = @"100";
         ctl.tabBarItem.tag = i;
         [baritems addObject:ctl];
         
@@ -121,11 +138,46 @@ typedef enum {
     
     [self.tabBar setTintColor:_rgb2uic(0x0095f1, 1)];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealRemoteMsg) name:kPushMessageReceiveRemote object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealTicketOrderMsg) name:kTicketOrderGeneration object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealLogout) name:kLogout object:nil];
+    
 }
 
+-(void)setTabBadge{
+    int unReadMsg = [DBManager queryCountUnReadMsgWithAccount:[SettingService sharedInstance].iUser.phone];
+    [SettingService sharedInstance].badgeMsg = unReadMsg;
+    int allUnRead = [SettingService sharedInstance].badgeTicket + [SettingService sharedInstance].badgeMsg;
+    if (allUnRead == 0) {
+        msgVc.tabBarItem.badgeValue = nil;
+    }else{
+        msgVc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",allUnRead];
+    }
+}
 
+-(void)dealLogout{
+    msgVc.tabBarItem.badgeValue = nil;
+}
 
-
+-(void)requestMsgData{
+    [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
+}
+-(void)dealRemoteMsg{
+    NSLog(@"dealRemoteMsg");
+    if (![[SettingService sharedInstance] isLogin]) {
+        
+        return;
+    }
+    [self setTabBadge];
+    [self requestMsgData];
+}
+-(void)dealTicketOrderMsg{
+    NSLog(@"dealTicketOrderMsg");
+    if (![[SettingService sharedInstance] isLogin]) {
+        return;
+    }
+}
 -(void)doubleClick:(UIViewController *)controller{
     int index = (int)controller.tabBarItem.tag;
     //NSLog(@"didSelectViewController:%d",index);
@@ -170,12 +222,65 @@ typedef enum {
 }
 
 
-#pragma mark -
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - AsyncHttpRequestDelegate
+- (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
+    [SVProgressHUD dismiss];
+    switch (request.m_requestType) {
+        case HttpRequestType_Img_LoadDown:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                //                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+                NSData *data = [request getResponseData];
+                if (!data || data.length <DefaultImageMinSize) {
+                    NSLog(@"请求图片失败");
+                    [request requestAgain];
+                    return;
+                }
+                NSLog(@"img.len:%d",(int)data.length);
+                //                UIImage *rImage = [UIImage imageWithData:data];
+                //                StoreItem *tmpStroeItem = [mDataArr objectAtIndex:ir.indexPath.row];
+                //                [XTFileManager saveTmpFolderFileWithUrlPath:tmpStroeItem.storeMiniPic with:rImage];
+                //                FoodListTableViewCell  * pc = (FoodListTableViewCell * )[self.tTableView cellForRowAtIndexPath:ir.indexPath];
+                //                if (pc) {
+                //                    pc.imgHeader.contentMode = DefaultImageViewContentMode;
+                //                    pc.imgHeader.image = rImage;
+                //                }
+                
+                
+            }else{
+                [request requestAgain];
+                NSLog(@"请求图片失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_GET_USER_UNREAD_MSG:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    isRequestSuc = YES;
+                    NSArray *tmpArr = (NSArray *)br.data;
+                    if (tmpArr) {
+                        NSArray *msgArr = [PushMessageItem getPushMessageItemsWithArr:tmpArr];
+                        int intSuc = [DBManager insertPushMessageItems:msgArr];
+                        NSLog(@"intSuc:%d",intSuc);
+                        
+                        [self setTabBadge];
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end

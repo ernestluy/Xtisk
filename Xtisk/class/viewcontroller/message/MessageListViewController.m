@@ -18,6 +18,13 @@
     UIFont *fontMsg;
     
     int maxWidth;
+    int curId;
+    
+    int curIndex;
+    
+    float tOffsetY;
+    
+    BOOL isNeedReload;
 }
 @end
 
@@ -26,11 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"消息";
+    self.title = @"i蛇口";
 //    self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
     mDataArr = [NSMutableArray array];
     fontSize = 14;
     fontMsg = [UIFont systemFontOfSize:14];
+    curId = -1;
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
     tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
@@ -48,21 +56,26 @@
     maxWidth = 150;
 //    CGRect tr = labTmp.frame;
     NSLog(@"over");
-    NSArray *tmpMsgArr = [DBManager queryPushMessageItemWithAccount:[SettingService sharedInstance].iUser.phone];
+//    NSArray *tmpMsgArr = [DBManager queryPushMessageItemWithAccount:[SettingService sharedInstance].iUser.phone];
+    NSArray *tmpMsgArr = [DBManager queryRecentMessagesWithSid:curId account:[SettingService sharedInstance].iUser.phone];
     if (tmpMsgArr) {
         [mDataArr addObjectsFromArray:tmpMsgArr];
     }
     
     self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
     tTableView.backgroundColor = [UIColor clearColor];
+    [DBManager updateMsgIsReadWithAccount:[SettingService sharedInstance].iUser.phone];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestData];
     
-    [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
 }
 
+-(void)requestData{
+    [[[HttpService sharedInstance] getRequestGetUserUnreadMsg:self type:@""]startAsynchronous];
+}
 
 /**
  @method 获取指定宽度width的字符串在UITextView上的高度
@@ -116,12 +129,61 @@
     }
     return mStr;
 }
+-(float)calHeightWithData:(PushMessageItem *)item{
+    item.tSize = [self sizeForString:item.content fontSize:fontSize andWidth:maxWidth];
+    return item.tSize.height + 15 + 14;
+}
+
+-(float)calHeightWithArr:(NSArray *)arr{
+    float allHeight = 0;
+    for (int i = 0; i<arr.count; i++) {
+        PushMessageItem *item = [arr objectAtIndex:i];
+        allHeight += [self calHeightWithData:item];
+    }
+    return allHeight;
+}
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
-    [tTableView performSelector:@selector(flushDoneStatus:) withObject:nil afterDelay:4];
+    if (mDataArr.count>0) {
+        PushMessageItem *item = [mDataArr objectAtIndex:0];
+        curId = item.sid;
+        NSArray *tmpMsgArr = [DBManager queryRecentMessagesWithSid:curId account:[SettingService sharedInstance].iUser.phone];
+        if (tmpMsgArr && tmpMsgArr.count>0) {
+            [mDataArr insertObjects:tmpMsgArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tmpMsgArr.count)]];
+//            curIndex = tmpMsgArr.count - 1;
+            
+            tOffsetY = [self calHeightWithArr:tmpMsgArr];
+            isNeedReload = YES;
+//            tTableView.contentOffset = CGPointMake(0, tHeight);
+//            [tTableView setContentOffset:CGPointMake(0,tHeight)];
+            
+        }else{
+            isNeedReload = NO;
+        }
+    }
+    
+    
+    [tTableView performSelector:@selector(flushDoneStatus:) withObject:nil afterDelay:0.1];
 }
 - (void)flushUpEnd:(NSObject *)ly{
+    if (isNeedReload) {
+        isNeedReload = NO;
+        [tTableView reloadData];
+        if (tOffsetY>0) {
+            tTableView.contentOffset = CGPointMake(0, tOffsetY - 20);
+        }
+    }
     
+//    [UIView animateWithDuration:0.25 animations:^{
+//        if (tOffsetY>0) {
+//            tTableView.contentOffset = CGPointMake(0, tOffsetY - 20);
+//        }
+//    }completion:^(BOOL finished){
+//        
+//    }];
+    
+    
+    tOffsetY = 0;
 }
 - (void)startToFlushDown:(NSObject *)ly{
     
@@ -162,7 +224,6 @@
     UITableViewCell * cell = (UITableViewCell*)[tv dequeueReusableCellWithIdentifier:kMessageListCell];
     
     int tTag = 1001;
-    int iconTag = 1002;
     int frameTag = 1003;
     
     CGRect bounds = [UIScreen mainScreen].bounds;
@@ -220,7 +281,7 @@
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    tTableView.contentOffset = CGPointMake(0, 120);
 }
 
 
@@ -269,7 +330,10 @@
                         }
                         int intSuc = [DBManager insertPushMessageItems:msgArr];
                         NSLog(@"intSuc:%d",intSuc);
-                        [self flushUI];
+                        if (msgArr.count>0) {
+                            [self flushUI];
+                        }
+                        
                         
                     }
                     

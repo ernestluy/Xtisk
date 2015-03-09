@@ -33,6 +33,12 @@
 @property(nonatomic,copy)NSString *token;
 @property(nonatomic,copy)NSString *psd;
 @property(nonatomic,copy)NSString *JSESSIONID;
+
+@property(nonatomic,copy)NSString *deviceToken;
+
+
+@property(nonatomic)int badgeMsg;
+@property(nonatomic)int badgeTicket;
 +(SettingService *)sharedInstance;
 
 -(BOOL)isLogin;

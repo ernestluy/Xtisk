@@ -58,10 +58,14 @@ static SettingService *settingServiceInstance = nil;
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLogout object:nil];
     
     self.iUser = nil;
     self.account = nil;
     self.JSESSIONID = nil;
+    
+    self.badgeMsg = 0;
+    self.badgeTicket = 0;
 }
 
 -(void)PermissionBaiduMap{

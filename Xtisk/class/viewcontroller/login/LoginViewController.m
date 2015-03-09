@@ -270,8 +270,13 @@ typedef enum  {
         [nav popViewControllerAnimated:YES];
     }
     
-    NSString *dfd = kUMessageAliasTypeSina;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPushMessageReceiveRemote object:nil];
     
+//    NSString *dfd = kUMessageAliasTypeSina;
+    
+    
+    
+    /*
     [UMessage addAlias:[SettingService sharedInstance].iUser.phone type:kUMessageAliasTypeSina response:^(id responseObject, NSError *error) {
         if(responseObject)
         {
@@ -287,6 +292,14 @@ typedef enum  {
             NSLog(@"addAlias%@",error.localizedDescription);
         }
     }];
+     */
+    [self performSelector:@selector(regDeviceToken) withObject:nil afterDelay:1];
+}
+
+-(void)regDeviceToken{
+    if ([SettingService sharedInstance].deviceToken) {
+        [[[HttpService sharedInstance] getRequestUploadDeviceId:self token:[SettingService sharedInstance].deviceToken]startAsynchronous];
+    }
 }
 
 
@@ -582,6 +595,21 @@ typedef enum  {
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
+        }
+        case HttpRequestType_XT_UPLOAD_DEVICE_TOKEN:{
+            if (HttpResponseTypeFinished ==  responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"token发送成功成功");
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else if (HttpResponseTypeFailed == responseCode){
+                NSLog(@"请求失败");
+            }
+            break;
+            
         }
         default:{
             

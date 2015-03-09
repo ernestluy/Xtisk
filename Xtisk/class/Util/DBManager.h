@@ -20,6 +20,8 @@
 
 + (BOOL) queryWithSql:(NSString*) sql inDBOfPath:(NSString*) dbPath;
 
++ (BOOL) updateWithSql:(NSString*) sql inDBOfPath:(NSString*) dbPath;
+
 + (int) updateWithSqls:(NSArray*) sqls inDBOfPath:(NSString*) dbPath;
 @end
 

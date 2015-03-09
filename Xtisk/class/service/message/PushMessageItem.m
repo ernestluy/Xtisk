@@ -23,6 +23,7 @@
     self = [super init];
     self.account = [SettingService sharedInstance].iUser.phone;
     self.isRead = NO;
+    self.sid = -1;
     return self;
 }
 
@@ -69,7 +70,7 @@
         return;
     }
     for (int i = 0; i<arr.count;i++) {
-        PushMessageItem * ci = [[PushMessageItem alloc]init];
+        PushMessageItem * ci = [arr objectAtIndex:i];
         ci.isRead = YES;
     }
 }

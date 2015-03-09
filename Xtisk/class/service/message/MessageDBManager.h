@@ -23,4 +23,8 @@
 +(NSArray *)getInsertPushMessageItemsSqlsWithArr:(NSArray *)arr;
 +(int)insertPushMessageItems:(NSArray *)arr;
 +(NSArray *)queryPushMessageItemWithAccount:(NSString *)account;
++(NSArray *)queryRecentMessagesWithSid:(int)sid account:(NSString *)account;
+
++(int)queryCountUnReadMsgWithAccount:(NSString *)account;
++(BOOL)updateMsgIsReadWithAccount:(NSString *)account;
 @end

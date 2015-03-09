@@ -127,6 +127,7 @@
 }
 -(void)logout:(id)sender{
     [[[HttpService sharedInstance] getRequestlogout:self] startAsynchronous];
+    
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
 }
 
@@ -641,6 +642,7 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"注销请求成功");
                     [[SettingService sharedInstance] logout];
+                    
                     [self.navigationController popViewControllerAnimated:YES];
                     
                 }else{

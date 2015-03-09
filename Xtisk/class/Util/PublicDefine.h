@@ -122,6 +122,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define IndexPosterList  @"posterList"
 #define CategoryRoot  @"CategoryRoot"
 
+#define DefaultMsgPageSize 10
 
 #define DefaultPageSize 20
 #define DefaultEnableAlhpe 0.5
@@ -130,7 +131,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 #define keyMyselfSign @"keyMyselfSign"
 
+#define kPushMessageReceiveRemote @"kPushMessageReceiveRemote"
+#define kTicketOrderGeneration    @"kTicketOrderGeneration"
+#define kLogout    @"kLogout"
 
+#define kDeviceToken    @"kDeviceToken"
 
 
 typedef enum  {

@@ -149,6 +149,10 @@
     //for log
     [UMessage setLogEnabled:YES];
     
+    NSString *tToken = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];
+    if (tToken) {
+        [SettingService sharedInstance].deviceToken = tToken;
+    }
     
     return YES;
 }
@@ -161,9 +165,14 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [UMessage registerDeviceToken:deviceToken];
-    NSLog(@"%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
-                  stringByReplacingOccurrencesOfString: @">" withString: @""]
-                 stringByReplacingOccurrencesOfString: @" " withString: @""]);
+    [SettingService sharedInstance].deviceToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                                    stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                                   stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSLog(@"%@",[SettingService sharedInstance].deviceToken);
+    if ([SettingService sharedInstance].deviceToken) {
+        [[NSUserDefaults standardUserDefaults] setObject:[SettingService sharedInstance].deviceToken forKey:kDeviceToken];
+    }
+    
     
 }
 
@@ -234,6 +243,8 @@
             [alertView show];
             
         }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPushMessageReceiveRemote object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

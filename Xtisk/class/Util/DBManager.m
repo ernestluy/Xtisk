@@ -99,6 +99,17 @@ static NSString* documentDir = nil;
     return FALSE;
 }
 
++ (BOOL) updateWithSql:(NSString*) sql inDBOfPath:(NSString*) dbPath{
+    FMDatabase * db = [FMDatabase databaseWithPath:kDATABASE_REAL_PATH];
+    if ([db open]) {
+        //NSLog(@"the update sql is %@",sql);
+        BOOL res = [db executeUpdate:sql];
+        [db close];
+        return res;
+    }
+    return FALSE;
+}
+
 + (int) updateWithSqls:(NSArray*) sqls inDBOfPath:(NSString*) dbPath{
     FMDatabaseQueue* myQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     FMDatabase* myDB = [FMDatabase databaseWithPath:dbPath];

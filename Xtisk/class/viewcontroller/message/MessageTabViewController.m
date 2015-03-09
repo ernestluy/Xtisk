@@ -12,7 +12,10 @@
 #import "PublicDefine.h"
 #import "ActivityViewController.h"
 #import "MessageListViewController.h"
+#import "BadgeView.h"
+#import "MessageListTableViewCell.h"
 #define MSG_TAB_HEIGHT 50.0
+#define kCell @"kCell"
 @interface MessageTabViewController ()
 {
     BOOL isCanFlushCtl;
@@ -29,6 +32,12 @@
     // Do any additional setup after loading the view from its nib.
     
     tCount= 5;
+    
+//    [self.tTableView registerClass:[MessageListTableViewCell class] forCellReuseIdentifier:kCell];
+    [self.tTableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:kCell];
+    
+    self.tTableView.separatorInset = UIEdgeInsetsMake(0, 48, 0, 0);
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -60,23 +69,28 @@
 -(UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *identifier = @"cell";
-    UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
-    if (cell ==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.textColor = [UIColor darkGrayColor];
-    }
+//    NSString *identifier = [NSString stringWithFormat:@"cell%d_%d",(int)indexPath.section,(int)indexPath.row];
+    MessageListTableViewCell * cell = (MessageListTableViewCell*)[tv dequeueReusableCellWithIdentifier:kCell];
+//    if (cell ==nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+////        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.textLabel.textColor = defaultTextColor;
+//    }
     
     
     if (0 == indexPath.section) {
-        cell.imageView.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
-        cell.textLabel.text = @"i蛇口";
+//        cell.imageView.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
+//        cell.textLabel.text = @"i蛇口";
+//        BadgeView *bView = [[BadgeView alloc]initWithFrame:CGRectMake(100, 10, 18, 18)];
+//        [cell addSubview:bView];
+//        [bView setTnum:0];
+        cell.imgViewHeader.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
+        cell.labTitle.text = @"i蛇口";
     }else if(1 == indexPath.section){
         NSArray *titleArr2 = @[@"船票",@"园区活动"];
         NSArray *imgArr2 =  @[@"msg_ticket_cell_icon",@"msg_activity_cell_icon"];
-        cell.imageView.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
-        cell.textLabel.text = [titleArr2 objectAtIndex:indexPath.row];
+        cell.imgViewHeader.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
+        cell.labTitle.text = [titleArr2 objectAtIndex:indexPath.row];
     }
     return cell;
 }

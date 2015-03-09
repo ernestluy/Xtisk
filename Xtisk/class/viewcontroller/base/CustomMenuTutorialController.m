@@ -74,15 +74,17 @@
             
             
             UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [btnDone setTitle:@"立即体验" forState:UIControlStateNormal];
-            btnDone.titleLabel.font = [UIFont systemFontOfSize:15];
-            btnDone.layer.borderColor = [UIColor whiteColor].CGColor;
-            btnDone.layer.borderWidth = 1;
-            btnDone.layer.cornerRadius = 4;
+            [btnDone setTitleColor:_rgb2uic(0xec2c2c, 1) forState:UIControlStateNormal];
+            [btnDone setTitle:@"立即开始" forState:UIControlStateNormal];
+            btnDone.titleLabel.font = [UIFont systemFontOfSize:20];
+            //ffecec
+            btnDone.backgroundColor = _rgb2uic(0xffecec, 1);
+//            btnDone.layer.borderColor = [UIColor whiteColor].CGColor;
+//            btnDone.layer.borderWidth = 1;
+            btnDone.layer.cornerRadius = 20;
             [btnDone addTarget:self action:@selector(into:) forControlEvents:UIControlEventTouchUpInside];
             
-            btnDone.frame  = CGRectMake(100, 100, 120, 35);
+            btnDone.frame  = CGRectMake(100, 100, 240, 40);
             btnDone.center = CGPointMake((i-1)*sRect.size.width + applicationFrame.size.width/2, applicationFrame.size.height - 100);
             
             [tutorialView addSubview:btnDone];

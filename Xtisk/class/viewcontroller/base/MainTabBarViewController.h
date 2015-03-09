@@ -15,4 +15,8 @@
 }
 
 -(void)doubleClick:(UIViewController *)controller;
+
+-(void)requestMsgData;
+-(void)dealRemoteMsg;
+-(void)dealTicketOrderMsg;
 @end

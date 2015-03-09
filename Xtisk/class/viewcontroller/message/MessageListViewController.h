@@ -12,5 +12,5 @@
 {
     
 }
-
+-(void)requestData;
 @end

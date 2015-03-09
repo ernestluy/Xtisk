@@ -124,5 +124,8 @@
 #pragma mark - 4.3.6.4获取用户未读消息
 -(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType;
 
+#pragma mark -  把ios的token发到tms
+-(AsyncHttpRequest *)getRequestUploadDeviceId:(id<AsyncHttpRequestDelegate>)delegate token:(NSString *)token;
+
 
 @end
