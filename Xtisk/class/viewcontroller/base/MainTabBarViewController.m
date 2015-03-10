@@ -17,6 +17,8 @@
 #import "LoginViewController.h"
 #import "DBManager.h"
 #import "MessageDBManager.h"
+#import "MsgPlaySound.h"
+#import "MessageListViewController.h"
 typedef enum {
     TAB_BAR_INDEX = 0,
     TAB_BAR_MSG,
@@ -140,18 +142,22 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealRemoteMsg) name:kPushMessageReceiveRemote object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealTicketOrderMsg) name:kTicketOrderGeneration object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setTabBadge) name:kPushMessageFlush object:nil];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealLogout) name:kLogout object:nil];
     
 }
 
 -(void)setTabBadge{
+    NSLog(@"setTabBadge");
     int unReadMsg = [DBManager queryCountUnReadMsgWithAccount:[SettingService sharedInstance].iUser.phone];
     [SettingService sharedInstance].badgeMsg = unReadMsg;
     int allUnRead = [SettingService sharedInstance].badgeTicket + [SettingService sharedInstance].badgeMsg;
     if (allUnRead == 0) {
         msgVc.tabBarItem.badgeValue = nil;
     }else{
+        [[MsgPlaySound sharedInstance] playReceiveMsg];
+        
         msgVc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",allUnRead];
     }
 }
@@ -169,7 +175,14 @@ typedef enum {
         
         return;
     }
-    [self setTabBadge];
+    //如果当前处于查看ishekou消息状况下
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[MessageListViewController class]]) {
+            NSLog(@"当前处于聊天状态，此处不处理");
+            return;
+        }
+    }
+//    [self setTabBadge];
     [self requestMsgData];
 }
 -(void)dealTicketOrderMsg{
@@ -206,7 +219,7 @@ typedef enum {
 }
 #pragma mark UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0){
-    NSLog(@"shouldSelectViewController");
+//    NSLog(@"shouldSelectViewController");
     if((int)viewController.tabBarItem.tag == TAB_BAR_MSG){
         if([[SettingService sharedInstance] isLogin]){
             return YES;
@@ -265,8 +278,8 @@ typedef enum {
                         NSArray *msgArr = [PushMessageItem getPushMessageItemsWithArr:tmpArr];
                         int intSuc = [DBManager insertPushMessageItems:msgArr];
                         NSLog(@"intSuc:%d",intSuc);
+                        [[NSNotificationCenter defaultCenter]postNotificationName:kPushMessageFlush object:nil];
                         
-                        [self setTabBadge];
                     }
                     
                 }else{

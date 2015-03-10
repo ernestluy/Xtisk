@@ -25,6 +25,7 @@
     iuser.birthday     = [IUser getValueFromKey:dic key:@"birthday"];// [dic objectForKey:@"birthday"];
     iuser.maritalStatus= [IUser getValueFromKey:dic key:@"maritalStatus"];// [dic objectForKey:@"maritalStatus"];
     iuser.enterprise   = [IUser getValueFromKey:dic key:@"enterprise"];// [dic objectForKey:@"enterprise"];
+    iuser.deviceId   = [IUser getValueFromKey:dic key:@"deviceId"];
     return iuser;
 }
 +(NSString *)getValueFromKey:(NSDictionary *)dic key:(NSString *)key{

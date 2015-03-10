@@ -41,6 +41,7 @@
 @property(nonatomic)int badgeTicket;
 +(SettingService *)sharedInstance;
 
+-(void)loginSucWithUser:(IUser *)tUser;
 -(BOOL)isLogin;
 -(void)setLoginJSessionid;
 -(void)logout;

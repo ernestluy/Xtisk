@@ -28,5 +28,11 @@
     self.inLabName.text = tuser.nickName;
     self.inLabAccount.text = tuser.phone;
     self.inLabSign.text = tuser.signature;
+    if (tuser.nickName== nil ||tuser.nickName.length == 0) {
+        self.inLabName.text = @"未设置";
+    }
+    if (tuser.signature== nil ||tuser.signature.length == 0) {
+        self.inLabSign.text = @"未设置";
+    }
 }
 @end

@@ -186,6 +186,9 @@
 //            [self.navigationController pushViewController:fc animated:YES];
             TicketQueryViewController *tqv = [[TicketQueryViewController alloc] init];
             [self.navigationController pushViewController:tqv animated:YES];
+            
+//            InfoViewController *iv = [[InfoViewController alloc]initWithLocalUrl:@"ticket_warning.html" title:@"蛇口购票须知"];
+//            [self.navigationController pushViewController:iv animated:YES];
             break;
         }
         case 1:{

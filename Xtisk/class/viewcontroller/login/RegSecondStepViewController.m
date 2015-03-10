@@ -241,7 +241,9 @@
                             [SVProgressHUD showErrorWithStatus:@"注册失败" duration:1.5];
                             return;
                         }
-                        [SettingService sharedInstance].iUser = user;
+//                        [SettingService sharedInstance].iUser = user;
+//                        [[SettingService sharedInstance] setLoginJSessionid];
+                        [[SettingService sharedInstance] loginSucWithUser:user];
                         [self regSuc];
                     }
                     

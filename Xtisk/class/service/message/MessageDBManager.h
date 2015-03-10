@@ -14,11 +14,11 @@
 @interface DBManager(MessageDBManager)
 
 
-+(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId;
 +(int)executeSqlsWithArray:(NSArray *)sqlArr;
 
 #pragma mark - PushMessageItem
 +(PushMessageItem *)queryPushMessageItemWithId:(NSString *)pId;
++(PushMessageItem *)queryPushMessageItemLastOneWithAccount:(NSString *)accoutn;
 +(NSString *)getInsertSqlWithPushMessageItem:(PushMessageItem *)item;
 +(NSArray *)getInsertPushMessageItemsSqlsWithArr:(NSArray *)arr;
 +(int)insertPushMessageItems:(NSArray *)arr;

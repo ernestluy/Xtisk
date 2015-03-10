@@ -61,6 +61,40 @@
     return nil;
 }
 
++(PushMessageItem *)queryPushMessageItemLastOneWithAccount:(NSString *)account{
+    if (!account || account.length == 0) {
+        return nil;
+    }
+
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from push_msg where account='%@'  order by dateCreate desc limit 1",account];
+    FMDatabase* myDB = [FMDatabase databaseWithPath:kDATABASE_REAL_PATH];
+    FMResultSet *rs = nil;
+    if ([myDB open]) {
+        
+        rs = [myDB executeQuery:sql];
+        if (rs) {
+            if ([rs next]) {
+                PushMessageItem *pi = [[PushMessageItem alloc] init];
+                pi.sid = [rs intForColumn:@"sid"];
+                pi.pid = [rs intForColumn:@"pid"];
+                pi.type = [rs stringForColumn:@"type"];
+                pi.content = [rs stringForColumn:@"content"];
+                pi.account = [rs stringForColumn:@"account"];
+                pi.loc_create_date = [rs stringForColumn:@"loc_create_date"];
+                pi.dateCreate = [rs stringForColumn:@"dateCreate"];
+                [myDB close];
+                return pi;
+            }
+            
+        }
+        [myDB close];
+    }else{
+        NSLog(@"queryPushMessageItemLastOneWithAccount open faile");
+    }
+    return nil;
+}
+
 +(NSString *)getInsertSqlWithPushMessageItem:(PushMessageItem *)item{
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {

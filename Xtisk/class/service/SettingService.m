@@ -31,6 +31,13 @@ static SettingService *settingServiceInstance = nil;
     _mapManager = nil;
     return self;
 }
+
+-(void)loginSucWithUser:(IUser *)tUser{
+    self.iUser = tUser;
+    [self setLoginJSessionid];
+}
+
+
 -(BOOL)isLogin{
 //    if (self.JSESSIONID && self.JSESSIONID.length>0) {
 //        return YES;

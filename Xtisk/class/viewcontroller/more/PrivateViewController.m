@@ -581,7 +581,7 @@
     switch (request.m_requestType) {
         case HttpRequestType_Img_LoadDown:{
             if (HttpResponseTypeFinished ==  responseCode) {
-                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
+//                AsyncImgDownLoadRequest *ir = (AsyncImgDownLoadRequest *)request;
                 NSData *data = [request getResponseData];
                 if (!data || data.length <DefaultImageMinSize) {
                     NSLog(@"请求图片失败");

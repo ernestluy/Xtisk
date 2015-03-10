@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view.
     self.title = @"注册账号";
     CGRect bounds = [UIScreen mainScreen].bounds;
-    limitTime = 10;
+    limitTime = GetVerifyCodeWaitingTime;
     self.view.backgroundColor = _rgb2uic(0xeff9fb, 1);
     UIView *tView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 150)];
     tView.backgroundColor = [UIColor clearColor];

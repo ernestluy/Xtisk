@@ -122,7 +122,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define IndexPosterList  @"posterList"
 #define CategoryRoot  @"CategoryRoot"
 
-#define DefaultMsgPageSize 10
+#define DefaultMsgPageSize 20
 
 #define DefaultPageSize 20
 #define DefaultEnableAlhpe 0.5
@@ -132,6 +132,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define keyMyselfSign @"keyMyselfSign"
 
 #define kPushMessageReceiveRemote @"kPushMessageReceiveRemote"
+#define kPushMessageFlush @"kPushMessageFlush"
 #define kTicketOrderGeneration    @"kTicketOrderGeneration"
 #define kLogout    @"kLogout"
 
@@ -234,7 +235,7 @@ typedef enum  {
 #define DefaultRequestFaile  @"请求失败"
 #define DefaultRequestFaileToAgain  @"请求失败，请重新请求"
 #define DefaultRequestException  @"请求异常"
-#define GetVerifyCodeWaitingTime 10
+#define GetVerifyCodeWaitingTime 60
 
 #define DefaultImageMinSize 1000
 

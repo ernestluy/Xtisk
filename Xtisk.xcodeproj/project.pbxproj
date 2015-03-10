@@ -128,6 +128,8 @@
 		7664BB891AADA49100E59DF0 /* MessageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB871AADA49100E59DF0 /* MessageListTableViewCell.m */; };
 		7664BB8A1AADA49100E59DF0 /* MessageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB881AADA49100E59DF0 /* MessageListTableViewCell.xib */; };
 		7664BB8D1AADA79300E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */; };
+		7664BB901AAE982400E59DF0 /* MsgPlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */; };
+		7664BB921AAEC28A00E59DF0 /* ticket_warning.html in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB911AAEC28A00E59DF0 /* ticket_warning.html */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -583,6 +585,9 @@
 		7664BB871AADA49100E59DF0 /* MessageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewCell.m; sourceTree = "<group>"; };
 		7664BB881AADA49100E59DF0 /* MessageListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListTableViewCell.xib; sourceTree = "<group>"; };
 		7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		7664BB8E1AAE982400E59DF0 /* MsgPlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgPlaySound.h; sourceTree = "<group>"; };
+		7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgPlaySound.m; sourceTree = "<group>"; };
+		7664BB911AAEC28A00E59DF0 /* ticket_warning.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ticket_warning.html; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -1772,6 +1777,8 @@
 				764D60181A836DD600B186A5 /* XTFileManager.m */,
 				760BF1E71A8CB7F90088DBA2 /* ForC++.h */,
 				760BF1E81A8CB7F90088DBA2 /* ForC++.m */,
+				7664BB8E1AAE982400E59DF0 /* MsgPlaySound.h */,
+				7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1848,6 +1855,7 @@
 		ED25875F1A7FABF7008EB344 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				7664BB911AAEC28A00E59DF0 /* ticket_warning.html */,
 				764D601C1A8449CF00B186A5 /* xt.sql */,
 				ED2587601A7FABF7008EB344 /* img */,
 			);
@@ -2213,6 +2221,7 @@
 				76C87CED1A8CA43E00843060 /* UMSCommentInputController.xib in Resources */,
 				764D60A41A8B251500B186A5 /* msg_ticket_cell_icon@2x.png in Resources */,
 				764D608E1A8AEBEE00B186A5 /* more_heaer_bg.png in Resources */,
+				7664BB921AAEC28A00E59DF0 /* ticket_warning.html in Resources */,
 				767B6FDD1AA5B46700D0FA54 /* guide_2@2x.png in Resources */,
 				ED8C77CA1A930691009C8286 /* near_food_0@2x.png in Resources */,
 				ED25876A1A80F961008EB344 /* SVProgressHUD.bundle in Resources */,
@@ -2402,6 +2411,7 @@
 				EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
+				7664BB901AAE982400E59DF0 /* MsgPlaySound.m in Sources */,
 				ED2D491E1AAAC844007CC065 /* AFURLSessionManager.m in Sources */,
 				76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,

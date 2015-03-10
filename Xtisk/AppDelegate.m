@@ -26,7 +26,9 @@
 #define isNeedDelDB NO
 
 @interface AppDelegate ()
-
+{
+    BOOL isBackToFore;
+}
 @end
 
 @implementation AppDelegate
@@ -40,7 +42,7 @@
 //    nav.interactivePopGestureRecognizer.enabled = NO;
 //    [nav pushViewController:[[LoginViewController alloc]init] animated:NO];
 //    self.window.rootViewController = nav;
-    
+    isBackToFore = NO;
     
     
     CustomNavigationController *nav = [[CustomNavigationController alloc]init];
@@ -147,13 +149,13 @@
 #endif
     
     //for log
-    [UMessage setLogEnabled:YES];
+//    [UMessage setLogEnabled:YES];
     
     NSString *tToken = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];
     if (tToken) {
         [SettingService sharedInstance].deviceToken = tToken;
     }
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     return YES;
 }
 
@@ -222,7 +224,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //关闭友盟自带的弹出框
-    //    [UMessage setAutoAlert:NO];
+    [UMessage setAutoAlert:NO];
  
     [UMessage didReceiveRemoteNotification:userInfo];
     if (userInfo) {
@@ -231,37 +233,62 @@
         NSLog(@"didReceiveRemote msgType:%@,productId:%@",msgType,productId);
     }
 //        self.userInfo = userInfo;
+//    NSLog(@"userInfo:%@",[userInfo description]);
+    /*
+     userInfo:{
+     aps =     {
+     alert = 9999444;
+     badge = 0;
+     sound = chime;
+     };
+     d = us80596142596481520601;
+     msgId = 1513;
+     msgType = 1;
+     p = 0;
+     text = 9999444;
+     }
+     */
         //定制自定的的弹出框
-        if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
-                                                                message:@"Test On ApplicationStateActive"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"确定"
-                                                      otherButtonTitles:nil];
-    
-            [alertView show];
-            
-        }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPushMessageReceiveRemote object:nil];
+//        if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+//        {
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
+//                                                                message:@"Test On ApplicationStateActive"
+//                                                               delegate:self
+//                                                      cancelButtonTitle:@"确定"
+//                                                      otherButtonTitles:nil];
+//    
+//            [alertView show];
+//            
+//        }
+    if (!isBackToFore){
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPushMessageReceiveRemote object:nil];
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    NSLog(@"\n ===> 程序暂行 !");
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    NSLog(@"\n ===> 程序进入后台 !");
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"\n ===> 程序进入前台 !");
+    isBackToFore = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPushMessageReceiveRemote object:nil];
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    NSLog(@"\n ===> applicationDidBecomeActive !");
+    isBackToFore = NO;
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

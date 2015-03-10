@@ -4,6 +4,7 @@
 @interface InfoViewController ()
 {
     NSTimer *timer;
+    BOOL isLocal;
 }
 @end
 
@@ -19,6 +20,14 @@
     self = [super init];
     self.tUrl = urlString;
     self.tTitle = tl;
+    isLocal = NO;
+    return self;
+}
+-(id)initWithLocalUrl:(NSString *)localString title:(NSString *)tl{
+    self = [super init];
+    self.tUrl = localString;
+    self.tTitle = tl;
+    isLocal = YES;
     return self;
 }
 -(void)dealloc{
@@ -56,12 +65,17 @@
     [self.view addSubview:webView];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
-    [self loadRemoteUrl:self.tUrl];
+    if (!isLocal) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
+        [self loadRemoteUrl:self.tUrl];
+    }else{
+        [self loadLocalFile:self.tUrl];
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [SVProgressHUD showWithStatus:@"正在加载..." ];
+//    [SVProgressHUD showWithStatus:@"正在加载..." ];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -79,8 +93,17 @@
     [SVProgressHUD dismiss];
 }
 
+
+- (void)loadLocalFile:(NSString *)file{
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:file];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+    
+}
+
+
 - (void)loadRemoteUrl:(NSString *)urlString
 {
+    [SVProgressHUD showWithStatus:@"正在加载..." ];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL: url];
     [webView loadRequest:request];

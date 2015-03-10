@@ -22,6 +22,7 @@
         self.hidden = YES;
         return;
     }
+    self.hidden = NO;
     strNum = [NSString stringWithFormat:@"%d",num];
     [self setNeedsDisplay];
 }

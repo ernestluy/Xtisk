@@ -581,8 +581,9 @@ typedef enum  {
                             [SVProgressHUD showErrorWithStatus:@"登录失败" duration:DefaultRequestDonePromptTime];
                             return;
                         }
-                        [SettingService sharedInstance].iUser = user;
-                        [[SettingService sharedInstance] setLoginJSessionid];
+//                        [SettingService sharedInstance].iUser = user;
+//                        [[SettingService sharedInstance] setLoginJSessionid];
+                        [[SettingService sharedInstance] loginSucWithUser:user];
                         [SVProgressHUD showSuccessWithStatus:@"登录成功" duration:1];
                         [self loginSucInto];
                     }
@@ -603,7 +604,7 @@ typedef enum  {
                     NSLog(@"token发送成功成功");
                     
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+//                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求失败");

@@ -558,7 +558,7 @@ static HttpService *httpServiceInstance = nil;
 //    [mContentStr appendFormat:@"toPortCodeReturn=%@&",par.toPortCodeReturn];
     [mContentStr appendFormat:@"currencyCode=%@&",par.currencyCode];
     [mContentStr appendFormat:@"isRoundtrip=%@&",par.isRoundtrip];
-    [mContentStr appendFormat:@"lang=%@&",par.lang];
+    [mContentStr appendFormat:@"lang=%@",par.lang];
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [Util strToData:sendStr];

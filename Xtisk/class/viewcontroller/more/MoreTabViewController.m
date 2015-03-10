@@ -76,7 +76,24 @@
     
     if ([[SettingService sharedInstance] isLogin]) {
         self.tTableView.tableHeaderView = inHeaderView;
+        IUser *tUser = [SettingService sharedInstance].iUser;
         [inHeaderView inSetDataWith:[SettingService sharedInstance].iUser];
+        
+        //判断头像是否已经下载
+        if (tUser.headImageUrl && tUser.headImageUrl.length >3) {
+            UIImage *tImg = [XTFileManager getDocFolderFileWithUrlPath:tUser.headImageUrl];
+            if (!tImg) {
+                AsyncImgDownLoadRequest *request = [[HttpService sharedInstance] getImgRequest:self url:tUser.headImageUrl];
+                request.tTag = REQUEST_HEADER_TAG;
+                [request startAsynchronous];
+            }else{
+                inHeaderView.inImageHead.contentMode = DefaultImageViewContentMode;
+                inHeaderView.inImageHead.layer.masksToBounds = YES;
+                inHeaderView.inImageHead.layer.cornerRadius = inHeaderView.inImageHead.frame.size.width/2;
+                inHeaderView.inImageHead.image = tImg;
+            }
+        }
+        
     }else{
         self.tTableView.tableHeaderView = outHeaderView;
     }
@@ -263,11 +280,13 @@
                 }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
-//                NSString *imgUrl = [[SettingService sharedInstance].iUser.headImageUrl stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+
                 
                 if (REQUEST_HEADER_TAG == ir.tTag) {
-                    NSString *headerPath = PathDocFile([SettingService sharedInstance].iUser.headImageUrl);
-                    [XTFileManager writeImage:rImage toFileAtPath:headerPath];
+                    [XTFileManager saveDocFolderFileWithUrlPath:[SettingService sharedInstance].iUser.headImageUrl with:rImage];
+                    inHeaderView.inImageHead.layer.cornerRadius = inHeaderView.inImageHead.frame.size.width/2;
+                    inHeaderView.inImageHead.contentMode = DefaultImageViewContentMode;
+                    inHeaderView.inImageHead.image = rImage;
                 }
                 
             }else{

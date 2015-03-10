@@ -30,6 +30,12 @@
 
 @implementation MessageListViewController
 
+
+-(void)dealloc{
+    NSLog(@"MessageListViewController dealloc");
+    [[NSNotificationCenter defaultCenter]postNotificationName:kPushMessageFlush object:nil];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -65,10 +71,13 @@
     self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
     tTableView.backgroundColor = [UIColor clearColor];
     [DBManager updateMsgIsReadWithAccount:[SettingService sharedInstance].iUser.phone];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestData) name:kPushMessageReceiveRemote object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self flushUI];
     [self requestData];
     
 }
@@ -261,7 +270,7 @@
     labMsg.frame = CGRectMake(60, 7 + insetH/2, item.tSize.width, item.tSize.height);
     frameImgView.frame = CGRectMake(45, 2 + insetH/2, item.tSize.width + 20, item.tSize.height + 13);
     UIImage* tImage =  [UIImage imageNamed:@"msg_im_frame"];
-    tImage = [tImage stretchableImageWithLeftCapWidth:22 topCapHeight:25];
+    tImage = [tImage stretchableImageWithLeftCapWidth:20 topCapHeight:20];
     frameImgView.image = tImage;
     return cell;
 }

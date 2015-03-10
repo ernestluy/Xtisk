@@ -10,6 +10,7 @@
 #import "PopoverView.h"
 #import "PublicDefine.h"
 #import "TicketQueryListViewController.h"
+#import "InfoViewController.h"
 #define TQV_HEIGHT 44.0
 @interface TicketQueryViewController ()
 {
@@ -125,6 +126,11 @@
         allLines = [TicketSerivice sharedInstance].allShipLines;
     }
     [self flushUI];
+}
+
+-(void)toNotice{
+    InfoViewController *iv = [[InfoViewController alloc]initWithLocalUrl:@"ticket_warning.html" title:@"蛇口购票须知"];
+    [self.navigationController pushViewController:iv animated:YES];
 }
 -(void)setOriginStationTitle:(NSString *)str{
     [btnOriginStation setTitle:str forState:UIControlStateNormal];

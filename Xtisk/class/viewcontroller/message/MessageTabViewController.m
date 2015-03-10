@@ -14,6 +14,7 @@
 #import "MessageListViewController.h"
 #import "BadgeView.h"
 #import "MessageListTableViewCell.h"
+#import "MessageDBManager.h"
 #define MSG_TAB_HEIGHT 50.0
 #define kCell @"kCell"
 @interface MessageTabViewController ()
@@ -37,16 +38,20 @@
     [self.tTableView registerNib:[UINib nibWithNibName:@"MessageListTableViewCell" bundle:nil] forCellReuseIdentifier:kCell];
     
     self.tTableView.separatorInset = UIEdgeInsetsMake(0, 48, 0, 0);
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flushMsgStatus) name:kPushMessageFlush object:nil];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.title = @"消息";
+//    [self.tTableView reloadData];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)flushMsgStatus {
+    NSLog(@"flushMsgStatus");
+    [self.tTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -86,11 +91,22 @@
 //        [bView setTnum:0];
         cell.imgViewHeader.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
         cell.labTitle.text = @"i蛇口";
+        int unReadMsg = [DBManager queryCountUnReadMsgWithAccount:[SettingService sharedInstance].iUser.phone];
+        [cell.badgeView setTnum:unReadMsg];
+        PushMessageItem *item = [DBManager queryPushMessageItemLastOneWithAccount:[SettingService sharedInstance].iUser.phone];
+        if (item) {
+            cell.labMsg.text = item.content;
+        }
     }else if(1 == indexPath.section){
         NSArray *titleArr2 = @[@"船票",@"园区活动"];
         NSArray *imgArr2 =  @[@"msg_ticket_cell_icon",@"msg_activity_cell_icon"];
         cell.imgViewHeader.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
         cell.labTitle.text = [titleArr2 objectAtIndex:indexPath.row];
+        [cell.badgeView setTnum:0];
+        if (0 == indexPath.row) {
+            [cell.badgeView setTnum:[SettingService sharedInstance].badgeTicket];
+        }
+        cell.labMsg.text = @"";
     }
     return cell;
 }
@@ -114,6 +130,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (0 == indexPath.section && 0 == indexPath.row) {
         MessageListViewController *mc = [[MessageListViewController alloc] init];
+        [DBManager updateMsgIsReadWithAccount:[SettingService sharedInstance].iUser.phone];
         [self.navigationController pushViewController:mc animated:YES];
     }
     if (1 == indexPath.section &&  0 == indexPath.row) {
