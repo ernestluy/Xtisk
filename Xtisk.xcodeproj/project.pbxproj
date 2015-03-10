@@ -103,12 +103,12 @@
 		7664BABB1AA7F9A000E59DF0 /* TicketOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABA1AA7F9A000E59DF0 /* TicketOrder.m */; };
 		7664BABE1AA7FAC200E59DF0 /* TicketInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */; };
 		7664BAC11AA801F600E59DF0 /* VoyageRequestPar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BAC01AA801F600E59DF0 /* VoyageRequestPar.m */; };
-		7664BACD1AA8236A00E59DF0 /* ticket_add_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */; };
-		7664BACE1AA8236A00E59DF0 /* ticket_add_touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */; };
-		7664BACF1AA8236A00E59DF0 /* ticket_add_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */; };
-		7664BAD01AA8236A00E59DF0 /* ticket_del_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */; };
-		7664BAD11AA8236A00E59DF0 /* ticket_del_touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */; };
-		7664BAD21AA8236A00E59DF0 /* ticket_del_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */; };
+		7664BACD1AA8236A00E59DF0 /* ticket_add_invalid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC21AA8236A00E59DF0 /* ticket_add_invalid@2x.png */; };
+		7664BACE1AA8236A00E59DF0 /* ticket_add_touch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC31AA8236A00E59DF0 /* ticket_add_touch@2x.png */; };
+		7664BACF1AA8236A00E59DF0 /* ticket_add_valid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC41AA8236A00E59DF0 /* ticket_add_valid@2x.png */; };
+		7664BAD01AA8236A00E59DF0 /* ticket_del_invalid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC51AA8236A00E59DF0 /* ticket_del_invalid@2x.png */; };
+		7664BAD11AA8236A00E59DF0 /* ticket_del_touch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC61AA8236A00E59DF0 /* ticket_del_touch@2x.png */; };
+		7664BAD21AA8236A00E59DF0 /* ticket_del_valid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC71AA8236A00E59DF0 /* ticket_del_valid@2x.png */; };
 		7664BAD31AA8236A00E59DF0 /* ticket_order_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */; };
 		7664BAD41AA8236A00E59DF0 /* ticket_order_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */; };
 		7664BAD51AA8236A00E59DF0 /* ticket_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */; };
@@ -130,6 +130,8 @@
 		7664BB8D1AADA79300E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */; };
 		7664BB901AAE982400E59DF0 /* MsgPlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */; };
 		7664BB921AAEC28A00E59DF0 /* ticket_warning.html in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB911AAEC28A00E59DF0 /* ticket_warning.html */; };
+		7664BB961AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB941AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.m */; };
+		7664BB971AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB951AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.xib */; };
 		767812681A806C3200CB4B08 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812671A806C3200CB4B08 /* RegViewController.m */; };
 		7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812691A806C6000CB4B08 /* RegViewController.xib */; };
 		7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7678126B1A80736600CB4B08 /* base_back@2x.png */; };
@@ -552,12 +554,12 @@
 		7664BABD1AA7FAC200E59DF0 /* TicketInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketInfoItem.m; sourceTree = "<group>"; };
 		7664BABF1AA801F600E59DF0 /* VoyageRequestPar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoyageRequestPar.h; sourceTree = "<group>"; };
 		7664BAC01AA801F600E59DF0 /* VoyageRequestPar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoyageRequestPar.m; sourceTree = "<group>"; };
-		7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_invalid.png; sourceTree = "<group>"; };
-		7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_touch.png; sourceTree = "<group>"; };
-		7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_add_valid.png; sourceTree = "<group>"; };
-		7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_invalid.png; sourceTree = "<group>"; };
-		7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_touch.png; sourceTree = "<group>"; };
-		7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_del_valid.png; sourceTree = "<group>"; };
+		7664BAC21AA8236A00E59DF0 /* ticket_add_invalid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_add_invalid@2x.png"; sourceTree = "<group>"; };
+		7664BAC31AA8236A00E59DF0 /* ticket_add_touch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_add_touch@2x.png"; sourceTree = "<group>"; };
+		7664BAC41AA8236A00E59DF0 /* ticket_add_valid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_add_valid@2x.png"; sourceTree = "<group>"; };
+		7664BAC51AA8236A00E59DF0 /* ticket_del_invalid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_del_invalid@2x.png"; sourceTree = "<group>"; };
+		7664BAC61AA8236A00E59DF0 /* ticket_del_touch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_del_touch@2x.png"; sourceTree = "<group>"; };
+		7664BAC71AA8236A00E59DF0 /* ticket_del_valid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_del_valid@2x.png"; sourceTree = "<group>"; };
 		7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_order_no@2x.png"; sourceTree = "<group>"; };
 		7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket_order_yes.png; sourceTree = "<group>"; };
 		7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticket_switch@2x.png"; sourceTree = "<group>"; };
@@ -588,6 +590,9 @@
 		7664BB8E1AAE982400E59DF0 /* MsgPlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgPlaySound.h; sourceTree = "<group>"; };
 		7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgPlaySound.m; sourceTree = "<group>"; };
 		7664BB911AAEC28A00E59DF0 /* ticket_warning.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ticket_warning.html; sourceTree = "<group>"; };
+		7664BB931AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketNumsEdit1TableViewCell.h; sourceTree = "<group>"; };
+		7664BB941AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketNumsEdit1TableViewCell.m; sourceTree = "<group>"; };
+		7664BB951AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketNumsEdit1TableViewCell.xib; sourceTree = "<group>"; };
 		767812661A806C3200CB4B08 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		767812671A806C3200CB4B08 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		767812691A806C6000CB4B08 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -1159,6 +1164,9 @@
 				7664BAAB1AA7EAE200E59DF0 /* TicketListTableViewCell.h */,
 				7664BAAC1AA7EAE200E59DF0 /* TicketListTableViewCell.m */,
 				7664BAAD1AA7EAE200E59DF0 /* TicketListTableViewCell.xib */,
+				7664BB931AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.h */,
+				7664BB941AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.m */,
+				7664BB951AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1867,12 +1875,12 @@
 			children = (
 				7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */,
 				7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */,
-				7664BAC21AA8236A00E59DF0 /* ticket_add_invalid.png */,
-				7664BAC31AA8236A00E59DF0 /* ticket_add_touch.png */,
-				7664BAC41AA8236A00E59DF0 /* ticket_add_valid.png */,
-				7664BAC51AA8236A00E59DF0 /* ticket_del_invalid.png */,
-				7664BAC61AA8236A00E59DF0 /* ticket_del_touch.png */,
-				7664BAC71AA8236A00E59DF0 /* ticket_del_valid.png */,
+				7664BAC21AA8236A00E59DF0 /* ticket_add_invalid@2x.png */,
+				7664BAC31AA8236A00E59DF0 /* ticket_add_touch@2x.png */,
+				7664BAC41AA8236A00E59DF0 /* ticket_add_valid@2x.png */,
+				7664BAC51AA8236A00E59DF0 /* ticket_del_invalid@2x.png */,
+				7664BAC61AA8236A00E59DF0 /* ticket_del_touch@2x.png */,
+				7664BAC71AA8236A00E59DF0 /* ticket_del_valid@2x.png */,
 				7664BAC81AA8236A00E59DF0 /* ticket_order_no@2x.png */,
 				7664BAC91AA8236A00E59DF0 /* ticket_order_yes.png */,
 				7664BACA1AA8236A00E59DF0 /* ticket_switch@2x.png */,
@@ -2162,7 +2170,7 @@
 				767812D31A81F9FC00CB4B08 /* 1-4.jpg in Resources */,
 				764D60961A8AF41C00B186A5 /* login_header_bg@2x.png in Resources */,
 				ED2586EC1A7D14A1008EB344 /* Images.xcassets in Resources */,
-				7664BAD11AA8236A00E59DF0 /* ticket_del_touch.png in Resources */,
+				7664BAD11AA8236A00E59DF0 /* ticket_del_touch@2x.png in Resources */,
 				ED8C78201A95F7BF009C8286 /* ShopMenuCollectionViewCell.xib in Resources */,
 				ED8C77B81A92F58B009C8286 /* ServiceMenuComViewController.xib in Resources */,
 				767812D11A81F9FC00CB4B08 /* 1-2.jpg in Resources */,
@@ -2172,14 +2180,14 @@
 				ED8C78481A970CDE009C8286 /* about_tel@2x.png in Resources */,
 				76C87CF41A8CA43E00843060 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				7664BAA11AA6D00400E59DF0 /* icon-60@2x.png in Resources */,
-				7664BAD21AA8236A00E59DF0 /* ticket_del_valid.png in Resources */,
+				7664BAD21AA8236A00E59DF0 /* ticket_del_valid@2x.png in Resources */,
 				767812D01A81F9FC00CB4B08 /* 1-1.jpg in Resources */,
-				7664BACD1AA8236A00E59DF0 /* ticket_add_invalid.png in Resources */,
+				7664BACD1AA8236A00E59DF0 /* ticket_add_invalid@2x.png in Resources */,
 				ED8C78321A96F149009C8286 /* ActivityDetailViewController.xib in Resources */,
 				764D60A61A8B2D2800B186A5 /* default_header_black@2x.png in Resources */,
 				ED8C78041A94DACE009C8286 /* food_call_touch@2x.png in Resources */,
 				ED8C78371A96F6CD009C8286 /* activity_commend_btn@2x.png in Resources */,
-				7664BAD01AA8236A00E59DF0 /* ticket_del_invalid.png in Resources */,
+				7664BAD01AA8236A00E59DF0 /* ticket_del_invalid@2x.png in Resources */,
 				ED8C77E81A9357E4009C8286 /* line_gray.png in Resources */,
 				7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */,
 				76C87CF01A8CA43E00843060 /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -2207,7 +2215,7 @@
 				EDD99D201A97B06F00DFF260 /* TicketDetailContentView.xib in Resources */,
 				ED8C77CC1A930692009C8286 /* near_food_2@2x.png in Resources */,
 				764D60A21A8B251500B186A5 /* msg_activity_cell_icon@2x.png in Resources */,
-				7664BACF1AA8236A00E59DF0 /* ticket_add_valid.png in Resources */,
+				7664BACF1AA8236A00E59DF0 /* ticket_add_valid@2x.png in Resources */,
 				ED8C77EA1A93650F009C8286 /* commend_icon@2x.png in Resources */,
 				76C87CFF1A8CA43E00843060 /* ios-social-sdk-shake.html in Resources */,
 				ED8C77BD1A92FD23009C8286 /* NearMenuCollectionViewCell.xib in Resources */,
@@ -2250,7 +2258,7 @@
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
 				764D609B1A8AF41C00B186A5 /* login_tf_acc_head@2x.png in Resources */,
 				764D608A1A8AEBEE00B186A5 /* more_cell_recommend_icon@2x.png in Resources */,
-				7664BACE1AA8236A00E59DF0 /* ticket_add_touch.png in Resources */,
+				7664BACE1AA8236A00E59DF0 /* ticket_add_touch@2x.png in Resources */,
 				ED8C780D1A94E34D009C8286 /* DetailFoodCommendTableViewCell.xib in Resources */,
 				ED8C77F31A949AF3009C8286 /* address_cion@2x.png in Resources */,
 				764D607D1A8AE99A00B186A5 /* icon_index_selected@2x.png in Resources */,
@@ -2288,6 +2296,7 @@
 				7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
 				760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */,
+				7664BB971AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.xib in Resources */,
 				ED8C77CB1A930692009C8286 /* near_food_1@2x.png in Resources */,
 				764D60881A8AEBEE00B186A5 /* default_header@2x.png in Resources */,
 				ED8C78001A94D6F3009C8286 /* up_cn@2x.png in Resources */,
@@ -2384,6 +2393,7 @@
 				ED8C78231A96183D009C8286 /* MyActivityViewController.m in Sources */,
 				760BF2421A8DD0410088DBA2 /* GeocodeDemoViewController.mm in Sources */,
 				767812DF1A830B0700CB4B08 /* PosterCollectionViewCell.m in Sources */,
+				7664BB961AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.m in Sources */,
 				ED8C783E1A96FCAC009C8286 /* ActivitySignUpViewController.m in Sources */,
 				764D606D1A89EA6500B186A5 /* CategoryItem.m in Sources */,
 				ED2587301A7D185D008EB344 /* NSData+Base64.mm in Sources */,

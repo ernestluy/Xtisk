@@ -29,6 +29,14 @@
     }
 }
 
+-(void)setData:(VoyageItem*)item{
+    NSLog(@"setData");
+    self.labSailTime.text = item.SETOFFTIME;
+    self.labPtwy.text = [NSString stringWithFormat:@"%d",item.ticketNum1];
+    self.labTdwy.text = [NSString stringWithFormat:@"%d",item.ticketNum2];
+    self.labHhwy.text = [NSString stringWithFormat:@"%d",item.ticketNum3];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

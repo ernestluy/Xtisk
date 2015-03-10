@@ -80,14 +80,14 @@
         [doneBtn addTarget:self action:@selector(toEditStatus:) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn] ;
         
-        UIButton * btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnCancel.frame = CGRectMake(0, 0, 30, 20);
-        [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
-        [btnCancel setTitleColor:headerColor forState:UIControlStateNormal];
-        btnCancel.titleLabel.font = [UIFont systemFontOfSize:14];
+//        UIButton * btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btnCancel.frame = CGRectMake(0, 0, 30, 20);
+//        [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
+//        [btnCancel setTitleColor:headerColor forState:UIControlStateNormal];
+//        btnCancel.titleLabel.font = [UIFont systemFontOfSize:14];
         
-        [btnCancel addTarget:self action:@selector(toCancel:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:btnCancel] ;
+//        [btnCancel addTarget:self action:@selector(toCancel:) forControlEvents:UIControlEventTouchUpInside];
+//        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:btnCancel] ;
         
         [self.navigationItem setRightBarButtonItems:@[doneItem]];
     }

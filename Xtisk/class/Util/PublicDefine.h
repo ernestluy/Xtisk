@@ -113,7 +113,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define kDateTimeFormat                 @"yyyy-MM-dd HH:mm:ss"  
 #define RecordTimeFormat                @"yyyyMMddHHmmss";
 
-
+#define kCellDefault @"kCellDefault"
 
 #define GuideMark @"GuideMark"
 

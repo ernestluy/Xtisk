@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "VoyageItem.h"
 @interface TicketListTableViewCell : UITableViewCell
 {
     
@@ -16,4 +16,7 @@
 @property(nonatomic,weak)IBOutlet UILabel *labPtwy;
 @property(nonatomic,weak)IBOutlet UILabel *labTdwy;
 @property(nonatomic,weak)IBOutlet UILabel *labHhwy;
+
+
+-(void)setData:(VoyageItem*)item;
 @end

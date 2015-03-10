@@ -559,7 +559,7 @@ static HttpService *httpServiceInstance = nil;
     [mContentStr appendFormat:@"currencyCode=%@&",par.currencyCode];
     [mContentStr appendFormat:@"isRoundtrip=%@&",par.isRoundtrip];
     [mContentStr appendFormat:@"lang=%@",par.lang];
-    
+    NSLog(@"mContentStr:%@",mContentStr);
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [Util strToData:sendStr];
     [request appendPostData:data];

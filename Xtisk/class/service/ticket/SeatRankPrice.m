@@ -22,10 +22,10 @@
         ci.VOYAGEROUTEID = [dic objectForKey:@"VOYAGEROUTEID"];
         ci.SEATRANKID = [dic objectForKey:@"SEATRANKID"];
         ci.SEATRANK = [dic objectForKey:@"SEATRANK"];
-        ci.PRICE1 = [[dic objectForKey:@"PRICE1"] floatValue];
-        ci.PRICE2 = [[dic objectForKey:@"PRICE2"] floatValue];
-        ci.PRICE3 = [[dic objectForKey:@"PRICE3"] floatValue];
-        ci.PRICE4 = [[dic objectForKey:@"PRICE4"] floatValue];
+        ci.PRICE1 = [dic objectForKey:@"PRICE1"];//[[dic objectForKey:@"PRICE1"] floatValue];
+        ci.PRICE2 = [dic objectForKey:@"PRICE2"];//[[dic objectForKey:@"PRICE2"] floatValue];
+        ci.PRICE3 = [dic objectForKey:@"PRICE3"];//[[dic objectForKey:@"PRICE3"] floatValue];
+        ci.PRICE4 = [dic objectForKey:@"PRICE4"];//[[dic objectForKey:@"PRICE4"] floatValue];
         ci.DETAIL1 = [dic objectForKey:@"DETAIL1"];
         ci.DETAIL2 = [dic objectForKey:@"DETAIL2"];
         ci.DETAIL3 = [dic objectForKey:@"DETAIL3"];

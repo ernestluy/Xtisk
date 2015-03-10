@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/service/TicketVoyageEditViewController.m"
-            timestampString = "447556126.005375"
+            timestampString = "447673593.20883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -256,22 +256,6 @@
             startingLineNumber = "53"
             endingLineNumber = "53"
             landmarkName = "+initDB"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Xtisk/class/viewcontroller/service/TicketQueryListViewController.m"
-            timestampString = "447556961.888255"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "-requestDidFinish:code:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -406,32 +390,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Xtisk/class/viewcontroller/service/TicketQueryViewController.m"
-            timestampString = "447661220.500522"
+            filePath = "Xtisk/class/service/ticket/VoyageItem.m"
+            timestampString = "447668612.452276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-toNotice"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Xtisk/class/service/HttpService.m"
-            timestampString = "447661682.36209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "563"
-            endingLineNumber = "563"
-            landmarkName = "-getRequestQueryVoyage:info:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+getVoyageItemsWithArr:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

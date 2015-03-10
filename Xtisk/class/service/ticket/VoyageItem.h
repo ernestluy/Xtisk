@@ -20,10 +20,13 @@
 @property(nonatomic,copy)NSString *SETOFFTIME;//	String	否	开航时间，格式：hh24:mi
 @property(nonatomic,copy)NSString *LINECODE;//	Stirng	否	航线代码
 @property(nonatomic,copy)NSString *VOYAGEROUTE_ID;//	String	否	航程ID
-@property(nonatomic)int TICKETNUM;//	Int	否	可售票数，格式为:座位等级ID(可售票数);例如  131(23)132(1) 即为:座位等级ID为131的等级,可售票数为23,座位等级ID为132的等级,可售票数为1
+@property(nonatomic,copy)NSString *TICKETNUM;//	Int	否	可售票数，格式为:座位等级ID(可售票数);例如  131(23)132(1) 即为:座位等级ID为131的等级,可售票数为23,座位等级ID为132的等级,可售票数为1
 @property(nonatomic,copy)NSArray *DTSEATRANKPRICE;//	Json Array	否	座位等级票价表
 
 
+@property(nonatomic)int ticketNum1;
+@property(nonatomic)int ticketNum2;
+@property(nonatomic)int ticketNum3;
 
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr;
 @end

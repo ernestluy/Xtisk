@@ -35,6 +35,9 @@
     
     StationSelectType stationSelectType;
     TicketQueryDirType   ticketDirType;
+    
+    UIButton *btnAgreement;
+    UIButton *btnOrder;
 }
 
 -(void)flushUI;
@@ -90,16 +93,45 @@
     footView.backgroundColor = [UIColor clearColor];
     tTableView.tableFooterView = footView;
     
+    
+    int btnHeight = 30;
+    int btnWidth = 90;
+    btnAgreement = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnAgreement setTitle:@"同意协议" forState:UIControlStateNormal];
+    [btnAgreement setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
+    [btnAgreement setImage:[UIImage imageNamed:@"login_rmb_selected"] forState:UIControlStateSelected];
+    [btnAgreement setImage:[UIImage imageNamed:@"login_rmb_no_selected"] forState:UIControlStateNormal];
+    [btnAgreement addTarget:self action:@selector(btnAgreeAction:) forControlEvents:UIControlEventTouchUpInside];
+//    btnAgreement.titleLabel.textAlignment = NSTextAlignmentRight;
+//    btnAgreement.titleLabel.font = [UIFont systemFontOfSize:14];
+//    btnAgreement.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -3);
+//    btnAgreement.imageEdgeInsets = UIEdgeInsetsMake(0, -3, 0, 0);
+    btnAgreement.backgroundColor = [UIColor clearColor];
+    [footView addSubview:btnAgreement];
+    btnAgreement.frame = CGRectMake(15, 10, btnHeight, btnHeight);
+    btnAgreement.selected = YES;
+    
+    UIButton * btnToNotice = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnToNotice setTitle:@"阅读并同意《购票须知》的条款" forState:UIControlStateNormal];
+    [btnToNotice setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
+    [btnToNotice addTarget:self action:@selector(toNotice) forControlEvents:UIControlEventTouchUpInside];
+    btnToNotice.titleLabel.textAlignment = NSTextAlignmentLeft;
+    btnToNotice.titleLabel.font = [UIFont systemFontOfSize:14];
+    btnToNotice.backgroundColor = [UIColor clearColor];
+    [footView addSubview:btnToNotice];
+    btnToNotice.frame = CGRectMake(15 + btnHeight +5, 10, 200, btnHeight);
+    
+    
     int startX = 15;
-    CGRect ttr = CGRectMake(startX, 20, bounds.size.width - 15*2, 44);
-    UIButton *btnOrder = [CTLCustom getTableViewLastButton:ttr];
+    CGRect ttr = CGRectMake(startX, 20 + 40, bounds.size.width - 15*2, 44);
+    btnOrder = [CTLCustom getTableViewLastButton:ttr];
     [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnOrder setTitle:@"查 询" forState:UIControlStateNormal];
     btnOrder.backgroundColor = [UIColor clearColor];
     [btnOrder addTarget:self action:@selector(submitQuery:) forControlEvents:UIControlEventTouchUpInside];
     [footView addSubview:btnOrder];
     
-    UILabel *labNote = [[UILabel alloc]initWithFrame:CGRectMake(startX, 70, ttr.size.width, 40)];
+    UILabel *labNote = [[UILabel alloc]initWithFrame:CGRectMake(startX, 80 + 40, ttr.size.width, 40)];
     labNote.textColor = defaultTextGrayColor;
     labNote.font = [UIFont systemFontOfSize:13];
     labNote.text = @"温馨提示:所有航线售票截止时间为开船时间前一天，只可以购买15天以内的船票";
@@ -128,7 +160,21 @@
     [self flushUI];
 }
 
+-(void)btnAgreeAction:(id)sender{
+    BOOL b = btnAgreement.selected;
+    btnAgreement.selected = !b;
+    if (btnAgreement.selected) {
+        btnOrder.enabled = YES;
+        btnOrder.alpha = 1.0;
+    }else{
+        btnOrder.enabled = NO;
+        btnOrder.alpha = 0.6;
+    }
+}
+
 -(void)toNotice{
+    btnAgreement.selected = NO;
+    [self btnAgreeAction:nil];
     InfoViewController *iv = [[InfoViewController alloc]initWithLocalUrl:@"ticket_warning.html" title:@"蛇口购票须知"];
     [self.navigationController pushViewController:iv animated:YES];
 }

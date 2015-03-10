@@ -21,6 +21,12 @@
     UITableView *tTableView;
     
     NSArray *voyageLines;
+    
+    UIActivityIndicatorView *acView;
+    
+    UIButton *btnDate;
+    UIButton *btnLast;
+    UIButton *btnNext;
 }
 @end
 
@@ -41,11 +47,14 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:[btnTitleArr objectAtIndex:i] forState:UIControlStateNormal];
         if (0 == i) {
+            btnLast = btn;
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(getLineInfo:) forControlEvents:UIControlEventTouchUpInside];
         }else if (1 == i){
+            btnDate = btn;
             [btn setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
         }else if (2 == i){
+            btnNext = btn;
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(getLineInfo:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -82,9 +91,21 @@
     [tTableView registerNib:[UINib nibWithNibName:@"TicketListTableViewCell" bundle:nil] forCellReuseIdentifier:kTicketListTableViewCell];
     
     [[btnArr objectAtIndex:1] setTitle:[TicketSerivice sharedInstance].fromDate forState:UIControlStateNormal];
+    
+    acView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    acView.color = headerColor;
+    UIBarButtonItem *waitViewItem = [[UIBarButtonItem alloc] initWithCustomView:acView] ;
+    
+    [self.navigationItem setRightBarButtonItems:@[waitViewItem]];
 }
 
 -(void)requestData{
+    
+    [acView startAnimating];
+    btnLast.enabled = NO;
+    btnNext.enabled = NO;
+    
+    
     TicketSerivice *tSerivice = [TicketSerivice sharedInstance];
     VoyageRequestPar *vrp = [[VoyageRequestPar alloc]init];
     vrp.sailDate = tSerivice.fromDate;
@@ -95,7 +116,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requestData];
+    if (!isRequestSucMark) {
+        [self requestData];
+    }
 }
 
 -(void)flushUI{
@@ -104,18 +127,26 @@
 
 -(void)getLineInfo:(UIButton *)btn{
     NSLog(@"getLineInfo");
+    NSString *strDate = [TicketSerivice sharedInstance].fromDate;
+    NSDateFormatter *tFormatter = [[NSDateFormatter alloc] init];
+    [tFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *tDate = [tFormatter dateFromString:strDate];
     switch (btn.tag) {
         case 0:{//前一天
-            
+            NSDate *lastDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] - 24*3600)];
+            [TicketSerivice sharedInstance].fromDate = [tFormatter stringFromDate:lastDate];
             break;
         }
         case 2:{//后一天
-            
+            NSDate *nextDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] + 24*3600)];
+            [TicketSerivice sharedInstance].fromDate = [tFormatter stringFromDate:nextDate];
             break;
         }
         default:
             break;
     }
+    [btnDate setTitle:[TicketSerivice sharedInstance].fromDate forState:UIControlStateNormal];
+    [self requestData];
 }
 
 
@@ -128,7 +159,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 15;
+    return voyageLines.count;
 }
 
 
@@ -136,7 +167,8 @@
 {
     TicketListTableViewCell * cell = (TicketListTableViewCell *)[tv dequeueReusableCellWithIdentifier:kTicketListTableViewCell];
     
-    
+    VoyageItem *item = [voyageLines objectAtIndex:indexPath.row];
+    [cell setData:item];
     
     return cell;
     
@@ -169,6 +201,11 @@
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
     [SVProgressHUD dismiss];
+    
+    [acView stopAnimating];
+    btnLast.enabled = YES;
+    btnNext.enabled = YES;
+    
     switch (request.m_requestType) {
             
         case HttpRequestType_XT_QUERY_VOYAGE:{
@@ -178,8 +215,15 @@
                     NSLog(@"请求成功");
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
+                        isRequestSucMark = YES;
                         NSArray *tmpArr = [dic objectForKey:@"VOYAGE"];
+                        if([[dic objectForKey:@"VOYAGE"] isKindOfClass:[NSDictionary class]]){
+                            NSLog(@"不是array类型，处理一下");
+                            tmpArr = @[[dic objectForKey:@"VOYAGE"]];
+                            
+                        }
                         voyageLines = [VoyageItem getVoyageItemsWithArr:tmpArr];
+                        [self flushUI];
                         NSLog(@"请求成功");
                     }
                     
