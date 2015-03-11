@@ -10,6 +10,13 @@
 
 @implementation SeatRankPrice
 
+-(id)init{
+    self = [super init];
+    self.orderNum1 = 0;
+    self.orderNum2 = 0;
+    self.orderNum3 = 0;
+    return self;
+}
 
 +(NSArray *)getSeatRankPricesWithArr:(NSArray *)arr{
     if (!arr) {

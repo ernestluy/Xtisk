@@ -218,6 +218,10 @@
 		76C87D1D1A8CA8CE00843060 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D1C1A8CA8CE00843060 /* MessageUI.framework */; };
 		76C87D1F1A8CA8D700843060 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D1E1A8CA8D700843060 /* SystemConfiguration.framework */; };
 		76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D201A8CA8E700843060 /* CoreGraphics.framework */; };
+		76D018181AAFDE4600E6B168 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D018171AAFDE4600E6B168 /* arrow_down@2x.png */; };
+		76D0181B1AB010EA00E6B168 /* StatisTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181A1AB010EA00E6B168 /* StatisTicketView.m */; };
+		76D0181F1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */; };
+		76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D0181E1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib */; };
 		ED2586E11A7D14A1008EB344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E01A7D14A1008EB344 /* main.m */; };
 		ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E31A7D14A1008EB344 /* AppDelegate.m */; };
 		ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2586E81A7D14A1008EB344 /* Main.storyboard */; };
@@ -729,6 +733,12 @@
 		76C87D1C1A8CA8CE00843060 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		76C87D1E1A8CA8D700843060 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		76C87D201A8CA8E700843060 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		76D018171AAFDE4600E6B168 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
+		76D018191AB010EA00E6B168 /* StatisTicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisTicketView.h; sourceTree = "<group>"; };
+		76D0181A1AB010EA00E6B168 /* StatisTicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisTicketView.m; sourceTree = "<group>"; };
+		76D0181C1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketNumsEdit2TableViewCell.h; sourceTree = "<group>"; };
+		76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketNumsEdit2TableViewCell.m; sourceTree = "<group>"; };
+		76D0181E1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketNumsEdit2TableViewCell.xib; sourceTree = "<group>"; };
 		ED2586DB1A7D14A1008EB344 /* Xtisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xtisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2586DF1A7D14A1008EB344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1167,6 +1177,11 @@
 				7664BB931AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.h */,
 				7664BB941AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.m */,
 				7664BB951AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.xib */,
+				76D018191AB010EA00E6B168 /* StatisTicketView.h */,
+				76D0181A1AB010EA00E6B168 /* StatisTicketView.m */,
+				76D0181C1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.h */,
+				76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */,
+				76D0181E1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1873,6 +1888,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				76D018171AAFDE4600E6B168 /* arrow_down@2x.png */,
 				7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */,
 				7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */,
 				7664BAC21AA8236A00E59DF0 /* ticket_add_invalid@2x.png */,
@@ -2275,6 +2291,7 @@
 				764D608B1A8AEBEE00B186A5 /* more_cell_scan_icon@2x.png in Resources */,
 				764D60561A89CE3E00B186A5 /* RegSecondStepViewController.xib in Resources */,
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
+				76D018181AAFDE4600E6B168 /* arrow_down@2x.png in Resources */,
 				ED8C78531A97100B009C8286 /* AboutIshekouHeaderView.xib in Resources */,
 				ED8C78081A94E110009C8286 /* food_call_normal@2x.png in Resources */,
 				764D60771A8AE38800B186A5 /* service_icon_park_activity@2x.png in Resources */,
@@ -2291,6 +2308,7 @@
 				764D60971A8AF41C00B186A5 /* login_reg@2x.png in Resources */,
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
 				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
+				76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */,
 				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 				7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */,
@@ -2425,6 +2443,7 @@
 				ED2D491E1AAAC844007CC065 /* AFURLSessionManager.m in Sources */,
 				76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */,
 				7678129A1A80A04600CB4B08 /* MoreTabViewController.m in Sources */,
+				76D0181B1AB010EA00E6B168 /* StatisTicketView.m in Sources */,
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
 				7664BAC11AA801F600E59DF0 /* VoyageRequestPar.m in Sources */,
 				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
@@ -2443,6 +2462,7 @@
 				ED8C77E01A93139B009C8286 /* ActivityViewController.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,
 				7664BAE01AA82DED00E59DF0 /* TicketOrderEditViewController.m in Sources */,
+				76D0181F1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m in Sources */,
 				764D60221A84A58500B186A5 /* HisAccSelectView.m in Sources */,
 				7664BADB1AA8296F00E59DF0 /* TicketVoyageEditViewController.m in Sources */,
 				ED2D49181AAAC844007CC065 /* AFHTTPSessionManager.m in Sources */,

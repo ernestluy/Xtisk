@@ -10,6 +10,13 @@
 #import "SeatRankPrice.h"
 @implementation VoyageItem
 
+-(id)init{
+    self = [super init];
+    
+    self.mArrTicketId =[NSMutableArray array];
+    self.mArrTicketNums = [NSMutableArray array];
+    return self;
+}
 
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr{
     if (!arr) {
@@ -54,6 +61,10 @@
             NSArray *sLevel = [[fLevel objectAtIndex:i] componentsSeparatedByString:@"("];
             
             if (sLevel.count>1) {
+//                [self.mArrTicketId addObject:[sLevel objectAtIndex:0]];
+//                [self.mArrTicketNums addObject:[sLevel objectAtIndex:1]];
+                [self.mArrTicketId addObject:[sLevel objectAtIndex:0]];
+                [self.mArrTicketNums addObject:@"20"];
                 if (0 == i) {
                     self.ticketNum1 = [[sLevel objectAtIndex:1] intValue];
                 }else if (1 == i) {
@@ -65,4 +76,64 @@
         }
     }
 }
+
+/*
+ {
+ "code": 0,
+ "msg": "成功",
+ "data": {
+ "VOYAGE": {
+ "FPORTCODE": "SK",
+ "SHIPCODE": "PX",
+ "VOYAGEROUTE_ID": "42111214",
+ "SHIP": "鹏星",
+ "FROMPORT": "蛇口港",
+ "TPORTCODE": "HKM",
+ "SETOFFDATE": "2015-03-11",
+ "TICKETNUM": "121(146)120(0)119(0)",
+ "SETOFFTIME": "19:15",
+ "TOPORT": "香港港澳码头",
+ "LINECODE": "SK-HKM",
+ "DTSEATRANKPRICE": {
+ "ROW": [
+ {
+ "PRICE3": "70",
+ "DETAIL3": "28633657",
+ "PRICE4": "NULL",
+ "DETAIL4": "0",
+ "PRICE1": "120",
+ "DETAIL1": "28633636",
+ "PRICE2": "70",
+ "DETAIL2": "28633652",
+ "STANDARDPRICE2": "70",
+ "STANDARDPRICE3": "70",
+ "STANDARDPRICE1": "120",
+ "VOYAGEROUTEID": "42111214",
+ "SEATRANK": "普通位",
+ "SEATRANKID": "121",
+ "STANDARDPRICE4": "NULL"
+ },
+ {
+ "PRICE3": "NULL",
+ "DETAIL3": "0",
+ "PRICE4": "NULL",
+ "DETAIL4": "0",
+ "PRICE1": "150",
+ "DETAIL1": "28633661",
+ "PRICE2": "NULL",
+ "DETAIL2": "0",
+ "STANDARDPRICE2": "NULL",
+ "STANDARDPRICE3": "NULL",
+ "STANDARDPRICE1": "150",
+ "VOYAGEROUTEID": "42111214",
+ "SEATRANK": "头等位",
+ "SEATRANKID": "120",
+ "STANDARDPRICE4": "NULL"
+ }
+ ]
+ }
+ }
+ }
+ }
+*/
 @end

@@ -47,6 +47,13 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="btnAdd" destination="6am-UL-Z9t" id="4gW-59-54X"/>
+                <outlet property="btnDel" destination="9LN-LA-V5e" id="V8v-eB-Vxq"/>
+                <outlet property="labTicketNum" destination="tT2-vK-S1l" id="j2J-Pm-31C"/>
+                <outlet property="labTicketPrice" destination="Gys-KV-AEh" id="Tn1-Di-Qij"/>
+                <outlet property="labTicketType" destination="DED-Jb-xIj" id="uIO-JQ-8aJ"/>
+            </connections>
             <point key="canvasLocation" x="195" y="232"/>
         </tableViewCell>
     </objects>

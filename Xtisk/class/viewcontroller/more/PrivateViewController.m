@@ -492,6 +492,8 @@
     birthPicker = datePicker;
     [tView addSubview:datePicker];
     if (labBirthDate.text && labBirthDate.text.length>4) {
+        if(labBirthDate.text.length>10)
+            labBirthDate.text = [labBirthDate.text substringToIndex:9];
         NSDate *date = [dateFormatter dateFromString:labBirthDate.text];
         datePicker.date = date;
     }

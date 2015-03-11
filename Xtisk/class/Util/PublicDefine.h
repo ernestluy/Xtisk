@@ -43,6 +43,7 @@
 #import "ShipLineItem.h"
 #import "MyActivity.h"
 #import "VoyageItem.h"
+#import "SeatRankPrice.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关

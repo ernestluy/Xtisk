@@ -11,6 +11,18 @@
 #import "PublicDefine.h"
 @implementation CTLCustom
 
+
++(UIButton *)getButtonRightArrowDownWithRect:(CGRect )rect{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    btn.frame = rect;
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"arrow_down.png"] forState:UIControlStateNormal];
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, btn.frame.size.width-17, 0, 0);
+    btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 18);
+    return btn;
+}
+
 +(UIButton *)getButtonNormalWithRect:(CGRect )rect{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitleColor:defaultTextColor forState:UIControlStateNormal];

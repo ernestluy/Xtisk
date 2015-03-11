@@ -10,4 +10,10 @@
 
 @interface TicketNumsEdit1TableViewCell : UITableViewCell
 
+@property(nonatomic,weak)IBOutlet UILabel *labTicketType;
+@property(nonatomic,weak)IBOutlet UILabel *labTicketPrice;
+@property(nonatomic,weak)IBOutlet UILabel *labTicketNum;
+
+@property(nonatomic,weak)IBOutlet UIButton *btnDel;
+@property(nonatomic,weak)IBOutlet UIButton *btnAdd;
 @end

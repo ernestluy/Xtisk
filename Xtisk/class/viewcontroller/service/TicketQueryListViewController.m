@@ -108,9 +108,18 @@
     
     TicketSerivice *tSerivice = [TicketSerivice sharedInstance];
     VoyageRequestPar *vrp = [[VoyageRequestPar alloc]init];
-    vrp.sailDate = tSerivice.fromDate;
-    vrp.fromPortCode = tSerivice.fromPort;
-    vrp.toPortCode = tSerivice.toPort;
+    if (tStep == TicketVoyageStepFirst) {
+        vrp.sailDate = tSerivice.fromDate;
+        vrp.fromPortCode = tSerivice.fromPort;
+        vrp.toPortCode = tSerivice.toPort;
+    }else if(tStep == TicketVoyageStepSecond){
+        vrp.sailDate = tSerivice.returnDate;
+        vrp.fromPortCode = tSerivice.toPort;
+        vrp.toPortCode = tSerivice.fromDate;
+    }
+//    vrp.sailDate = tSerivice.fromDate;
+//    vrp.fromPortCode = tSerivice.fromPort;
+//    vrp.toPortCode = tSerivice.toPort;
     
     [[[HttpService sharedInstance] getRequestQueryVoyage:self info:vrp]startAsynchronous];
 }
@@ -191,8 +200,10 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    VoyageItem *item = [voyageLines objectAtIndex:indexPath.row];
     TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
     tvv.tStep = self.tStep;
+    tvv.mVoyageItem = item;
     [self.navigationController pushViewController:tvv animated:YES];
     
 }

@@ -28,5 +28,9 @@
 @property(nonatomic)int ticketNum2;
 @property(nonatomic)int ticketNum3;
 
+@property(nonatomic,strong)NSMutableArray *mArrTicketId;
+@property(nonatomic,strong)NSMutableArray *mArrTicketNums;
+
+
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr;
 @end

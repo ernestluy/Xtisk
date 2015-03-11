@@ -22,6 +22,9 @@
 @property(nonatomic,copy)NSString *DETAIL3;//	String	是	长者票价ID
 @property(nonatomic,copy)NSString *DETAIL4;//	String	是	婴儿票价ID
 
+@property(nonatomic)int orderNum1;
+@property(nonatomic)int orderNum2;
+@property(nonatomic)int orderNum3;
 
 +(NSArray *)getSeatRankPricesWithArr:(NSArray *)arr;
 @end
