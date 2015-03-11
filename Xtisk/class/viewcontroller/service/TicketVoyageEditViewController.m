@@ -123,11 +123,13 @@
         if (TicketVoyageStepFirst == tStep) {
 //            TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
 //            tvv.tStep = TicketVoyageStepSecond;
+            [TicketSerivice sharedInstance].toVoyageItem =self.mVoyageItem;
             TicketQueryListViewController *tvv = [[TicketQueryListViewController alloc] init];
             tvv.tStep = TicketVoyageStepSecond;
             [self.navigationController pushViewController:tvv animated:YES];
         }else if(TicketVoyageStepSecond == tStep){
             NSLog(@"进入订单详情，准备付费");
+            [TicketSerivice sharedInstance].returnVoyageItem =self.mVoyageItem;
             TicketOrderEditViewController *to = [[TicketOrderEditViewController alloc] init];
             [self.navigationController pushViewController:to animated:YES];
         }
@@ -135,8 +137,11 @@
     }else if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
         NSLog(@"进入订单详情，准备付费");
         TicketOrderEditViewController *to = [[TicketOrderEditViewController alloc] init];
+        [TicketSerivice sharedInstance].toVoyageItem =self.mVoyageItem;
         [self.navigationController pushViewController:to animated:YES];
     }
+    
+    
 }
 
 -(void)calTotalPrice{

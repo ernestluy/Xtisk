@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ShipLineItem.h"
+#import "VoyageItem.h"
 @interface TicketSerivice : NSObject
 {
     
@@ -23,6 +24,10 @@
 
 @property(nonatomic,copy)NSString *   fromDate;   //去的日期
 @property(nonatomic,copy)NSString *   returnDate;  //返回的日期
+
+
+@property(nonatomic,strong)VoyageItem *toVoyageItem;
+@property(nonatomic,strong)VoyageItem *returnVoyageItem;
 
 
 +(TicketSerivice *)sharedInstance;

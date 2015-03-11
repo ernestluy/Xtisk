@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "VoyageItem.h"
 @interface StatisTicketView : UIView
-@property(nonatomic,strong) UIButton *labTicketType;
+
 @end

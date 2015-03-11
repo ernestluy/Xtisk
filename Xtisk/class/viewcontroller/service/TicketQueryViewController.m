@@ -74,6 +74,7 @@
     segmentedControl.frame = CGRectMake((tRect.size.width - itemWidth*3)/2, 15, itemWidth*3, 30 );
     segmentedControl.selectedSegmentIndex = 0;
     [segmentedControl addTarget:self action:@selector(segmentedControlChange:) forControlEvents:UIControlEventValueChanged];
+    segmentedControl.tintColor = _rgb2uic(0x0095f1, 1);
     
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tRect.size.width, 60)];
     [headerView addSubview:segmentedControl];
@@ -273,7 +274,7 @@
     labelStartTime.text = [queryDateFormatter stringFromDate:startPicker.date];
 }
 -(void)updateEnd{
-    labelEndTime.text = [queryDateFormatter stringFromDate:startPicker.date];
+    labelEndTime.text = [queryDateFormatter stringFromDate:endPicker.date];
 }
 
 

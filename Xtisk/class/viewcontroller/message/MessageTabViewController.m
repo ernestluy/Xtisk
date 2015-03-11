@@ -96,6 +96,7 @@
         PushMessageItem *item = [DBManager queryPushMessageItemLastOneWithAccount:[SettingService sharedInstance].iUser.phone];
         if (item) {
             cell.labMsg.text = item.content;
+            cell.labTime.text = item.dateCreate;
         }
     }else if(1 == indexPath.section){
         NSArray *titleArr2 = @[@"船票",@"园区活动"];
@@ -106,6 +107,7 @@
         if (0 == indexPath.row) {
             [cell.badgeView setTnum:[SettingService sharedInstance].badgeTicket];
         }
+        cell.labTime.text = @"";
         cell.labMsg.text = @"";
     }
     return cell;

@@ -18,6 +18,13 @@
     return self;
 }
 
+-(void)clearData{
+    for (int i = 0; i<self.DTSEATRANKPRICE.count; i++) {
+        SeatRankPrice *sitem = [self.DTSEATRANKPRICE objectAtIndex:i];
+        [sitem clearData];
+    }
+}
+
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr{
     if (!arr) {
         return nil;
@@ -43,10 +50,17 @@
         
         NSDictionary *tmpDic = [dic objectForKey:@"DTSEATRANKPRICE"];
         //ROW
-        NSArray *tmpArr = [tmpDic objectForKey:@"ROW"];
-        if (tmpArr && tmpArr.count>0) {
-            ci.DTSEATRANKPRICE = [SeatRankPrice getSeatRankPricesWithArr:tmpArr];
+        NSObject *tmpObject = [tmpDic objectForKey:@"ROW"];
+        if ([tmpObject isKindOfClass:[NSDictionary class]]) {
+            ci.DTSEATRANKPRICE = [SeatRankPrice getSeatRankPricesWithArr:@[tmpObject]];
+        }else{
+            NSArray *tmpArr = [tmpDic objectForKey:@"ROW"];
+            if (tmpArr && tmpArr.count>0) {
+                ci.DTSEATRANKPRICE = [SeatRankPrice getSeatRankPricesWithArr:tmpArr];
+            }
         }
+        
+        
         
         [mArr addObject:ci];
     }

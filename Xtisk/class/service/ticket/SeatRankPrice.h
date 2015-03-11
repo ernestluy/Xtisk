@@ -26,5 +26,7 @@
 @property(nonatomic)int orderNum2;
 @property(nonatomic)int orderNum3;
 
+-(void)clearData;
+
 +(NSArray *)getSeatRankPricesWithArr:(NSArray *)arr;
 @end

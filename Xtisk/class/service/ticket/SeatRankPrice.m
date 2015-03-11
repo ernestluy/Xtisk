@@ -18,6 +18,12 @@
     return self;
 }
 
+-(void)clearData{
+    self.orderNum1 = 0;
+    self.orderNum2 = 0;
+    self.orderNum3 = 0;
+}
+
 +(NSArray *)getSeatRankPricesWithArr:(NSArray *)arr{
     if (!arr) {
         return nil;

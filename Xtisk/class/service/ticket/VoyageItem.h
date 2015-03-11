@@ -31,6 +31,7 @@
 @property(nonatomic,strong)NSMutableArray *mArrTicketId;
 @property(nonatomic,strong)NSMutableArray *mArrTicketNums;
 
+-(void)clearData;
 
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr;
 @end

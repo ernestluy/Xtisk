@@ -201,22 +201,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Xtisk/class/viewcontroller/service/TicketVoyageEditViewController.m"
-            timestampString = "447747897.93468"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/service/FoodDetailViewController.m"
             timestampString = "447299865.768184"
             startingColumnNumber = "9223372036854775807"
@@ -298,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/message/MessageTabViewController.m"
-            timestampString = "447659917.066675"
+            timestampString = "447756132.377289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/service/ticket/VoyageItem.m"
-            timestampString = "447745227.096887"
+            timestampString = "447753266.637212"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "+getVoyageItemsWithArr:"
             landmarkType = "5">
          </BreakpointContent>
@@ -410,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/service/TicketVoyageEditViewController.m"
-            timestampString = "447748280.97412"
+            timestampString = "447752721.996356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-calTotalPrice"
             landmarkType = "5">
          </BreakpointContent>
@@ -426,12 +410,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Xtisk/class/viewcontroller/service/TicketVoyageEditViewController.m"
-            timestampString = "447748368.750501"
+            timestampString = "447752721.996356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Xtisk/class/viewcontroller/service/TicketQueryViewController.m"
+            timestampString = "447754825.676955"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

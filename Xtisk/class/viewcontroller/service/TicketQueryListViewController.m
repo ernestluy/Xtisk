@@ -97,6 +97,13 @@
     UIBarButtonItem *waitViewItem = [[UIBarButtonItem alloc] initWithCustomView:acView] ;
     
     [self.navigationItem setRightBarButtonItems:@[waitViewItem]];
+    
+    if (tStep == TicketVoyageStepFirst) {
+        [btnDate setTitle:[TicketSerivice sharedInstance].fromDate forState:UIControlStateNormal];
+    }else if(tStep == TicketVoyageStepSecond){
+        [btnDate setTitle:[TicketSerivice sharedInstance].returnDate forState:UIControlStateNormal];
+    }
+    
 }
 
 -(void)requestData{
@@ -115,7 +122,7 @@
     }else if(tStep == TicketVoyageStepSecond){
         vrp.sailDate = tSerivice.returnDate;
         vrp.fromPortCode = tSerivice.toPort;
-        vrp.toPortCode = tSerivice.fromDate;
+        vrp.toPortCode = tSerivice.fromPort;
     }
 //    vrp.sailDate = tSerivice.fromDate;
 //    vrp.fromPortCode = tSerivice.fromPort;
@@ -125,6 +132,17 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType) {
+        if (TicketVoyageStepFirst == tStep) {
+            self.title = @"航班信息-起航";
+        }else if(TicketVoyageStepSecond == tStep){
+            self.title = @"航班信息-返航";
+        }
+        
+    }else if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
+        self.title = @"航班信息";
+    }
+    
     if (!isRequestSucMark) {
         [self requestData];
     }
@@ -137,24 +155,37 @@
 -(void)getLineInfo:(UIButton *)btn{
     NSLog(@"getLineInfo");
     NSString *strDate = [TicketSerivice sharedInstance].fromDate;
+    if (tStep == TicketVoyageStepFirst) {
+        strDate = [TicketSerivice sharedInstance].fromDate;
+    }else if(tStep == TicketVoyageStepSecond){
+        strDate = [TicketSerivice sharedInstance].returnDate;
+    }
     NSDateFormatter *tFormatter = [[NSDateFormatter alloc] init];
     [tFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *tDate = [tFormatter dateFromString:strDate];
     switch (btn.tag) {
         case 0:{//前一天
             NSDate *lastDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] - 24*3600)];
-            [TicketSerivice sharedInstance].fromDate = [tFormatter stringFromDate:lastDate];
+            strDate = [tFormatter stringFromDate:lastDate];
             break;
         }
         case 2:{//后一天
             NSDate *nextDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] + 24*3600)];
-            [TicketSerivice sharedInstance].fromDate = [tFormatter stringFromDate:nextDate];
+            strDate = [tFormatter stringFromDate:nextDate];
             break;
         }
         default:
             break;
     }
-    [btnDate setTitle:[TicketSerivice sharedInstance].fromDate forState:UIControlStateNormal];
+    
+    if (tStep == TicketVoyageStepFirst) {
+        [TicketSerivice sharedInstance].fromDate = strDate;
+    }else if(tStep == TicketVoyageStepSecond){
+        [TicketSerivice sharedInstance].returnDate = strDate;
+    }
+    voyageLines = @[];
+    [tTableView reloadData];
+    [btnDate setTitle:strDate forState:UIControlStateNormal];
     [self requestData];
 }
 
@@ -201,6 +232,7 @@
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     VoyageItem *item = [voyageLines objectAtIndex:indexPath.row];
+    [item clearData];
     TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
     tvv.tStep = self.tStep;
     tvv.mVoyageItem = item;

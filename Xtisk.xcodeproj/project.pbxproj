@@ -2686,7 +2686,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "14595918-dc28-4720-976b-d014672d8a1d";
+				PROVISIONING_PROFILE = "b7a6e548-80ea-49bb-9775-54e8f03c80b7";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
