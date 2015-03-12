@@ -23,6 +23,9 @@
     iuser.signature    = [IUser getValueFromKey:dic key:@"signature"];// [dic objectForKey:@"signature"];
     iuser.gender       = [IUser getValueFromKey:dic key:@"gender"];// [dic objectForKey:@"gender"];
     iuser.birthday     = [IUser getValueFromKey:dic key:@"birthday"];// [dic objectForKey:@"birthday"];
+    if (iuser.birthday && iuser.birthday.length>10) {
+        iuser.birthday = [iuser.birthday substringToIndex:10];
+    }
     iuser.maritalStatus= [IUser getValueFromKey:dic key:@"maritalStatus"];// [dic objectForKey:@"maritalStatus"];
     iuser.enterprise   = [IUser getValueFromKey:dic key:@"enterprise"];// [dic objectForKey:@"enterprise"];
     iuser.deviceId   = [IUser getValueFromKey:dic key:@"deviceId"];

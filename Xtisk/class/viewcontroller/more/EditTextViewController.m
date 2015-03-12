@@ -73,6 +73,14 @@
     
     [self textViewDidChange:self.tTextView];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+
 -(void)submit:(id)sender{
     NSLog(@"submit");
     [self.tTextView resignFirstResponder];

@@ -17,6 +17,7 @@
 #import "TicketQueryViewController.h"
 #import "LYTableView.h"
 #import "LYCollectionView.h"
+#import "TestViewController.h"
 @interface IndexTabViewController ()
 {
     NSMutableArray *pmArr;
@@ -215,6 +216,8 @@
 #pragma mark - CirculaScrollViewDelegate
 - (void)didSelected:(PosterItem *)pi{
     NSLog(@"didSelected:%@",pi.posterTitle);
+//    TestViewController *tv = [[TestViewController alloc]init];
+//    [self.navigationController pushViewController:tv animated:YES];
     
     InfoViewController *info = [[InfoViewController alloc]initWithUrl:pi.posterUrl title:pi.posterTitle];
     [self.navigationController pushViewController:info animated:YES];

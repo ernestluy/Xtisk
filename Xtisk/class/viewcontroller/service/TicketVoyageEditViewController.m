@@ -352,14 +352,17 @@
                 labSeatLevel3.text = [NSString stringWithFormat:@"%d",seat.orderNum3];
             }
             
-            if (self.mVoyageItem.mArrTicketNums.count>indexPath.row ) {
-                if ([[self.mVoyageItem.mArrTicketNums objectAtIndex:indexPath.row] intValue] == 0) {
+            if (self.mVoyageItem.mArrTicketNums.count>seatLevelIndex ) {
+                if ([[self.mVoyageItem.mArrTicketNums objectAtIndex:seatLevelIndex] intValue] == 0) {
                     cell.btnAdd.enabled = NO;
                     cell.btnDel.enabled = NO;
                 }else{
                     cell.btnAdd.enabled = YES;
                     cell.btnDel.enabled = YES;
                 }
+            }else{
+                cell.btnAdd.enabled = NO;
+                cell.btnDel.enabled = NO;
             }
             
             return cell;

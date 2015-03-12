@@ -82,7 +82,7 @@
 
 
 #pragma mark - 4.3.4.4	查看我报名的活动列表
--(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize;
+-(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize;
 #pragma mark - 4.3.4.5	修改密码
 -(AsyncHttpRequest *)getRequestUpdateMyPassword:(id<AsyncHttpRequestDelegate>)delegate oldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword checkPassword:(NSString *)checkPassword;
 #pragma mark - 4.3.4.6	图片上传
@@ -105,6 +105,9 @@
 
 #pragma mark - 4.3.4.14	建议反馈
 -(AsyncHttpRequest *)getRequestSuggestion :(id<AsyncHttpRequestDelegate>)delegate  content:(NSString *)content;
+
+#pragma mark - 4.3.4.16 删除我的活动
+-(AsyncHttpRequest *)getRequestDelMyActivity :(id<AsyncHttpRequestDelegate>)delegate  activityId:(NSString *)activityId;
 
 #pragma mark - 4.3.5	船票
 #pragma mark - 4.3.5.1 获取航线列表

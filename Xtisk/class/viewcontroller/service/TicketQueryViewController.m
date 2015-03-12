@@ -96,7 +96,7 @@
     
     
     int btnHeight = 30;
-    int btnWidth = 90;
+//    int btnWidth = 90;
     btnAgreement = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [btnAgreement setTitle:@"同意协议" forState:UIControlStateNormal];
     [btnAgreement setTitleColor:_rgb2uic(0x0095f1, 1) forState:UIControlStateNormal];
@@ -154,7 +154,9 @@
     [super viewWillAppear:animated];
     self.title = @"船票查询";
     if (![TicketSerivice sharedInstance].allShipLines) {
-        [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+        NSArray *tmpArr = [[NSArray alloc]initWithContentsOfFile:PathDocFile(ShipLineList)];
+        allLines = [ShipLineItem getShipLineItemsWithArr:tmpArr];
+//        [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
     }else{
         allLines = [TicketSerivice sharedInstance].allShipLines;
     }
@@ -578,7 +580,11 @@
                     NSLog(@"请求成功");
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
-                        allLines = [ShipLineItem getShipLineItemsWithArr:[dic objectForKey:@"shipLineList"]];
+                        NSArray *tmpArr = [dic objectForKey:@"shipLineList"];
+                        if (tmpArr && tmpArr.count>0) {
+                            [tmpArr writeToFile:PathDocFile(ShipLineList) atomically:YES];
+                        }
+                        allLines = [ShipLineItem getShipLineItemsWithArr:tmpArr];
                         [TicketSerivice sharedInstance].allShipLines = allLines;
                         [self flushUI];
                     }

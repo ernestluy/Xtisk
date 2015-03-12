@@ -98,15 +98,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define PathDocumentsHeadIcon				[NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/headicon"]
 //头像路径
 #define PathLogo(logo)			[NSString stringWithFormat:@"%@/%@",PathDocumentsHeadIcon,logo]
-#define PathTmpFile(tpath)			[NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),tpath]
+//#define PathTmpFile(tpath)		[NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),tpath]
+#define PathTmpFile(tpath)		[NSString stringWithFormat:@"%@/%@",tPathTmpDir,tpath]
 #define PathDocFile(tpath)      [NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),tpath]
 
+#define tPathTmpDir             [NSString stringWithFormat:@"%@/Documents/tmp",NSHomeDirectory()]
 
 #define SEARCH_FONT_SIZE  14
 
 #define DEFAULT_CELL_HEIGHT 44.0
 
-#define COMMEND_CELL_HEIGHT 120.0
+#define COMMEND_CELL_HEIGHT 110.0
 
 #define DATABASE_PATH                   @"xt"
 #define DATABASE_TYPE                   @"db"
@@ -122,6 +124,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define IndexRecomList  @"recomList"
 #define IndexPosterList  @"posterList"
 #define CategoryRoot  @"CategoryRoot"
+
+#define ShipLineList @"shipLineList"
 
 #define DefaultMsgPageSize 20
 

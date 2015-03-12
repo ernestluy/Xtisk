@@ -222,6 +222,10 @@
 		76D0181B1AB010EA00E6B168 /* StatisTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181A1AB010EA00E6B168 /* StatisTicketView.m */; };
 		76D0181F1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */; };
 		76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D0181E1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib */; };
+		76D018231AB045D900E6B168 /* LYScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D018221AB045D900E6B168 /* LYScrollView.m */; };
+		76D018271AB046E800E6B168 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D018251AB046E800E6B168 /* TestViewController.m */; };
+		76D018281AB046E800E6B168 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D018261AB046E800E6B168 /* TestViewController.xib */; };
+		76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */; };
 		ED2586E11A7D14A1008EB344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E01A7D14A1008EB344 /* main.m */; };
 		ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E31A7D14A1008EB344 /* AppDelegate.m */; };
 		ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2586E81A7D14A1008EB344 /* Main.storyboard */; };
@@ -739,6 +743,12 @@
 		76D0181C1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketNumsEdit2TableViewCell.h; sourceTree = "<group>"; };
 		76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketNumsEdit2TableViewCell.m; sourceTree = "<group>"; };
 		76D0181E1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketNumsEdit2TableViewCell.xib; sourceTree = "<group>"; };
+		76D018211AB045D900E6B168 /* LYScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYScrollView.h; sourceTree = "<group>"; };
+		76D018221AB045D900E6B168 /* LYScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYScrollView.m; sourceTree = "<group>"; };
+		76D018241AB046E800E6B168 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		76D018251AB046E800E6B168 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		76D018261AB046E800E6B168 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commend_bar@2x.png"; sourceTree = "<group>"; };
 		ED2586DB1A7D14A1008EB344 /* Xtisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xtisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2586DF1A7D14A1008EB344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1110,6 +1120,9 @@
 				760BF1E21A8CB7B60088DBA2 /* BaiduMapViewController.h */,
 				760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */,
 				760BF1E41A8CB7B60088DBA2 /* BaiduMapViewController.xib */,
+				76D018241AB046E800E6B168 /* TestViewController.h */,
+				76D018251AB046E800E6B168 /* TestViewController.m */,
+				76D018261AB046E800E6B168 /* TestViewController.xib */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1129,6 +1142,8 @@
 				ED8C779F1A861F52009C8286 /* LYFlushDefine.m */,
 				ED8C78191A959DDB009C8286 /* StarCommendView.h */,
 				ED8C781A1A959DDB009C8286 /* StarCommendView.m */,
+				76D018211AB045D900E6B168 /* LYScrollView.h */,
+				76D018221AB045D900E6B168 /* LYScrollView.m */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1888,6 +1903,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */,
 				76D018171AAFDE4600E6B168 /* arrow_down@2x.png */,
 				7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */,
 				7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */,
@@ -2274,6 +2290,7 @@
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
 				764D609B1A8AF41C00B186A5 /* login_tf_acc_head@2x.png in Resources */,
 				764D608A1A8AEBEE00B186A5 /* more_cell_recommend_icon@2x.png in Resources */,
+				76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */,
 				7664BACE1AA8236A00E59DF0 /* ticket_add_touch@2x.png in Resources */,
 				ED8C780D1A94E34D009C8286 /* DetailFoodCommendTableViewCell.xib in Resources */,
 				ED8C77F31A949AF3009C8286 /* address_cion@2x.png in Resources */,
@@ -2310,6 +2327,7 @@
 				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
 				76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */,
 				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
+				76D018281AB046E800E6B168 /* TestViewController.xib in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 				7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
@@ -2418,6 +2436,7 @@
 				ED8C77E41A9319EF009C8286 /* FoodDetailHeader.m in Sources */,
 				ED2586E11A7D14A1008EB344 /* main.m in Sources */,
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
+				76D018231AB045D900E6B168 /* LYScrollView.m in Sources */,
 				764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */,
 				7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */,
 				764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */,
@@ -2460,6 +2479,7 @@
 				764D60261A84A6CE00B186A5 /* HisLoginAcc.m in Sources */,
 				767812C71A80BDED00CB4B08 /* UcmHandleDataCenter.m in Sources */,
 				ED8C77E01A93139B009C8286 /* ActivityViewController.m in Sources */,
+				76D018271AB046E800E6B168 /* TestViewController.m in Sources */,
 				ED2587191A7D1857008EB344 /* NSObject+Queue.m in Sources */,
 				7664BAE01AA82DED00E59DF0 /* TicketOrderEditViewController.m in Sources */,
 				76D0181F1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m in Sources */,
@@ -2686,7 +2706,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b7a6e548-80ea-49bb-9775-54e8f03c80b7";
+				PROVISIONING_PROFILE = "b7aaf1f3-0794-4be1-ada3-e75128b0a863";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

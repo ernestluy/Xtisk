@@ -28,7 +28,9 @@
 //        NSString *tmpDir = PathTmpFile(@"header.png");
 
         BOOL b = [XTFileManager createDirAtPath:imageDir];
-        b = [XTFileManager writeImage:[UIImage imageNamed:@"1-1.jpg"] toFileAtPath:PathTmpFile(@"1-1.jpg")];
+//        b = [XTFileManager writeImage:[UIImage imageNamed:@"1-1.jpg"] toFileAtPath:PathTmpFile(@"1-1.jpg")];
+        
+        b = [XTFileManager createDirAtPath:tPathTmpDir];
         NSLog(@"b:%d",b);
     }
     return self;

@@ -18,9 +18,14 @@
     for (int i = 0; i<arr.count;i++) {
         CategoryItem * ci = [[CategoryItem alloc]init];
         NSDictionary *dic = [arr objectAtIndex:i];
-        ci.categoryId = [dic objectForKey:@"categoryId"];
+        ci.categoryId = [[dic objectForKey:@"categoryId"] intValue];
         ci.categoryName = [dic objectForKey:@"categoryName"];
-        ci.categoryImageUrl = [dic objectForKey:@"categoryImageUrl"];
+        
+        NSDictionary *imgDic = [dic objectForKey:@"categoryImageUrl"];
+        if (imgDic) {
+            ci.categoryImageUrl = [imgDic objectForKey:@"ios"];
+        }
+        
         NSArray *tmpArr = [dic objectForKey:@"childList"];
         if (tmpArr && [tmpArr isKindOfClass:[NSArray class]]) {
             ci.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];

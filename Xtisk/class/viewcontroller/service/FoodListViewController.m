@@ -18,7 +18,7 @@
     NSMutableArray *mDataArr;
     
     
-    
+    UILabel *labNoteNoData;
 }
 @end
 
@@ -44,6 +44,13 @@
     isRequestSuc = NO;
     mDataArr = [NSMutableArray array];
     tCount = 0;
+    
+    
+    labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    labNoteNoData.text = @"暂无数据";
+    labNoteNoData.font = [UIFont systemFontOfSize:14];
+    labNoteNoData.textColor = defaultTextColor;
+    labNoteNoData.textAlignment = NSTextAlignmentCenter;
 }
 -(void)requestListData{
     if (!isRequestSuc) {
@@ -57,15 +64,24 @@
     [self requestListData];
 }
 
+-(void)flushUI{
+    if (mDataArr.count == 0) {
+        self.tTableView.tableFooterView = labNoteNoData;
+    }else{
+        self.tTableView.tableFooterView = nil;
+    }
+    [self.tTableView reloadData];
+}
+
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
 }
 - (void)flushUpEnd:(NSObject *)ly{
     
 }
 - (void)startToFlushDown:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:self.categoryItem.categoryId pageNo:(curPage+1) pageSize:DefaultPageSize]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:(curPage+1) pageSize:DefaultPageSize]startAsynchronous];
 }
 - (void)flushDownEnd:(NSObject *)ly{
     
@@ -195,7 +211,7 @@
                                     [mDataArr addObjectsFromArray:tmpArr];
                                 }
                                 [self.tTableView flushDoneStatus:YES];
-                                [self.tTableView reloadData];
+                                [self flushUI];
                                 return;
                             }
                         }

@@ -55,11 +55,11 @@
     UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
     [self.navigationItem setRightBarButtonItem:ritem];
     
-    UIButton *btnTmp = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnTmp.frame = CGRectMake(100, 100, 100, 100);
-    btnTmp.backgroundColor = [UIColor orangeColor];
-    [btnTmp addTarget:self action:@selector(toBrowCommendList:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnTmp];
+//    UIButton *btnTmp = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btnTmp.frame = CGRectMake(100, 100, 100, 100);
+//    btnTmp.backgroundColor = [UIColor orangeColor];
+//    [btnTmp addTarget:self action:@selector(toBrowCommendList:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btnTmp];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
     [SVProgressHUD showWithStatus:@"正在加载..." ];
@@ -73,6 +73,8 @@
     self.title = self.mActivityItem.activityTitle;
     
     if (!isRequestSucMark) {
+        [[[HttpService sharedInstance] getRequestActivityDetail:self activityId:int2str(self.mActivityItem.activityId)]startAsynchronous];
+    }else{
         [[[HttpService sharedInstance] getRequestActivityDetail:self activityId:int2str(self.mActivityItem.activityId)]startAsynchronous];
     }
     
@@ -116,13 +118,13 @@
     //是否允许评论
     self.btnSignUp.enabled = YES;
     self.btnSignUp.alpha = 1;
-    if (self.mActivityItem.allowReview) {
-        self.btnCommend.enabled = YES;
-        self.btnCommend.alpha = 1.0;
-    }else{
-        self.btnCommend.enabled = NO;
-        self.btnCommend.alpha = DefaultEnableAlhpe;
-    }
+//    if (self.mActivityItem.allowReview) {
+//        self.btnCommend.enabled = YES;
+//        self.btnCommend.alpha = 1.0;
+//    }else{
+//        self.btnCommend.enabled = NO;
+//        self.btnCommend.alpha = DefaultEnableAlhpe;
+//    }
     
     //是否允许报名
     if (self.mActivityItem.isJoin) {
@@ -227,16 +229,25 @@
 }
 -(IBAction)toCommend:(id)sender{
     NSLog(@"toCommend");
-    if (![[SettingService sharedInstance] isLogin]) {
-        LoginViewController *lv = [[LoginViewController alloc]init];
-        lv.delegate = self;
-        [self.navigationController pushViewController:lv animated:YES];
-        return;
-    }
-    EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
-    ec.activityId = self.mActivityItem.activityId;
-    ec.mActivityItem = self.mActivityItem;
-    [self.navigationController pushViewController:ec animated:YES];
+    
+    ComCommendViewController *ccc = [[ComCommendViewController alloc]init];
+    ccc.activityId = self.mActivityItem.activityId;
+    ccc.vcType = CommendVcActivity;
+    ccc.mActivityItem = self.mActivityItem;
+    [self.navigationController pushViewController:ccc animated:YES];
+    
+
+    
+//    if (![[SettingService sharedInstance] isLogin]) {
+//        LoginViewController *lv = [[LoginViewController alloc]init];
+//        lv.delegate = self;
+//        [self.navigationController pushViewController:lv animated:YES];
+//        return;
+//    }
+//    EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
+//    ec.activityId = self.mActivityItem.activityId;
+//    ec.mActivityItem = self.mActivityItem;
+//    [self.navigationController pushViewController:ec animated:YES];
 }
 
 -(IBAction)toBrowCommendList:(id)sender{

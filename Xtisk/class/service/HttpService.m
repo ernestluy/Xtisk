@@ -306,6 +306,7 @@ static HttpService *httpServiceInstance = nil;
     
     NSString *contentStr = [NSString stringWithFormat:@"categoryId=%@&pageNo=%d&pageSize=%d",categoryId,pageNo,pageSize];
     NSData *data = [Util strToData:contentStr];
+    NSLog(@"QueryStoreByCategory:%@",contentStr);
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
     return request;
@@ -389,10 +390,10 @@ static HttpService *httpServiceInstance = nil;
 
 
 #pragma mark - 4.3.4.4	查看我报名的活动列表
--(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate pageNo:(int)pageNo pageSize:(int)pageSize{
+-(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/queryMyActivity",SERVICE_HOME];
-    urlStr = [NSString stringWithFormat:@"%@?pageNo=%d&pageSize=%d",urlStr,pageNo,pageSize];
+    urlStr = [NSString stringWithFormat:@"%@?pageNo=%d&pageSize=%d&activityStatus=%d",urlStr,pageNo,pageSize,activityStatus];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYMYACTIVITY];
@@ -525,6 +526,20 @@ static HttpService *httpServiceInstance = nil;
                                                                        type:HttpRequestType_XT_SUGGESTION];
     //content	String	300	否	建议反馈内容
     NSString *contentStr = [NSString stringWithFormat:@"content=%@",content];
+    NSData *data = [Util strToData:contentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+#pragma mark - 4.3.4.16 删除我的活动
+-(AsyncHttpRequest *)getRequestDelMyActivity :(id<AsyncHttpRequestDelegate>)delegate  activityId:(NSString *)activityId{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/delMyActivity",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_DEL_MYACTIVITY];
+    
+    NSString *contentStr = [NSString stringWithFormat:@"activityId=%@",activityId];
     NSData *data = [Util strToData:contentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];

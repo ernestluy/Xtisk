@@ -7,7 +7,7 @@
 //
 
 #import "TicketOrderEditViewController.h"
-
+#import "StatisTicketView.h"
 @interface TicketOrderEditViewController ()
 
 @end
@@ -18,6 +18,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"订单填写";
+    
+    StatisTicketView *st = [[StatisTicketView alloc]initWithFrame:CGRectMake(0, 0, 320, 400)];
+    [st layoutUI];
+    [self.view addSubview:st];
 }
 
 - (void)didReceiveMemoryWarning {

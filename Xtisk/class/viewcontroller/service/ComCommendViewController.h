@@ -14,4 +14,6 @@
 @property(nonatomic) int storeId;
 @property(nonatomic) int activityId;
 @property(nonatomic) int vcType;
+@property(nonatomic,strong)ActivityItem *mActivityItem;
+@property(nonatomic,strong) StoreItem *mStoreItem;
 @end

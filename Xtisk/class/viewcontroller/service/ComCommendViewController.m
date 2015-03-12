@@ -9,11 +9,14 @@
 #import "ComCommendViewController.h"
 #import "PublicDefine.h"
 #import "DetailFoodCommendTableViewCell.h"
+#import "LoginViewController.h"
+#import "EditTextViewController.h"
 @interface ComCommendViewController ()
 {
     NSMutableArray *mComArr;
     
     UILabel *labNote;
+    UILabel *labNoteNoData;
 }
 @end
 
@@ -26,7 +29,7 @@
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
-    CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64);
+    CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64 - 44);
     self.tTableView = [[LYTableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
 //    self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tTableView];
@@ -50,14 +53,87 @@
     labNote.textColor = defaultTextColor;
     [self.view addSubview:labNote];
     labNote.hidden = YES;
+    
+    
+//    UIButton * doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    doneBtn.frame = CGRectMake(0, 0, 30, 20);
+//    [doneBtn setTitle:@"评价" forState:UIControlStateNormal];
+//    [doneBtn setTitleColor:headerColor forState:UIControlStateNormal];
+//    doneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    
+//    [doneBtn addTarget:self action:@selector(toCommend:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn] ;
+//    
+//    
+//    [self.navigationItem setRightBarButtonItems:@[doneItem]];
+    
+    labNoteNoData = [CTLCustom labelNoteNoData];
+    
+    
+    //底部评价按钮
+    int commendHeight = 44;
+    UIView *cView = [[UIView alloc]initWithFrame:CGRectMake(0, bounds.size.height - 64 - commendHeight, bounds.size.width, commendHeight)];
+    [self.view addSubview:cView];
+    
+    UIButton *btnCommend = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnCommend setImage:[UIImage imageNamed:@"commend_bar"] forState:UIControlStateNormal];
+    [btnCommend setImage:[UIImage imageNamed:@"commend_bar"] forState:UIControlStateHighlighted];
+    btnCommend.frame = cView.bounds;
+    [cView addSubview:btnCommend];
+    [btnCommend addTarget:self action:@selector(toCommend:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    
     
     if (!isRequestSucMark) {
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [self.tTableView upToStartFlush];
     }
+}
+
+-(void)flushUI{
+    if (mComArr.count == 0) {
+        self.tTableView.tableFooterView = labNoteNoData;
+    }else{
+        self.tTableView.tableFooterView = nil;
+    }
+    [self.tTableView reloadData];
+}
+
+-(void)toCommend:(id)sender{
+    NSLog(@"toCommend");
+    
+    
+    
+    if (self.vcType == CommendVcActivity) {
+        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
+        ec.activityId = self.mActivityItem.activityId;
+        ec.mActivityItem = self.mActivityItem;
+        if (![[SettingService sharedInstance] isLogin]) {
+            LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
+            [self.navigationController pushViewController:lv animated:YES];
+            return;
+        }
+        [self.navigationController pushViewController:ec animated:YES];
+    }else if (self.vcType == CommendVcStore) {
+        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:nil];
+        ec.storeId = self.mStoreItem.storeId;
+        ec.mStoreItem = self.mStoreItem;
+        if (![[SettingService sharedInstance] isLogin]) {
+            LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
+            [self.navigationController pushViewController:lv animated:YES];
+            return;
+        }
+        [self.navigationController pushViewController:ec animated:YES];
+    }
+    
 }
 
 #pragma mark - LYFlushViewDelegate
@@ -192,15 +268,14 @@
                         [mComArr addObjectsFromArray:tmpComArr];
                     }
                     
-                    if (mComArr.count == 0) {
-                        labNote.hidden = NO;
-                        self.tTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-                    }else{
-                        labNote.hidden = YES;
-                        self.tTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-                    }
                     
-                    [self.tTableView flushDoneStatus:YES];
+                    if (tmpComArr.count>0) {
+                        [self.tTableView flushDoneStatus:YES];
+                    }else{
+                        [self.tTableView flushDoneStatus:NO];
+                    }
+//                    [self.tTableView flushDoneStatus:YES];
+                    [self flushUI];
                     [self.tTableView reloadData];
                     return;
                     

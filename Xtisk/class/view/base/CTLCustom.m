@@ -96,4 +96,15 @@
     tf.backgroundColor = [UIColor whiteColor];
     return tf;
 }
+
+
++(UILabel *)labelNoteNoData{
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    UILabel * labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    labNoteNoData.text = @"暂无数据";
+    labNoteNoData.font = [UIFont systemFontOfSize:14];
+    labNoteNoData.textColor = defaultTextColor;
+    labNoteNoData.textAlignment = NSTextAlignmentCenter;
+    return labNoteNoData;
+}
 @end

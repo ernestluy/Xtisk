@@ -21,7 +21,8 @@
     UIBarButtonItem * doneItem;
     UIBarButtonItem * delItem;
     
-    NSArray *allMyActivityArr;
+    NSMutableArray *allMyActivityArr;
+    UILabel *labNoteNoData;
 }
 @end
 
@@ -30,12 +31,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     tAcount = 5;
+    allMyActivityArr = [NSMutableArray array];
     // Do any additional setup after loading the view.
     self.title = @"我的活动";
     self.view.backgroundColor = [UIColor whiteColor];
     btnArr = [[NSMutableArray alloc]init];
     CGRect bounds = [UIScreen mainScreen].bounds;
-    NSArray *btnTitleArr = @[@"全部",@"进行中",@"已结束"];
+    NSArray *btnTitleArr = @[@"全部",@"未开始",@"进行中",@"已结束"];
     int btnW = bounds.size.width / btnTitleArr.count;
     int btnH = 40;
     int lineHeight = 20;
@@ -77,6 +79,9 @@
     
     [okBtn addTarget:self action:@selector(toDelete:) forControlEvents:UIControlEventTouchUpInside];
     delItem = [[UIBarButtonItem alloc] initWithCustomView:okBtn] ;
+    
+    
+    //暂时没有删除接口，不提供该功能
     [self.navigationItem setRightBarButtonItem:delItem];
     
     
@@ -93,14 +98,26 @@
 //    进行中 f75218
 //    已结束 bcbcbc
 //    未开始 4ad02a
+    
+    
+    labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    labNoteNoData.text = @"暂无数据";
+    labNoteNoData.font = [UIFont systemFontOfSize:14];
+    labNoteNoData.textColor = defaultTextColor;
+    labNoteNoData.textAlignment = NSTextAlignmentCenter;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self requestData];
+}
+
+-(void)requestData{
+    tTableView.tableFooterView = nil;
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
-    [[[HttpService sharedInstance] getRequestQueryMyActivity:self pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
 }
 
 -(void)doneDelete:(id)sender{
@@ -125,6 +142,7 @@
     }
     
     btn.selected = YES;
+    selectedIndex = (int)btn.tag;
     switch (btn.tag) {
         case 0:
             
@@ -133,17 +151,25 @@
         default:
             break;
     }
+    [allMyActivityArr removeAllObjects];
+    [self flushUI];
+    [self requestData];
 }
 
 
 -(void)flushUI{
+    if (allMyActivityArr.count == 0) {
+        tTableView.tableFooterView = labNoteNoData;
+    }else{
+        tTableView.tableFooterView = nil;
+    }
     [tTableView reloadData];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return allMyActivityArr.count;
+    return tAcount;//allMyActivityArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -153,7 +179,20 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (selectedIndex == 1 || selectedIndex == 2) {
+        return NO;
+    }
+    if (selectedIndex == 3) {
+        return YES;
+    }
+    if (0 == selectedIndex) {
+        
+        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+        
+        return YES;
+    }
     return YES;
+//    return NO;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"commitEditing");
@@ -165,6 +204,10 @@
         tAcount --;
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
         [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
+        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+        [allMyActivityArr removeObjectAtIndex:indexPath.section];
+        [[[HttpService sharedInstance] getRequestDelMyActivity:self activityId:int2str(ma.activityId)]startAsynchronous];
+        
     }
 }
 
@@ -179,9 +222,9 @@
 }
 
 #pragma mark - UITableViewDelegate
-- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
-}
+//- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return NO;
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 7;
 }
@@ -220,8 +263,13 @@
                     if (dic) {
                         int tTotal = [[dic objectForKey:@"total"] intValue];
                         //改为items
+                        [allMyActivityArr removeAllObjects];
                         NSArray *tmpArr = [dic objectForKey:@"items"];
-                        allMyActivityArr = [MyActivity getMyActivitysWithArr:tmpArr];
+                        tmpArr = [MyActivity getMyActivitysWithArr:tmpArr];
+                        if(tmpArr){
+                            [allMyActivityArr addObjectsFromArray:tmpArr];
+                        }
+                        
                         [self flushUI];
                     }
                     
@@ -231,6 +279,23 @@
             }else{
                 NSLog(@"请求失败");
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+            }
+            break;
+        }
+        case HttpRequestType_XT_DEL_MYACTIVITY:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    
+                    
+                }else{
+//                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                NSLog(@"请求失败");
+//                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
         }

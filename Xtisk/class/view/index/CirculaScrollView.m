@@ -153,13 +153,53 @@
     [self selectedEnd:nTag];
     for (int i = 0; i<dataArr.count; i++) {
         PosterItem *pi = [dataArr objectAtIndex:i];
-        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:pi.posterPic
-                                                                                       target:self
-                                                                                         type:HttpRequestType_Img_LoadDown];
-        request.iMark = myTask;
-        request.tTag = i;
-        [request setRequestMethod:@"GET"];
-        [request startAsynchronous];
+//        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:pi.posterPic
+//                                                                                       target:self
+//                                                                                         type:HttpRequestType_Img_LoadDown];
+//        request.iMark = myTask;
+//        request.tTag = i;
+//        [request setRequestMethod:@"GET"];
+//        [request startAsynchronous];
+        
+        UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:pi.posterPic];
+        
+        
+        if (!tImg) {
+            UIImageView *iv =  [imgViewArr objectAtIndex:(i+1)];
+            iv.image = [UIImage imageNamed:@"down_img"];
+            iv.contentMode = DefaultImageViewInitMode;
+            //    原理：3-[0-1-2-3]-0
+            if (i == 0) {
+                iv =  [imgViewArr objectAtIndex:allCount+1];
+                iv.image = [UIImage imageNamed:@"down_img"];
+            }else if(i == (allCount - 1)){
+                iv =  [imgViewArr objectAtIndex:0];
+                iv.image = [UIImage imageNamed:@"down_img"];
+            }
+            iv.contentMode = DefaultImageViewInitMode;
+            
+            AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:pi.posterPic
+                                                                                           target:self
+                                                                                             type:HttpRequestType_Img_LoadDown];
+            request.iMark = myTask;
+            request.tTag = i;
+            [request setRequestMethod:@"GET"];
+            [request startAsynchronous];
+        }else{
+            UIImageView *iv =  [imgViewArr objectAtIndex:(i+1)];
+            iv.image = tImg;
+            iv.contentMode = DefaultImageViewContentMode;
+            //    原理：3-[0-1-2-3]-0
+            if (i == 0) {
+                iv =  [imgViewArr objectAtIndex:allCount+1];
+                iv.image = tImg;
+            }else if(i == (allCount - 1)){
+                iv =  [imgViewArr objectAtIndex:0];
+                iv.image = tImg;
+            }
+            iv.contentMode = DefaultImageViewContentMode;
+            
+        }
     }
     
 }
@@ -321,6 +361,8 @@
                 }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
+                PosterItem *pi = [dataArr objectAtIndex:ir.tTag];
+                [XTFileManager saveTmpFolderFileWithUrlPath:pi.posterPic with:rImage];
                 UIImageView *iv =  [imgViewArr objectAtIndex:(ir.tTag+1)];
                 iv.image = rImage;
                 iv.contentMode = DefaultImageViewContentMode;

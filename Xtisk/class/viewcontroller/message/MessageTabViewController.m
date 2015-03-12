@@ -97,6 +97,9 @@
         if (item) {
             cell.labMsg.text = item.content;
             cell.labTime.text = item.dateCreate;
+        }else{
+            cell.labTime.text = @"";
+            cell.labMsg.text = @"";
         }
     }else if(1 == indexPath.section){
         NSArray *titleArr2 = @[@"船票",@"园区活动"];

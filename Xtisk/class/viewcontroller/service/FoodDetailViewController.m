@@ -18,7 +18,6 @@
 #import "FoodShopAllMenuViewController.h"
 #import "LoginViewController.h"
 #define SECTION_SENCOND_HEIGHT   56.0
-#define SECTION_THIRD_HEIGHT     120.0
 @interface FoodDetailViewController ()
 {
     FoodDetailHeader *foodDetailHeader;
@@ -127,6 +126,8 @@
     if (!isRequestSuc) {
         [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
         [[[HttpService sharedInstance] getRequestStoreCommentsList:self storeId:int2str(self.mStoreItem.storeId) pageNo:1 pageSize:5]startAsynchronous];
+    }else{
+        [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
     }
     
 }
@@ -138,17 +139,25 @@
 }
 -(void)toCommend:(id)sender{
     NSLog(@"toCommend");//评价
-    EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
-    et.storeId = self.mStoreItem.storeId;
-    et.mStoreItem = self.mStoreItem;
-    if (![[SettingService sharedInstance] isLogin]) {
-        LoginViewController *lv = [[LoginViewController alloc]initWithVc:et];
-        lv.delegate = self;
-        [self.navigationController pushViewController:lv animated:YES];
-        return;
-    }
     
-    [self.navigationController pushViewController:et animated:YES];
+    ComCommendViewController *ccc = [[ComCommendViewController alloc]init];
+    ccc.storeId = self.mStoreItem.storeId;
+    ccc.vcType = CommendVcStore;
+    ccc.mStoreItem = self.mStoreItem;
+    [self.navigationController pushViewController:ccc animated:YES];
+    
+    
+//    EditTextViewController *et = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:self];
+//    et.storeId = self.mStoreItem.storeId;
+//    et.mStoreItem = self.mStoreItem;
+//    if (![[SettingService sharedInstance] isLogin]) {
+//        LoginViewController *lv = [[LoginViewController alloc]initWithVc:et];
+//        lv.delegate = self;
+//        [self.navigationController pushViewController:lv animated:YES];
+//        return;
+//    }
+//    
+//    [self.navigationController pushViewController:et animated:YES];
 }
 -(void)toPraise:(id)sender{
     //点赞
@@ -317,7 +326,7 @@
     if (1 == indexPath.section) {
         return SECTION_SENCOND_HEIGHT;
     }else if (2 == indexPath.section) {
-        return SECTION_THIRD_HEIGHT;
+        return COMMEND_CELL_HEIGHT;
     }
     return DEFAULT_CELL_HEIGHT;
 }

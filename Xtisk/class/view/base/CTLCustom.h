@@ -19,4 +19,6 @@
 +(UILabel*)getCusRightLabel:(CGRect)rect;
 
 +(UITextField*)getRegTextFieldWith:(CGRect)rect;
+
++(UILabel *)labelNoteNoData;
 @end

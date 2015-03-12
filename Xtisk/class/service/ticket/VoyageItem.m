@@ -41,7 +41,7 @@
         ci.SHIP = [dic objectForKey:@"SHIP"];
         ci.SHIPCODE = [dic objectForKey:@"SHIPCODE"];
         ci.SETOFFTIME = [dic objectForKey:@"SETOFFTIME"];
-        ci.LINECODE = [dic objectForKey:@"LINECODE"];
+        ci.SETOFFDATE = [dic objectForKey:@"SETOFFDATE"];
         ci.LINECODE = [dic objectForKey:@"LINECODE"];
         ci.VOYAGEROUTE_ID = [dic objectForKey:@"VOYAGEROUTE_ID"];
         ci.TICKETNUM = [dic objectForKey:@"TICKETNUM"];
@@ -75,10 +75,10 @@
             NSArray *sLevel = [[fLevel objectAtIndex:i] componentsSeparatedByString:@"("];
             
             if (sLevel.count>1) {
-//                [self.mArrTicketId addObject:[sLevel objectAtIndex:0]];
-//                [self.mArrTicketNums addObject:[sLevel objectAtIndex:1]];
                 [self.mArrTicketId addObject:[sLevel objectAtIndex:0]];
-                [self.mArrTicketNums addObject:@"20"];
+                [self.mArrTicketNums addObject:[sLevel objectAtIndex:1]];
+//                [self.mArrTicketId addObject:[sLevel objectAtIndex:0]];
+//                [self.mArrTicketNums addObject:@"20"];
                 if (0 == i) {
                     self.ticketNum1 = [[sLevel objectAtIndex:1] intValue];
                 }else if (1 == i) {
