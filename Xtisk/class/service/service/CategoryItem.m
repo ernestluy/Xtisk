@@ -18,7 +18,7 @@
     for (int i = 0; i<arr.count;i++) {
         CategoryItem * ci = [[CategoryItem alloc]init];
         NSDictionary *dic = [arr objectAtIndex:i];
-        ci.categoryId = [[dic objectForKey:@"categoryId"] intValue];
+        ci.categoryId = [[dic objectForKey:@"categoryId"] longValue];
         ci.categoryName = [dic objectForKey:@"categoryName"];
         
         NSDictionary *imgDic = [dic objectForKey:@"categoryImageUrl"];

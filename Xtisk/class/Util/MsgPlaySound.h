@@ -22,4 +22,5 @@
 +(MsgPlaySound *)sharedInstance;
 
 -(void)playReceiveMsg;
+-(void)playAll;
 @end

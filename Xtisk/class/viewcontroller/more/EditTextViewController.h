@@ -18,6 +18,7 @@
 
 @property(nonatomic,weak)IBOutlet UITextView *tTextView;
 @property(nonatomic,weak)IBOutlet UILabel *labWarnning;
+@property(nonatomic,weak)IBOutlet UILabel *labXhb;
 @property(nonatomic,weak)id<EditTextViewDelegate> tDelegate;
 @property(nonatomic)int tType;
 @property(nonatomic) int storeId;

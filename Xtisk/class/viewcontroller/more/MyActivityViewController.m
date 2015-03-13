@@ -10,6 +10,12 @@
 #import "PublicDefine.h"
 #import "MyActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
+
+//活动状态，返回中文“进行中”、“已结束”、“未开始”
+#define AcStatusIng @"进行中"
+#define AcStatusEnd @"已结束"
+#define AcStatusNoBegin @"未开始"
+
 #define TheCellId  @"cell"
 @interface MyActivityViewController ()
 {
@@ -67,9 +73,14 @@
     [self.view addSubview:iv];
     
     int tableHeight = bounds.size.height - 64 - btnH;
-    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, btnH, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
+    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, btnH, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
+    
+    tTableView.lyDelegate = self;
+    [tTableView setNeedBottomFlush];
+    [tTableView setNeedTopFlush];
+    
     [tTableView registerNib:[UINib nibWithNibName:@"MyActivityTableViewCell" bundle:nil] forCellReuseIdentifier:TheCellId];
     [self.view addSubview:tTableView];
     
@@ -117,6 +128,8 @@
 -(void)requestData{
     tTableView.tableFooterView = nil;
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    curPage = 1;
+    [allMyActivityArr removeAllObjects];
     [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
 }
 
@@ -151,6 +164,7 @@
         default:
             break;
     }
+    curPage = 1;
     [allMyActivityArr removeAllObjects];
     [self flushUI];
     [self requestData];
@@ -165,11 +179,40 @@
     }
     [tTableView reloadData];
 }
+//活动状态，返回中文“进行中”、“已结束”、“未开始”
+#pragma mark - LYFlushViewDelegate
+- (void)startToFlushUp:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+}
+- (void)flushUpEnd:(NSObject *)ly{
+    
+}
+- (void)startToFlushDown:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:(curPage+1) pageSize:DefaultPageSize]startAsynchronous];
+}
+- (void)flushDownEnd:(NSObject *)ly{
+    
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [tTableView setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    [tTableView judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //    NSLog(@"drag end");
+    [tTableView judgeDragEnd];
+    
+}
+
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return tAcount;//allMyActivityArr.count;
+    return allMyActivityArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -188,8 +231,11 @@
     if (0 == selectedIndex) {
         
         MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-        
-        return YES;
+        if ([ma.status isEqualToString:AcStatusEnd]) {
+            return YES;
+        }else{
+            return NO;
+        }
     }
     return YES;
 //    return NO;
@@ -263,7 +309,13 @@
                     if (dic) {
                         int tTotal = [[dic objectForKey:@"total"] intValue];
                         //改为items
-                        [allMyActivityArr removeAllObjects];
+//                        [allMyActivityArr removeAllObjects];
+                        if (tTableView.flushDirType == FlushDirDown) {
+                            curPage ++;
+                        }else if (tTableView.flushDirType == FlushDirUp){
+                            curPage = 1;
+                            [allMyActivityArr removeAllObjects];
+                        }
                         NSArray *tmpArr = [dic objectForKey:@"items"];
                         tmpArr = [MyActivity getMyActivitysWithArr:tmpArr];
                         if(tmpArr){
@@ -295,7 +347,7 @@
                 }
             }else{
                 NSLog(@"请求失败");
-//                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
         }

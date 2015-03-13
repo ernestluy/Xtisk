@@ -311,7 +311,7 @@
 
 #pragma mark -  拖动中，提示放开刷新
 -(void)promptDownDragFlush{
-    labelDownDrag.text = RELEASE_DRAG_TO_FLUSH;
+    labelDownDrag.text = DOWN_RELEASE_DRAG_TO_FLUSH;
 }
 
 #pragma mark -  拖动中，提示为正常状态

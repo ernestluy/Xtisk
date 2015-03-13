@@ -206,11 +206,18 @@
                             if (tmpArr) {
                                 if (self.tTableView.flushDirType == FlushDirDown) {
                                     [mDataArr addObjectsFromArray:tmpArr];
+                                    curPage ++;
                                 }else{
                                     [mDataArr removeAllObjects];
                                     [mDataArr addObjectsFromArray:tmpArr];
+                                    curPage = 1;
                                 }
-                                [self.tTableView flushDoneStatus:YES];
+                                if (tmpArr.count>0) {
+                                    [self.tTableView flushDoneStatus:YES];
+                                }else{
+                                    [self.tTableView flushDoneStatus:NO];
+                                }
+//                                [self.tTableView flushDoneStatus:YES];
                                 [self flushUI];
                                 return;
                             }
@@ -222,6 +229,7 @@
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 NSLog(@"请求失败");
             }
             [self.tTableView flushDoneStatus:NO];

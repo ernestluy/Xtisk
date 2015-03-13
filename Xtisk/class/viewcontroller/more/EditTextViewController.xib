@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditTextViewController">
             <connections>
                 <outlet property="labWarnning" destination="SfQ-E2-2pw" id="fbt-Fb-jvX"/>
+                <outlet property="labXhb" destination="6sW-Ws-ArS" id="ar0-hU-QjT"/>
                 <outlet property="tTextView" destination="Jer-nK-p0s" id="Ktt-zg-o6u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,6 +28,12 @@
                     <rect key="frame" x="258" y="131" width="47" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="让小伙伴知道你的最新动态吧！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sW-Ws-ArS">
+                    <rect key="frame" x="15" y="131" width="225" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

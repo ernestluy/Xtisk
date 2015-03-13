@@ -26,15 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.labXhb.hidden = YES;
     if (tType == PrivateEditTextNick) {
         self.title = @"昵称";
         self.tTextView.text = [SettingService sharedInstance].iUser.nickName;
-        limitNum = 15;
+        limitNum = 10;
     }
     else if (tType == PrivateEditTextSign) {
         self.title = @"修改签名";
+        self.labXhb.hidden = NO;
         self.tTextView.text = [SettingService sharedInstance].iUser.signature;
-        limitNum = 32;
+        limitNum = 26;
     }else if (tType == PrivateEditTextCom){
         self.title = @"企业";
         self.tTextView.text = [SettingService sharedInstance].iUser.enterprise;
@@ -84,6 +86,20 @@
 -(void)submit:(id)sender{
     NSLog(@"submit");
     [self.tTextView resignFirstResponder];
+    
+    if (PrivateEditTextFoodCommend == tType || PrivateEditTextActivity == tType || PrivateEditTextAdvise == tType) {
+        if (self.tTextView.text.length == 0) {
+            NSString *strNote = [NSString stringWithFormat:@"长度格式必须为1-%d",limitNum];
+            [SVProgressHUD showErrorWithStatus:strNote duration:2];
+            return;
+        }
+        
+        if (self.tTextView.text.length >limitNum) {
+            [SVProgressHUD showErrorWithStatus:@"太多啦，删几个字吧！" duration:2];
+            return;
+        }
+    }
+    
     if (self.tDelegate &&  [self.tDelegate respondsToSelector:@selector(editTextDone:type:)]) {
         [self.tDelegate editTextDone:self.tTextView.text type:tType];
     }
@@ -134,7 +150,11 @@
 - (void)textViewDidChange:(UITextView *)textView{
     int dd = limitNum - (int)textView.text.length;
     self.labWarnning.text = [NSString stringWithFormat:@"%d",dd];
-    
+    if (dd<0) {
+        self.labWarnning.textColor = [UIColor redColor];
+    }else{
+        self.labWarnning.textColor = defaultTextColor;
+    }
 }
 
 #pragma mark - AsyncHttpRequestDelegate

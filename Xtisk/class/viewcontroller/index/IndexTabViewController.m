@@ -18,6 +18,7 @@
 #import "LYTableView.h"
 #import "LYCollectionView.h"
 #import "TestViewController.h"
+#import "MsgPlaySound.h"
 @interface IndexTabViewController ()
 {
     NSMutableArray *pmArr;
@@ -159,7 +160,7 @@
     if (!isRequestSucMark) {
         [tLyCollectionView upToStartFlush];
     }
-    
+//    [[MsgPlaySound sharedInstance] playAll];
 }
 
 
