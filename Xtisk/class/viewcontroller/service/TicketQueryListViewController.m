@@ -27,6 +27,8 @@
     UIButton *btnDate;
     UIButton *btnLast;
     UIButton *btnNext;
+    
+    UILabel *labNoteNoData;
 }
 @end
 
@@ -104,6 +106,12 @@
         [btnDate setTitle:[TicketSerivice sharedInstance].returnDate forState:UIControlStateNormal];
     }
     
+    
+    labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    labNoteNoData.text = @"暂无数据";
+    labNoteNoData.font = [UIFont systemFontOfSize:14];
+    labNoteNoData.textColor = defaultTextColor;
+    labNoteNoData.textAlignment = NSTextAlignmentCenter;
 }
 
 -(void)requestData{
@@ -149,6 +157,12 @@
 }
 
 -(void)flushUI{
+    
+    if (voyageLines.count == 0) {
+        tTableView.tableFooterView = labNoteNoData;
+    }else{
+        tTableView.tableFooterView = nil;
+    }
     [tTableView reloadData];
 }
 

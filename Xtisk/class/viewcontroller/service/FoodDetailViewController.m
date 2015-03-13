@@ -28,6 +28,8 @@
     NSArray *comArr;
     
     int totalCom;
+    
+    UILabel *labCellWypj;
 }
 @end
 
@@ -88,6 +90,14 @@
 
 -(void)flushUI{
     [self setDataWithStoreInfo:self.mStoreItem];
+    if (labCellWypj) {
+        if (self.mStoreItem.reviews == 0) {
+            labCellWypj.text = @"网友评价";
+        }else{
+            labCellWypj.text = [NSString stringWithFormat:@"网友评价(%d)",self.mStoreItem.reviews];
+        }
+    }
+    totalCom = self.mStoreItem.reviews;
 
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:self.mStoreItem.storeMiniPic];
     if (!tImg) {
@@ -276,6 +286,7 @@
             }
             //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = @"网友评价(36)";
+            labCellWypj = cell.textLabel;
             if (totalCom == 0) {
                 cell.textLabel.text = @"网友评价";
             }else{

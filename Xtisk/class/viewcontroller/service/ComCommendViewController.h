@@ -8,7 +8,8 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate>
+#import "EditTextViewController.h"
+@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate,CommentViewControllerDelegate>
 
 @property(nonatomic,strong)IBOutlet LYTableView *tTableView;
 @property(nonatomic) int storeId;
@@ -16,4 +17,5 @@
 @property(nonatomic) int vcType;
 @property(nonatomic,strong)ActivityItem *mActivityItem;
 @property(nonatomic,strong) StoreItem *mStoreItem;
+
 @end

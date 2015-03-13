@@ -116,6 +116,7 @@
         EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
         ec.activityId = self.mActivityItem.activityId;
         ec.mActivityItem = self.mActivityItem;
+        ec.comDelegate = self;
         if (![[SettingService sharedInstance] isLogin]) {
             LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
             [self.navigationController pushViewController:lv animated:YES];
@@ -126,6 +127,7 @@
         EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:nil];
         ec.storeId = self.mStoreItem.storeId;
         ec.mStoreItem = self.mStoreItem;
+        ec.comDelegate = self;
         if (![[SettingService sharedInstance] isLogin]) {
             LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
             [self.navigationController pushViewController:lv animated:YES];
@@ -134,6 +136,13 @@
         [self.navigationController pushViewController:ec animated:YES];
     }
     
+}
+
+#pragma mark - CommentViewControllerDelegate
+
+- (void)commentDelegate:(int)result{
+    NSLog(@"commentDelegate");
+    [self.tTableView upToStartFlush];
 }
 
 #pragma mark - LYFlushViewDelegate

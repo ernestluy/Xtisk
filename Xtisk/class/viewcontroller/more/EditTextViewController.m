@@ -173,6 +173,9 @@
                         self.mStoreItem.reviews += 1;
                     }
                     [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
+                    if (self.comDelegate && [self.comDelegate respondsToSelector:@selector(commentDelegate:)]) {
+                        [self.comDelegate commentDelegate:YES];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];

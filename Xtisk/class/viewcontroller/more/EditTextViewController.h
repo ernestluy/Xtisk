@@ -11,6 +11,11 @@
 @protocol EditTextViewDelegate <NSObject>
 - (void)editTextDone:(NSString *)str type:(int)ty;
 @end
+
+@protocol CommentViewControllerDelegate <NSObject>
+- (void)commentDelegate:(int)result;
+@end
+
 @interface EditTextViewController : SecondaryViewController<UITextViewDelegate ,AsyncHttpRequestDelegate>
 {
     int tType;
@@ -20,6 +25,7 @@
 @property(nonatomic,weak)IBOutlet UILabel *labWarnning;
 @property(nonatomic,weak)IBOutlet UILabel *labXhb;
 @property(nonatomic,weak)id<EditTextViewDelegate> tDelegate;
+@property(nonatomic,strong) id<CommentViewControllerDelegate> comDelegate;
 @property(nonatomic)int tType;
 @property(nonatomic) int storeId;
 @property(nonatomic) int activityId;
