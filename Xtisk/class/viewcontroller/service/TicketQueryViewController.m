@@ -156,7 +156,7 @@
     if (![TicketSerivice sharedInstance].allShipLines) {
         NSArray *tmpArr = [[NSArray alloc]initWithContentsOfFile:PathDocFile(ShipLineList)];
         allLines = [ShipLineItem getShipLineItemsWithArr:tmpArr];
-//        [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
+        [[[HttpService sharedInstance] getRequestQueryShipLine:self]startAsynchronous];
     }else{
         allLines = [TicketSerivice sharedInstance].allShipLines;
     }

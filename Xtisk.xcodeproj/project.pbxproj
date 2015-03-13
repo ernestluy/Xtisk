@@ -127,7 +127,6 @@
 		7664BB801AAD6B8300E59DF0 /* msg_shekou_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB7E1AAD6B8300E59DF0 /* msg_shekou_icon@2x.png */; };
 		7664BB891AADA49100E59DF0 /* MessageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB871AADA49100E59DF0 /* MessageListTableViewCell.m */; };
 		7664BB8A1AADA49100E59DF0 /* MessageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB881AADA49100E59DF0 /* MessageListTableViewCell.xib */; };
-		7664BB8D1AADA79300E59DF0 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */; };
 		7664BB901AAE982400E59DF0 /* MsgPlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */; };
 		7664BB921AAEC28A00E59DF0 /* ticket_warning.html in Resources */ = {isa = PBXBuildFile; fileRef = 7664BB911AAEC28A00E59DF0 /* ticket_warning.html */; };
 		7664BB961AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664BB941AAEEE8C00E59DF0 /* TicketNumsEdit1TableViewCell.m */; };
@@ -346,6 +345,7 @@
 		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
 		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
 		EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCA83221AAB45C500AD2FB3 /* MyActivity.m */; };
+		EDCB5C411AB1BDFF00FC50EC /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */; };
 		EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */; };
 		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
 		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
@@ -594,7 +594,6 @@
 		7664BB861AADA49100E59DF0 /* MessageListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewCell.h; sourceTree = "<group>"; };
 		7664BB871AADA49100E59DF0 /* MessageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewCell.m; sourceTree = "<group>"; };
 		7664BB881AADA49100E59DF0 /* MessageListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListTableViewCell.xib; sourceTree = "<group>"; };
-		7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		7664BB8E1AAE982400E59DF0 /* MsgPlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgPlaySound.h; sourceTree = "<group>"; };
 		7664BB8F1AAE982400E59DF0 /* MsgPlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgPlaySound.m; sourceTree = "<group>"; };
 		7664BB911AAEC28A00E59DF0 /* ticket_warning.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ticket_warning.html; sourceTree = "<group>"; };
@@ -936,6 +935,7 @@
 		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
 		EDCA83211AAB45C500AD2FB3 /* MyActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivity.h; sourceTree = "<group>"; };
 		EDCA83221AAB45C500AD2FB3 /* MyActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivity.m; sourceTree = "<group>"; };
+		EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
 		EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
 		EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
@@ -978,7 +978,7 @@
 				76C87CFA1A8CA43E00843060 /* libSocialQQ.a in Frameworks */,
 				76C87CF81A8CA43E00843060 /* libSocialLine.a in Frameworks */,
 				76C87D031A8CA43E00843060 /* libSocialWechat.a in Frameworks */,
-				7664BB8D1AADA79300E59DF0 /* libbaidumapapi.a in Frameworks */,
+				EDCB5C411AB1BDFF00FC50EC /* libbaidumapapi.a in Frameworks */,
 				7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				76C87CF61A8CA43E00843060 /* libSocialInstagram.a in Frameworks */,
 				76C87CFD1A8CA43E00843060 /* libSocialTumblr.a in Frameworks */,
@@ -1007,7 +1007,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				7664BB8B1AADA79300E59DF0 /* Release-iphoneos */,
+				EDCB5C3F1AB1BDFF00FC50EC /* Release-iphonesimulator */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -1278,15 +1278,6 @@
 				7664BAE41AA8523800E59DF0 /* UMessage.h */,
 			);
 			path = UMessage_Sdk_1.1.0;
-			sourceTree = "<group>";
-		};
-		7664BB8B1AADA79300E59DF0 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				7664BB8C1AADA79300E59DF0 /* libbaidumapapi.a */,
-			);
-			name = "Release-iphoneos";
-			path = "libs/Release-iphoneos";
 			sourceTree = "<group>";
 		};
 		7678126D1A808F1D00CB4B08 /* CSIHttp */ = {
@@ -2085,6 +2076,15 @@
 			path = more;
 			sourceTree = "<group>";
 		};
+		EDCB5C3F1AB1BDFF00FC50EC /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */,
+			);
+			name = "Release-iphonesimulator";
+			path = "libs/Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2652,7 +2652,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2701,7 +2701,7 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

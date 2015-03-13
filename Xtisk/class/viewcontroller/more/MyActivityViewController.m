@@ -169,7 +169,7 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return tAcount;//allMyActivityArr.count;
+    return allMyActivityArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

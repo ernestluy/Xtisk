@@ -12,6 +12,9 @@
 
 
 @property(nonatomic,weak)IBOutlet UILabel *labPrompt;
+
+@property(nonatomic,weak)IBOutlet UITextField *tf1;
+@property(nonatomic,weak)IBOutlet UITextField *tf2;
 -(IBAction)regAction:(id)sender;
 -(IBAction)getVerCodeAction:(id)sender;
 -(IBAction)nextAction:(id)sender;
