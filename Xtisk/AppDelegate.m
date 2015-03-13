@@ -17,7 +17,7 @@
 
 #import "SettingService.h"
 #import "CustomMenuTutorialController.h"
-
+#import "MsgPlaySound.h"
 #import "UMessage.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -156,6 +156,10 @@
         [SettingService sharedInstance].deviceToken = tToken;
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    
+    
+    
+    
     return YES;
 }
 

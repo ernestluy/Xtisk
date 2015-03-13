@@ -263,9 +263,11 @@
                     tmpComArr = [CommentsItem getCommentsItemsWithArr:tmpComArr];
                     if (self.tTableView.flushDirType == FlushDirDown) {
                         [mComArr addObjectsFromArray:tmpComArr];
+                        curPage ++;
                     }else{
                         [mComArr removeAllObjects];
                         [mComArr addObjectsFromArray:tmpComArr];
+                        curPage = 1;
                     }
                     
                     
@@ -285,6 +287,7 @@
             }else{
                 //XT_SHOWALERT(@"请求失败");
                 NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             [self.tTableView flushDoneStatus:NO];
             break;

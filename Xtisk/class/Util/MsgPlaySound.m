@@ -145,4 +145,23 @@ static MsgPlaySound *instanceMsgPlaySound = nil;
     
     
 }
+
+-(void)playAll{
+    for (int i = 1; i<7; i++) {
+        // sms-received1.caf
+        NSString *ddstr = [NSString stringWithFormat:@"sms-received%i.caf",i];
+        SystemSoundID idddd = kSystemSoundID_Vibrate;
+        NSString *path = [NSString stringWithFormat:ddstr];
+        //[[NSBundle bundleWithIdentifier:@"com.apple.UIKit" ]pathForResource:soundName ofType:soundType];//得到苹果框架资源UIKit.framework ，从中取出所要播放的系统声音的路径
+        //[[NSBundle mainBundle] URLForResource: @"tap" withExtension: @"aif"];  获取自定义的声音
+        if (path) {
+            OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path],&idddd);
+            
+            if (error != kAudioServicesNoError) {//获取的声音的时候，出现错误
+                idddd = NULL;
+            }
+            AudioServicesPlaySystemSound(idddd);
+        }
+    }
+}
 @end

@@ -26,12 +26,14 @@
     scanButton.frame = CGRectMake(100, 420, 120, 40);
     [scanButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scanButton];
+    scanButton.hidden = YES;
     
     UILabel * labIntroudction= [[UILabel alloc] initWithFrame:CGRectMake(15, 40, 290, 50)];
     labIntroudction.backgroundColor = [UIColor clearColor];
     labIntroudction.numberOfLines=2;
     labIntroudction.textColor=[UIColor whiteColor];
     labIntroudction.text=@"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别。";
+    labIntroudction.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:labIntroudction];
     
     
@@ -47,7 +49,7 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
     
-   
+   self.title = @"扫一扫";
 
 
 }

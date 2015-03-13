@@ -8,8 +8,8 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface MyActivityViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate>
+@interface MyActivityViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate>
 {
-    UITableView *tTableView;
+    LYTableView *tTableView;
 }
 @end
