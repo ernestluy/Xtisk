@@ -7,7 +7,7 @@
 //
 
 #import "SecondaryViewController.h"
-
-@interface TicketOrderEditViewController : SecondaryViewController
+#import "PublicDefine.h"
+@interface TicketOrderEditViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,UITextFieldDelegate>
 
 @end

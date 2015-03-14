@@ -21,4 +21,6 @@
 +(UITextField*)getRegTextFieldWith:(CGRect)rect;
 
 +(UILabel *)labelNoteNoData;
+
++(UITextField *)textFieldNormalWith:(CGRect)rect;
 @end

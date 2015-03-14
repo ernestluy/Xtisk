@@ -79,7 +79,7 @@
 
 #pragma mark - 4.3.4	我的
 #pragma mark - 4.3.4.1	查看我的船票订单列表
-
+-(AsyncHttpRequest *)getRequestQueryMyTicketOrder:(id<AsyncHttpRequestDelegate>)delegate;
 
 #pragma mark - 4.3.4.4	查看我报名的活动列表
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize;

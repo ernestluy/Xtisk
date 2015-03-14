@@ -23,7 +23,7 @@
     [dic setValue:item.clienttype forKey:@"clienttype"];
     [dic setValue:item.shipName forKey:@"shipName"];
     [dic setValue:item.shipStartTime forKey:@"shipStartTime"];
-    
+    [dic setValue:item.shipping_line forKey:@"shipping_line"];
     
     return dic;
 }

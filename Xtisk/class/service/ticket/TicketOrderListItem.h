@@ -1,0 +1,19 @@
+//
+//  TicketOrderListItem.h
+//  Xtisk
+//
+//  Created by 卢一 on 15/3/14.
+//  Copyright (c) 2015年 卢一. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface TicketOrderListItem : NSObject
+@property(nonatomic,copy)NSString *orderId;
+@property(nonatomic,copy)NSString *orderTime;
+@property(nonatomic,copy)NSString *orderStatus;
+//@property(nonatomic,copy)NSString *name;
+//@property(nonatomic,copy)NSString *name;
+
++(NSArray *)getTicketOrderListItemsWithArr:(NSArray *)arr;
+@end

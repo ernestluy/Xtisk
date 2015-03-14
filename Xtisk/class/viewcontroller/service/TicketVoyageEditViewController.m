@@ -167,7 +167,7 @@
         if (tmpSeat.orderNum2 >0) {
             NSMutableArray *tmpMArr = [NSMutableArray array];
             [tmpMArr addObject:tmpSeat.SEATRANK];
-            [tmpMArr addObject:@"长者"];
+            [tmpMArr addObject:@"小童"];
             [tmpMArr addObject:[NSString stringWithFormat:@"%d张",tmpSeat.orderNum2]];
             NSString *strPrice = [NSString stringWithFormat:@"￥%0.1f",[tmpSeat.PRICE2 floatValue] * tmpSeat.orderNum2];
             [tmpMArr addObject:strPrice];
@@ -176,7 +176,7 @@
         if (tmpSeat.orderNum3 >0) {
             NSMutableArray *tmpMArr = [NSMutableArray array];
             [tmpMArr addObject:tmpSeat.SEATRANK];
-            [tmpMArr addObject:@"小童"];
+            [tmpMArr addObject:@"长者"];
             [tmpMArr addObject:[NSString stringWithFormat:@"%d张",tmpSeat.orderNum3]];
             NSString *strPrice = [NSString stringWithFormat:@"￥%0.1f",[tmpSeat.PRICE3 floatValue] * tmpSeat.orderNum3];
             [tmpMArr addObject:strPrice];
@@ -327,7 +327,7 @@
             TicketNumsEdit1TableViewCell * cell = (TicketNumsEdit1TableViewCell *)[tv dequeueReusableCellWithIdentifier:kTicketVoyageTableViewCell1];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            cell.labTicketType.text = [@[@"成人",@"长者",@"小童"] objectAtIndex:indexPath.row];
+            cell.labTicketType.text = [@[@"成人",@"小童",@"长者"] objectAtIndex:indexPath.row];
             SeatRankPrice *seat = [self.mVoyageItem.DTSEATRANKPRICE objectAtIndex:seatLevelIndex];
             [cell.btnAdd addTarget:self action:@selector(ticketNumAdd:) forControlEvents:UIControlEventTouchUpInside];
             [cell.btnDel addTarget:self action:@selector(ticketNumDel:) forControlEvents:UIControlEventTouchUpInside];

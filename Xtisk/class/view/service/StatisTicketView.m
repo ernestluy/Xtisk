@@ -11,11 +11,22 @@
 @implementation StatisTicketView
 
 -(void)layoutUI{
+    
+    
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
     UIFont *tFont = [UIFont systemFontOfSize:14];
-    int startX  = 60;
-    int startY = 10;
-    int labHeight = 20;
+    int startX  = 40;
+    if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
+        startX = 10;
+    }
+    
+    int detailY = 8;
+    int startY = detailY;
+    int labHeight = 16;
     int labWidth = 240;
+    self.backgroundColor = [UIColor whiteColor];
     VoyageItem *toVoyage = [TicketSerivice sharedInstance].toVoyageItem;
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
     lab.font = tFont;
@@ -53,14 +64,14 @@
             lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
             lab.font = tFont;
             [self addSubview:lab];
-            lab.text = [NSString stringWithFormat:@"%@ 长者 %d张",tmpSeat.SEATRANK,tmpSeat.orderNum2];
+            lab.text = [NSString stringWithFormat:@"%@ 小童 %d张",tmpSeat.SEATRANK,tmpSeat.orderNum2];
             startY += labHeight;
         }
         if (tmpSeat.orderNum3 >0) {
             lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
             lab.font = tFont;
             [self addSubview:lab];
-            lab.text = [NSString stringWithFormat:@"%@ 小童 %d张",tmpSeat.SEATRANK,tmpSeat.orderNum3];
+            lab.text = [NSString stringWithFormat:@"%@ 长者 %d张",tmpSeat.SEATRANK,tmpSeat.orderNum3];
             startY += labHeight;
         }
     }
@@ -73,7 +84,17 @@
     
     
     if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType){
+        UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, detailY, 30, startY - detailY)];
+        labQh.backgroundColor = headerColor;
+        labQh.text = @"起航";
+        labQh.font = [UIFont systemFontOfSize:13];
+        labQh.textColor = [UIColor whiteColor];
+        [self addSubview:labQh];
+    }
+    
+    if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType){
         startY += 5;
+        int iScale= startY;
         
         toVoyage = [TicketSerivice sharedInstance].returnVoyageItem;
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
@@ -129,9 +150,25 @@
         [self addSubview:lab];
         lab.text = [NSString stringWithFormat:@"合计:￥%0.1f",toTotalPrice];
         startY += labHeight;
+        
+        {
+            UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, iScale, 30, startY - iScale)];
+            labQh.backgroundColor = headerColor;
+            labQh.text = @"返航";
+            labQh.font = [UIFont systemFontOfSize:13];
+            labQh.textColor = [UIColor whiteColor];
+            [self addSubview:labQh];
+        }
     }
     
+    startY += 8;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, startY);
+}
+
+-(void)layoutWithCode:(NSString *)code{
+    
+    
+    [self layoutUI];
 }
 
 @end

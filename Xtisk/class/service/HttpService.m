@@ -387,7 +387,16 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.4	我的
 #pragma mark - 4.3.4.1	查看我的船票订单列表
+-(AsyncHttpRequest *)getRequestQueryMyTicketOrder:(id<AsyncHttpRequestDelegate>)delegate{
+    //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/queryMyTicketOrder",SERVICE_HOME];
 
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERY_MY_TICKETS];
+    [request setRequestMethod:@"GET"];
+    return request;
+}
 
 #pragma mark - 4.3.4.4	查看我报名的活动列表
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize{
@@ -584,7 +593,7 @@ static HttpService *httpServiceInstance = nil;
 
 #pragma mark - 4.3.5.3 船票下订单
 -(AsyncHttpRequest *)getRequestSubmitBooking:(id<AsyncHttpRequestDelegate>)delegate info:(TicketOrder *)order{
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@/tickets/queryVoyage",SERVICE_HOME];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/tickets/submitBooking",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_SUBMIT_BOOKING];

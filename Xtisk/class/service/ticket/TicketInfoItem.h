@@ -17,6 +17,8 @@
 @property(nonatomic,copy)NSString *clienttype;//	String	否	客户类型  1-(成人) ,2-(小孩),3-(长者),4-(婴儿)
 @property(nonatomic,copy)NSString *shipName;//	String	否	船名
 @property(nonatomic,copy)NSString *shipStartTime;//	String	否	起航时间
+@property(nonatomic,copy)NSString *shipping_line;//	String	否	起航时间
+//航线描述信息，从航程信息FROMPORT和TOPORT中取值，拼接成字符串，用”TO ”分隔，如：蛇口港 TO 香港港澳码头
 //@property(nonatomic,copy)NSString *serviceTitle;
 //@property(nonatomic,copy)NSString *serviceTitle;
 

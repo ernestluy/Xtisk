@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *tickets;//	String	否	票信息,多张票组成Json Array,转换成字符串，如：{“tickets”:[{ “seatrank_id”:””,… },
 //{“seatrank_id”:””,…}]
 //}
+@property(nonatomic,strong)NSArray *arrTickets;
 //@property(nonatomic,copy)NSString *serviceTitle;
 //@property(nonatomic,copy)NSString *serviceTitle;
 //@property(nonatomic,copy)NSString *serviceTitle;

@@ -44,6 +44,9 @@
 #import "MyActivity.h"
 #import "VoyageItem.h"
 #import "SeatRankPrice.h"
+#import "TicketOrder.h"
+#import "TicketInfoItem.h"
+#import "TicketOrderListItem.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关

@@ -107,4 +107,13 @@
     labNoteNoData.textAlignment = NSTextAlignmentCenter;
     return labNoteNoData;
 }
+
++(UITextField *)textFieldNormalWith:(CGRect)rect{
+    UITextField *theTextField = [[UITextField alloc] initWithFrame:rect];
+    theTextField.textAlignment = NSTextAlignmentLeft;
+    theTextField.returnKeyType = UIReturnKeyNext;
+    theTextField.placeholder = @"请输入";
+    theTextField.font = [UIFont systemFontOfSize:15];
+    return theTextField;
+}
 @end

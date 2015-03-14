@@ -10,4 +10,11 @@
 
 @implementation TicketOrder
 
+
+-(id)init{
+    self = [super init];
+    self.address = @"none";
+    self.lang = @"C";
+    return self;
+}
 @end

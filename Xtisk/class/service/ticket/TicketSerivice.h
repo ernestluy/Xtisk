@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ShipLineItem.h"
 #import "VoyageItem.h"
+#import "TicketOrder.h"
 @interface TicketSerivice : NSObject
 {
     
@@ -31,4 +32,8 @@
 
 
 +(TicketSerivice *)sharedInstance;
+
+-(TicketOrder *)createTicketOrder;
+
+-(float)calTickets:(VoyageItem *)tItme marr:(NSMutableArray *)mArrTickets;
 @end
