@@ -48,6 +48,8 @@ typedef enum HttpRequestType{
     HttpRequestType_XT_STORECOMMENTS,
     HttpRequestType_XT_STORECOMMENTSLIST,
     HttpRequestType_XT_QUERY_MY_TICKETS,
+    HttpRequestType_XT_QUERY_MY_TICKET_ORDER_DETAIL,//queryTicketOrderDetail
+    HttpRequestType_XT_DEL_MY_TICKETS,
     HttpRequestType_XT_QUERYMYACTIVITY,
     HttpRequestType_XT_UPDATEMYPASSWORD,
     

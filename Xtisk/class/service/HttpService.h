@@ -81,6 +81,10 @@
 #pragma mark - 4.3.4.1	查看我的船票订单列表
 -(AsyncHttpRequest *)getRequestQueryMyTicketOrder:(id<AsyncHttpRequestDelegate>)delegate;
 
+#pragma mark - 4.3.4.2	查看船票订单的详情
+-(AsyncHttpRequest *)getRequestQueryTicketOrderDetail:(id<AsyncHttpRequestDelegate>)delegate orderId:(NSString *)orderId;
+#pragma mark - 4.3.4.3	删除我的船票订单
+-(AsyncHttpRequest *)getRequestDelMyTicketOrder:(id<AsyncHttpRequestDelegate>)delegate orderIds:(NSArray *)orderIds;
 #pragma mark - 4.3.4.4	查看我报名的活动列表
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize;
 #pragma mark - 4.3.4.5	修改密码

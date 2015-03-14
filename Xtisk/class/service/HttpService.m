@@ -398,6 +398,49 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 
+#pragma mark - 4.3.4.2	查看船票订单的详情
+-(AsyncHttpRequest *)getRequestQueryTicketOrderDetail:(id<AsyncHttpRequestDelegate>)delegate orderId:(NSString *)orderId{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/queryTicketOrderDetail",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_QUERY_MY_TICKET_ORDER_DETAIL];
+    //    NSMutableString *contentStr = [NSMutableString string];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendFormat:@"orderId=%@",orderId];
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+
+#pragma mark - 4.3.4.3	删除我的船票订单
+-(AsyncHttpRequest *)getRequestDelMyTicketOrder:(id<AsyncHttpRequestDelegate>)delegate orderIds:(NSArray *)orderIds{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/delMyTicketOrder",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_DEL_MY_TICKETS];
+    //    NSMutableString *contentStr = [NSMutableString string];
+    //    [contentStr appendFormat:@"phone=%@&password=%@",name,psd];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendString:@"orderIds="];
+    for (int i = 0; i<orderIds.count; i++) {
+        [mContentStr appendFormat:@"%@,",[orderIds objectAtIndex:i]];
+    }
+    
+    NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [Util strToData:sendStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
+
 #pragma mark - 4.3.4.4	查看我报名的活动列表
 -(AsyncHttpRequest *)getRequestQueryMyActivity:(id<AsyncHttpRequestDelegate>)delegate activityStatus:(int)activityStatus pageNo:(int)pageNo pageSize:(int)pageSize{
     //APP请求时需要在http header cookie属性里面携带上登录成功时返回的JSESSIONID

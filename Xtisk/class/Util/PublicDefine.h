@@ -47,6 +47,9 @@
 #import "TicketOrder.h"
 #import "TicketInfoItem.h"
 #import "TicketOrderListItem.h"
+#import "MyTicketItem.h"
+#import "MyTicketOrderDetail.h"
+#import "TicketOrderListItem.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关

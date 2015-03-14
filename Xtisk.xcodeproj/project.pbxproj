@@ -350,6 +350,12 @@
 		EDCB5C471AB3E79D00FC50EC /* TicketOrderListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C461AB3E79D00FC50EC /* TicketOrderListItem.m */; };
 		EDCB5C4B1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C491AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m */; };
 		EDCB5C4C1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCB5C4A1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.xib */; };
+		EDCB5C4F1AB4084F00FC50EC /* MyTicketItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C4E1AB4084F00FC50EC /* MyTicketItem.m */; };
+		EDCB5C521AB4091600FC50EC /* MyTicketOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C511AB4091600FC50EC /* MyTicketOrderDetail.m */; };
+		EDCB5C561AB40A8500FC50EC /* MyTicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C541AB40A8500FC50EC /* MyTicketDetailViewController.m */; };
+		EDCB5C571AB40A8500FC50EC /* MyTicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCB5C551AB40A8500FC50EC /* MyTicketDetailViewController.xib */; };
+		EDCB5C5B1AB40E2900FC50EC /* TicketPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C591AB40E2900FC50EC /* TicketPayViewController.m */; };
+		EDCB5C5C1AB40E2900FC50EC /* TicketPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDCB5C5A1AB40E2900FC50EC /* TicketPayViewController.xib */; };
 		EDD99D1A1A97ABB800DFF260 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */; };
 		EDD99D1B1A97ABB800DFF260 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */; };
 		EDD99D1E1A97B06500DFF260 /* TicketDetailContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD99D1D1A97B06500DFF260 /* TicketDetailContentView.m */; };
@@ -947,6 +953,16 @@
 		EDCB5C481AB3E9CD00FC50EC /* MyTicketsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketsListTableViewCell.h; sourceTree = "<group>"; };
 		EDCB5C491AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketsListTableViewCell.m; sourceTree = "<group>"; };
 		EDCB5C4A1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTicketsListTableViewCell.xib; sourceTree = "<group>"; };
+		EDCB5C4D1AB4084F00FC50EC /* MyTicketItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketItem.h; sourceTree = "<group>"; };
+		EDCB5C4E1AB4084F00FC50EC /* MyTicketItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketItem.m; sourceTree = "<group>"; };
+		EDCB5C501AB4091600FC50EC /* MyTicketOrderDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketOrderDetail.h; sourceTree = "<group>"; };
+		EDCB5C511AB4091600FC50EC /* MyTicketOrderDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketOrderDetail.m; sourceTree = "<group>"; };
+		EDCB5C531AB40A8500FC50EC /* MyTicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketDetailViewController.h; sourceTree = "<group>"; };
+		EDCB5C541AB40A8500FC50EC /* MyTicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketDetailViewController.m; sourceTree = "<group>"; };
+		EDCB5C551AB40A8500FC50EC /* MyTicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTicketDetailViewController.xib; sourceTree = "<group>"; };
+		EDCB5C581AB40E2900FC50EC /* TicketPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPayViewController.h; sourceTree = "<group>"; };
+		EDCB5C591AB40E2900FC50EC /* TicketPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPayViewController.m; sourceTree = "<group>"; };
+		EDCB5C5A1AB40E2900FC50EC /* TicketPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketPayViewController.xib; sourceTree = "<group>"; };
 		EDD99D171A97ABB800DFF260 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
 		EDD99D181A97ABB800DFF260 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
 		EDD99D191A97ABB800DFF260 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
@@ -1285,6 +1301,10 @@
 				EDCB5C431AB3E72100FC50EC /* PeopleInfo.m */,
 				EDCB5C451AB3E79D00FC50EC /* TicketOrderListItem.h */,
 				EDCB5C461AB3E79D00FC50EC /* TicketOrderListItem.m */,
+				EDCB5C4D1AB4084F00FC50EC /* MyTicketItem.h */,
+				EDCB5C4E1AB4084F00FC50EC /* MyTicketItem.m */,
+				EDCB5C501AB4091600FC50EC /* MyTicketOrderDetail.h */,
+				EDCB5C511AB4091600FC50EC /* MyTicketOrderDetail.m */,
 			);
 			path = ticket;
 			sourceTree = "<group>";
@@ -1387,6 +1407,9 @@
 				ED8C78221A96183D009C8286 /* MyActivityViewController.m */,
 				ED8C78241A961971009C8286 /* MyTicketViewController.h */,
 				ED8C78251A961971009C8286 /* MyTicketViewController.m */,
+				EDCB5C531AB40A8500FC50EC /* MyTicketDetailViewController.h */,
+				EDCB5C541AB40A8500FC50EC /* MyTicketDetailViewController.m */,
+				EDCB5C551AB40A8500FC50EC /* MyTicketDetailViewController.xib */,
 			);
 			path = more;
 			sourceTree = "<group>";
@@ -1431,6 +1454,9 @@
 				7664BADD1AA82DED00E59DF0 /* TicketOrderEditViewController.h */,
 				7664BADE1AA82DED00E59DF0 /* TicketOrderEditViewController.m */,
 				7664BADF1AA82DED00E59DF0 /* TicketOrderEditViewController.xib */,
+				EDCB5C581AB40E2900FC50EC /* TicketPayViewController.h */,
+				EDCB5C591AB40E2900FC50EC /* TicketPayViewController.m */,
+				EDCB5C5A1AB40E2900FC50EC /* TicketPayViewController.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -2311,6 +2337,7 @@
 				76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */,
 				EDCB5C4C1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.xib in Resources */,
 				7664BACE1AA8236A00E59DF0 /* ticket_add_touch@2x.png in Resources */,
+				EDCB5C5C1AB40E2900FC50EC /* TicketPayViewController.xib in Resources */,
 				ED8C780D1A94E34D009C8286 /* DetailFoodCommendTableViewCell.xib in Resources */,
 				ED8C77F31A949AF3009C8286 /* address_cion@2x.png in Resources */,
 				764D607D1A8AE99A00B186A5 /* icon_index_selected@2x.png in Resources */,
@@ -2322,6 +2349,7 @@
 				76C87CEC1A8CA43E00843060 /* UMSCommentDetailController.xib in Resources */,
 				ED8C78591A97397F009C8286 /* MsgTicketListTableViewCell.xib in Resources */,
 				7664BADC1AA8296F00E59DF0 /* TicketVoyageEditViewController.xib in Resources */,
+				EDCB5C571AB40A8500FC50EC /* MyTicketDetailViewController.xib in Resources */,
 				764D607F1A8AE99A00B186A5 /* icon_msg_selected@2x.png in Resources */,
 				ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */,
 				764D608B1A8AEBEE00B186A5 /* more_cell_scan_icon@2x.png in Resources */,
@@ -2384,6 +2412,7 @@
 				764D600F1A835F1F00B186A5 /* PopoverView.m in Sources */,
 				ED25876F1A824088008EB344 /* CirculaScrollView.m in Sources */,
 				760BF1E91A8CB7F90088DBA2 /* ForC++.m in Sources */,
+				EDCB5C5B1AB40E2900FC50EC /* TicketPayViewController.m in Sources */,
 				764D60381A887CD400B186A5 /* PosterItem.m in Sources */,
 				ED2D49171AAAC844007CC065 /* AFHTTPRequestOperationManager.m in Sources */,
 				ED2D491D1AAAC844007CC065 /* AFURLResponseSerialization.m in Sources */,
@@ -2416,6 +2445,7 @@
 				767B6FE21AA5B47800D0FA54 /* CustomMenuTutorialController.m in Sources */,
 				ED2587171A7D1857008EB344 /* GDataXMLNode.m in Sources */,
 				760BF24E1A9EE7300088DBA2 /* MenuItem.m in Sources */,
+				EDCB5C521AB4091600FC50EC /* MyTicketOrderDetail.m in Sources */,
 				ED25875A1A7FAA0C008EB344 /* ExtendsView.m in Sources */,
 				767812C11A80BCD100CB4B08 /* UcmDispatchCenter.m in Sources */,
 				7664BAB81AA7F55F00E59DF0 /* SeatRankPrice.m in Sources */,
@@ -2444,6 +2474,7 @@
 				ED8C781F1A95F7BF009C8286 /* ShopMenuCollectionViewCell.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
 				ED2587491A7D1B4A008EB344 /* FMDatabaseQueue.m in Sources */,
+				EDCB5C561AB40A8500FC50EC /* MyTicketDetailViewController.m in Sources */,
 				ED2587181A7D1857008EB344 /* NSDate+utils.m in Sources */,
 				7664BB7A1AAD627500E59DF0 /* BadgeView.m in Sources */,
 				764D60511A89CC6800B186A5 /* IUser.m in Sources */,
@@ -2498,6 +2529,7 @@
 				764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */,
 				767812811A80981000CB4B08 /* SettingService.m in Sources */,
 				7664BB711AA98EDD00E59DF0 /* MessageDBManager.m in Sources */,
+				EDCB5C4F1AB4084F00FC50EC /* MyTicketItem.m in Sources */,
 				764D60261A84A6CE00B186A5 /* HisLoginAcc.m in Sources */,
 				767812C71A80BDED00CB4B08 /* UcmHandleDataCenter.m in Sources */,
 				ED8C77E01A93139B009C8286 /* ActivityViewController.m in Sources */,

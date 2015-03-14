@@ -16,7 +16,7 @@
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-    UIFont *tFont = [UIFont systemFontOfSize:14];
+    UIFont *tFont = [UIFont systemFontOfSize:13];
     int startX  = 40;
     if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
         startX = 10;
@@ -89,6 +89,7 @@
         labQh.text = @"起航";
         labQh.font = [UIFont systemFontOfSize:13];
         labQh.textColor = [UIColor whiteColor];
+        labQh.textAlignment = NSTextAlignmentCenter;
         [self addSubview:labQh];
     }
     
@@ -157,6 +158,7 @@
             labQh.text = @"返航";
             labQh.font = [UIFont systemFontOfSize:13];
             labQh.textColor = [UIColor whiteColor];
+            labQh.textAlignment = NSTextAlignmentCenter;
             [self addSubview:labQh];
         }
     }

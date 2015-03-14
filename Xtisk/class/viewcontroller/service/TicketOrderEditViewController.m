@@ -26,6 +26,8 @@
     UIButton *btnOrder;
     
     StatisTicketView *statisView;
+    
+    BOOL isInput;
 }
 -(void)tapped:(UITapGestureRecognizer *)tap;
 @end
@@ -38,7 +40,7 @@
     self.title = @"订单填写";
     titleArr = @[@"姓名:",@"手机号码:",@"身份证后三位:",@"邮箱:"];
     tFont = [UIFont systemFontOfSize:15];
-    
+    isInput = NO;
     CGRect bounds = [UIScreen mainScreen].bounds;
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64) ;
     statisView = [[StatisTicketView alloc]initWithFrame:CGRectMake(0, 0, 320, 400)];
@@ -65,7 +67,6 @@
             tfName.text = @"卢一";
         }else if (i == 1) {
             tfPhone = tmpTf;
-            tfPhone.keyboardType = UIKeyboardTypePhonePad;
             tfPhone.text = @"13418884362";
         }else if (i == 2) {
             tfCard = tmpTf;
@@ -182,11 +183,22 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     nowTextField = textField;
+    isInput = YES;
+    [UIView animateWithDuration:0.25 animations:^{
+        tTableView.contentOffset = CGPointMake(0, 120);
+    }];
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    if (nowTextField == textField) {
+        [UIView animateWithDuration:0.25 animations:^{
+            tTableView.contentOffset = CGPointMake(0, 0);
+        }];
+    }
     return YES;
 }
+
+
 
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

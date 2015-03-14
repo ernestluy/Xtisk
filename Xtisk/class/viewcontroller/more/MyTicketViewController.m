@@ -9,6 +9,7 @@
 #import "MyTicketViewController.h"
 #import "MyTicketsListTableViewCell.h"
 #import "PublicDefine.h"
+#import "MyTicketDetailViewController.h"
 #define kMyTicketsCellId @"kMyTicketsCellId"
 @interface MyTicketViewController ()
 {
@@ -87,13 +88,12 @@
         //deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
         NSLog(@"sec:%d,row:%d",(int)indexPath.section,(int)indexPath.row);
         
-        //        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 
-//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-//        [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
-//        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-//        [allMyActivityArr removeObjectAtIndex:indexPath.section];
-//        [[[HttpService sharedInstance] getRequestDelMyActivity:self activityId:int2str(ma.activityId)]startAsynchronous];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+        [allMyTicketArr removeObjectAtIndex:indexPath.row];
+        [[[HttpService sharedInstance] getRequestDelMyTicketOrder:self orderIds:@[item.orderId]]startAsynchronous];
         
     }
 }
@@ -127,7 +127,11 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
+    MyTicketDetailViewController *tv = [[MyTicketDetailViewController alloc]init];
+    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+    tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
+    [self.navigationController pushViewController:tv animated:YES];
 }
 
 
@@ -164,16 +168,16 @@
             }
             break;
         }
-        case HttpRequestType_XT_DEL_MYACTIVITY:{
+        case HttpRequestType_XT_DEL_MY_TICKETS:{
             if ( HttpResponseTypeFinished == responseCode) {
                 BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
                 
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     
-                    
+                    [SVProgressHUD showSuccessWithStatus:@"成功删除" duration:DefaultRequestDonePromptTime];
                 }else{
-                    //                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
             }else{
                 NSLog(@"请求失败");

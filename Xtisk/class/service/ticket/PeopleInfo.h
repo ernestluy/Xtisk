@@ -13,4 +13,6 @@
 @property(nonatomic,copy)NSString *email;//	String	否	用户邮箱
 @property(nonatomic,copy)NSString *phone;//	String	否	电话号码
 @property(nonatomic,copy)NSString *identity_card;//	String	否	提票验证码，3位数字
+
++(PeopleInfo *)getPeopleInfoWithDic:(NSDictionary *)dic;
 @end
