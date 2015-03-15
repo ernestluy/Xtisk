@@ -110,6 +110,10 @@
 #pragma mark - 4.3.4.14	建议反馈
 -(AsyncHttpRequest *)getRequestSuggestion :(id<AsyncHttpRequestDelegate>)delegate  content:(NSString *)content;
 
+#pragma mark - 4.3.4.15 上传用户登录的设备Id
+#pragma mark -  把ios的token发到tms
+-(AsyncHttpRequest *)getRequestUploadDeviceId:(id<AsyncHttpRequestDelegate>)delegate token:(NSString *)token;
+
 #pragma mark - 4.3.4.16 删除我的活动
 -(AsyncHttpRequest *)getRequestDelMyActivity :(id<AsyncHttpRequestDelegate>)delegate  activityId:(NSString *)activityId;
 
@@ -131,8 +135,8 @@
 #pragma mark - 4.3.6.4获取用户未读消息
 -(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType;
 
-#pragma mark -  把ios的token发到tms
--(AsyncHttpRequest *)getRequestUploadDeviceId:(id<AsyncHttpRequestDelegate>)delegate token:(NSString *)token;
+
+
 
 
 @end

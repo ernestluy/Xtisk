@@ -23,4 +23,6 @@
 +(UILabel *)labelNoteNoData;
 
 +(UITextField *)textFieldNormalWith:(CGRect)rect;
+
++(UILabel *)labelNormalWith:(CGRect)rect;
 @end

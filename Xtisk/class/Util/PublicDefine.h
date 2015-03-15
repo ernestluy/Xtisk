@@ -264,7 +264,7 @@ typedef enum  {
 #define DOWN_DRAG_FLUSH_NORMAL @"上拉可以加载"
 #define DOWN_DRAG_FLUSH_WILL_START @"上拉可以加载"
 #define DOWN_DRAG_FLUSH_DOING @"正在加载中"
-#define DOWN_RELEASE_DRAG_TO_FLUSH @"松开立即刷新"
+#define DOWN_RELEASE_DRAG_TO_FLUSH @"松开立即加载"
 
 #define RELEASE_DRAG_TO_FLUSH @"松开立即刷新"
 

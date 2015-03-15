@@ -116,4 +116,11 @@
     theTextField.font = [UIFont systemFontOfSize:15];
     return theTextField;
 }
+
++(UILabel *)labelNormalWith:(CGRect)rect{
+    UILabel *lab = [[UILabel alloc] initWithFrame:rect];
+    lab.textAlignment = NSTextAlignmentLeft;
+    lab.font = [UIFont systemFontOfSize:15];
+    return lab;
+}
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define TicketStatusPayYes      @"已支付"
+#define TicketStatusPayNo       @"未支付"
+#define TicketStatusPayExpire   @"已过期"
 @interface TicketOrderListItem : NSObject
 @property(nonatomic,copy)NSString *orderId;
 @property(nonatomic,copy)NSString *orderTime;

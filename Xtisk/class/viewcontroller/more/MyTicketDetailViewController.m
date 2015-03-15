@@ -7,10 +7,19 @@
 //
 
 #import "MyTicketDetailViewController.h"
-
+#import "PublicDefine.h"
 @interface MyTicketDetailViewController ()
 {
     UITableView *tTableView;
+    
+    UILabel *labName;
+    UILabel *labEmal;
+    UILabel *labCard;
+    UILabel *labPhone;
+    NSArray *titleArr;
+    UIFont *tFont;
+    
+    UIButton *btnOrder;
 }
 @end
 
@@ -21,16 +30,55 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"船票详情";
+    titleArr = @[@"姓名:",@"手机号码:",@"身份证后三位:",@"邮箱:"];
+    tFont = [UIFont systemFontOfSize:15];
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
-    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
+    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
     [tTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
     [self.view addSubview:tTableView];
+    
+    
+    for (int i = 0; i<titleArr.count; i++) {
+        int startX = 15 + [[titleArr objectAtIndex:i] sizeWithFont:tFont].width + 5 ;
+        CGRect tRect = CGRectMake(startX, 0.0f, [UIScreen mainScreen].bounds.size.width - startX - 1, 44.0);
+        UILabel *tmpLab = [CTLCustom labelNormalWith:tRect];
+        
+        if (i == 0) {
+            labName = tmpLab;
+            labName.text = @"卢一";
+        }else if (i == 1) {
+            labPhone = tmpLab;
+            labPhone.text = @"13418884362";
+        }else if (i == 2) {
+            labCard = tmpLab;
+            labCard.text = @"234";
+        }else if (i == 3) {
+            labEmal = tmpLab;
+            labEmal.text = @"175640827@163.com";
+        }
+    }
+    
+    UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 70)];
+    footView.backgroundColor = [UIColor clearColor];
+    tTableView.tableFooterView = footView;
+    
+    btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
+    int startX = 15;
+    btnOrder.frame = CGRectMake(startX, 20, bounds.size.width - 15*2, 44);
+    [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnOrder setTitle:@"去支付" forState:UIControlStateNormal];
+    [btnOrder setBackgroundImage:[UIImage imageNamed:@"radiu_done"] forState:UIControlStateNormal];
+    btnOrder.backgroundColor = [UIColor clearColor];
+    [btnOrder addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footView addSubview:btnOrder];
+    
+    tTableView.tableFooterView = footView;
 }
 
 
@@ -38,7 +86,7 @@
     NSLog(@"payAction  去支付");
 
     
-    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    //[SVProgressHUD showWithStatus:DefaultRequestPrompt];
     
     
     NSLog(@"submit");
@@ -52,13 +100,17 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 3;
+    return 2;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return 1;
+    if (0 == section) {
+        return 1;
+    }else if (1 == section){
+        return 4;
+    }
+    return 4;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -81,7 +133,32 @@
 {
     
     UITableViewCell * cell = (UITableViewCell*)[tv dequeueReusableCellWithIdentifier:@"cell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    cell.textLabel.font = tFont;
+    
+    switch (indexPath.section) {
+        case 0:{
+            cell.textLabel.text = @"";
+//            [cell addSubview:statisView];
+            break;
+        }
+        case 1:{
+            cell.textLabel.text = [titleArr objectAtIndex:indexPath.row];
+            if (indexPath.row == 0) {
+                [cell addSubview:labName];
+            }else if (indexPath.row == 1) {
+                [cell addSubview:labPhone];
+            }else if (indexPath.row == 2) {
+                [cell addSubview:labCard];
+            }else if (indexPath.row == 3) {
+                [cell addSubview:labEmal];
+            }
+            break;
+        }
+        default:
+            break;
+    }
     return cell;
 }
 
@@ -92,6 +169,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (0 == indexPath.section) {
+        return 100 ;
+    }else if (1 == indexPath.section){
+        return 44.0;
+    }
     return 100.0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

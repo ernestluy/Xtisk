@@ -32,7 +32,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
-    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
+    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
     
@@ -68,13 +68,13 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return allMyTicketArr.count;
+    return 1;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 1;
+    return 3;//allMyTicketArr.count;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -102,9 +102,9 @@
 {
     
     MyTicketsListTableViewCell * cell = (MyTicketsListTableViewCell*)[tv dequeueReusableCellWithIdentifier:kMyTicketsCellId];
-    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
-    [cell setData:item];
-    
+//    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+//    [cell setData:item];
+    cell.detailTextLabel.text = @"状态";
     return cell;
 }
 
@@ -117,7 +117,7 @@
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100.0;
+    return DEFAULT_CELL_HEIGHT;
 }
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 //    return 0.5;
@@ -129,8 +129,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MyTicketDetailViewController *tv = [[MyTicketDetailViewController alloc]init];
-    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
-    tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
+//    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+//    tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
     [self.navigationController pushViewController:tv animated:YES];
 }
 
