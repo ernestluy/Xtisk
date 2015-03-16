@@ -9,6 +9,7 @@
 #import "TicketOrderEditViewController.h"
 #import "StatisTicketView.h"
 #import "PublicDefine.h"
+#import "LoginViewController.h"
 @interface TicketOrderEditViewController ()
 {
     UITableView *tTableView;
@@ -100,6 +101,12 @@
     [self.view addGestureRecognizer:tap];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 -(void)tapped:(UITapGestureRecognizer *)tap
 {
     if (nowTextField) {
@@ -126,6 +133,13 @@
         [SVProgressHUD showErrorWithStatus:@"email不能为空" duration:DefaultRequestDonePromptTime];
         return;
     }
+    
+    if (![[SettingService sharedInstance] isLogin]) {
+        LoginViewController *lv = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:lv animated:YES];
+        return;
+    }
+    
     TicketOrder *order = [[TicketSerivice sharedInstance] createTicketOrder];
     order.name = tfName.text;
     order.email = tfEmal.text;

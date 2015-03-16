@@ -10,13 +10,44 @@
 
 @implementation MyTicketOrderDetail
 
-
+/*
+ {
+ "peopleInfo": {
+ "phone": "13418884362",
+ "address": "none",
+ "email": "175640827@163.com",
+ "identity_card": "234",
+ "name": "卢一"
+ },
+ "ticketList": [
+ {
+ "price": 120,
+ "ticketPosition": "普通位",
+ "type": "1",
+ "ticketInfo": "蛇口港 TO 香港港澳码头",
+ "ticketTime": "2015-03-17 09:00",
+ "getId": "1031448174"
+ },
+ {
+ "price": 70,
+ "ticketPosition": "普通位",
+ "type": "2",
+ "ticketInfo": "蛇口港 TO 香港港澳码头",
+ "ticketTime": "2015-03-17 09:00",
+ "getId": "1031448174"
+ }
+ ],
+ "orderTime": "2015-03-16 19:21",
+ "orderStatus": "等待买家付款",
+ "orderId": 701
+ }
+ */
 +(MyTicketOrderDetail *)getMyTicketOrderDetailWithDic:(NSDictionary *)dic{
     if (!dic) {
         return nil;
     }
     MyTicketOrderDetail * detail = [[MyTicketOrderDetail alloc]init];
-    detail.orderId = [dic objectForKey:@"orderId"];
+    detail.orderId = [[dic objectForKey:@"orderId"]intValue];;
     detail.orderTime = [dic objectForKey:@"orderTime"];
     detail.orderStatus = [dic objectForKey:@"orderStatus"];
     detail.peopleInfo = [PeopleInfo getPeopleInfoWithDic:[dic objectForKey:@"peopleInfo"]];

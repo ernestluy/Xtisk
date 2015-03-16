@@ -8,6 +8,7 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface MyTicketViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate>
+
+@interface MyTicketViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate>
 
 @end

@@ -34,7 +34,8 @@ static TicketSerivice *instanceTicketService = nil;
     order.total_fee = fTotal;
     order.discount_fee = 0;
     order.arrTickets = [TicketInfoItem getJsonArrayWithArray:mArrTickets];
-    order.tickets = [Util getJsonStrWithObj:order.arrTickets];
+    NSDictionary *tDic = @{@"tickets":order.arrTickets};
+    order.tickets = [Util getJsonStrWithObj:tDic];
     return order;
 }
 

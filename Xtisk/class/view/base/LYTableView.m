@@ -344,15 +344,15 @@
 }
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)sender
-{
-    NSLog(@"LYTableView scrollViewDidScroll ");
-    [self judgeDragIng];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)sender
+//{
+////    NSLog(@"LYTableView scrollViewDidScroll ");
+//    [self judgeDragIng];
+//}
+//
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    
+//}
 #pragma mark -
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier{
 

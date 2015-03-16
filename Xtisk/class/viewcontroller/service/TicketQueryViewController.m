@@ -152,6 +152,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [TicketSerivice sharedInstance].ticketQueryType = TICKET_QUERY_ONE;
     self.title = @"船票查询";
     if (![TicketSerivice sharedInstance].allShipLines) {
         NSArray *tmpArr = [[NSArray alloc]initWithContentsOfFile:PathDocFile(ShipLineList)];

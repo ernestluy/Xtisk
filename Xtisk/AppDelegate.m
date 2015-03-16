@@ -107,7 +107,7 @@
     
     
     //set umeng AppKey and LaunchOptions
-    [UMessage startWithAppkey:@"54f3fcc9fd98c559e30005f7" launchOptions:launchOptions];
+    [UMessage startWithAppkey:@"55063bf5fd98c5a3a00006f5" launchOptions:launchOptions];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
     if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))

@@ -81,6 +81,15 @@
     tTableView.tableFooterView = footView;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [[[HttpService sharedInstance] getRequestQueryTicketOrderDetail:self orderId:int2str(self.mOrderDetail.orderId)]startAsynchronous];
+}
+
 
 -(void)payAction:(id)sender{
     NSLog(@"payAction  去支付");
@@ -93,7 +102,10 @@
 }
 
 -(void)flushUI{
-    
+    labName.text = self.mOrderDetail.peopleInfo.name;
+    labPhone.text = self.mOrderDetail.peopleInfo.phone;
+    labEmal.text = self.mOrderDetail.peopleInfo.email;
+    labCard.text = self.mOrderDetail.peopleInfo.identity_card;
     [tTableView reloadData];
 }
 #pragma mark - UITableViewDataSource
@@ -206,6 +218,32 @@
                     [SVProgressHUD showSuccessWithStatus:@"成功删除" duration:DefaultRequestDonePromptTime];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                }
+            }else{
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERY_MY_TICKET_ORDER_DETAIL:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        //                        int tTotal = [[dic objectForKey:@"total"] intValue];
+                        //orderList
+                        MyTicketOrderDetail *mDetail = [MyTicketOrderDetail getMyTicketOrderDetailWithDic:dic];
+                        self.mOrderDetail = mDetail;
+                        
+                        
+                        [self flushUI];
+                    }
+
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else{
                 NSLog(@"请求失败");

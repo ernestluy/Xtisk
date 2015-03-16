@@ -169,6 +169,7 @@
 		767B6FDE1AA5B46700D0FA54 /* guide_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */; };
 		767B6FDF1AA5B46700D0FA54 /* guide_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */; };
 		767B6FE21AA5B47800D0FA54 /* CustomMenuTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */; };
+		768AB0DB1AB6647900DB1869 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 768AB0DA1AB6647900DB1869 /* libbaidumapapi.a */; };
 		76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */; };
 		76C87C941A8C3D8300843060 /* AboutIshekouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */; };
 		76C87C981A8C466E00843060 /* ModifyPsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C961A8C466E00843060 /* ModifyPsdViewController.m */; };
@@ -225,6 +226,7 @@
 		76D018271AB046E800E6B168 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D018251AB046E800E6B168 /* TestViewController.m */; };
 		76D018281AB046E800E6B168 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D018261AB046E800E6B168 /* TestViewController.xib */; };
 		76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */; };
+		76D363FB1AB6F3AB002A32CF /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */; };
 		ED2586E11A7D14A1008EB344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E01A7D14A1008EB344 /* main.m */; };
 		ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E31A7D14A1008EB344 /* AppDelegate.m */; };
 		ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2586E81A7D14A1008EB344 /* Main.storyboard */; };
@@ -345,7 +347,6 @@
 		ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C785B1A973C3C009C8286 /* MsgTicketListViewController.m */; };
 		ED8C785E1A973C3C009C8286 /* MsgTicketListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */; };
 		EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCA83221AAB45C500AD2FB3 /* MyActivity.m */; };
-		EDCB5C411AB1BDFF00FC50EC /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */; };
 		EDCB5C441AB3E72100FC50EC /* PeopleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C431AB3E72100FC50EC /* PeopleInfo.m */; };
 		EDCB5C471AB3E79D00FC50EC /* TicketOrderListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C461AB3E79D00FC50EC /* TicketOrderListItem.m */; };
 		EDCB5C4B1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCB5C491AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m */; };
@@ -667,6 +668,7 @@
 		767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_4@2x.png"; sourceTree = "<group>"; };
 		767B6FE01AA5B47800D0FA54 /* CustomMenuTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuTutorialController.h; sourceTree = "<group>"; };
 		767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuTutorialController.m; sourceTree = "<group>"; };
+		768AB0DA1AB6647900DB1869 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		76C87C901A8C3D8300843060 /* AboutIshekouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutIshekouViewController.h; sourceTree = "<group>"; };
 		76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutIshekouViewController.m; sourceTree = "<group>"; };
 		76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutIshekouViewController.xib; sourceTree = "<group>"; };
@@ -758,6 +760,9 @@
 		76D018251AB046E800E6B168 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		76D018261AB046E800E6B168 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commend_bar@2x.png"; sourceTree = "<group>"; };
+		76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
+		76D363F91AB6F3AB002A32CF /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
+		76D363FA1AB6F3AB002A32CF /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
 		ED2586DB1A7D14A1008EB344 /* Xtisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xtisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2586DF1A7D14A1008EB344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -945,7 +950,6 @@
 		ED8C785C1A973C3C009C8286 /* MsgTicketListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgTicketListViewController.xib; sourceTree = "<group>"; };
 		EDCA83211AAB45C500AD2FB3 /* MyActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivity.h; sourceTree = "<group>"; };
 		EDCA83221AAB45C500AD2FB3 /* MyActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivity.m; sourceTree = "<group>"; };
-		EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		EDCB5C421AB3E72100FC50EC /* PeopleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleInfo.h; sourceTree = "<group>"; };
 		EDCB5C431AB3E72100FC50EC /* PeopleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleInfo.m; sourceTree = "<group>"; };
 		EDCB5C451AB3E79D00FC50EC /* TicketOrderListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketOrderListItem.h; sourceTree = "<group>"; };
@@ -1005,12 +1009,13 @@
 				76C87CFA1A8CA43E00843060 /* libSocialQQ.a in Frameworks */,
 				76C87CF81A8CA43E00843060 /* libSocialLine.a in Frameworks */,
 				76C87D031A8CA43E00843060 /* libSocialWechat.a in Frameworks */,
-				EDCB5C411AB1BDFF00FC50EC /* libbaidumapapi.a in Frameworks */,
+				768AB0DB1AB6647900DB1869 /* libbaidumapapi.a in Frameworks */,
 				7664BAE51AA8523800E59DF0 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				76C87CF61A8CA43E00843060 /* libSocialInstagram.a in Frameworks */,
 				76C87CFD1A8CA43E00843060 /* libSocialTumblr.a in Frameworks */,
 				76C87D021A8CA43E00843060 /* libUMSocial_Sdk_Shake_1.0.a in Frameworks */,
 				ED25874C1A7D1B95008EB344 /* libsqlite3.0.dylib in Frameworks */,
+				76D363FB1AB6F3AB002A32CF /* libUPPayPlugin.a in Frameworks */,
 				76C87CFE1A8CA43E00843060 /* libSocialTwitter.a in Frameworks */,
 				ED2587391A7D1893008EB344 /* libxml2.dylib in Frameworks */,
 				76C87CF51A8CA43E00843060 /* libSocialFacebook.a in Frameworks */,
@@ -1034,7 +1039,7 @@
 		760BF1FB1A8DCFF00088DBA2 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				EDCB5C3F1AB1BDFF00FC50EC /* Release-iphonesimulator */,
+				768AB0D91AB6647900DB1869 /* Release-iphoneos */,
 				760BF23E1A8DD0410088DBA2 /* class */,
 				760BF1FC1A8DCFF00088DBA2 /* inc */,
 				760BF23B1A8DCFF00088DBA2 /* mapapi.bundle */,
@@ -1528,6 +1533,15 @@
 			path = more;
 			sourceTree = "<group>";
 		};
+		768AB0D91AB6647900DB1869 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				768AB0DA1AB6647900DB1869 /* libbaidumapapi.a */,
+			);
+			name = "Release-iphoneos";
+			path = "libs/Release-iphoneos";
+			sourceTree = "<group>";
+		};
 		76C87C9A1A8CA43E00843060 /* UM */ = {
 			isa = PBXGroup;
 			children = (
@@ -1730,6 +1744,16 @@
 			path = YiXin;
 			sourceTree = "<group>";
 		};
+		76D363F71AB6F3AB002A32CF /* UPPayPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */,
+				76D363F91AB6F3AB002A32CF /* UPPayPlugin.h */,
+				76D363FA1AB6F3AB002A32CF /* UPPayPluginDelegate.h */,
+			);
+			path = UPPayPlugin;
+			sourceTree = "<group>";
+		};
 		ED2586D21A7D14A1008EB344 = {
 			isa = PBXGroup;
 			children = (
@@ -1824,6 +1848,7 @@
 		ED25870C1A7D166D008EB344 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				76D363F71AB6F3AB002A32CF /* UPPayPlugin */,
 				ED2D49021AAAC844007CC065 /* AFNetworking */,
 				7664BAE21AA8523800E59DF0 /* UMessage_Sdk_1.1.0 */,
 				760BF1FB1A8DCFF00088DBA2 /* BaiduMap */,
@@ -2118,15 +2143,6 @@
 				EDCA83221AAB45C500AD2FB3 /* MyActivity.m */,
 			);
 			path = more;
-			sourceTree = "<group>";
-		};
-		EDCB5C3F1AB1BDFF00FC50EC /* Release-iphonesimulator */ = {
-			isa = PBXGroup;
-			children = (
-				EDCB5C401AB1BDFF00FC50EC /* libbaidumapapi.a */,
-			);
-			name = "Release-iphonesimulator";
-			path = "libs/Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2706,7 +2722,8 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/UPPayPlugin",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2755,7 +2772,8 @@
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UM/UMSocial_Sdk_Extra_Frameworks/YiXin",
 					"$(PROJECT_DIR)/Xtisk/class/Util/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphonesimulator",
+					"$(PROJECT_DIR)/Xtisk/class/Util/BaiduMap/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/Xtisk/class/Util/UPPayPlugin",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

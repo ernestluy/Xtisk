@@ -646,11 +646,11 @@ static HttpService *httpServiceInstance = nil;
     [mContentStr appendFormat:@"email=%@&",order.email];
     [mContentStr appendFormat:@"address=%@&",order.address];
     [mContentStr appendFormat:@"phone=%@&",order.phone];
-    [mContentStr appendFormat:@"cardNum=%@&",order.cardNum];
+    [mContentStr appendFormat:@"cardnum=%@&",order.cardNum];
     [mContentStr appendFormat:@"lang=%@&",order.lang];
     [mContentStr appendFormat:@"total_fee=%.1f&",order.total_fee];
     [mContentStr appendFormat:@"discount_fee=%.1f&",order.discount_fee];
-    [mContentStr appendFormat:@"tickets=%@&",order.tickets];
+    [mContentStr appendFormat:@"tickets=%@",order.tickets];
 
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

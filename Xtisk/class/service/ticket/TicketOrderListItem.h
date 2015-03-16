@@ -11,7 +11,7 @@
 #define TicketStatusPayNo       @"未支付"
 #define TicketStatusPayExpire   @"已过期"
 @interface TicketOrderListItem : NSObject
-@property(nonatomic,copy)NSString *orderId;
+@property(nonatomic)int orderId;
 @property(nonatomic,copy)NSString *orderTime;
 @property(nonatomic,copy)NSString *orderStatus;
 //@property(nonatomic,copy)NSString *name;

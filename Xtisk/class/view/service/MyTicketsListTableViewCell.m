@@ -7,7 +7,7 @@
 //
 
 #import "MyTicketsListTableViewCell.h"
-
+#import "PublicDefine.h"
 @implementation MyTicketsListTableViewCell
 
 - (void)awakeFromNib {
@@ -15,7 +15,7 @@
 }
 
 -(void)setData:(TicketOrderListItem  *)item{
-    self.labOrderId.text = item.orderId;
+    self.labOrderId.text = int2str(item.orderId);
     self.labOrderTime.text = item.orderTime;
     self.labStatus.text = item.orderStatus;
 }

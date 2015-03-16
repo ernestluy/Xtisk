@@ -29,6 +29,9 @@
     
     NSMutableArray *allMyActivityArr;
     UILabel *labNoteNoData;
+    
+    NSIndexSet *tIndexSet;
+    NSIndexPath *tIndexPath;
 }
 @end
 
@@ -130,7 +133,8 @@
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
     curPage = 1;
     [allMyActivityArr removeAllObjects];
-    [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+//    [[[HttpService sharedInstance] getRequestQueryMyActivity:self activityStatus:selectedIndex pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+    [tTableView upToStartFlush];
 }
 
 -(void)doneDelete:(id)sender{
@@ -222,21 +226,21 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (selectedIndex == 1 || selectedIndex == 2) {
-        return NO;
-    }
-    if (selectedIndex == 3) {
-        return YES;
-    }
-    if (0 == selectedIndex) {
-        
-        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-        if ([ma.status isEqualToString:AcStatusEnd]) {
-            return YES;
-        }else{
-            return NO;
-        }
-    }
+//    if (selectedIndex == 1 || selectedIndex == 2) {
+//        return NO;
+//    }
+//    if (selectedIndex == 3) {
+//        return YES;
+//    }
+//    if (0 == selectedIndex) {
+//        
+//        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+//        if ([ma.status isEqualToString:AcStatusEnd]) {
+//            return YES;
+//        }else{
+//            return NO;
+//        }
+//    }
     return YES;
 //    return NO;
 }
@@ -245,13 +249,15 @@
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         //deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
         NSLog(@"sec:%d,row:%d",(int)indexPath.section,(int)indexPath.row);
-        
+        tIndexPath = indexPath;
 //        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
         tAcount --;
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-        [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
         MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-        [allMyActivityArr removeObjectAtIndex:indexPath.section];
+//        [allMyActivityArr removeObjectAtIndex:indexPath.section];
+//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+//        [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [[[HttpService sharedInstance] getRequestDelMyActivity:self activityId:int2str(ma.activityId)]startAsynchronous];
         
     }
@@ -310,26 +316,28 @@
                         int tTotal = [[dic objectForKey:@"total"] intValue];
                         //改为items
 //                        [allMyActivityArr removeAllObjects];
+                        
+                        NSArray *tmpArr = [dic objectForKey:@"items"];
+                        tmpArr = [MyActivity getMyActivitysWithArr:tmpArr];
                         if (tTableView.flushDirType == FlushDirDown) {
                             curPage ++;
+                            [allMyActivityArr addObjectsFromArray:tmpArr];
                         }else if (tTableView.flushDirType == FlushDirUp){
                             curPage = 1;
                             [allMyActivityArr removeAllObjects];
-                        }
-                        NSArray *tmpArr = [dic objectForKey:@"items"];
-                        tmpArr = [MyActivity getMyActivitysWithArr:tmpArr];
-                        if(tmpArr){
                             [allMyActivityArr addObjectsFromArray:tmpArr];
                         }
-                        
+                        [tTableView flushDoneStatus:YES];
                         [self flushUI];
                     }
                     
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [tTableView flushDoneStatus:NO];
                 }
             }else{
                 NSLog(@"请求失败");
+                [tTableView flushDoneStatus:NO];
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
@@ -341,9 +349,11 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     
-                    
+                    [allMyActivityArr removeObjectAtIndex:tIndexPath.section];
+                    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:tIndexPath.section];
+                    [tTableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
                 }else{
-//                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }
             }else{
                 NSLog(@"请求失败");

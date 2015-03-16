@@ -10,10 +10,11 @@
 #import "MyTicketsListTableViewCell.h"
 #import "PublicDefine.h"
 #import "MyTicketDetailViewController.h"
+#import "LYTableView.h"
 #define kMyTicketsCellId @"kMyTicketsCellId"
 @interface MyTicketViewController ()
 {
-    UITableView *tTableView;
+    LYTableView *tTableView;
     NSMutableArray *allMyTicketArr;
     
     UILabel *labNoteNoData;
@@ -29,12 +30,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"船票订单";
+    allMyTicketArr = [NSMutableArray array];
     self.view.backgroundColor = [UIColor whiteColor];
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
-    tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
+    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
     tTableView.delegate = self;
     tTableView.dataSource = self;
+    
+    tTableView.lyDelegate = self;
+    [tTableView setNeedBottomFlush];
+    [tTableView setNeedTopFlush];
     
     [tTableView registerNib:[UINib nibWithNibName:@"MyTicketsListTableViewCell" bundle:nil] forCellReuseIdentifier:kMyTicketsCellId];
     
@@ -50,7 +56,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+    [tTableView reloadData];
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
     [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
 }
@@ -64,6 +70,36 @@
     }
     [tTableView reloadData];
 }
+
+//活动状态，返回中文“进行中”、“已结束”、“未开始”
+#pragma mark - LYFlushViewDelegate
+- (void)startToFlushUp:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
+}
+- (void)flushUpEnd:(NSObject *)ly{
+    
+}
+- (void)startToFlushDown:(NSObject *)ly{
+    [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
+}
+- (void)flushDownEnd:(NSObject *)ly{
+    
+}
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [tTableView setIsDraging:YES];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    [tTableView judgeDragIng];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //    NSLog(@"drag end");
+    [tTableView judgeDragEnd];
+    
+}
+
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -74,7 +110,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 3;//allMyTicketArr.count;
+    return allMyTicketArr.count;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -93,7 +129,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
         TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
         [allMyTicketArr removeObjectAtIndex:indexPath.row];
-        [[[HttpService sharedInstance] getRequestDelMyTicketOrder:self orderIds:@[item.orderId]]startAsynchronous];
+        [[[HttpService sharedInstance] getRequestDelMyTicketOrder:self orderIds:@[int2str(item.orderId)]]startAsynchronous];
         
     }
 }
@@ -102,9 +138,9 @@
 {
     
     MyTicketsListTableViewCell * cell = (MyTicketsListTableViewCell*)[tv dequeueReusableCellWithIdentifier:kMyTicketsCellId];
-//    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
-//    [cell setData:item];
-    cell.detailTextLabel.text = @"状态";
+    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+    [cell setData:item];
+//    cell.detailTextLabel.text = @"状态";
     return cell;
 }
 
@@ -129,8 +165,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MyTicketDetailViewController *tv = [[MyTicketDetailViewController alloc]init];
-//    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
-//    tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
+    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+    tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
     [self.navigationController pushViewController:tv animated:YES];
 }
 
@@ -150,11 +186,14 @@
                     if (dic) {
 //                        int tTotal = [[dic objectForKey:@"total"] intValue];
                         //orderList
-                        NSArray *tmpArr = [dic objectForKey:@"items"];
+                        NSArray *tmpArr = [dic objectForKey:@"orderList"];
                         tmpArr = [TicketOrderListItem getTicketOrderListItemsWithArr:tmpArr];
                         if(tmpArr){
+                            [allMyTicketArr removeAllObjects];
                             [allMyTicketArr addObjectsFromArray:tmpArr];
                         }
+                        
+                        
                         
                         [self flushUI];
                     }
@@ -166,6 +205,7 @@
                 NSLog(@"请求失败");
                 [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
+            [tTableView flushDoneStatus:NO];
             break;
         }
         case HttpRequestType_XT_DEL_MY_TICKETS:{
