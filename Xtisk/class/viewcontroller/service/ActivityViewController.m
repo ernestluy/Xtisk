@@ -10,9 +10,11 @@
 #import "PublicDefine.h"
 #import "ActivityListTableViewCell.h"
 #import "ActivityDetailViewController.h"
+#import "CommentPad.h"
 @interface ActivityViewController ()
 {
     NSMutableArray *mDataArr;
+    CommentPad *commentPad;
 }
 @end
 
@@ -39,6 +41,8 @@
     
     [self.tTableView registerNib:[UINib nibWithNibName:@"ActivityListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.title = @"园区活动";
+    
+    
     
 }
 
@@ -99,6 +103,7 @@
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     ActivityItem *item = [mDataArr objectAtIndex:indexPath.row];
+    [cell setData:item];
     UIImage *tImg = [XTFileManager getTmpFolderFileWithUrlPath:item.activityPic];
     if (!tImg) {
         //down_img

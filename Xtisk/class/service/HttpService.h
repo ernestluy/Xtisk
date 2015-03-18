@@ -116,6 +116,7 @@
 
 #pragma mark - 4.3.4.16 删除我的活动
 -(AsyncHttpRequest *)getRequestDelMyActivity :(id<AsyncHttpRequestDelegate>)delegate  activityId:(NSString *)activityId;
+-(AsyncHttpRequest *)getRequestDelMyActivitys:(id<AsyncHttpRequestDelegate>)delegate  activityIds:(NSArray *)ids;
 
 #pragma mark - 4.3.5	船票
 #pragma mark - 4.3.5.1 获取航线列表

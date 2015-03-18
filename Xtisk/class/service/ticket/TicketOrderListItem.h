@@ -14,6 +14,9 @@
 @property(nonatomic)int orderId;
 @property(nonatomic,copy)NSString *orderTime;
 @property(nonatomic,copy)NSString *orderStatus;
+
+@property(nonatomic)int status;
+@property(nonatomic,copy)NSString *tn;
 //@property(nonatomic,copy)NSString *name;
 //@property(nonatomic,copy)NSString *name;
 

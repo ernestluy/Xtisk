@@ -16,6 +16,12 @@
 @property(nonatomic,weak)IBOutlet UILabel *labStatus;
 @property(nonatomic,weak)IBOutlet UIButton *btnDetail;
 
+@property(nonatomic,weak)IBOutlet UIButton *btnSelect;
+
 
 -(void)setData:(MyActivity *)ac;
+
+-(void)setIsDeleting:(BOOL)b;
+
+-(void)setItemSelect:(BOOL)b;
 @end

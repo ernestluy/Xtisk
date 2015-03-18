@@ -27,12 +27,12 @@
 -(void)inSetDataWith:(IUser *)tuser{
     self.inLabName.text = tuser.nickName;
     self.inLabAccount.text = tuser.phone;
-    self.inLabSign.text = tuser.signature;
+    self.inLabSign.text = [NSString stringWithFormat:@"个性签名:%@",tuser.signature];
     if (tuser.nickName== nil ||tuser.nickName.length == 0) {
         self.inLabName.text = @"未设置";
     }
     if (tuser.signature== nil ||tuser.signature.length == 0) {
-        self.inLabSign.text = @"未设置";
+        self.inLabSign.text = @"个性签名:未设置";//[NSString stringWithFormat:@"个性签名:未设置",tuser.signature];;//@"未设置";
     }
 }
 @end

@@ -50,6 +50,9 @@
     detail.orderId = [[dic objectForKey:@"orderId"]intValue];;
     detail.orderTime = [dic objectForKey:@"orderTime"];
     detail.orderStatus = [dic objectForKey:@"orderStatus"];
+    
+    detail.status = [[dic objectForKey:@"status"] intValue];
+    detail.tn = [dic objectForKey:@"tn"];
     detail.peopleInfo = [PeopleInfo getPeopleInfoWithDic:[dic objectForKey:@"peopleInfo"]];
     detail.ticketList = [MyTicketItem getMyTicketItemsWithArr:[dic objectForKey:@"ticketList"]];
     

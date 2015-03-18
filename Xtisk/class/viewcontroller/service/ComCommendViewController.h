@@ -9,7 +9,9 @@
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
 #import "EditTextViewController.h"
-@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate,CommentViewControllerDelegate>
+#import "CommentPad.h"
+#import "LoginViewController.h"
+@interface ComCommendViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,LYFlushViewDelegate,CommentViewControllerDelegate,CommentPadDelegate,LoginViewControllerDelegate>
 
 @property(nonatomic,strong)IBOutlet LYTableView *tTableView;
 @property(nonatomic) int storeId;

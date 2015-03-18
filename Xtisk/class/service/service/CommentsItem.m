@@ -7,7 +7,8 @@
 //
 
 #import "CommentsItem.h"
-
+#import <UIKit/UIKit.h>
+#import "PublicDefine.h"
 @implementation CommentsItem
 
 
@@ -28,5 +29,18 @@
         [mArr addObject:ci];
     }
     return mArr;
+}
+
+-(int)getCellHeight{
+    if (!self.content) {
+        return 110;
+    }
+    int startY = 52;
+    CGSize size = [Util sizeForString:self.content fontSize:12 andWidth:274];
+    int allHeight = startY + size.height;
+    if (allHeight < 110) {
+        return 110;
+    }
+    return size.height + startY;
 }
 @end

@@ -227,6 +227,19 @@
 		76D018281AB046E800E6B168 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D018261AB046E800E6B168 /* TestViewController.xib */; };
 		76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */; };
 		76D363FB1AB6F3AB002A32CF /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */; };
+		76D363FE1AB7B3F6002A32CF /* TicketTradeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D363FD1AB7B3F6002A32CF /* TicketTradeInfo.m */; };
+		76D364011AB7BC28002A32CF /* MyTicketOrderItemStatis.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D364001AB7BC28002A32CF /* MyTicketOrderItemStatis.m */; };
+		76D364031AB80ED4002A32CF /* line_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364021AB80ED4002A32CF /* line_black@2x.png */; };
+		76D364061AB83C4D002A32CF /* cell_del_no_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364041AB83C4D002A32CF /* cell_del_no_select@2x.png */; };
+		76D364071AB83C4D002A32CF /* cell_del_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364051AB83C4D002A32CF /* cell_del_select@2x.png */; };
+		76D3640A1AB8514F002A32CF /* CommentPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D364091AB8514F002A32CF /* CommentPad.m */; };
+		76D3640C1AB91D33002A32CF /* upay_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640B1AB91D33002A32CF /* upay_icon.png */; };
+		76D3640E1AB91EC3002A32CF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640D1AB91EC3002A32CF /* Default@2x.png */; };
+		76D364111AB94E10002A32CF /* upay_fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640F1AB94E10002A32CF /* upay_fail.png */; };
+		76D364121AB94E10002A32CF /* upay_success.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364101AB94E10002A32CF /* upay_success.png */; };
+		76D364151AB94E4F002A32CF /* UPayResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D364141AB94E4F002A32CF /* UPayResultView.m */; };
+		76D364171AB94E66002A32CF /* UPayResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D364161AB94E66002A32CF /* UPayResultView.xib */; };
+		76D364191AB9814B002A32CF /* com_submit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364181AB9814B002A32CF /* com_submit@2x.png */; };
 		ED2586E11A7D14A1008EB344 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E01A7D14A1008EB344 /* main.m */; };
 		ED2586E41A7D14A1008EB344 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2586E31A7D14A1008EB344 /* AppDelegate.m */; };
 		ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2586E81A7D14A1008EB344 /* Main.storyboard */; };
@@ -763,6 +776,23 @@
 		76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
 		76D363F91AB6F3AB002A32CF /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
 		76D363FA1AB6F3AB002A32CF /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
+		76D363FC1AB7B3F6002A32CF /* TicketTradeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketTradeInfo.h; sourceTree = "<group>"; };
+		76D363FD1AB7B3F6002A32CF /* TicketTradeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketTradeInfo.m; sourceTree = "<group>"; };
+		76D363FF1AB7BC28002A32CF /* MyTicketOrderItemStatis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketOrderItemStatis.h; sourceTree = "<group>"; };
+		76D364001AB7BC28002A32CF /* MyTicketOrderItemStatis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketOrderItemStatis.m; sourceTree = "<group>"; };
+		76D364021AB80ED4002A32CF /* line_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_black@2x.png"; sourceTree = "<group>"; };
+		76D364041AB83C4D002A32CF /* cell_del_no_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_del_no_select@2x.png"; sourceTree = "<group>"; };
+		76D364051AB83C4D002A32CF /* cell_del_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_del_select@2x.png"; sourceTree = "<group>"; };
+		76D364081AB8514F002A32CF /* CommentPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentPad.h; sourceTree = "<group>"; };
+		76D364091AB8514F002A32CF /* CommentPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentPad.m; sourceTree = "<group>"; };
+		76D3640B1AB91D33002A32CF /* upay_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_icon.png; sourceTree = "<group>"; };
+		76D3640D1AB91EC3002A32CF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		76D3640F1AB94E10002A32CF /* upay_fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_fail.png; sourceTree = "<group>"; };
+		76D364101AB94E10002A32CF /* upay_success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_success.png; sourceTree = "<group>"; };
+		76D364131AB94E4F002A32CF /* UPayResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPayResultView.h; sourceTree = "<group>"; };
+		76D364141AB94E4F002A32CF /* UPayResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPayResultView.m; sourceTree = "<group>"; };
+		76D364161AB94E66002A32CF /* UPayResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UPayResultView.xib; sourceTree = "<group>"; };
+		76D364181AB9814B002A32CF /* com_submit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_submit@2x.png"; sourceTree = "<group>"; };
 		ED2586DB1A7D14A1008EB344 /* Xtisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xtisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2586DF1A7D14A1008EB344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1162,6 +1192,8 @@
 		764D5FFE1A83347C00B186A5 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				76D364081AB8514F002A32CF /* CommentPad.h */,
+				76D364091AB8514F002A32CF /* CommentPad.m */,
 				764D600D1A835F1F00B186A5 /* PopoverView.h */,
 				764D600E1A835F1F00B186A5 /* PopoverView.m */,
 				764D5FFF1A83349C00B186A5 /* CTLCustom.h */,
@@ -1275,6 +1307,7 @@
 		7664BA971AA6D00400E59DF0 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				76D3640D1AB91EC3002A32CF /* Default@2x.png */,
 				7664BA981AA6D00400E59DF0 /* Default-568h@2x.png */,
 				7664BA991AA6D00400E59DF0 /* icon-29@2x.png */,
 				7664BA9A1AA6D00400E59DF0 /* icon-40@2x.png */,
@@ -1310,6 +1343,8 @@
 				EDCB5C4E1AB4084F00FC50EC /* MyTicketItem.m */,
 				EDCB5C501AB4091600FC50EC /* MyTicketOrderDetail.h */,
 				EDCB5C511AB4091600FC50EC /* MyTicketOrderDetail.m */,
+				76D363FC1AB7B3F6002A32CF /* TicketTradeInfo.h */,
+				76D363FD1AB7B3F6002A32CF /* TicketTradeInfo.m */,
 			);
 			path = ticket;
 			sourceTree = "<group>";
@@ -1529,6 +1564,11 @@
 				ED8C784F1A970FF8009C8286 /* AboutIshekouHeaderView.h */,
 				ED8C78501A970FF8009C8286 /* AboutIshekouHeaderView.m */,
 				ED8C78521A97100B009C8286 /* AboutIshekouHeaderView.xib */,
+				76D363FF1AB7BC28002A32CF /* MyTicketOrderItemStatis.h */,
+				76D364001AB7BC28002A32CF /* MyTicketOrderItemStatis.m */,
+				76D364131AB94E4F002A32CF /* UPayResultView.h */,
+				76D364141AB94E4F002A32CF /* UPayResultView.m */,
+				76D364161AB94E66002A32CF /* UPayResultView.xib */,
 			);
 			path = more;
 			sourceTree = "<group>";
@@ -1963,6 +2003,13 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				76D364181AB9814B002A32CF /* com_submit@2x.png */,
+				76D3640F1AB94E10002A32CF /* upay_fail.png */,
+				76D364101AB94E10002A32CF /* upay_success.png */,
+				76D3640B1AB91D33002A32CF /* upay_icon.png */,
+				76D364041AB83C4D002A32CF /* cell_del_no_select@2x.png */,
+				76D364051AB83C4D002A32CF /* cell_del_select@2x.png */,
+				76D364021AB80ED4002A32CF /* line_black@2x.png */,
 				76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */,
 				76D018171AAFDE4600E6B168 /* arrow_down@2x.png */,
 				7664BB7D1AAD6B8300E59DF0 /* msg_im_frame@2x.png */,
@@ -2238,11 +2285,13 @@
 				ED8C77AF1A91F5B8009C8286 /* radiu_done@2x.png in Resources */,
 				7664BA9E1AA6D00400E59DF0 /* Default-568h@2x.png in Resources */,
 				764D60A81A8B3EB300B186A5 /* reg_get_ver_code@2x.png in Resources */,
+				76D3640E1AB91EC3002A32CF /* Default@2x.png in Resources */,
 				ED2586EA1A7D14A1008EB344 /* Main.storyboard in Resources */,
 				7664BAD71AA8236A00E59DF0 /* ticket_x.png in Resources */,
 				ED8C783A1A96F6CD009C8286 /* share_arrow@2x.png in Resources */,
 				ED8C78061A94DFA6009C8286 /* tel_symbol@2x.png in Resources */,
 				764D60A31A8B251500B186A5 /* msg_ishekou_cell_icon@2x.png in Resources */,
+				76D364111AB94E10002A32CF /* upay_fail.png in Resources */,
 				ED8C77E61A931A0F009C8286 /* FoodDetailHeader.xib in Resources */,
 				767812D21A81F9FC00CB4B08 /* 1-3.jpg in Resources */,
 				ED8C779D1A861EFB009C8286 /* grayArrow@2x.png in Resources */,
@@ -2348,6 +2397,7 @@
 				76C87D011A8CA43E00843060 /* ios-social-sdk-shake.html in Resources */,
 				764D60891A8AEBEE00B186A5 /* more_cell_activity_icon@2x.png in Resources */,
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
+				76D364031AB80ED4002A32CF /* line_black@2x.png in Resources */,
 				764D609B1A8AF41C00B186A5 /* login_tf_acc_head@2x.png in Resources */,
 				764D608A1A8AEBEE00B186A5 /* more_cell_recommend_icon@2x.png in Resources */,
 				76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */,
@@ -2359,6 +2409,7 @@
 				764D607D1A8AE99A00B186A5 /* icon_index_selected@2x.png in Resources */,
 				764D608C1A8AEBEE00B186A5 /* more_cell_setting_icon@2x.png in Resources */,
 				764D602C1A884CD800B186A5 /* icon_more@2x.png in Resources */,
+				76D364071AB83C4D002A32CF /* cell_del_select@2x.png in Resources */,
 				ED8C77CE1A930692009C8286 /* near_food_4@2x.png in Resources */,
 				ED8C78491A970CDE009C8286 /* about_wechat@2x.png in Resources */,
 				760BF23D1A8DCFF00088DBA2 /* mapapi.bundle in Resources */,
@@ -2372,6 +2423,7 @@
 				764D60561A89CE3E00B186A5 /* RegSecondStepViewController.xib in Resources */,
 				767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */,
 				76D018181AAFDE4600E6B168 /* arrow_down@2x.png in Resources */,
+				76D364121AB94E10002A32CF /* upay_success.png in Resources */,
 				ED8C78531A97100B009C8286 /* AboutIshekouHeaderView.xib in Resources */,
 				ED8C78081A94E110009C8286 /* food_call_normal@2x.png in Resources */,
 				764D60771A8AE38800B186A5 /* service_icon_park_activity@2x.png in Resources */,
@@ -2389,15 +2441,19 @@
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
 				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
 				76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */,
+				76D3640C1AB91D33002A32CF /* upay_icon.png in Resources */,
 				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
 				76D018281AB046E800E6B168 /* TestViewController.xib in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
 				7664BAE11AA82DED00E59DF0 /* TicketOrderEditViewController.xib in Resources */,
+				76D364061AB83C4D002A32CF /* cell_del_no_select@2x.png in Resources */,
 				764D602D1A884CD800B186A5 /* icon_msg@2x.png in Resources */,
 				760BF2501A9F1C920088DBA2 /* down_img_small@2x.png in Resources */,
 				7664BB971AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.xib in Resources */,
 				ED8C77CB1A930692009C8286 /* near_food_1@2x.png in Resources */,
+				76D364191AB9814B002A32CF /* com_submit@2x.png in Resources */,
 				764D60881A8AEBEE00B186A5 /* default_header@2x.png in Resources */,
+				76D364171AB94E66002A32CF /* UPayResultView.xib in Resources */,
 				ED8C78001A94D6F3009C8286 /* up_cn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2450,6 +2506,7 @@
 				ED8C77D21A930BA9009C8286 /* FoodListViewController.m in Sources */,
 				767812E91A83326F00CB4B08 /* MoreTableViewHeaderView.m in Sources */,
 				ED8C78261A961971009C8286 /* MyTicketViewController.m in Sources */,
+				76D363FE1AB7B3F6002A32CF /* TicketTradeInfo.m in Sources */,
 				767B6FD41AA55F1700D0FA54 /* TicketQueryListViewController.m in Sources */,
 				764D605C1A89DC7000B186A5 /* RecommendItem.m in Sources */,
 				ED2D491A1AAAC844007CC065 /* AFSecurityPolicy.m in Sources */,
@@ -2506,6 +2563,7 @@
 				ED25874A1A7D1B4A008EB344 /* FMResultSet.m in Sources */,
 				76D018231AB045D900E6B168 /* LYScrollView.m in Sources */,
 				764D60651A89E37500B186A5 /* FavoriteItem.m in Sources */,
+				76D364151AB94E4F002A32CF /* UPayResultView.m in Sources */,
 				7664BB741AA98F3100E59DF0 /* PushMessageItem.m in Sources */,
 				764D604B1A88B0D900B186A5 /* EditTextViewController.m in Sources */,
 				ED8C78581A97397F009C8286 /* MsgTicketListTableViewCell.m in Sources */,
@@ -2535,12 +2593,14 @@
 				767812951A80A02D00CB4B08 /* ServiceTabViewController.m in Sources */,
 				7664BAC11AA801F600E59DF0 /* VoyageRequestPar.m in Sources */,
 				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
+				76D364011AB7BC28002A32CF /* MyTicketOrderItemStatis.m in Sources */,
 				ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */,
 				ED2D491B1AAAC844007CC065 /* AFURLConnectionOperation.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
 				ED8C78311A96F149009C8286 /* ActivityDetailViewController.m in Sources */,
 				ED8C77BC1A92FD23009C8286 /* NearMenuCollectionViewCell.m in Sources */,
 				764D60461A88919200B186A5 /* PrivateViewController.m in Sources */,
+				76D3640A1AB8514F002A32CF /* CommentPad.m in Sources */,
 				764D600C1A83441500B186A5 /* ServiceMainView.m in Sources */,
 				764D60081A8343C400B186A5 /* ServiceItemCell.m in Sources */,
 				767812811A80981000CB4B08 /* SettingService.m in Sources */,

@@ -33,7 +33,8 @@
         ci.orderId = [[dic objectForKey:@"orderId"] intValue];
         ci.orderTime = [dic objectForKey:@"orderTime"];
         ci.orderStatus = [dic objectForKey:@"orderStatus"];
-
+        ci.status = [[dic objectForKey:@"status"] intValue];
+        ci.tn = [dic objectForKey:@"tn"];
         [mArr addObject:ci];
     }
     return mArr;

@@ -219,6 +219,13 @@
     NSLog(@"didSelected:%@",pi.posterTitle);
 //    TestViewController *tv = [[TestViewController alloc]init];
 //    [self.navigationController pushViewController:tv animated:YES];
+    //upload/poster/url/2015_03_17/77a6b41388324de2bd233c3a0160ad72/index.html
+    if (pi.posterUrl) {
+        NSRange range = [pi.posterUrl rangeOfString:@"http:"];
+        if (range.location != 0) {
+             pi.posterUrl = [NSString stringWithFormat:@"http://%@/%@",SERVICE_HOME,pi.posterUrl];
+        }
+    }
     
     InfoViewController *info = [[InfoViewController alloc]initWithUrl:pi.posterUrl title:pi.posterTitle];
     [self.navigationController pushViewController:info animated:YES];
@@ -246,6 +253,13 @@
     }
     if (tRecommendList) {
         RecommendItem *ri = [tRecommendList objectAtIndex:tSelectedIndex];
+        if (ri.recomUrl) {
+            NSRange range = [ri.recomUrl rangeOfString:@"http:"];
+            if (range.location != 0) {
+                ri.recomUrl = [NSString stringWithFormat:@"http://%@/%@",SERVICE_HOME,ri.recomUrl];
+            }
+        }
+        
         InfoViewController *iv = [[InfoViewController alloc]initWithUrl:ri.recomUrl title:@"热门活动"];
         [self.navigationController pushViewController:iv animated:YES];
         return;

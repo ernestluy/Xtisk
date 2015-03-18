@@ -16,6 +16,7 @@
 @property(nonatomic)float price;//Double	否	票价
 @property(nonatomic,copy)NSString *getId;//String	否	取票编号
 
+@property(nonatomic,copy)NSString *keyTicket;
 
 +(NSArray *)getMyTicketItemsWithArr:(NSArray *)arr;
 @end

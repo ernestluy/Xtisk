@@ -304,6 +304,8 @@
                 cell.textLabel.font = [UIFont systemFontOfSize:14];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            CGRect rect = [tv rectForRowAtIndexPath:indexPath];
+            cell.labContent.frame = CGRectMake(27, 52, 274, rect.size.height - 52);
             CommentsItem *ci = [comArr objectAtIndex:(indexPath.row - 1)];
             [cell setDataWith:ci];
             return cell;
@@ -337,7 +339,9 @@
     if (1 == indexPath.section) {
         return SECTION_SENCOND_HEIGHT;
     }else if (2 == indexPath.section) {
-        return COMMEND_CELL_HEIGHT;
+        CommentsItem *ci = [comArr objectAtIndex:(indexPath.row - 1)];
+        return [ci getCellHeight];
+//        return COMMEND_CELL_HEIGHT;
     }
     return DEFAULT_CELL_HEIGHT;
 }

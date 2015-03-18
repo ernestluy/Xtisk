@@ -10,6 +10,12 @@
 #import "StatisTicketView.h"
 #import "PublicDefine.h"
 #import "LoginViewController.h"
+#include <sys/socket.h> // Per msqr
+#include <sys/sysctl.h>
+#include <net/if.h>
+#include <net/if_dl.h>
+#import "UPPayPlugin.h"
+#import "MyTicketDetailViewController.h"
 @interface TicketOrderEditViewController ()
 {
     UITableView *tTableView;
@@ -29,8 +35,17 @@
     StatisTicketView *statisView;
     
     BOOL isInput;
+    
+    TicketTradeInfo *tradeInfo;
 }
+
 -(void)tapped:(UITapGestureRecognizer *)tap;
+
+-(void)toPay;
+
+- (void)showAlertMessage:(NSString*)msg;
+
+
 @end
 
 @implementation TicketOrderEditViewController
@@ -45,6 +60,7 @@
     CGRect bounds = [UIScreen mainScreen].bounds;
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64) ;
     statisView = [[StatisTicketView alloc]initWithFrame:CGRectMake(0, 0, 320, 400)];
+    statisView.backgroundColor = [UIColor clearColor];
     [statisView layoutUI];
     
     
@@ -88,8 +104,8 @@
     int startX = 15;
     btnOrder.frame = CGRectMake(startX, 20, bounds.size.width - 15*2, 44);
     [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnOrder setTitle:@"提 交" forState:UIControlStateNormal];
-    [btnOrder setBackgroundImage:[UIImage imageNamed:@"radiu_done"] forState:UIControlStateNormal];
+    [btnOrder setTitle:@"提交订单" forState:UIControlStateNormal];
+    [btnOrder setBackgroundImage:[UIImage imageNamed:@"login_submit"] forState:UIControlStateNormal];
     btnOrder.backgroundColor = [UIColor clearColor];
     [btnOrder addTarget:self action:@selector(orderAction:) forControlEvents:UIControlEventTouchUpInside];
     [footView addSubview:btnOrder];
@@ -152,6 +168,33 @@
     NSLog(@"submit");
 }
 
+
+-(void)toPay{
+//    if (tradeInfo.tn != nil && tradeInfo.tn.length > 0)
+//    {
+//        NSLog(@"tn=%@",tradeInfo.tn);
+//        [UPPayPlugin startPay:tradeInfo.tn mode:kMode_Development viewController:self delegate:self];
+//    }else{
+//        NSString *strNote = [NSString stringWithFormat:@"交易流水号错误:%@",tradeInfo.tn];
+//        [self showAlertMessage:strNote];
+//    }
+    
+    
+}
+
+#pragma mark UPPayPluginResult
+- (void)UPPayPluginResult:(NSString *)result
+{
+    //银联手机支付控件有三个支付状态返回值:success、fail、cancel,分别代表:支 付成功、支付失败、用户取消支付
+    NSString* msg = [NSString stringWithFormat:kResult, result];
+    [self showAlertMessage:msg];
+}
+
+- (void)showAlertMessage:(NSString*)msg
+{
+    UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:kNote message:msg delegate:self cancelButtonTitle:kConfirm otherButtonTitles:nil, nil];
+    [_alertView show];
+}
 #pragma mark textfieldDelegate
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
@@ -319,10 +362,13 @@
                         NSString *tn = [tmpDic objectForKey:@"tn"];
                         NSString *orderId = [tmpDic objectForKey:@"orderId"];
 //                        [SVProgressHUD showSuccessWithStatus:@"订单提交成功\n" duration:2];
-                        
-                        NSString *strNote = [NSString stringWithFormat:@"订单提交成功\n交易流水号:%@\n订单号:%@",tn,orderId];
-                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"订单" message:strNote delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                        [alertView show];
+                        tradeInfo = [TicketTradeInfo getTicketTradeInfoWithDic:tmpDic];
+                        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+                        [[[HttpService sharedInstance] getRequestQueryTicketOrderDetail:self orderId:tradeInfo.orderId]startAsynchronous];
+//                        [self toPay];
+//                        NSString *strNote = [NSString stringWithFormat:@"订单提交成功\n交易流水号:%@\n订单号:%@",tradeInfo.tn,tradeInfo.orderId];
+//                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"订单" message:strNote delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//                        [alertView show];
                     }
                     
                 }else{
@@ -331,6 +377,32 @@
             }else{
                 //XT_SHOWALERT(@"请求失败");
                 NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERY_MY_TICKET_ORDER_DETAIL:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        //                        int tTotal = [[dic objectForKey:@"total"] intValue];
+                        //orderList
+                        MyTicketOrderDetail *mDetail = [MyTicketOrderDetail getMyTicketOrderDetailWithDic:dic];
+                        MyTicketDetailViewController *tv = [[MyTicketDetailViewController alloc]init];
+                        tv.payAction = TicketOrderDetailSeq;
+                        tv.mOrderDetail = mDetail;
+                        [self.navigationController pushViewController:tv animated:YES];
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                NSLog(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
             }
             break;
         }

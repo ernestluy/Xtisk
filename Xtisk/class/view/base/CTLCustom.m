@@ -112,7 +112,9 @@
     UITextField *theTextField = [[UITextField alloc] initWithFrame:rect];
     theTextField.textAlignment = NSTextAlignmentLeft;
     theTextField.returnKeyType = UIReturnKeyNext;
+    theTextField.clearButtonMode = YES;
     theTextField.placeholder = @"请输入";
+    theTextField.textColor = defaultTextGrayColor;
     theTextField.font = [UIFont systemFontOfSize:15];
     return theTextField;
 }

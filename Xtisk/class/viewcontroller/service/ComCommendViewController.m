@@ -11,12 +11,15 @@
 #import "DetailFoodCommendTableViewCell.h"
 #import "LoginViewController.h"
 #import "EditTextViewController.h"
+
 @interface ComCommendViewController ()
 {
     NSMutableArray *mComArr;
     
     UILabel *labNote;
     UILabel *labNoteNoData;
+    CommentPad *commentPad;
+    int iLimitNum;
 }
 @end
 
@@ -26,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     mComArr = [NSMutableArray array];
-    
+    iLimitNum = 160;
     CGRect bounds = [UIScreen mainScreen].bounds;
     //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64 - 44);
@@ -81,6 +84,10 @@
     btnCommend.frame = cView.bounds;
     [cView addSubview:btnCommend];
     [btnCommend addTarget:self action:@selector(toCommend:) forControlEvents:UIControlEventTouchUpInside];
+    
+    commentPad = [[CommentPad alloc]init];
+    commentPad.delegate = self;
+    commentPad.limitNum = iLimitNum;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -113,31 +120,67 @@
     
     
     if (self.vcType == CommendVcActivity) {
-        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
-        ec.activityId = self.mActivityItem.activityId;
-        ec.mActivityItem = self.mActivityItem;
-        ec.comDelegate = self;
+//        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextActivity delegate:nil];
+//        ec.activityId = self.mActivityItem.activityId;
+//        ec.mActivityItem = self.mActivityItem;
+//        ec.comDelegate = self;
         if (![[SettingService sharedInstance] isLogin]) {
-            LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
+            LoginViewController *lv = [[LoginViewController alloc]init];
+            lv.delegate  =  self;
             [self.navigationController pushViewController:lv animated:YES];
             return;
         }
-        [self.navigationController pushViewController:ec animated:YES];
+//        [self.navigationController pushViewController:ec animated:YES];
+        [commentPad show];
     }else if (self.vcType == CommendVcStore) {
-        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:nil];
-        ec.storeId = self.mStoreItem.storeId;
-        ec.mStoreItem = self.mStoreItem;
-        ec.comDelegate = self;
+//        EditTextViewController *ec = [[EditTextViewController alloc]initWithType:PrivateEditTextFoodCommend delegate:nil];
+//        ec.storeId = self.mStoreItem.storeId;
+//        ec.mStoreItem = self.mStoreItem;
+//        ec.comDelegate = self;
         if (![[SettingService sharedInstance] isLogin]) {
-            LoginViewController *lv = [[LoginViewController alloc]initWithVc:ec];
+            LoginViewController *lv = [[LoginViewController alloc]init];
+            lv.delegate  =  self;
             [self.navigationController pushViewController:lv animated:YES];
             return;
         }
-        [self.navigationController pushViewController:ec animated:YES];
+//        [self.navigationController pushViewController:ec animated:YES];
+        [commentPad show];
     }
     
 }
 
+- (void)loginSucBack:(LoginViewController *)loginVc{
+    NSLog(@"loginSucBack");
+//    [commentPad performSelector:@selector(show) withObject:nil afterDelay:0.2];
+    [commentPad show];
+}
+#pragma mark - CommentPadDelegate
+- (void)commentPadHide:(CommentPad *)cPad{
+    
+}
+-(void)commentPadShow:(CommentPad *)cPad{
+    
+}
+-(void)commentPadSubmit:(CommentPad *)cPad{
+    NSLog(@"commentPadSubmit");
+
+    if (cPad.textView.text.length == 0) {
+        NSString *strNote = [NSString stringWithFormat:@"长度格式必须为1-%d",iLimitNum];
+        [SVProgressHUD showErrorWithStatus:strNote duration:2];
+        return;
+    }
+    
+    if (cPad.textView.text.length > iLimitNum) {
+        [SVProgressHUD showErrorWithStatus:@"太多啦，删几个字吧！" duration:3];
+        return;
+    }
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    if (self.vcType == CommendVcStore) {//店铺评论
+        [[[HttpService sharedInstance] getRequestStoreComments:self storeId:int2str(self.storeId) content:cPad.textView.text]startAsynchronous];
+    }else if (self.vcType == CommendVcActivity){//活动评论
+        [[[HttpService sharedInstance] getRequestActivityComments:self activityId:int2str(self.activityId) content:cPad.textView.text]startAsynchronous];
+    }
+}
 #pragma mark - CommentViewControllerDelegate
 
 - (void)commentDelegate:(int)result{
@@ -207,6 +250,10 @@
         cell.textLabel.textColor = [UIColor darkGrayColor];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
+//    cell.labContent.backgroundColor = [UIColor yellowColor];
+//    CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath
+    CGRect rect = [tv rectForRowAtIndexPath:indexPath];
+    cell.labContent.frame = CGRectMake(27, 52, 274, rect.size.height - 52);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     CommentsItem *ci = [mComArr objectAtIndex:indexPath.row];
@@ -220,8 +267,9 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return COMMEND_CELL_HEIGHT;
+    CommentsItem *ci = [mComArr objectAtIndex:indexPath.row];
+    return [ci getCellHeight];
+//    return COMMEND_CELL_HEIGHT;
 }
 
 
@@ -301,7 +349,31 @@
             [self.tTableView flushDoneStatus:NO];
             break;
         }
-        
+        case HttpRequestType_XT_ACTIVITYCOMMENTS:
+        case HttpRequestType_XT_STORECOMMENTS:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                
+                if (ResponseCodeSuccess == br.code) {
+                    if (HttpRequestType_XT_ACTIVITYCOMMENTS == request.m_requestType) {
+                        self.mActivityItem.reviews += 1;
+                    }else if (HttpRequestType_XT_STORECOMMENTS == request.m_requestType) {
+                        self.mStoreItem.reviews += 1;
+                    }
+                    [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
+                    [commentPad hide];
+                    commentPad.textView.text = @"";
+                    [self.tTableView upToStartFlush];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showSuccessWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
+                NSLog(@"请求失败");
+            }
+            break;
+        }
             
             
         default:

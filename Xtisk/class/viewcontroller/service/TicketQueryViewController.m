@@ -38,6 +38,8 @@
     
     UIButton *btnAgreement;
     UIButton *btnOrder;
+    
+    UIButton *btnExchange;
 }
 
 -(void)flushUI;
@@ -148,6 +150,12 @@
     btnDestStation = [CTLCustom getButtonNormalWithRect:tRect];
     btnDestStation.titleLabel.font = DefaultCellFont;
     btnDestStation.tag = StationDest;
+    
+    btnExchange = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnExchange.frame = CGRectMake(40, 0, 30, 30);
+    [btnExchange setImage:[UIImage imageNamed:@"ticket_switch"] forState:UIControlStateNormal];
+    [btnExchange addTarget:self action:@selector(exChange:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -176,6 +184,12 @@
     }
 }
 
+-(void)exChange:(id)sender{
+    NSLog(@"exChange");
+    NSString *strTmp = btnOriginStation.titleLabel.text;
+    [self setOriginStationTitle:btnDestStation.titleLabel.text];
+    [self setDestStationTitle:strTmp];
+}
 -(void)toNotice{
     btnAgreement.selected = NO;
     [self btnAgreeAction:nil];
@@ -408,10 +422,13 @@
             [btnOriginStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
             [btnDestStation addTarget:self action:@selector(stationSelectAction:) forControlEvents:UIControlEventTouchUpInside];
             
-            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 0, 30, 30)];
-            imgView.image = [UIImage imageNamed:@"ticket_switch"];
-            imgView.center = CGPointMake(cell.bounds.size.width/2, cell.bounds.size.height/2);
-            [cell addSubview:imgView];
+//            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 0, 30, 30)];
+//            imgView.image = [UIImage imageNamed:@"ticket_switch"];
+//            imgView.center = CGPointMake(cell.bounds.size.width/2, cell.bounds.size.height/2);
+//            [cell addSubview:imgView];
+            
+            [cell addSubview:btnExchange];
+            btnExchange.center = CGPointMake(cell.bounds.size.width/2, cell.bounds.size.height/2);
             
         }else if(0 == indexPath.section && 1 == indexPath.row){
             CGRect tRect = CGRectMake(20, 0,200, TQV_HEIGHT);

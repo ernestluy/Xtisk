@@ -18,6 +18,7 @@
     NSMutableArray *allMyTicketArr;
     
     UILabel *labNoteNoData;
+    NSIndexPath *delIndexPath;
 }
 @end
 
@@ -34,9 +35,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
-    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStylePlain];
+    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
+//    tTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     tTableView.lyDelegate = self;
     [tTableView setNeedBottomFlush];
@@ -104,18 +106,18 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 1;
+    return allMyTicketArr.count;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return allMyTicketArr.count;
+    return 1;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return NO;
+    return YES;
     //    return NO;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -126,9 +128,9 @@
         
         //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-        TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
-        [allMyTicketArr removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.section];
+        delIndexPath = indexPath;
         [[[HttpService sharedInstance] getRequestDelMyTicketOrder:self orderIds:@[int2str(item.orderId)]]startAsynchronous];
         
     }
@@ -138,26 +140,25 @@
 {
     
     MyTicketsListTableViewCell * cell = (MyTicketsListTableViewCell*)[tv dequeueReusableCellWithIdentifier:kMyTicketsCellId];
-    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.section];
     [cell setData:item];
 //    cell.detailTextLabel.text = @"状态";
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
-//- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return NO;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 7;
-//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 8;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return DEFAULT_CELL_HEIGHT;
+//    return DEFAULT_CELL_HEIGHT;
+    return 70;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 0.5;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.5;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -165,7 +166,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MyTicketDetailViewController *tv = [[MyTicketDetailViewController alloc]init];
-    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.row];
+    TicketOrderListItem *item = [allMyTicketArr objectAtIndex:indexPath.section];
+    tv.payAction = TicketOrderDetailHis;
     tv.mOrderDetail = [MyTicketOrderDetail createMyTicketOrderDetailWithPerant:item];
     [self.navigationController pushViewController:tv animated:YES];
 }
@@ -216,6 +218,8 @@
                     NSLog(@"请求成功");
                     
                     [SVProgressHUD showSuccessWithStatus:@"成功删除" duration:DefaultRequestDonePromptTime];
+                    [tTableView deleteRowsAtIndexPaths:@[delIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+                    [tTableView reloadData];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }

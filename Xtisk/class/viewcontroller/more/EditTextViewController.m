@@ -40,7 +40,7 @@
     }else if (tType == PrivateEditTextCom){
         self.title = @"企业";
         self.tTextView.text = [SettingService sharedInstance].iUser.enterprise;
-        limitNum = 32;
+        limitNum = 26;
     }else if (tType == PrivateEditTextFoodCommend){
         self.title = @"评价";
         limitNum = 160;
@@ -94,12 +94,12 @@
             return;
         }
         
-        if (self.tTextView.text.length >limitNum) {
-            [SVProgressHUD showErrorWithStatus:@"太多啦，删几个字吧！" duration:2];
-            return;
-        }
+        
     }
-    
+    if (self.tTextView.text.length >limitNum) {
+        [SVProgressHUD showErrorWithStatus:@"太多啦，删几个字吧！" duration:2];
+        return;
+    }
     if (self.tDelegate &&  [self.tDelegate respondsToSelector:@selector(editTextDone:type:)]) {
         [self.tDelegate editTextDone:self.tTextView.text type:tType];
     }

@@ -12,9 +12,11 @@
 #import "ActivitySignUpViewController.h"
 #import "LoginViewController.h"
 #import "ComCommendViewController.h"
+#import "CommentPad.h"
 @interface ActivityDetailViewController ()
 {
     NSTimer *timer;
+    CommentPad *commentPad;
 }
 -(void)flushUIData;
 @end
@@ -63,6 +65,8 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(judgeTimeOut) userInfo:nil repeats:NO];
     [SVProgressHUD showWithStatus:@"正在加载..." ];
+    
+    commentPad = [[CommentPad alloc] init];
     
     
 }
@@ -160,8 +164,11 @@
     [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:tUrl];
     NSArray *tmpArr = @[UMShareToSina,UMShareToTencent,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite];
     NSString *shareText = @"热门活动";             //分享内嵌文字
-    UIImage *shareImage = [UIImage imageNamed:@"service_icon_near"];          //分享内嵌图片
-    
+//    UIImage *shareImage = [UIImage imageNamed:@"service_icon_near"];          //分享内嵌图片
+    UIImage *shareImage = [XTFileManager getTmpFolderFileWithUrlPath:self.mActivityItem.activityPic];
+    if (!shareImage) {
+        shareImage = [UIImage imageNamed:@"index_header_icon"];
+    }
     //调用快速分享接口
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UmengAppkey

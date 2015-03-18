@@ -194,7 +194,7 @@
             [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:@"http://code4app.com/"];
             NSArray *tmpArr = @[UMShareToSina,UMShareToTencent,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite];
             NSString *shareText = @"程序员最 傻逼 的事情就是：重复造轮子。我们不需要造轮子，我们应该将我们的聪明才智发挥到其他更 牛逼 的创意上去。所以，我们做了 Code4App。 http://code4app.com/";             //分享内嵌文字
-            UIImage *shareImage = [UIImage imageNamed:@"service_icon_near"];          //分享内嵌图片
+            UIImage *shareImage = [UIImage imageNamed:@"index_header_icon"];          //分享内嵌图片
             
             //调用快速分享接口
             [UMSocialSnsService presentSnsIconSheetView:self

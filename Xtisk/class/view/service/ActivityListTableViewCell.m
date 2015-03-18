@@ -13,6 +13,27 @@
 - (void)awakeFromNib {
     // Initialization code
     self.imgHeader.backgroundColor = _rgb2uic(0xf6f6f6, 1);
+    
+    self.imgBar.alpha = 0.3;
+    
+    
+}
+
+-(void)setData:(ActivityItem *)item{
+    self.labTitle.text = item.activityTitle;
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    NSString *tmpStr = item.activityTime;
+    if (tmpStr && tmpStr.length>10) {
+        tmpStr = [tmpStr substringToIndex:10];
+    }
+    
+    NSDate *date = [dateFormatter dateFromString:tmpStr];
+    NSString *strDate = [dateFormatter stringFromDate:date];
+    self.labTime.text = strDate;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

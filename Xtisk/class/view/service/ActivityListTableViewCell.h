@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ActivityItem.h"
 @interface ActivityListTableViewCell : UITableViewCell
 
 @property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
+@property(nonatomic,weak)IBOutlet UIImageView *imgBar;
+@property(nonatomic,weak)IBOutlet UILabel *labTitle;
+@property(nonatomic,weak)IBOutlet UILabel *labTime;
+
+-(void)setData:(ActivityItem *)item;
 @end

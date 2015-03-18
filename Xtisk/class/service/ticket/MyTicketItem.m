@@ -26,6 +26,8 @@
         ci.price = [[dic objectForKey:@"price"] floatValue];
         ci.getId = [dic objectForKey:@"getId"];
         
+        ci.keyTicket = [NSString stringWithFormat:@"%@%@%@",ci.ticketInfo,ci.ticketPosition,ci.type];
+        
         [mArr addObject:ci];
     }
     return mArr;

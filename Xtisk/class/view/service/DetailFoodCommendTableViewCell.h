@@ -17,11 +17,14 @@
  "storeId": "166"
  }
  */
-@interface DetailFoodCommendTableViewCell : UITableViewCell
+@interface DetailFoodCommendTableViewCell : UITableViewCell{
+    CommentsItem *item;
+}
 
 @property(nonatomic,weak)IBOutlet UILabel *labName;
 @property(nonatomic,weak)IBOutlet UILabel *labContent;
 @property(nonatomic,weak)IBOutlet UILabel *labTime;
 -(void)setDataWith:(CommentsItem *)ci;
+-(int)getCellHeight;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface TicketOrderEditViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,UITextFieldDelegate>
+#import "UPPayPluginDelegate.h"
+@interface TicketOrderEditViewController : SecondaryViewController<UPPayPluginDelegate,UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,UITextFieldDelegate>
 
 @end

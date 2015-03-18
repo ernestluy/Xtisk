@@ -12,9 +12,7 @@
 #import "ActivityDetailViewController.h"
 
 //活动状态，返回中文“进行中”、“已结束”、“未开始”
-#define AcStatusIng @"进行中"
-#define AcStatusEnd @"已结束"
-#define AcStatusNoBegin @"未开始"
+
 
 #define TheCellId  @"cell"
 @interface MyActivityViewController ()
@@ -32,6 +30,12 @@
     
     NSIndexSet *tIndexSet;
     NSIndexPath *tIndexPath;
+    
+    BOOL isEdit;
+    
+    NSMutableDictionary *mutableDic;
+    
+    UIButton *btnDel;
 }
 @end
 
@@ -45,11 +49,14 @@
     self.title = @"我的活动";
     self.view.backgroundColor = [UIColor whiteColor];
     btnArr = [[NSMutableArray alloc]init];
+    mutableDic = [NSMutableDictionary dictionary];
+    
     CGRect bounds = [UIScreen mainScreen].bounds;
     NSArray *btnTitleArr = @[@"全部",@"未开始",@"进行中",@"已结束"];
     int btnW = bounds.size.width / btnTitleArr.count;
     int btnH = 40;
     int lineHeight = 20;
+    isEdit = NO;
     for (int i = 0; i<btnTitleArr.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:[btnTitleArr objectAtIndex:i] forState:UIControlStateNormal];
@@ -76,7 +83,7 @@
     [self.view addSubview:iv];
     
     int tableHeight = bounds.size.height - 64 - btnH;
-    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, btnH, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
+    tTableView = [[LYTableView alloc]initWithFrame:CGRectMake(0, 40, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
     tTableView.delegate = self;
     tTableView.dataSource = self;
     
@@ -113,12 +120,23 @@
 //    已结束 bcbcbc
 //    未开始 4ad02a
     
+    btnDel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnDel addTarget:self action:@selector(deleteActivity:) forControlEvents:UIControlEventTouchUpInside];
+    [btnDel setTitle:@"删   除" forState:UIControlStateNormal];
+    btnDel.titleLabel.textColor = [UIColor whiteColor];
+    btnDel.frame = CGRectMake(0, btnH + tableHeight - 50, bounds.size.width, 50);
+    btnDel.backgroundColor = _rgb2uic(0xda3908, 1);
+    [self.view addSubview:btnDel];
+    btnDel.hidden = YES;
+    
     
     labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
     labNoteNoData.text = @"暂无数据";
     labNoteNoData.font = [UIFont systemFontOfSize:14];
     labNoteNoData.textColor = defaultTextColor;
     labNoteNoData.textAlignment = NSTextAlignmentCenter;
+    
+    self.view.backgroundColor = tTableView.backgroundColor;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -137,15 +155,46 @@
     [tTableView upToStartFlush];
 }
 
+-(void)deleteActivity:(id)sender{
+    NSLog(@"deleteActivity");
+    NSArray *ids = mutableDic.allValues;
+    if (ids.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"未选择要删除的活动" duration:DefaultRequestDonePromptTime];
+        return;
+    }
+    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [[[HttpService sharedInstance] getRequestDelMyActivitys:self activityIds:ids]startAsynchronous];
+}
+
 -(void)doneDelete:(id)sender{
     NSLog(@"doneDelete");
     [self.navigationItem setRightBarButtonItem:delItem];
-    [tTableView setEditing:NO];
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    tTableView.frame = CGRectMake(0, 40, bounds.size.width, bounds.size.height - 64 - 40);
+    btnDel.hidden = YES;
+    
+    isEdit = NO;
+    [mutableDic removeAllObjects];
+    [tTableView reloadData];
+    
 }
 -(void)toDelete:(id)sender{
     NSLog(@"toDelete");
     [self.navigationItem setRightBarButtonItem:doneItem];
-    [tTableView setEditing:YES];
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    tTableView.frame = CGRectMake(0, 40, bounds.size.width, bounds.size.height - 64 - 40 - 50);
+    btnDel.hidden = NO;
+    CGRect tmpRect = btnDel.frame;
+    btnDel.frame = CGRectMake(tmpRect.origin.x, tmpRect.origin.y + tmpRect.size.height, tmpRect.size.width, tmpRect.size.height);
+    [UIView animateWithDuration:0.25 animations:^{
+        btnDel.frame = tmpRect;
+        NSLog(@"");
+    }];
+    isEdit = YES;
+    [tTableView reloadData];
+//    [tTableView setEditing:YES];
 }
 -(void)actListAction:(id)sender{
     NSLog(@"actListAction");
@@ -168,12 +217,33 @@
         default:
             break;
     }
+    [self.navigationItem setRightBarButtonItem:delItem];
+    
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    tTableView.frame = CGRectMake(0, 40, bounds.size.width, bounds.size.height - 64 - 40);
+    btnDel.hidden = YES;
+    
+    [mutableDic removeAllObjects];
+    isEdit = NO;
     curPage = 1;
     [allMyActivityArr removeAllObjects];
     [self flushUI];
     [self requestData];
 }
 
+-(void)delSelectAction:(UIButton *)btn{
+    NSLog(@"delSelectAction");
+    MyActivity *ma = [allMyActivityArr objectAtIndex:btn.tag];
+    MyActivityTableViewCell * cell = (MyActivityTableViewCell*)[tTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:btn.tag]];
+    NSObject *tmpo = [mutableDic objectForKey:int2str(ma.activityId)];
+    if (tmpo) {
+        cell.btnSelect.selected = NO;
+        [mutableDic removeObjectForKey:int2str(ma.activityId)];
+    }else{
+        cell.btnSelect.selected = YES;
+        [mutableDic setObject:int2str(ma.activityId) forKey:int2str(ma.activityId)];
+    }
+}
 
 -(void)flushUI{
     if (allMyActivityArr.count == 0) {
@@ -226,21 +296,15 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (selectedIndex == 1 || selectedIndex == 2) {
-//        return NO;
-//    }
-//    if (selectedIndex == 3) {
-//        return YES;
-//    }
-//    if (0 == selectedIndex) {
-//        
-//        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-//        if ([ma.status isEqualToString:AcStatusEnd]) {
-//            return YES;
-//        }else{
-//            return NO;
-//        }
-//    }
+    if (0 == selectedIndex) {
+        
+        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+        if ([ma.status isEqualToString:AcStatusEnd]) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }
     return YES;
 //    return NO;
 }
@@ -269,7 +333,20 @@
     MyActivityTableViewCell * cell = (MyActivityTableViewCell*)[tv dequeueReusableCellWithIdentifier:TheCellId];
 
     MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+    cell.btnSelect.tag = indexPath.section;
+    [cell.btnSelect addTarget:self action:@selector(delSelectAction:) forControlEvents:UIControlEventTouchUpInside];
     [cell setData:ma];
+    
+    [cell setIsDeleting:isEdit];
+    NSObject *tmpo = [mutableDic objectForKey:int2str(ma.activityId)];
+    if (tmpo) {
+        cell.btnSelect.selected = YES;
+    }else{
+        cell.btnSelect.selected = NO;
+    }
+    
+    
+    
     return cell;
 }
 

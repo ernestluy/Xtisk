@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -17,14 +17,34 @@
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="pMo-2h-fKb">
                         <rect key="frame" x="10" y="5" width="300" height="120"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="fCy-e9-9v2">
+                        <rect key="frame" x="10" y="105" width="300" height="20"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYx-id-XRv">
+                        <rect key="frame" x="202" y="106" width="105" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vtq-30-mxv">
+                        <rect key="frame" x="14" y="106" width="183" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgBar" destination="fCy-e9-9v2" id="iul-Gc-OjW"/>
                 <outlet property="imgHeader" destination="pMo-2h-fKb" id="ci0-Um-C83"/>
+                <outlet property="labTime" destination="hYx-id-XRv" id="V8d-EA-HM0"/>
+                <outlet property="labTitle" destination="Vtq-30-mxv" id="dgZ-ZV-cMH"/>
             </connections>
+            <point key="canvasLocation" x="334" y="220"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="down_img.png" width="64" height="64"/>
+        <image name="line_black.png" width="1" height="1"/>
     </resources>
 </document>

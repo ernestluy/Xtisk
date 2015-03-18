@@ -597,6 +597,23 @@ static HttpService *httpServiceInstance = nil;
     [request setRequestMethod:@"POST"];
     return request;
 }
+-(AsyncHttpRequest *)getRequestDelMyActivitys:(id<AsyncHttpRequestDelegate>)delegate  activityIds:(NSArray *)ids{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/user/delMyActivity",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_DEL_MYACTIVITY];
+    
+    NSMutableString *mContentStr = [NSMutableString string];
+    [mContentStr appendString:@"activityId="];
+    for (int i = 0; i<ids.count; i++) {
+        [mContentStr appendFormat:@"%@,",[ids objectAtIndex:i]];
+    }
+    NSData *data = [Util strToData:mContentStr];
+    [request appendPostData:data];
+    [request setRequestMethod:@"POST"];
+    return request;
+}
+
 
 #pragma mark - 4.3.5.1 获取航线列表
 -(AsyncHttpRequest *)getRequestQueryShipLine:(id<AsyncHttpRequestDelegate>)delegate{

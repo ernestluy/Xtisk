@@ -19,9 +19,13 @@
 }
 
 -(void)clearData{
+    
     self.orderNum1 = 0;
     self.orderNum2 = 0;
     self.orderNum3 = 0;
+    if ([@"121" isEqualToString:self.SEATRANKID]) {
+        self.orderNum1 = 1;
+    }
 }
 
 +(NSArray *)getSeatRankPricesWithArr:(NSArray *)arr{

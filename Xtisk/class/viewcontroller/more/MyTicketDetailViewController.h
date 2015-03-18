@@ -8,7 +8,9 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface MyTicketDetailViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate>
+#import "UPPayPluginDelegate.h"
+@interface MyTicketDetailViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate,AsyncHttpRequestDelegate,UPPayPluginDelegate>
 
 @property(nonatomic,strong) MyTicketOrderDetail *mOrderDetail;
+@property(nonatomic) TicketOrderDetailAction payAction;
 @end

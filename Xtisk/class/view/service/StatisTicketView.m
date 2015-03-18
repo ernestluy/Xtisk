@@ -79,14 +79,20 @@
     lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
     lab.font = tFont;
     [self addSubview:lab];
-    lab.text = [NSString stringWithFormat:@"合计:￥%0.1f",toTotalPrice];
+    lab.text = @"合计:";
+    NSString *strValue = [NSString stringWithFormat:@"￥%0.1f",toTotalPrice];
+    lab = [[UILabel alloc]initWithFrame:CGRectMake(startX + [lab.text sizeWithFont:lab.font].width + 5, startY, labWidth, labHeight)];
+    lab.font = tFont;
+    [self addSubview:lab];
+    lab.text = strValue;
+    lab.textColor = [UIColor redColor];
     startY += labHeight;
     
     
     if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType){
         UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, detailY, 30, startY - detailY)];
         labQh.backgroundColor = headerColor;
-        labQh.text = @"起航";
+        labQh.text = @"启程";
         labQh.font = [UIFont systemFontOfSize:13];
         labQh.textColor = [UIColor whiteColor];
         labQh.textAlignment = NSTextAlignmentCenter;
@@ -149,13 +155,19 @@
         lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
         lab.font = tFont;
         [self addSubview:lab];
-        lab.text = [NSString stringWithFormat:@"合计:￥%0.1f",toTotalPrice];
+        lab.text = @"合计:";
+        NSString *strValue = [NSString stringWithFormat:@"￥%0.1f",toTotalPrice];
+        lab = [[UILabel alloc]initWithFrame:CGRectMake(startX + [lab.text sizeWithFont:lab.font].width + 5, startY, labWidth, labHeight)];
+        lab.font = tFont;
+        [self addSubview:lab];
+        lab.text = strValue;
+        lab.textColor = [UIColor redColor];
         startY += labHeight;
         
         {
             UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, iScale, 30, startY - iScale)];
             labQh.backgroundColor = headerColor;
-            labQh.text = @"返航";
+            labQh.text = @"返程";
             labQh.font = [UIFont systemFontOfSize:13];
             labQh.textColor = [UIColor whiteColor];
             labQh.textAlignment = NSTextAlignmentCenter;

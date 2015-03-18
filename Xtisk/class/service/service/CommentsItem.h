@@ -16,4 +16,6 @@
 @property(nonatomic,copy)NSString *storeId;//	String	否	评论所属店铺ID
 @property(nonatomic,copy)NSString *userName;//	String	否	评论者账号
 +(NSArray *)getCommentsItemsWithArr:(NSArray *)arr;
+
+-(int)getCellHeight;
 @end

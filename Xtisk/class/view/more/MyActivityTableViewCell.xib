@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -51,19 +51,28 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RC-ZV-p7I">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="270" maxY="0.0"/>
+                        <state key="normal" image="cell_del_no_select.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnDetail" destination="ke9-ei-rxy" id="KIp-iG-7b7"/>
+                <outlet property="btnSelect" destination="1RC-ZV-p7I" id="Fgt-5O-Ef3"/>
                 <outlet property="labAcLast" destination="Qe8-gz-Isz" id="Qwo-vu-TWb"/>
                 <outlet property="labSignUpTime" destination="2Bd-78-TTo" id="ZjV-Tn-edQ"/>
                 <outlet property="labStatus" destination="iCh-GY-NrY" id="Hlf-pQ-kJ3"/>
                 <outlet property="labTitle" destination="caB-aS-ZMN" id="rcp-Qr-f6M"/>
             </connections>
-            <point key="canvasLocation" x="354" y="155"/>
+            <point key="canvasLocation" x="354" y="154"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cell_del_no_select.png" width="17" height="18"/>
         <image name="line_gray.png" width="1" height="1"/>
         <image name="right_arrow_gray.png" width="9" height="15"/>
     </resources>

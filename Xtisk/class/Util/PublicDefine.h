@@ -50,6 +50,7 @@
 #import "MyTicketItem.h"
 #import "MyTicketOrderDetail.h"
 #import "TicketOrderListItem.h"
+#import "TicketTradeInfo.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关
@@ -228,6 +229,12 @@ typedef enum  {
     TicketVoyageStepSecond
 }TicketVoyageStepType ;
 
+typedef enum  {
+    TicketOrderDetailDelfault = 0,
+    TicketOrderDetailSeq,
+    TicketOrderDetailHis
+}TicketOrderDetailAction ;
+
 
 #define IshekouWXAppId     @"wxd930ea5d5a258f4f"
 #define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
@@ -271,3 +278,49 @@ typedef enum  {
 #define UP_DRAG_FLUSH_NORMAL @"下拉可以刷新"
 #define UP_DRAG_FLUSH_WILL_START @"下拉可以刷新"
 #define UP_DRAG_FLUSH_DOING @"正在刷新中"
+
+#define iMinIndex 16
+
+
+//uppay
+#define KBtn_width        200
+#define KBtn_height       80
+#define KXOffSet          (self.view.frame.size.width - KBtn_width) / 2
+#define KYOffSet          80
+#define kCellHeight_Normal  50
+#define kCellHeight_Manual  145
+
+#define kVCTitle          @"商户测试"
+#define kBtnFirstTitle    @"获取订单，开始测试"
+#define kWaiting          @"正在获取TN,请稍后..."
+#define kNote             @"提示"
+#define kConfirm          @"确定"
+#define kErrorNet         @"网络错误"
+#define kResult           @"支付结果：%@"
+
+//success、fail、cancel
+#define PaySuccess @"success"
+#define PayFail    @"fail"
+#define PayCancel  @"cancel"
+
+#define kMode_Development             @"01"
+#define kMode_Product                 @"00"
+
+
+#define AcStatusIng     @"进行中"
+#define AcStatusEnd     @"已结束"
+#define AcStatusNoBegin @"未开始"
+
+#define listColorIng     _rgb2uic(0xe24242, 1)
+#define listColorEnd     _rgb2uic(0xb0b0b0, 1)
+#define listColorNoBegin _rgb2uic(0x2bf147, 1)
+
+//f54d12
+#define listColorPayIng     _rgb2uic(0xf54d12, 1)
+#define listColorPayOk     _rgb2uic(0x4ad02a, 1)
+#define listColorPayOver     _rgb2uic(0xa9a9a9, 1)
+
+#define tagWaitToPay  0
+
+
+

@@ -25,5 +25,9 @@
 
 + (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize;
 
+-(NSString *)getTradeStatus:(int)tag;
 
++(CGRect)getFrameWithX:(CGRect)r x:(int)x;
+
++(CGSize) sizeForString:(NSString *)value fontSize:(float)pFontSize andWidth:(float)width;
 @end
