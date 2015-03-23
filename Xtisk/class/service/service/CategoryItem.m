@@ -20,6 +20,7 @@
         NSDictionary *dic = [arr objectAtIndex:i];
         ci.categoryId = [[dic objectForKey:@"categoryId"] longValue];
         ci.categoryName = [dic objectForKey:@"categoryName"];
+        ci.valid = [[dic objectForKey:@"valid"] boolValue];
         
         NSDictionary *imgDic = [dic objectForKey:@"categoryImageUrl"];
         if (imgDic) {
@@ -40,9 +41,10 @@
         return nil;
     }
     CategoryItem * ci = [[CategoryItem alloc]init];
-    ci.categoryId = [dic objectForKey:@"categoryId"];
+    ci.categoryId = [[dic objectForKey:@"categoryId"] longValue];
     ci.categoryName = [dic objectForKey:@"categoryName"];
     ci.categoryImageUrl = [dic objectForKey:@"categoryImageUrl"];
+    ci.valid = [[dic objectForKey:@"valid"] boolValue];
     NSArray *tmpArr = [dic objectForKey:@"childList"];
     if (tmpArr && [tmpArr isKindOfClass:[NSArray class]]) {
         ci.childList = [CategoryItem getCategoryItemsWithArr:tmpArr];

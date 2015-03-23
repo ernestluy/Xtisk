@@ -71,7 +71,7 @@
     }else{
         [self loadLocalFile:self.tUrl];
     }
-    
+    NSLog(@"self.tUrl:%@",self.tUrl);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

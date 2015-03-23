@@ -211,13 +211,13 @@
         return NO;
     }
     
-    if (tfTel.text.length == 0||tfTel.text.length>50) {
-        [SVProgressHUD showErrorWithStatus:@"手机号码格式不对" duration:2];
+    if (tfTel.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"手机号码不能为空" duration:2];
         return NO;
     }
     
-    if (tfEmail.text.length == 0 ||tfEmail.text.length>100) {
-        [SVProgressHUD showErrorWithStatus:@"邮箱格式不对" duration:2];
+    if (tfEmail.text.length == 0) {// ||tfEmail.text.length>100
+        [SVProgressHUD showErrorWithStatus:@"邮箱不能为空" duration:2];
         return NO;
     }
     

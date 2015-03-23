@@ -192,6 +192,10 @@
     self.tIndexPath = indexPath;
 
     CategoryItem *tCategoryItem = [self.categoryItem.childList objectAtIndex:indexPath.row];
+    if (!tCategoryItem.valid) {
+        //不开放的类型
+        return;
+    }
     if (tCategoryItem.childList && tCategoryItem.childList.count>0) {
         ServiceMenuComViewController *smc = [[ServiceMenuComViewController alloc] initWithLevel:ServiceNode title:tCategoryItem.categoryName];
         smc.categoryItem = tCategoryItem;

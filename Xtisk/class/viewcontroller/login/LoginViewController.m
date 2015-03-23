@@ -298,7 +298,7 @@ typedef enum  {
 
 -(void)regDeviceToken{
     if ([SettingService sharedInstance].deviceToken) {
-        [[[HttpService sharedInstance] getRequestUploadDeviceId:self token:[SettingService sharedInstance].deviceToken]startAsynchronous];
+        [[[HttpService sharedInstance] getRequestUploadDeviceId:nil token:[SettingService sharedInstance].deviceToken]startAsynchronous];
     }
 }
 
@@ -401,6 +401,7 @@ typedef enum  {
             tf_name.clearButtonMode = YES;
             tf_name.delegate = self;
             tf_name.backgroundColor = [UIColor clearColor];
+            [tf_name addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             [cell addSubview:tf_name];
             if (lastLogAcc) {
                 tf_name.text = lastLogAcc.account;
@@ -453,6 +454,7 @@ typedef enum  {
             tf_password.clearButtonMode = YES;
             tf_password.delegate = self;
             tf_password.backgroundColor = [UIColor clearColor];
+            [tf_password addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             [cell addSubview:tf_password];
             
             if (lastLogAcc) {
@@ -551,6 +553,24 @@ typedef enum  {
     }
     return YES;
 }
+/*
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (range.location >= 40)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+ */
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField.text.length > 40) {
+        textField.text = [textField.text substringToIndex:40];
+    }
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 //    [lTableView scrollRectToVisible:self.view.frame animated:YES];//只对UITableViewController起作用
     nowTextField = textField;

@@ -34,7 +34,7 @@
 -(void)dealloc{
     NSLog(@"MessageListViewController dealloc");
     [[NSNotificationCenter defaultCenter]postNotificationName:kPushMessageFlush object:nil];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

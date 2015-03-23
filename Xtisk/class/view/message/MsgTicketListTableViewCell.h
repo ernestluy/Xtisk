@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyTicketOrderDetail.h"
 @interface MsgTicketListTableViewCell : UITableViewCell
 
 
@@ -16,4 +16,6 @@
 @property(nonatomic,weak)IBOutlet UILabel *labPayTime;
 @property(nonatomic,weak)IBOutlet UILabel *labLine;
 @property(nonatomic,weak)IBOutlet UILabel *labRemind;
+
+-(void)setData:(MyTicketOrderDetail*)order;
 @end

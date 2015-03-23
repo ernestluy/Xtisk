@@ -56,9 +56,16 @@
     [self setNeedsDisplay];
     
     [topView addSubview:self];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-    [self addGestureRecognizer:tap];
-    self.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+//    [self addGestureRecognizer:tap];
+//    self.userInteractionEnabled = YES;
+    
+    UIButton *btnDismiis = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnDismiis.frame = self.bounds;
+    btnDismiis.backgroundColor = [UIColor clearColor];
+    [btnDismiis addTarget:self action:@selector(btnDismiss) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btnDismiis];
+    [self sendSubviewToBack:btnDismiis];
     
     self.alpha = 0.f;
     self.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
@@ -132,6 +139,15 @@
 
 - (void)tapped:(UITapGestureRecognizer *)tap
 {
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(popoverView:)]) {
+            [self.delegate performSelector:@selector(popoverView:) withObject:self];
+        }
+    }
+    [self dismiss];
+}
+
+-(void)btnDismiss{
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(popoverView:)]) {
             [self.delegate performSelector:@selector(popoverView:) withObject:self];

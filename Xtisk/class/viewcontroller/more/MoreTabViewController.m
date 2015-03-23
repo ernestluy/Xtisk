@@ -23,6 +23,7 @@
 #import "GeocodeDemoViewController.h"
 #import "MyActivityViewController.h"
 #import "MyTicketViewController.h"
+#import "LogViewerController.h"
 #define MORE_HEIGHT 44.0
 #define REQUEST_HEADER_TAG 88
 @interface MoreTabViewController ()
@@ -65,7 +66,22 @@
         self.tTableView.tableHeaderView = outHeaderView;
     }
     
+    
+    
+//    UILongPressGestureRecognizer * longPressGr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showLogView)];
+//    longPressGr.minimumPressDuration = 3.0;
+//    [self.view addGestureRecognizer:longPressGr];
+    
+    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLogView)];
+    pan.numberOfTapsRequired  = 4;
+    [self.view addGestureRecognizer:pan];
 }
+
+-(void)showLogView{
+    LogViewerController *lv = [[LogViewerController alloc]init] ;
+    [self.navigationController pushViewController:lv animated:YES];
+}
+
 -(void)toLogin:(id)sender{
     LoginViewController *lv = [[LoginViewController alloc]init];
     [self.navigationController pushViewController:lv animated:YES];
@@ -81,6 +97,8 @@
         
         //判断头像是否已经下载
         if (tUser.headImageUrl && tUser.headImageUrl.length >3) {
+            inHeaderView.inImageHead.layer.masksToBounds = YES;
+            inHeaderView.inImageHead.layer.cornerRadius = inHeaderView.inImageHead.frame.size.width/2;
             UIImage *tImg = [XTFileManager getDocFolderFileWithUrlPath:tUser.headImageUrl];
             if (!tImg) {
                 AsyncImgDownLoadRequest *request = [[HttpService sharedInstance] getImgRequest:self url:tUser.headImageUrl];
@@ -88,8 +106,7 @@
                 [request startAsynchronous];
             }else{
                 inHeaderView.inImageHead.contentMode = DefaultImageViewContentMode;
-                inHeaderView.inImageHead.layer.masksToBounds = YES;
-                inHeaderView.inImageHead.layer.cornerRadius = inHeaderView.inImageHead.frame.size.width/2;
+                
                 inHeaderView.inImageHead.image = tImg;
             }
         }
@@ -143,7 +160,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 6;
+    return 10;
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, MORE_HEIGHT)];

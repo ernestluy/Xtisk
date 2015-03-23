@@ -15,6 +15,7 @@
 #import "BadgeView.h"
 #import "MessageListTableViewCell.h"
 #import "MessageDBManager.h"
+#import "TicketQueryViewController.h"
 #define MSG_TAB_HEIGHT 50.0
 #define kCell @"kCell"
 @interface MessageTabViewController ()
@@ -76,19 +77,10 @@
     
 //    NSString *identifier = [NSString stringWithFormat:@"cell%d_%d",(int)indexPath.section,(int)indexPath.row];
     MessageListTableViewCell * cell = (MessageListTableViewCell*)[tv dequeueReusableCellWithIdentifier:kCell];
-//    if (cell ==nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-////        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        cell.textLabel.textColor = defaultTextColor;
-//    }
-    
+
     
     if (0 == indexPath.section) {
-//        cell.imageView.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
-//        cell.textLabel.text = @"i蛇口";
-//        BadgeView *bView = [[BadgeView alloc]initWithFrame:CGRectMake(100, 10, 18, 18)];
-//        [cell addSubview:bView];
-//        [bView setTnum:0];
+
         cell.imgViewHeader.image = [UIImage imageNamed:@"msg_ishekou_cell_icon"];
         cell.labTitle.text = @"i蛇口";
         int unReadMsg = [DBManager queryCountUnReadMsgWithAccount:[SettingService sharedInstance].iUser.phone];
@@ -99,7 +91,7 @@
             cell.labTime.text = item.dateCreate;
         }else{
             cell.labTime.text = @"";
-            cell.labMsg.text = @"";
+            cell.labMsg.text = @"hi，亲爱的小伙伴，欢迎使用i蛇口！";
         }
     }else if(1 == indexPath.section){
         NSArray *titleArr2 = @[@"船票",@"园区活动"];
@@ -107,11 +99,32 @@
         cell.imgViewHeader.image = [UIImage imageNamed:[imgArr2 objectAtIndex:indexPath.row]];
         cell.labTitle.text = [titleArr2 objectAtIndex:indexPath.row];
         [cell.badgeView setTnum:0];
-        if (0 == indexPath.row) {
-            [cell.badgeView setTnum:[SettingService sharedInstance].badgeTicket];
-        }
         cell.labTime.text = @"";
         cell.labMsg.text = @"";
+        if (0 == indexPath.row) {
+            [cell.badgeView setTnum:[SettingService sharedInstance].badgeTicket];//[SettingService sharedInstance].badgeTicket
+            if ([TicketSerivice sharedInstance].arrOrderSuc.count > 0) {
+                MyTicketOrderDetail *od = [[TicketSerivice sharedInstance].arrOrderSuc lastObject];
+                if (od.orderTime && od.orderTime.length>10) {
+                    cell.labTime.text = [od.orderTime substringToIndex:10];
+                }else{
+                    cell.labTime.text = od.orderTime;
+                }
+                if (od.ticketList.count > 0) {
+                    MyTicketItem *item = [od.ticketList objectAtIndex:0];
+                    cell.labMsg.text = item.ticketInfo;
+                }
+                
+            }else{
+                //您还没有买过船票呢，现在就去买？
+                cell.labMsg.text = @"您还没有买过船票呢，现在就去买？";
+            }
+            
+            
+        }else if(1 == indexPath.row){
+            cell.labMsg.text = @"点击查看更多精彩活动！";
+        }
+        
     }
     return cell;
 }
@@ -139,8 +152,15 @@
         [self.navigationController pushViewController:mc animated:YES];
     }
     if (1 == indexPath.section &&  0 == indexPath.row) {
-        MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];
-        [self.navigationController pushViewController:mt animated:YES];
+        if ([TicketSerivice sharedInstance].arrOrderSuc.count > 0) {
+            [SettingService sharedInstance].badgeTicket = 0;
+            MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];
+            [self.navigationController pushViewController:mt animated:YES];
+        }else{
+            //您还没有买过船票呢，现在就去买？
+            TicketQueryViewController *mc = [[TicketQueryViewController alloc] init];
+            [self.navigationController pushViewController:mc animated:YES];
+        }
     }else if(1 == indexPath.section &&  1 == indexPath.row){
         ActivityViewController *ac = [[ActivityViewController alloc]init];
         [self.navigationController pushViewController:ac animated:YES];

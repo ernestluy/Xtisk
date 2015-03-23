@@ -20,6 +20,7 @@
 
 -(void)setCode:(NSString *)code res:(BOOL)b{
     self.labCode.textColor = _rgb2uic(0xef5e56, 1);
+    self.labReuslt.textColor = _rgb2uic(0xef5e56, 1);
     if (!b) {
         self.labCode.text = code;
         self.lab1.text = @"对不起！您的订单";
@@ -27,8 +28,8 @@
         self.imgViewRes.image = [UIImage imageNamed:@"upay_fail"];
     }else{
         self.labCode.text = code;
-        self.lab1.text = @"恭喜！您的订单";
-        self.labReuslt.text = @"已经支付成功";
+        self.lab1.text = @"恭喜您！订单支付成功";
+        self.labReuslt.text = @"(取票时请出示)";
         self.imgViewRes.image = [UIImage imageNamed:@"upay_success"];
     }
 }

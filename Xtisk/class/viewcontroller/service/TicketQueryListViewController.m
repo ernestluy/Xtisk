@@ -179,12 +179,44 @@
     NSDate *tDate = [tFormatter dateFromString:strDate];
     switch (btn.tag) {
         case 0:{//前一天
-            NSDate *lastDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] - 24*3600)];
+            NSDate *lastDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] - OneDaySeconds)];
+            if (tStep == TicketVoyageStepFirst) {
+                NSComparisonResult r = [[TicketSerivice sharedInstance].tMinDate compare:lastDate];
+                if (NSOrderedDescending == r) {
+                    [SVProgressHUD showErrorWithStatus:@"不能购买该日期船票，不在订票日期范围内" duration:2];
+                    return;
+                }
+            }else if(tStep == TicketVoyageStepSecond){
+                NSDate *toDate = [tFormatter dateFromString:[TicketSerivice sharedInstance].fromDate];
+                NSComparisonResult r = [toDate compare:lastDate];
+                if (NSOrderedDescending == r) {
+                    [SVProgressHUD showErrorWithStatus:@"返程票时间不能早于启程票" duration:2];
+                    return;
+                }
+            }
+            
             strDate = [tFormatter stringFromDate:lastDate];
             break;
         }
         case 2:{//后一天
-            NSDate *nextDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] + 24*3600)];
+            NSDate *nextDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([tDate timeIntervalSinceReferenceDate] + OneDaySeconds)];
+            
+            NSComparisonResult r = [[TicketSerivice sharedInstance].tMaxDate compare:nextDate];
+            if (NSOrderedAscending == r) {
+                [SVProgressHUD showErrorWithStatus:@"不能购买该日期船票，不在订票日期范围内" duration:2];
+                return;
+            }
+            
+            //判断，如果启航日期的下一天大于返航日期则更改返航日期
+            if (tStep == TicketVoyageStepFirst) {
+                NSDate *rDate = [tFormatter dateFromString:[TicketSerivice sharedInstance].returnDate];
+                NSComparisonResult r = [nextDate compare:rDate];
+                if (NSOrderedDescending == r) {
+                    [TicketSerivice sharedInstance].returnDate = [tFormatter stringFromDate:nextDate];
+                }
+            }
+            
+            
             strDate = [tFormatter stringFromDate:nextDate];
             break;
         }

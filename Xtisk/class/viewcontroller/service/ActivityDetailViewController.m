@@ -115,8 +115,11 @@
     
     if (self.mActivityItem.isFavorite) {
         [self.btnPraise setImage:[UIImage imageNamed:@"heart_good_yes"] forState:UIControlStateNormal];
+        [self.btnPraise setTitleColor:_rgb2uic(0xed4d1c, 1) forState:UIControlStateNormal];
     }else{
         [self.btnPraise setImage:[UIImage imageNamed:@"heart_good_no"] forState:UIControlStateNormal];
+        //_rgb2uic(0x808080, 1)
+        [self.btnPraise setTitleColor:defaultTextGrayColor forState:UIControlStateNormal];
     }
     
     //是否允许评论

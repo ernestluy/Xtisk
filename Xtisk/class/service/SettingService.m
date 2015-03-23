@@ -15,7 +15,7 @@ static SettingService *settingServiceInstance = nil;
 -(void)setLoginJSessionid;
 @end
 @implementation SettingService
-@synthesize account,user,token,psd,key,orgId,JSESSIONID;
+@synthesize account,user,token,psd,key,orgId,JSESSIONID,filterSelectedIndex;
 +(SettingService *)sharedInstance{
     if (!settingServiceInstance) {
         @synchronized([SettingService class]){
@@ -29,6 +29,7 @@ static SettingService *settingServiceInstance = nil;
 -(id)init{
     self = [super init];
     _mapManager = nil;
+    filterSelectedIndex = 0;
     return self;
 }
 

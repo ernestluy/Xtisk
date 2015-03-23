@@ -40,6 +40,8 @@
     UIButton *btnOrder;
     
     UIButton *btnExchange;
+    
+    UIView *dateSelectView;
 }
 
 -(void)flushUI;
@@ -65,11 +67,17 @@
     CGRect tRect = [UIScreen mainScreen].bounds;
     startPicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, (tRect.size.height - 216)/2, tRect.size.width, 216)];
     startPicker.datePickerMode = UIDatePickerModeDate;
+    startPicker.minimumDate = [TicketSerivice sharedInstance].tMinDate;
+    startPicker.maximumDate = [TicketSerivice sharedInstance].tMaxDate;
     [startPicker addTarget:self action:@selector(updateStart) forControlEvents:UIControlEventValueChanged];
+    
+    
     
     endPicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, (tRect.size.height - 216)/2, 240, 216)];
     endPicker.datePickerMode = UIDatePickerModeDate;
     [endPicker addTarget:self action:@selector(updateEnd) forControlEvents:UIControlEventValueChanged];
+    endPicker.minimumDate = [TicketSerivice sharedInstance].tMinDate;
+    endPicker.maximumDate = [TicketSerivice sharedInstance].tMaxDate;
     
     int itemWidth = 80;
     segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"单程",@"往返"]];
@@ -155,12 +163,11 @@
     btnExchange.frame = CGRectMake(40, 0, 30, 30);
     [btnExchange setImage:[UIImage imageNamed:@"ticket_switch"] forState:UIControlStateNormal];
     [btnExchange addTarget:self action:@selector(exChange:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [[TicketSerivice sharedInstance] clearData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [TicketSerivice sharedInstance].ticketQueryType = TICKET_QUERY_ONE;
     self.title = @"船票查询";
     if (![TicketSerivice sharedInstance].allShipLines) {
         NSArray *tmpArr = [[NSArray alloc]initWithContentsOfFile:PathDocFile(ShipLineList)];
@@ -281,6 +288,22 @@
         }
         case TICKET_QUERY_RETURN:{
             [tTableView reloadData];
+            
+            if ( TICKET_QUERY_RETURN == ticketDirType) {
+                NSDate *startDate = [queryDateFormatter dateFromString:labelStartTime.text];
+                NSDate *endDate = [queryDateFormatter dateFromString:labelEndTime.text];
+                
+                endPicker.minimumDate = startDate;
+                
+                NSComparisonResult r = [startDate compare:endDate];
+                if (NSOrderedDescending == r) {
+                    //前往时间较大，要修改返程时间
+                    labelEndTime.text = labelStartTime.text;
+                }else if (NSOrderedAscending == r){
+                    //时间顺序对，不做修改
+                }
+            }
+            
             break;
         }
         default:
@@ -289,6 +312,23 @@
 }
 -(void)updateStart{
     labelStartTime.text = [queryDateFormatter stringFromDate:startPicker.date];
+    
+    if ( TICKET_QUERY_RETURN == ticketDirType) {
+        NSDate *startDate = [queryDateFormatter dateFromString:labelStartTime.text];
+        NSDate *endDate = [queryDateFormatter dateFromString:labelEndTime.text];
+        
+        endPicker.minimumDate = startDate;
+        
+        NSComparisonResult r = [startDate compare:endDate];
+        if (NSOrderedDescending == r) {
+            //前往时间较大，要修改返程时间
+            labelEndTime.text = labelStartTime.text;
+        }else if (NSOrderedAscending == r){
+            //时间顺序对，不做修改
+        }
+    }
+    
+    
 }
 -(void)updateEnd{
     labelEndTime.text = [queryDateFormatter stringFromDate:endPicker.date];

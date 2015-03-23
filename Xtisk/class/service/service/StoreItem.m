@@ -37,7 +37,7 @@
         ci.storeAddress = [dic objectForKey:@"storeAddress"];
         ci.isFavorite = [[dic objectForKey:@"isFavorite"] boolValue];
         
-        
+        ci.menusTotal = [[dic objectForKey:@"menusTotal"] intValue];
         
         [mArr addObject:ci];
     }
@@ -67,6 +67,8 @@
     
     ci.longitude = [[dic objectForKey:@"longitude"] floatValue];
     ci.latitude = [[dic objectForKey:@"latitude"] floatValue];
+    
+    ci.menusTotal = [[dic objectForKey:@"menusTotal"] intValue];
     
     NSArray *tmpArr = [dic objectForKey:@"recomDishes"];
     if (tmpArr) {

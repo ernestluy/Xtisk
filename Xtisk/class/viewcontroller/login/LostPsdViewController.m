@@ -399,13 +399,8 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     
-                    NSDictionary *tDic = (NSDictionary *)br.data;
-                    if (tDic == nil) {
-                        [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
-                    }else{
-                        
-                    }
-                    
+                    [SVProgressHUD showSuccessWithStatus:@"新密码设置成功" duration:2];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }

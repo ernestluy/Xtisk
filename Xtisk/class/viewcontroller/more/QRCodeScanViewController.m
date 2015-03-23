@@ -9,6 +9,8 @@
 
 #import "QRCodeScanViewController.h"
 #import "InfoViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PublicDefine.h"
 @interface QRCodeScanViewController ()
 
 @end
@@ -85,6 +87,22 @@
 }
 - (void)setupCamera
 {
+    
+    NSString *mediaType = AVMediaTypeVideo;
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        
+        NSLog(@"相机权限受限");
+//        [SVProgressHUD showErrorWithStatus:@"相机权限受限" duration:2];
+        NSString *strNote = @"相机访问权限受限,请按照以下步骤操作:\n 设置->i蛇口->相机->打开";
+        [self.navigationController popViewControllerAnimated:YES];
+        XT_SHOWALERT(strNote);
+        return;
+        
+    }
+    
     // Device
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     

@@ -213,4 +213,46 @@
     CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:pFontSize] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
     return sizeToFit;
 }
+
+
++(UIColor *)getPayStatusColorWith:(int)status{
+    if(status == 0){
+        return listColorPayIng;
+    }else if(status == 1){
+        return listColorPayOk;
+    }else{
+        return listColorPayOver;
+    }
+    return listColorPayOver;
+}
+
++(NSString *)removeCChar:(NSString *)str{
+    if (!str) {
+        return nil;
+    }
+    NSMutableString *mStr = [NSMutableString string];
+    for (int i = 0; i<str.length; i++) {
+        NSRange range = {i,1};
+        NSString *indexStr = [str substringWithRange:range];
+        char *strc = (char *)[indexStr UTF8String];
+        if (strlen(strc) == 1) {
+            [mStr appendString:indexStr];
+        }
+    }
+    return mStr;
+    
+}
+
+
+-(int)compare:(NSDate *)fDate mid:(NSDate *)mDate last:(NSDate *)lDate{
+    
+    
+    
+    
+    return  -1;
+}
+
+
+
+
 @end

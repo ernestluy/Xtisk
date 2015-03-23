@@ -19,11 +19,22 @@
 #import "CustomMenuTutorialController.h"
 #import "MsgPlaySound.h"
 #import "UMessage.h"
+#import "LogUtil.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
 #define isNeedDelDB NO
+
+void UncaughtExceptionHandler(NSException *exception) {
+    NSArray *arr = [exception callStackSymbols];//得到当前调用栈信息
+    NSString *reason = [exception reason];//非常重要，就是崩溃的原因
+    NSString *name = [exception name];//异常类型
+    
+    //    NSLog(@"exception type : %@ \n crash reason : %@ \n call stack info : %@", name, reason, arr);
+    NSString *tmpStr = [NSString stringWithFormat:@"exception type : %@ \n crash reason : %@ \n call stack info : %@", name, reason, arr];
+    PRINT_LOG([tmpStr UTF8String]);
+}
 
 @interface AppDelegate ()
 {
@@ -159,7 +170,7 @@
     
     
     
-    
+    NSSetUncaughtExceptionHandler (&UncaughtExceptionHandler);
     return YES;
 }
 

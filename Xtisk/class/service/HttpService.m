@@ -67,6 +67,10 @@ static HttpService *httpServiceInstance = nil;
     NSLog(@"result:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 //    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     BaseResponse *br = [BaseResponse getBaseResponseWithDic:[Util getObjWithJsonData:data]];
+    if (2 == br.code) {
+        //用户未登录
+        [[SettingService sharedInstance] logout];
+    }
     return br;
 }
 
@@ -298,13 +302,13 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 #pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
--(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize;{
+-(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize orderBy:(int)orderBy;{
     NSString *urlStr = [NSString stringWithFormat:@"http://%@/neighborhood/queryStoreByCategory",SERVICE_HOME];
     AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
                                                                      target:delegate
                                                                        type:HttpRequestType_XT_QUERYSTOREBYCATEGORY];
     
-    NSString *contentStr = [NSString stringWithFormat:@"categoryId=%@&pageNo=%d&pageSize=%d",categoryId,pageNo,pageSize];
+    NSString *contentStr = [NSString stringWithFormat:@"categoryId=%@&pageNo=%d&pageSize=%d&orderBy=%d",categoryId,pageNo,pageSize,orderBy];//  
     NSData *data = [Util strToData:contentStr];
     NSLog(@"QueryStoreByCategory:%@",contentStr);
     [request appendPostData:data];

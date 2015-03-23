@@ -100,6 +100,7 @@
     pickerSelectSeatLevel.showsSelectionIndicator = YES;
     pickerSelectSeatLevel.delegate = self;
     pickerSelectSeatLevel.dataSource = self;
+    [self calTotalPrice];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -364,6 +365,13 @@
                 cell.btnAdd.enabled = NO;
                 cell.btnDel.enabled = NO;
             }
+            
+            if(cell.labTicketPrice.text == nil || [cell.labTicketPrice.text intValue] == 0){
+                cell.labTicketPrice.text = @"无";
+                cell.btnAdd.enabled = NO;
+                cell.btnDel.enabled = NO;
+            }
+            
             
             return cell;
             break;

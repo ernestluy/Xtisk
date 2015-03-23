@@ -27,8 +27,8 @@
     UIFont *tFont = [UIFont systemFontOfSize:13];
     int startX  = 40;
     
-    startX = 10;
-    
+    int inset = 15;
+    startX = inset;
     
     int detailY = 8;
     int startY = detailY;
@@ -50,13 +50,14 @@
         }
     }
     if (mLineArr.count == 2) {//有往返程
-        startX = 40;
+        startX = inset + 30;
     }
     
     NSMutableDictionary *mEdDic = [NSMutableDictionary dictionary];
     NSString *tLineTitle = nil;
     int iScale = startY;
     float fTotal = 0;
+    order.totalPrice = 0;
     for (int i = 0; i<order.ticketList.count; i++) {
         MyTicketItem *ticket = [order.ticketList objectAtIndex:i];
         if (!tLineTitle || ![tLineTitle isEqualToString:ticket.ticketInfo]) {
@@ -65,6 +66,7 @@
                 lab.font = tFont;
                 [self addSubview:lab];
                 lab.text = @"合计:";
+                order.totalPrice += fTotal;
                 NSString *strValue = [NSString stringWithFormat:@"￥%0.1f",fTotal];
                 lab = [[UILabel alloc]initWithFrame:CGRectMake(startX + [lab.text sizeWithFont:lab.font].width + 5, startY, labWidth, labHeight)];
                 lab.font = tFont;
@@ -75,7 +77,7 @@
                 startY += labHeight;
                 if (mLineArr.count == 2)
                 {
-                    UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, iScale, 30, startY - iScale)];
+                    UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(inset, iScale, 30, startY - iScale)];
                     labQh.backgroundColor = headerColor;
                     labQh.text = @"启程";
                     labQh.font = [UIFont systemFontOfSize:13];
@@ -141,7 +143,7 @@
         
         if (mLineArr.count == 2)
         {
-            UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(5, iScale, 30, startY - iScale)];
+            UILabel *labQh = [[UILabel alloc]initWithFrame:CGRectMake(inset, iScale, 30, startY - iScale)];
             labQh.backgroundColor = headerColor;
             labQh.text = @"返程";
             labQh.font = [UIFont systemFontOfSize:13];
@@ -149,25 +151,12 @@
             labQh.textAlignment = NSTextAlignmentCenter;
             [self addSubview:labQh];
         }
+        order.totalPrice += fTotal;
         fTotal = 0;
     }
     
     
-    
-//    NSMutableString *muStr = [NSMutableString string];
-//    [muStr appendFormat:@"%@ ",ticket.ticketPosition];
-//    if ([ticket.type isEqualToString:@"1"]) {
-//        [muStr appendString:@"成人 "];
-//    }else if ([ticket.type isEqualToString:@"2"]) {
-//        [muStr appendString:@"小童 "];
-//    }else if ([ticket.type isEqualToString:@"3"]) {
-//        [muStr appendString:@"长者 "];
-//    }
-//    lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
-//    lab.font = tFont;
-//    [self addSubview:lab];
-//    lab.text = [NSString stringWithFormat:@"%@ 1张",muStr];
-//    startY += labHeight;
+
     
     startY += 8;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, startY);

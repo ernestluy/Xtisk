@@ -65,7 +65,7 @@
 #pragma mark - 4.3.3.1	获取周边的分类（含根据父分类获取子分类）
 -(AsyncHttpRequest *)getRequestCategoryTypeList:(id<AsyncHttpRequestDelegate>)delegate parentCategoryId:(NSString *)parentCategoryId;
 #pragma mark - 4.3.3.2	根据分类获取分类下的店家列表
--(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize;
+-(AsyncHttpRequest *)getRequestQueryStoreByCategory:(id<AsyncHttpRequestDelegate>)delegate categoryId:(NSString *)categoryId pageNo:(int)pageNo pageSize:(int)pageSize orderBy:(int)orderBy;
 #pragma mark - 4.3.3.3	获取店家详情
 -(AsyncHttpRequest *)getRequestQueryStoreDetail:(id<AsyncHttpRequestDelegate>)delegate storeId:(NSString *)storeId;
 #pragma mark - 4.3.3.4	获取店家菜单列表

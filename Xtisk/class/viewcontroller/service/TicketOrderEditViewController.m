@@ -78,19 +78,19 @@
         CGRect textFieldRect = CGRectMake(startX, 0.0f, [UIScreen mainScreen].bounds.size.width - startX - 1, 44.0);
         UITextField *tmpTf = [CTLCustom textFieldNormalWith:textFieldRect];
         tmpTf.delegate = self;
-        
+        [tmpTf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         if (i == 0) {
             tfName = tmpTf;
-            tfName.text = @"卢一";
+//            tfName.text = @"卢一";
         }else if (i == 1) {
             tfPhone = tmpTf;
-            tfPhone.text = @"13418884362";
+//            tfPhone.text = @"13418884362";
         }else if (i == 2) {
             tfCard = tmpTf;
-            tfCard.text = @"234";
+//            tfCard.text = @"234";
         }else if (i == 3) {
             tfEmal = tmpTf;
-            tfEmal.text = @"175640827@163.com";
+//            tfEmal.text = @"175640827@163.com";
             tfEmal.keyboardType = UIKeyboardTypeEmailAddress;
             tfEmal.returnKeyType = UIReturnKeyDone;
         }
@@ -211,24 +211,73 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
     if (tfEmal == textField) {
-        if (range.location >= 100)
+        if (tfEmal.text.length > 100)
+        {
+            textField.text = [textField.text substringToIndex:100];
+        }
+        textField.text = [Util removeCChar:textField.text];
+    }else if (tfName == textField){
+        if (tfName.text.length > 20)
+        {
+            textField.text = [textField.text substringToIndex:20];
+        }
+    }else if (tfPhone == textField){
+        if (tfPhone.text.length > 11)
+        {
+            textField.text = [textField.text substringToIndex:11];
+        }
+        textField.text = [Util removeCChar:textField.text];
+    }else if (tfCard == textField){
+        if (tfCard.text.length > 3)
+        {
+            textField.text = [textField.text substringToIndex:3];
+        }
+        textField.text = [Util removeCChar:textField.text];
+    }
+}
+
+/*
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs;
+    if(textField == tfEmal)
+    {
+        if (textField.text.length>12) {
+            if (string && string.length == 0) {
+                return YES;
+            }
+            return NO;
+        }
+        cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basicTest = [string isEqualToString:filtered];
+        if(!basicTest)
+        {
+            NSLog(@"请输入数字");
+            return NO;
+        }
+    }
+    
+    if (tfEmal == textField) {
+        if (tfEmal.text.length >= 100)
         {
             return NO;
         }
     }else if (tfName == textField){
-        if (range.location >= 40)
+        if (tfName.text.length >= 20)
         {
             return NO;
         }
     }else if (tfPhone == textField){
-        if (range.location >= 20)
+        if (tfPhone.text.length == 11)
         {
             return NO;
         }
     }else if (tfCard == textField){
-        if (range.location >= 6)
+        if (tfCard.text.length == 3)
         {
             return NO;
         }
@@ -236,6 +285,7 @@
     
     return YES;
 }
+ */
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
@@ -363,7 +413,7 @@
                         NSString *orderId = [tmpDic objectForKey:@"orderId"];
 //                        [SVProgressHUD showSuccessWithStatus:@"订单提交成功\n" duration:2];
                         tradeInfo = [TicketTradeInfo getTicketTradeInfoWithDic:tmpDic];
-                        [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+                        [SVProgressHUD showWithStatus:@"订单已经生成，即将进入确认界面"];
                         [[[HttpService sharedInstance] getRequestQueryTicketOrderDetail:self orderId:tradeInfo.orderId]startAsynchronous];
 //                        [self toPay];
 //                        NSString *strNote = [NSString stringWithFormat:@"订单提交成功\n交易流水号:%@\n订单号:%@",tradeInfo.tn,tradeInfo.orderId];

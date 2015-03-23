@@ -30,6 +30,9 @@
     int totalCom;
     
     UILabel *labCellWypj;
+    
+    int totalMenu;
+    UILabel *labTotalMenu;
 }
 @end
 
@@ -41,6 +44,7 @@
     CGRect bounds = [UIScreen mainScreen].bounds;
 //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
     totalCom = 0;
+    totalMenu = 0;
     
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - DEFAULT_CELL_HEIGHT - 64);
     self.tTableView = [[UITableView alloc]initWithFrame:tableRect style:UITableViewStyleGrouped];
@@ -121,6 +125,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self flushUI];
     [self requestListData];
+
 }
 
 
@@ -136,6 +141,7 @@
     if (!isRequestSuc) {
         [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
         [[[HttpService sharedInstance] getRequestStoreCommentsList:self storeId:int2str(self.mStoreItem.storeId) pageNo:1 pageSize:5]startAsynchronous];
+        [[[HttpService sharedInstance] getRequestQueryStoreMenu:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
     }else{
         [[[HttpService sharedInstance] getRequestQueryStoreDetail:self storeId:int2str(self.mStoreItem.storeId)]startAsynchronous];
     }
@@ -245,8 +251,9 @@
                 cell.textLabel.textColor = [UIColor darkGrayColor];
                 cell.textLabel.font = [UIFont boldSystemFontOfSize:14]; //[UIFont systemFontOfSize:14];
             }
+            labTotalMenu = cell.textLabel;
             cell.textLabel.text = @"全部菜单";
-            
+            labTotalMenu.text = [NSString stringWithFormat:@"全部菜单(%d)",totalMenu];
             return cell;
         }else{
             NSString *identifier = @"cell2";
@@ -484,6 +491,28 @@
                 }
             }else{
                 //XT_SHOWALERT(@"请求失败");
+                NSLog(@"请求失败");
+            }
+            break;
+        }
+        case HttpRequestType_XT_QUERYSTOREMENU:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    //                    [SVProgressHUD showErrorWithStatus:@"请求成功" duration:DefaultRequestDonePromptTime];
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        NSArray *tmpArr = [dic objectForKey:@"menuList"];
+                        totalMenu = (int)tmpArr.count;
+                        labTotalMenu.text = [NSString stringWithFormat:@"全部菜单(%d)",totalMenu];
+                    }
+                    
+                }else{
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
+                }
+            }else{
+                //XT_SHOWALERT(@"请求失败");
+                [SVProgressHUD showErrorWithStatus:DefaultRequestFaile duration:DefaultRequestDonePromptTime];
                 NSLog(@"请求失败");
             }
             break;

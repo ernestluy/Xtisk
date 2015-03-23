@@ -7,13 +7,17 @@
 //
 
 #import "TicketDetailViewController.h"
+#import "MyTicketOrderItemStatis.h"
 #import "PublicDefine.h"
+#import "TicketDetailContentView.h"
 @interface TicketDetailViewController ()
 {
     NSMutableArray *dataArr;
     NSMutableArray *viewArr;
     NSMutableArray *viewSecondArr;
     NSMutableDictionary *heightDic;
+    
+    MyTicketOrderItemStatis *myTicketOrderStatis;
 }
 @end
 
@@ -36,12 +40,12 @@
         }
         
     }
-    dataArr = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]];
+    dataArr = [NSMutableArray array];
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64 - 76;
     tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
-    tTableView.bounces = NO;
+//    tTableView.bounces = NO;
     tTableView.delegate = self;
     tTableView.dataSource = self;
     //    tTableView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
@@ -49,6 +53,14 @@
     [tTableView registerNib:[UINib nibWithNibName:@"MsgTicketListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:tTableView];
     
+    myTicketOrderStatis = [[MyTicketOrderItemStatis alloc]init];
+    myTicketOrderStatis.frame = CGRectMake(0, 0, 0, 0);
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [myTicketOrderStatis setData:self.mOrderDetail];
 }
 
 #pragma mark - UITableViewDataSource
@@ -60,9 +72,9 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (0 == section) {
-        return viewArr.count;
+        return 3;
     }else if (1 == section){
-        return viewSecondArr.count;
+        return 1;
     }
     return 0;
 }
@@ -77,11 +89,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (0 == indexPath.section) {
+            
             UIView *tv = [viewArr objectAtIndex:indexPath.row];
-            [cell addSubview:tv];
+            if (0 == indexPath.row) {
+                [cell addSubview:tv];
+                TicketDetailContentView *dc = (TicketDetailContentView*)tv;
+                dc.labCode.text = int2str(self.mOrderDetail.orderId);
+                dc.labStatus.text = self.mOrderDetail.orderStatus;
+                
+                dc.labStatus.textColor = [Util getPayStatusColorWith:self.mOrderDetail.status];
+                
+            }else if(1 == indexPath.row){
+                [cell addSubview:myTicketOrderStatis];
+            }else if(2 == indexPath.row){
+                [cell addSubview:tv];
+                TicketDetailContentView *dc = (TicketDetailContentView*)tv;
+                dc.labNme.text = self.mOrderDetail.peopleInfo.name;
+                dc.labEmail.text = self.mOrderDetail.peopleInfo.email;
+                dc.labTel.text = self.mOrderDetail.peopleInfo.phone;
+                dc.labCode.text = self.mOrderDetail.peopleInfo.identity_card;
+            }
         }else if (1 == indexPath.section){
             UIView *tv = [viewSecondArr objectAtIndex:indexPath.row];
             [cell addSubview:tv];
+            TicketDetailContentView *dc = (TicketDetailContentView*)tv;
+            dc.labMoney.text = [NSString stringWithFormat:@"%0.1f",self.mOrderDetail.totalPrice];
         }
         
     }
@@ -93,11 +125,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (0 == indexPath.section) {
-        UIView *tv = [viewArr objectAtIndex:indexPath.row];
-        return tv.frame.size.height;
+        
+        if (0 == indexPath.row) {
+            return 41;
+        }else if(1 == indexPath.row){
+            return  myTicketOrderStatis.frame.size.height;
+        }else if(2 == indexPath.row){
+            return 98;
+        }
     }else if (1 == indexPath.section){
-        UIView *tv = [viewSecondArr objectAtIndex:indexPath.row];
-        return tv.frame.size.height;
+        return 63;
     }
     return 100;
 }
@@ -106,9 +143,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == (dataArr.count - 1)) {
-        return 10;
-    }
+    
     return 1.0;
 }
 

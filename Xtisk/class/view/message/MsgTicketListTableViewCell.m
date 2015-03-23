@@ -7,11 +7,23 @@
 //
 
 #import "MsgTicketListTableViewCell.h"
-
+#import "SettingService.h"
 @implementation MsgTicketListTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+}
+
+-(void)setData:(MyTicketOrderDetail*)order{
+    IUser *tUser = [SettingService sharedInstance].iUser;
+    self.labCode.text = [NSString stringWithFormat:@"订单号:%d",order.orderId];
+    self.labName.text = [NSString stringWithFormat:@"亲爱的%@,您已购",tUser.nickName];
+    
+    if (order.ticketList.count > 0) {
+        MyTicketItem *item = [order.ticketList objectAtIndex:0];
+        self.labLine.text = item.ticketInfo;
+        self.labPayTime.text = item.ticketTime;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

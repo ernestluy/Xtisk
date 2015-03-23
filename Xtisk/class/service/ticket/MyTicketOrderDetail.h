@@ -15,6 +15,7 @@
 
 @property(nonatomic,strong)PeopleInfo *peopleInfo;
 @property(nonatomic,strong)NSArray *ticketList;
+@property(nonatomic)float totalPrice;
 +(MyTicketOrderDetail *)getMyTicketOrderDetailWithDic:(NSDictionary *)dic;
 +(MyTicketOrderDetail *)createMyTicketOrderDetailWithPerant:(TicketOrderListItem*)item;
 @end

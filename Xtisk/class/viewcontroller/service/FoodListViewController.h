@@ -8,7 +8,8 @@
 
 #import "SecondaryViewController.h"
 #import "PublicDefine.h"
-@interface FoodListViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate, AsyncHttpRequestDelegate,LYFlushViewDelegate>
+#import "NearFilterView.h"
+@interface FoodListViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate, AsyncHttpRequestDelegate,LYFlushViewDelegate,NearFilterViewDelegate>
 
 
 @property(nonatomic,strong) LYTableView *tTableView;

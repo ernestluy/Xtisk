@@ -7,9 +7,10 @@
 //
 
 #import "SecondaryViewController.h"
-
+#import "MyTicketOrderDetail.h"
 @interface TicketDetailViewController : SecondaryViewController<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *tTableView;
 }
+@property(nonatomic,strong) MyTicketOrderDetail *mOrderDetail;
 @end

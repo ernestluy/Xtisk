@@ -57,6 +57,10 @@
     int btnH = 40;
     int lineHeight = 20;
     isEdit = NO;
+    
+    UIView *btnBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, btnH)];
+    btnBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:btnBar];
     for (int i = 0; i<btnTitleArr.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:[btnTitleArr objectAtIndex:i] forState:UIControlStateNormal];
@@ -155,8 +159,12 @@
     [tTableView upToStartFlush];
 }
 
+#pragma mark - 底部删除按钮动作
 -(void)deleteActivity:(id)sender{
     NSLog(@"deleteActivity");
+    
+    
+    
     NSArray *ids = mutableDic.allValues;
     if (ids.count == 0) {
         [SVProgressHUD showErrorWithStatus:@"未选择要删除的活动" duration:DefaultRequestDonePromptTime];
@@ -166,6 +174,7 @@
     [[[HttpService sharedInstance] getRequestDelMyActivitys:self activityIds:ids]startAsynchronous];
 }
 
+#pragma mark - 结束多选择删除
 -(void)doneDelete:(id)sender{
     NSLog(@"doneDelete");
     [self.navigationItem setRightBarButtonItem:delItem];
@@ -179,6 +188,7 @@
     [tTableView reloadData];
     
 }
+#pragma mark - 开始多选择删除
 -(void)toDelete:(id)sender{
     NSLog(@"toDelete");
     [self.navigationItem setRightBarButtonItem:doneItem];
@@ -196,6 +206,8 @@
     [tTableView reloadData];
 //    [tTableView setEditing:YES];
 }
+
+#pragma mark - 活动状态选择
 -(void)actListAction:(id)sender{
     NSLog(@"actListAction");
     UIButton *btn = (UIButton *)sender;
@@ -231,6 +243,7 @@
     [self requestData];
 }
 
+#pragma mark - 多选择删除--》单向判断
 -(void)delSelectAction:(UIButton *)btn{
     NSLog(@"delSelectAction");
     MyActivity *ma = [allMyActivityArr objectAtIndex:btn.tag];
@@ -245,6 +258,42 @@
     }
 }
 
+#pragma mark - 多选择删除--》根据返回结果删除
+-(void)responseDel{
+    
+    NSMutableArray *mArrTmp = [NSMutableArray array];
+    for (int i = 0;i<allMyActivityArr.count;i++) {
+        MyActivity *ma = [allMyActivityArr objectAtIndex:i];
+        NSObject *tmpo = [mutableDic objectForKey:int2str(ma.activityId)];
+        if (tmpo) {
+            [mArrTmp addObject:[NSIndexSet indexSetWithIndex:i]];
+//            [mArrTmp addObject:[NSIndexPath indexPathForRow:0 inSection:i]];
+        }
+    }
+    
+    for (int i = 0;i<allMyActivityArr.count;) {
+        MyActivity *ma = [allMyActivityArr objectAtIndex:i];
+        NSObject *tmpo = [mutableDic objectForKey:int2str(ma.activityId)];
+        if (tmpo) {
+            [allMyActivityArr removeObject:ma];
+        }else{
+            i++;
+        }
+    }
+    
+    [tTableView beginUpdates];
+//    [tTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+//    [tTableView endUpdates];
+    for (int i = 0;i<mArrTmp.count;i++) {
+        NSIndexSet *is = [mArrTmp objectAtIndex:i];
+        [tTableView deleteSections:is withRowAnimation:UITableViewRowAnimationBottom];
+    }
+    [tTableView endUpdates];
+    
+    [mutableDic removeAllObjects];
+    [tTableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.25];
+}
+#pragma mark - 刷新
 -(void)flushUI{
     if (allMyActivityArr.count == 0) {
         tTableView.tableFooterView = labNoteNoData;
@@ -291,19 +340,22 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+//    if (allMyActivityArr.count == 0 || allMyActivityArr.count <= (1+section)) {
+//        return 0;
+//    }
     return 1;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (0 == selectedIndex) {
-        
-        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-        if ([ma.status isEqualToString:AcStatusEnd]) {
-            return YES;
-        }else{
-            return NO;
-        }
+    if (isEdit) {
+        return NO;
+    }
+    
+    MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+    if ([ma.status isEqualToString:AcStatusEnd]) {
+        return YES;
+    }else{
+        return NO;
     }
     return YES;
 //    return NO;
@@ -314,13 +366,14 @@
         //deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
         NSLog(@"sec:%d,row:%d",(int)indexPath.section,(int)indexPath.row);
         tIndexPath = indexPath;
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-        tAcount --;
-        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
 //        [allMyActivityArr removeObjectAtIndex:indexPath.section];
-//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-//        [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationBottom];
+        
+        
+        tAcount --;
+        [mutableDic removeAllObjects];
+        MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
+        [mutableDic setObject:int2str(ma.activityId) forKey:int2str(ma.activityId)];
         [SVProgressHUD showWithStatus:DefaultRequestPrompt];
         [[[HttpService sharedInstance] getRequestDelMyActivity:self activityId:int2str(ma.activityId)]startAsynchronous];
         
@@ -369,6 +422,10 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (isEdit) {
+        return;
+    }
+    
     ActivityDetailViewController *ac = [[ActivityDetailViewController alloc] init];
     MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
     
@@ -426,9 +483,8 @@
                 if (ResponseCodeSuccess == br.code) {
                     NSLog(@"请求成功");
                     
-                    [allMyActivityArr removeObjectAtIndex:tIndexPath.section];
-                    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:tIndexPath.section];
-                    [tTableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
+                    [self responseDel];
+                    [SVProgressHUD showSuccessWithStatus:@"成功删除" duration:DefaultRequestDonePromptTime];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:1.5];
                 }

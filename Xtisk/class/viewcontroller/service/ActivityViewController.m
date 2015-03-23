@@ -181,7 +181,6 @@
                 if (ResponseCodeSuccess == br.code) {
                     isRequestSucMark = YES;
                     NSLog(@"请求成功");
-                    [mDataArr removeAllObjects];
                     NSDictionary *dic = (NSDictionary *)br.data;
                     if (dic) {
                         NSArray *tmpArr = [dic objectForKey:@"items"];

@@ -10,9 +10,12 @@
 #import "PublicDefine.h"
 #import "MsgTicketListTableViewCell.h"
 #import "TicketDetailViewController.h"
+#import "TicketSerivice.h"
+#import "MyTicketOrderDetail.h"
 @interface MsgTicketListViewController ()
 {
     NSMutableArray *dataArr;
+    UILabel *labNoteNoData;
 }
 @end
 
@@ -23,7 +26,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"船票";
     self.view.backgroundColor = _rgb2uic(0xf7f7f7, 1);
-    dataArr = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]];
+    dataArr = [TicketSerivice sharedInstance].arrOrderSuc;
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     int tableHeight = bounds.size.height - 64;
@@ -34,6 +37,24 @@
 //    tTableView.backgroundColor = [UIColor clearColor];
     [tTableView registerNib:[UINib nibWithNibName:@"MsgTicketListTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:tTableView];
+    
+    labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    labNoteNoData.text = @"暂无购买船票信息";
+    labNoteNoData.font = [UIFont systemFontOfSize:14];
+    labNoteNoData.textColor = defaultTextColor;
+    labNoteNoData.textAlignment = NSTextAlignmentCenter;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (dataArr.count == 0) {
+        tTableView.tableFooterView = labNoteNoData;
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kPushMessageFlush object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -52,9 +73,10 @@
 {
     
     NSString *identifier = @"cell";
-    UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
+    MsgTicketListTableViewCell * cell = (MsgTicketListTableViewCell*)[tv dequeueReusableCellWithIdentifier:identifier];
 //    cell.backgroundColor = [UIColor clearColor];
-    
+    MyTicketOrderDetail *order = [dataArr objectAtIndex:indexPath.section];
+    [cell setData:order];
     return cell;
 }
 
@@ -88,8 +110,9 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    MyTicketOrderDetail *od = [dataArr objectAtIndex:indexPath.section];
     TicketDetailViewController *tdc = [[TicketDetailViewController alloc]init];
+    tdc.mOrderDetail = od;
     [self.navigationController pushViewController:tdc animated:YES];
 }
 

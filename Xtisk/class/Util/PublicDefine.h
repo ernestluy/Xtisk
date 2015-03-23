@@ -51,6 +51,7 @@
 #import "MyTicketOrderDetail.h"
 #import "TicketOrderListItem.h"
 #import "TicketTradeInfo.h"
+#import "MsgPlaySound.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关
@@ -95,9 +96,13 @@ colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
+#define  MainTintColor _rgb2uic(0x0095f1, 1)
+
 #define XT_SHOWALERT(CONTENT) [[[UIAlertView alloc]initWithTitle:@"提示" message:(CONTENT) delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]show]
 #define LyRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
+#define NUMBERS @"0123456789.\n"
+#define OneDaySeconds 24*3600
 
 #define  randomInt arc4random_uniform(100)
 #define int2str(i) [NSString stringWithFormat:@"%d",(i)]
@@ -150,6 +155,13 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 #define kDeviceToken    @"kDeviceToken"
 
+
+typedef enum {
+    TAB_BAR_INDEX = 0,
+    TAB_BAR_MSG,
+    TAB_BAR_SERVICE,
+    TAB_BAR_MORE,
+}TabBarIndex;
 
 typedef enum  {
     MESSAGE_TYPE_SINGLE, //单人
@@ -321,6 +333,7 @@ typedef enum  {
 #define listColorPayOver     _rgb2uic(0xa9a9a9, 1)
 
 #define tagWaitToPay  0
+#define tagHaveToPay  1
 
 
 

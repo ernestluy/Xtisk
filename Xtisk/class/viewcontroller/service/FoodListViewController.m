@@ -10,6 +10,8 @@
 #import "FoodDetailHeader.h"
 #import "FoodDetailViewController.h"
 #import "FoodListTableViewCell.h"
+#import "PopoverView.h"
+#import "NearFilterView.h"
 #define FoodListHeigt 89.0
 #define FoodListCellId  @"FoodListCellId"
 @interface FoodListViewController ()
@@ -19,6 +21,7 @@
     
     
     UILabel *labNoteNoData;
+    PopoverView *filterPopoverView;
 }
 @end
 
@@ -29,6 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     
     CGRect bounds = [UIScreen mainScreen].bounds;
+    filterPopoverView = nil;
     //    CGRectMake(0, 64, mRect.size.width, mRect.size.height - 64)
     CGRect tableRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 64);
     self.tTableView = [[LYTableView alloc]initWithFrame:tableRect style:UITableViewStylePlain];
@@ -51,6 +55,15 @@
     labNoteNoData.font = [UIFont systemFontOfSize:14];
     labNoteNoData.textColor = defaultTextColor;
     labNoteNoData.textAlignment = NSTextAlignmentCenter;
+    
+    UIButton * btnFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnFilter.frame = CGRectMake(0, 0, 40, 40);
+    [btnFilter setImage:[UIImage imageNamed:@"btn_near_filter"] forState:UIControlStateNormal];
+    
+    
+    [btnFilter addTarget:self action:@selector(showFilterView) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:btnFilter] ;
+    [self.navigationItem setRightBarButtonItem:ritem];
 }
 -(void)requestListData{
     if (!isRequestSuc) {
@@ -64,6 +77,15 @@
     [self requestListData];
 }
 
+
+-(void)showFilterView{
+    NSLog(@"showFilterView");
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    NearFilterView *fv = [[NearFilterView alloc]initWithFrame:CGRectMake(bounds.size.width/2, 20, bounds.size.width/2, bounds.size.height)];
+    fv.delegate = self;
+    filterPopoverView = [PopoverView showPopoverAtPoint:CGPointMake(bounds.size.width, bounds.size.height/2) inView:self.view withContentView:fv];
+}
+
 -(void)flushUI{
     if (mDataArr.count == 0) {
         self.tTableView.tableFooterView = labNoteNoData;
@@ -73,15 +95,24 @@
     [self.tTableView reloadData];
 }
 
+#pragma mark -  NearFilterViewDelegate
+- (void)filterDidSelected:(int)selectedIndex{
+    if (filterPopoverView) {
+        [filterPopoverView dismiss];
+        filterPopoverView = nil;
+    }
+    [self.tTableView upToStartFlush];
+}
+
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:1 pageSize:DefaultPageSize]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:1 pageSize:DefaultPageSize orderBy:[SettingService sharedInstance].filterSelectedIndex]startAsynchronous];
 }
 - (void)flushUpEnd:(NSObject *)ly{
     
 }
 - (void)startToFlushDown:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:(curPage+1) pageSize:DefaultPageSize]startAsynchronous];
+    [[[HttpService sharedInstance] getRequestQueryStoreByCategory:self categoryId:int2str(self.categoryItem.categoryId) pageNo:(curPage+1) pageSize:DefaultPageSize orderBy:[SettingService sharedInstance].filterSelectedIndex]startAsynchronous];
 }
 - (void)flushDownEnd:(NSObject *)ly{
     

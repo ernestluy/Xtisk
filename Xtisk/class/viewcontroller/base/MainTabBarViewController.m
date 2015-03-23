@@ -19,12 +19,8 @@
 #import "MessageDBManager.h"
 #import "MsgPlaySound.h"
 #import "MessageListViewController.h"
-typedef enum {
-    TAB_BAR_INDEX = 0,
-    TAB_BAR_MSG,
-    TAB_BAR_SERVICE,
-    TAB_BAR_MORE,
-}TabBarIndex;
+#import "LogViewerController.h"
+
 
 @interface MainTabBarViewController ()
 {
@@ -146,6 +142,31 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dealLogout) name:kLogout object:nil];
     
+    
+//    UIView *viewInto = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 44)];
+//    viewInto.backgroundColor = [UIColor yellowColor];
+//    UILongPressGestureRecognizer * longPressGr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showLogView)];
+//    longPressGr.minimumPressDuration = 2.0;
+//    [viewInto addGestureRecognizer:longPressGr];
+//    
+//    UIButton * doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    doneBtn.frame = CGRectMake(0, 0, 30, 20);
+//    [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
+//    [doneBtn setTitleColor:headerColor forState:UIControlStateNormal];
+//    doneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    
+//    [doneBtn addTarget:self action:@selector(showLogView) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn] ;
+//    
+//    UIBarButtonItem * ritem = [[UIBarButtonItem alloc] initWithCustomView:viewInto] ;
+//    [self.navigationItem setRightBarButtonItem:doneItem];
+    
+    
+}
+
+-(void)showLogView{
+    LogViewerController *lv = [[LogViewerController alloc]init] ;
+    [self.navigationController pushViewController:lv animated:YES];
 }
 
 -(void)setTabBadge{
@@ -203,6 +224,7 @@ typedef enum {
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
 //    NSLog(@"didSelectViewController");
 //    [self doubleClick:viewController];
+//    [[MsgPlaySound sharedInstance] play];
     if((int)viewController.tabBarItem.tag == TAB_BAR_INDEX){
         
         [self.navigationController.navigationBar.topItem setTitleView:tImgView];

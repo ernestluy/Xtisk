@@ -30,4 +30,13 @@
 +(CGRect)getFrameWithX:(CGRect)r x:(int)x;
 
 +(CGSize) sizeForString:(NSString *)value fontSize:(float)pFontSize andWidth:(float)width;
+
+
++(UIColor *)getPayStatusColorWith:(int)status;
+
++(NSString *)removeCChar:(NSString *)str;
+
+
+-(int)compare:(NSDate *)fDate mid:(NSDate *)mDate last:(NSDate *)lDate;
+
 @end

@@ -58,6 +58,7 @@
     self.tTextView.backgroundColor = [UIColor whiteColor];
     self.tTextView.delegate = self;
     
+    
     [self.tTextView becomeFirstResponder];
     UIButton * okBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     okBtn.frame = CGRectMake(0, 0, 40, 25);
@@ -134,6 +135,24 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     
 }
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if(textView.text.length >= limitNum){
+        textView.text = [textView.text substringToIndex:limitNum];
+    }
+    
+    int dd = limitNum - (int)textView.text.length;
+    self.labWarnning.text = [NSString stringWithFormat:@"%d",dd];
+    if (dd<0) {
+        self.labWarnning.textColor = [UIColor redColor];
+    }else{
+        self.labWarnning.textColor = defaultTextColor;
+    }
+    
+}
+
+/*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     NSString *gStr = text;
     if ([gStr isEqualToString:@""]) {//删除
@@ -147,6 +166,7 @@
     
     return YES;
 }
+
 - (void)textViewDidChange:(UITextView *)textView{
     int dd = limitNum - (int)textView.text.length;
     self.labWarnning.text = [NSString stringWithFormat:@"%d",dd];
@@ -156,6 +176,8 @@
         self.labWarnning.textColor = defaultTextColor;
     }
 }
+ */
+
 
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{

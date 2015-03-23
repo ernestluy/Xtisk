@@ -23,19 +23,38 @@ static TicketSerivice *instanceTicketService = nil;
     return instanceTicketService;
 }
 
+-(id)init{
+    self = [super init];
+    self.arrOrderSuc = [NSMutableArray array];
+    self.tMinDate = [NSDate date];
+    self.tMaxDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([self.tMinDate timeIntervalSinceReferenceDate] + 15*OneDaySeconds)];
+    self.ticketDateFormatter = [[NSDateFormatter alloc]init];
+    self.ticketDateFormatter.dateFormat = @"yyyy-MM-dd";
+    return self;
+}
+
+-(void)clearData{
+    self.toVoyageItem = nil;
+    self.returnVoyageItem = nil;
+    self.ticketQueryType = TICKET_QUERY_ONE;
+}
+
 -(TicketOrder *)createTicketOrder{
     TicketOrder *order = [[TicketOrder alloc]init];
     NSMutableArray *mArrTickets = [NSMutableArray array];
     VoyageItem *tItme = self.toVoyageItem;
     float fTotal = 0;
     fTotal += [self calTickets:tItme marr:mArrTickets];
-    VoyageItem *rItme = self.returnVoyageItem;
-    fTotal += [self calTickets:rItme marr:mArrTickets];
+    if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType && self.returnVoyageItem) {//如果为往返程的话则。。
+        VoyageItem *rItme = self.returnVoyageItem;
+        fTotal += [self calTickets:rItme marr:mArrTickets];
+    }
     order.total_fee = fTotal;
     order.discount_fee = 0;
     order.arrTickets = [TicketInfoItem getJsonArrayWithArray:mArrTickets];
     NSDictionary *tDic = @{@"tickets":order.arrTickets};
     order.tickets = [Util getJsonStrWithObj:tDic];
+    
     return order;
 }
 

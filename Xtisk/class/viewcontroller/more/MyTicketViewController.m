@@ -19,6 +19,7 @@
     
     UILabel *labNoteNoData;
     NSIndexPath *delIndexPath;
+    UIActivityIndicatorView *acView;
 }
 @end
 
@@ -48,6 +49,11 @@
     
     [self.view addSubview:tTableView];
     
+    acView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    acView.color = headerColor;
+    UIBarButtonItem *waitViewItem = [[UIBarButtonItem alloc] initWithCustomView:acView] ;
+    [self.navigationItem setRightBarButtonItems:@[waitViewItem]];
+    
     labNoteNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
     labNoteNoData.text = @"暂无数据";
     labNoteNoData.font = [UIFont systemFontOfSize:14];
@@ -59,10 +65,13 @@
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [tTableView reloadData];
-    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+//    [SVProgressHUD showWithStatus:DefaultRequestPrompt];
+    [self requestData];
+}
+-(void)requestData{
+    [acView startAnimating];
     [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
 }
-
 
 -(void)flushUI{
     if (allMyTicketArr.count == 0) {
@@ -76,13 +85,13 @@
 //活动状态，返回中文“进行中”、“已结束”、“未开始”
 #pragma mark - LYFlushViewDelegate
 - (void)startToFlushUp:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
+    [self requestData];
 }
 - (void)flushUpEnd:(NSObject *)ly{
     
 }
 - (void)startToFlushDown:(NSObject *)ly{
-    [[[HttpService sharedInstance] getRequestQueryMyTicketOrder:self]startAsynchronous];
+    [self requestData];
 }
 - (void)flushDownEnd:(NSObject *)ly{
     
@@ -176,6 +185,7 @@
 #pragma mark - AsyncHttpRequestDelegate
 - (void) requestDidFinish:(AsyncHttpRequest *) request code:(HttpResponseType )responseCode{
     [SVProgressHUD dismiss];
+    [acView stopAnimating];
     switch (request.m_requestType) {
             
         case HttpRequestType_XT_QUERY_MY_TICKETS:{

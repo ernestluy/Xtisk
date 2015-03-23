@@ -161,6 +161,7 @@
 		767812E01A830B0700CB4B08 /* PosterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812DE1A830B0700CB4B08 /* PosterCollectionViewCell.xib */; };
 		767812E91A83326F00CB4B08 /* MoreTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767812E81A83326F00CB4B08 /* MoreTableViewHeaderView.m */; };
 		767812EB1A83328500CB4B08 /* MoreTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767812EA1A83328500CB4B08 /* MoreTableViewHeaderView.xib */; };
+		767ACBF01ABFB6F9006774D7 /* filter_title_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767ACBEF1ABFB6F9006774D7 /* filter_title_line@2x.png */; };
 		767B6FD41AA55F1700D0FA54 /* TicketQueryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */; };
 		767B6FD51AA55F1700D0FA54 /* TicketQueryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */; };
 		767B6FD71AA57F5B00D0FA54 /* good_commend_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FD61AA57F5B00D0FA54 /* good_commend_yes@2x.png */; };
@@ -169,6 +170,14 @@
 		767B6FDE1AA5B46700D0FA54 /* guide_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDA1AA5B46700D0FA54 /* guide_3@2x.png */; };
 		767B6FDF1AA5B46700D0FA54 /* guide_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */; };
 		767B6FE21AA5B47800D0FA54 /* CustomMenuTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */; };
+		767FBB3E1ABD038B00CC4D45 /* LogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FBB3B1ABD038B00CC4D45 /* LogUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		767FBB3F1ABD038B00CC4D45 /* LogViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FBB3D1ABD038B00CC4D45 /* LogViewerController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		767FBB431ABD152400CC4D45 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767FBB421ABD152400CC4D45 /* MediaPlayer.framework */; };
+		767FBB471ABD15ED00CC4D45 /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767FBB461ABD15ED00CC4D45 /* libUPPayPlugin.a */; };
+		767FBB491ABD169500CC4D45 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767FBB481ABD169500CC4D45 /* CoreAudio.framework */; };
+		767FBB4B1ABD16BC00CC4D45 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767FBB4A1ABD16BC00CC4D45 /* AdSupport.framework */; };
+		767FBB4E1ABFA59B00CC4D45 /* NearFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FBB4D1ABFA59B00CC4D45 /* NearFilterView.m */; };
+		767FBB501ABFAF6B00CC4D45 /* btn_near_filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 767FBB4F1ABFAF6B00CC4D45 /* btn_near_filter@2x.png */; };
 		768AB0DB1AB6647900DB1869 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 768AB0DA1AB6647900DB1869 /* libbaidumapapi.a */; };
 		76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */; };
 		76C87C941A8C3D8300843060 /* AboutIshekouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C87C921A8C3D8300843060 /* AboutIshekouViewController.xib */; };
@@ -218,6 +227,9 @@
 		76C87D1D1A8CA8CE00843060 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D1C1A8CA8CE00843060 /* MessageUI.framework */; };
 		76C87D1F1A8CA8D700843060 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D1E1A8CA8D700843060 /* SystemConfiguration.framework */; };
 		76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87D201A8CA8E700843060 /* CoreGraphics.framework */; };
+		76CF83591ABAD3D0001FFFCD /* TicketPaySuccssViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CF83571ABAD3D0001FFFCD /* TicketPaySuccssViewController.m */; };
+		76CF835A1ABAD3D0001FFFCD /* TicketPaySuccssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CF83581ABAD3D0001FFFCD /* TicketPaySuccssViewController.xib */; };
+		76CF835C1ABAEFC3001FFFCD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CF835B1ABAEFC3001FFFCD /* Default.png */; };
 		76D018181AAFDE4600E6B168 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D018171AAFDE4600E6B168 /* arrow_down@2x.png */; };
 		76D0181B1AB010EA00E6B168 /* StatisTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181A1AB010EA00E6B168 /* StatisTicketView.m */; };
 		76D0181F1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D0181D1AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.m */; };
@@ -226,14 +238,13 @@
 		76D018271AB046E800E6B168 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D018251AB046E800E6B168 /* TestViewController.m */; };
 		76D018281AB046E800E6B168 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D018261AB046E800E6B168 /* TestViewController.xib */; };
 		76D0182D1AB164FF00E6B168 /* commend_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */; };
-		76D363FB1AB6F3AB002A32CF /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */; };
 		76D363FE1AB7B3F6002A32CF /* TicketTradeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D363FD1AB7B3F6002A32CF /* TicketTradeInfo.m */; };
 		76D364011AB7BC28002A32CF /* MyTicketOrderItemStatis.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D364001AB7BC28002A32CF /* MyTicketOrderItemStatis.m */; };
 		76D364031AB80ED4002A32CF /* line_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364021AB80ED4002A32CF /* line_black@2x.png */; };
 		76D364061AB83C4D002A32CF /* cell_del_no_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364041AB83C4D002A32CF /* cell_del_no_select@2x.png */; };
 		76D364071AB83C4D002A32CF /* cell_del_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364051AB83C4D002A32CF /* cell_del_select@2x.png */; };
 		76D3640A1AB8514F002A32CF /* CommentPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D364091AB8514F002A32CF /* CommentPad.m */; };
-		76D3640C1AB91D33002A32CF /* upay_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640B1AB91D33002A32CF /* upay_icon.png */; };
+		76D3640C1AB91D33002A32CF /* upay_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640B1AB91D33002A32CF /* upay_icon@2x.png */; };
 		76D3640E1AB91EC3002A32CF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640D1AB91EC3002A32CF /* Default@2x.png */; };
 		76D364111AB94E10002A32CF /* upay_fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D3640F1AB94E10002A32CF /* upay_fail.png */; };
 		76D364121AB94E10002A32CF /* upay_success.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D364101AB94E10002A32CF /* upay_success.png */; };
@@ -671,6 +682,7 @@
 		767812E71A83326F00CB4B08 /* MoreTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewHeaderView.h; sourceTree = "<group>"; };
 		767812E81A83326F00CB4B08 /* MoreTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewHeaderView.m; sourceTree = "<group>"; };
 		767812EA1A83328500CB4B08 /* MoreTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreTableViewHeaderView.xib; sourceTree = "<group>"; };
+		767ACBEF1ABFB6F9006774D7 /* filter_title_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter_title_line@2x.png"; sourceTree = "<group>"; };
 		767B6FD11AA55F1700D0FA54 /* TicketQueryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketQueryListViewController.h; sourceTree = "<group>"; };
 		767B6FD21AA55F1700D0FA54 /* TicketQueryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketQueryListViewController.m; sourceTree = "<group>"; };
 		767B6FD31AA55F1700D0FA54 /* TicketQueryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketQueryListViewController.xib; sourceTree = "<group>"; };
@@ -681,6 +693,17 @@
 		767B6FDB1AA5B46700D0FA54 /* guide_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_4@2x.png"; sourceTree = "<group>"; };
 		767B6FE01AA5B47800D0FA54 /* CustomMenuTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuTutorialController.h; sourceTree = "<group>"; };
 		767B6FE11AA5B47800D0FA54 /* CustomMenuTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuTutorialController.m; sourceTree = "<group>"; };
+		767FBB3A1ABD038B00CC4D45 /* LogUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogUtil.h; sourceTree = "<group>"; };
+		767FBB3B1ABD038B00CC4D45 /* LogUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogUtil.m; sourceTree = "<group>"; };
+		767FBB3C1ABD038B00CC4D45 /* LogViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerController.h; sourceTree = "<group>"; };
+		767FBB3D1ABD038B00CC4D45 /* LogViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerController.m; sourceTree = "<group>"; };
+		767FBB421ABD152400CC4D45 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		767FBB461ABD15ED00CC4D45 /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
+		767FBB481ABD169500CC4D45 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		767FBB4A1ABD16BC00CC4D45 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		767FBB4C1ABFA59B00CC4D45 /* NearFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearFilterView.h; sourceTree = "<group>"; };
+		767FBB4D1ABFA59B00CC4D45 /* NearFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearFilterView.m; sourceTree = "<group>"; };
+		767FBB4F1ABFAF6B00CC4D45 /* btn_near_filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_near_filter@2x.png"; sourceTree = "<group>"; };
 		768AB0DA1AB6647900DB1869 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		76C87C901A8C3D8300843060 /* AboutIshekouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutIshekouViewController.h; sourceTree = "<group>"; };
 		76C87C911A8C3D8300843060 /* AboutIshekouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutIshekouViewController.m; sourceTree = "<group>"; };
@@ -761,6 +784,10 @@
 		76C87D1C1A8CA8CE00843060 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		76C87D1E1A8CA8D700843060 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		76C87D201A8CA8E700843060 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		76CF83561ABAD3D0001FFFCD /* TicketPaySuccssViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPaySuccssViewController.h; sourceTree = "<group>"; };
+		76CF83571ABAD3D0001FFFCD /* TicketPaySuccssViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPaySuccssViewController.m; sourceTree = "<group>"; };
+		76CF83581ABAD3D0001FFFCD /* TicketPaySuccssViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketPaySuccssViewController.xib; sourceTree = "<group>"; };
+		76CF835B1ABAEFC3001FFFCD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		76D018171AAFDE4600E6B168 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
 		76D018191AB010EA00E6B168 /* StatisTicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisTicketView.h; sourceTree = "<group>"; };
 		76D0181A1AB010EA00E6B168 /* StatisTicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisTicketView.m; sourceTree = "<group>"; };
@@ -773,7 +800,6 @@
 		76D018251AB046E800E6B168 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		76D018261AB046E800E6B168 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		76D0182C1AB164FF00E6B168 /* commend_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commend_bar@2x.png"; sourceTree = "<group>"; };
-		76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
 		76D363F91AB6F3AB002A32CF /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
 		76D363FA1AB6F3AB002A32CF /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
 		76D363FC1AB7B3F6002A32CF /* TicketTradeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketTradeInfo.h; sourceTree = "<group>"; };
@@ -785,7 +811,7 @@
 		76D364051AB83C4D002A32CF /* cell_del_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_del_select@2x.png"; sourceTree = "<group>"; };
 		76D364081AB8514F002A32CF /* CommentPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentPad.h; sourceTree = "<group>"; };
 		76D364091AB8514F002A32CF /* CommentPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentPad.m; sourceTree = "<group>"; };
-		76D3640B1AB91D33002A32CF /* upay_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_icon.png; sourceTree = "<group>"; };
+		76D3640B1AB91D33002A32CF /* upay_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upay_icon@2x.png"; sourceTree = "<group>"; };
 		76D3640D1AB91EC3002A32CF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		76D3640F1AB94E10002A32CF /* upay_fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_fail.png; sourceTree = "<group>"; };
 		76D364101AB94E10002A32CF /* upay_success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upay_success.png; sourceTree = "<group>"; };
@@ -1012,20 +1038,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */,
+				767FBB4B1ABD16BC00CC4D45 /* AdSupport.framework in Frameworks */,
+				76C87D0F1A8CA88100843060 /* AudioToolbox.framework in Frameworks */,
+				767FBB491ABD169500CC4D45 /* CoreAudio.framework in Frameworks */,
+				767FBB431ABD152400CC4D45 /* MediaPlayer.framework in Frameworks */,
 				ED2D49201AAACB6F007CC065 /* MobileCoreServices.framework in Frameworks */,
 				EDE4B3E21AA0C2C50098CCF6 /* CFNetwork.framework in Frameworks */,
 				760BF2451A8DE6D70088DBA2 /* CoreLocation.framework in Frameworks */,
 				760BF1DE1A8CA9FA0088DBA2 /* libz.1.1.3.dylib in Frameworks */,
-				76C87D211A8CA8E700843060 /* CoreGraphics.framework in Frameworks */,
 				76C87D1F1A8CA8D700843060 /* SystemConfiguration.framework in Frameworks */,
 				76C87D1D1A8CA8CE00843060 /* MessageUI.framework in Frameworks */,
 				76C87D1B1A8CA8C600843060 /* MapKit.framework in Frameworks */,
 				76C87D191A8CA8BD00843060 /* CoreTelephony.framework in Frameworks */,
+				767FBB471ABD15ED00CC4D45 /* libUPPayPlugin.a in Frameworks */,
 				76C87D171A8CA8B300843060 /* Security.framework in Frameworks */,
 				76C87D151A8CA8A600843060 /* OpenGLES.framework in Frameworks */,
 				76C87D131A8CA89300843060 /* Social.framework in Frameworks */,
 				76C87D111A8CA88B00843060 /* Accounts.framework in Frameworks */,
-				76C87D0F1A8CA88100843060 /* AudioToolbox.framework in Frameworks */,
 				76C87D0D1A8CA87700843060 /* AVFoundation.framework in Frameworks */,
 				76C87D0B1A8CA86600843060 /* CoreMedia.framework in Frameworks */,
 				76C87D091A8CA49200843060 /* libstdc++.dylib in Frameworks */,
@@ -1045,7 +1075,6 @@
 				76C87CFD1A8CA43E00843060 /* libSocialTumblr.a in Frameworks */,
 				76C87D021A8CA43E00843060 /* libUMSocial_Sdk_Shake_1.0.a in Frameworks */,
 				ED25874C1A7D1B95008EB344 /* libsqlite3.0.dylib in Frameworks */,
-				76D363FB1AB6F3AB002A32CF /* libUPPayPlugin.a in Frameworks */,
 				76C87CFE1A8CA43E00843060 /* libSocialTwitter.a in Frameworks */,
 				ED2587391A7D1893008EB344 /* libxml2.dylib in Frameworks */,
 				76C87CF51A8CA43E00843060 /* libSocialFacebook.a in Frameworks */,
@@ -1264,6 +1293,8 @@
 				EDCB5C481AB3E9CD00FC50EC /* MyTicketsListTableViewCell.h */,
 				EDCB5C491AB3E9CD00FC50EC /* MyTicketsListTableViewCell.m */,
 				EDCB5C4A1AB3E9CD00FC50EC /* MyTicketsListTableViewCell.xib */,
+				767FBB4C1ABFA59B00CC4D45 /* NearFilterView.h */,
+				767FBB4D1ABFA59B00CC4D45 /* NearFilterView.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1307,6 +1338,7 @@
 		7664BA971AA6D00400E59DF0 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				76CF835B1ABAEFC3001FFFCD /* Default.png */,
 				76D3640D1AB91EC3002A32CF /* Default@2x.png */,
 				7664BA981AA6D00400E59DF0 /* Default-568h@2x.png */,
 				7664BA991AA6D00400E59DF0 /* icon-29@2x.png */,
@@ -1497,6 +1529,9 @@
 				EDCB5C581AB40E2900FC50EC /* TicketPayViewController.h */,
 				EDCB5C591AB40E2900FC50EC /* TicketPayViewController.m */,
 				EDCB5C5A1AB40E2900FC50EC /* TicketPayViewController.xib */,
+				76CF83561ABAD3D0001FFFCD /* TicketPaySuccssViewController.h */,
+				76CF83571ABAD3D0001FFFCD /* TicketPaySuccssViewController.m */,
+				76CF83581ABAD3D0001FFFCD /* TicketPaySuccssViewController.xib */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1571,6 +1606,17 @@
 				76D364161AB94E66002A32CF /* UPayResultView.xib */,
 			);
 			path = more;
+			sourceTree = "<group>";
+		};
+		767FBB391ABD038B00CC4D45 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				767FBB3A1ABD038B00CC4D45 /* LogUtil.h */,
+				767FBB3B1ABD038B00CC4D45 /* LogUtil.m */,
+				767FBB3C1ABD038B00CC4D45 /* LogViewerController.h */,
+				767FBB3D1ABD038B00CC4D45 /* LogViewerController.m */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		768AB0D91AB6647900DB1869 /* Release-iphoneos */ = {
@@ -1787,7 +1833,7 @@
 		76D363F71AB6F3AB002A32CF /* UPPayPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				76D363F81AB6F3AB002A32CF /* libUPPayPlugin.a */,
+				767FBB461ABD15ED00CC4D45 /* libUPPayPlugin.a */,
 				76D363F91AB6F3AB002A32CF /* UPPayPlugin.h */,
 				76D363FA1AB6F3AB002A32CF /* UPPayPluginDelegate.h */,
 			);
@@ -1797,6 +1843,9 @@
 		ED2586D21A7D14A1008EB344 = {
 			isa = PBXGroup;
 			children = (
+				767FBB4A1ABD16BC00CC4D45 /* AdSupport.framework */,
+				767FBB481ABD169500CC4D45 /* CoreAudio.framework */,
+				767FBB421ABD152400CC4D45 /* MediaPlayer.framework */,
 				ED2D491F1AAACB6F007CC065 /* MobileCoreServices.framework */,
 				EDE4B3E11AA0C2C50098CCF6 /* CFNetwork.framework */,
 				760BF2441A8DE6D70088DBA2 /* CoreLocation.framework */,
@@ -1888,6 +1937,7 @@
 		ED25870C1A7D166D008EB344 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				767FBB391ABD038B00CC4D45 /* Log */,
 				76D363F71AB6F3AB002A32CF /* UPPayPlugin */,
 				ED2D49021AAAC844007CC065 /* AFNetworking */,
 				7664BAE21AA8523800E59DF0 /* UMessage_Sdk_1.1.0 */,
@@ -2003,10 +2053,12 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				767ACBEF1ABFB6F9006774D7 /* filter_title_line@2x.png */,
+				767FBB4F1ABFAF6B00CC4D45 /* btn_near_filter@2x.png */,
 				76D364181AB9814B002A32CF /* com_submit@2x.png */,
 				76D3640F1AB94E10002A32CF /* upay_fail.png */,
 				76D364101AB94E10002A32CF /* upay_success.png */,
-				76D3640B1AB91D33002A32CF /* upay_icon.png */,
+				76D3640B1AB91D33002A32CF /* upay_icon@2x.png */,
 				76D364041AB83C4D002A32CF /* cell_del_no_select@2x.png */,
 				76D364051AB83C4D002A32CF /* cell_del_select@2x.png */,
 				76D364021AB80ED4002A32CF /* line_black@2x.png */,
@@ -2332,6 +2384,7 @@
 				ED8C77E81A9357E4009C8286 /* line_gray.png in Resources */,
 				7678126C1A80736600CB4B08 /* base_back@2x.png in Resources */,
 				76C87CF01A8CA43E00843060 /* UMShareEditViewControlleriPad.xib in Resources */,
+				76CF835C1ABAEFC3001FFFCD /* Default.png in Resources */,
 				ED8C78381A96F6CD009C8286 /* heart_good_no@2x.png in Resources */,
 				764D602E1A884CD800B186A5 /* icon_service@2x.png in Resources */,
 				764D60AD1A8B4EFE00B186A5 /* SettingViewController.xib in Resources */,
@@ -2339,6 +2392,7 @@
 				760BF2431A8DD0410088DBA2 /* GeocodeDemoViewController.xib in Resources */,
 				ED8C783F1A96FCAC009C8286 /* ActivitySignUpViewController.xib in Resources */,
 				ED8C77FA1A94D36D009C8286 /* DetailFoodTableViewCell.xib in Resources */,
+				767ACBF01ABFB6F9006774D7 /* filter_title_line@2x.png in Resources */,
 				76C87CE91A8CA43E00843060 /* UMSocialLocalizable.strings in Resources */,
 				764D608D1A8AEBEE00B186A5 /* more_cell_ticket_icon@2x.png in Resources */,
 				76C87CF21A8CA43E00843060 /* UMSnsAccountViewController.xib in Resources */,
@@ -2397,6 +2451,7 @@
 				76C87D011A8CA43E00843060 /* ios-social-sdk-shake.html in Resources */,
 				764D60891A8AEBEE00B186A5 /* more_cell_activity_icon@2x.png in Resources */,
 				76C87CEE1A8CA43E00843060 /* UMSCommentInputControlleriPad.xib in Resources */,
+				76CF835A1ABAD3D0001FFFCD /* TicketPaySuccssViewController.xib in Resources */,
 				76D364031AB80ED4002A32CF /* line_black@2x.png in Resources */,
 				764D609B1A8AF41C00B186A5 /* login_tf_acc_head@2x.png in Resources */,
 				764D608A1A8AEBEE00B186A5 /* more_cell_recommend_icon@2x.png in Resources */,
@@ -2441,7 +2496,7 @@
 				ED8C77D81A930D62009C8286 /* FoodListTableViewCell.xib in Resources */,
 				767B6FDC1AA5B46700D0FA54 /* guide_1@2x.png in Resources */,
 				76D018201AB0135B00E6B168 /* TicketNumsEdit2TableViewCell.xib in Resources */,
-				76D3640C1AB91D33002A32CF /* upay_icon.png in Resources */,
+				76D3640C1AB91D33002A32CF /* upay_icon@2x.png in Resources */,
 				7664BAA31AA6D00400E59DF0 /* icon@2x.png in Resources */,
 				76D018281AB046E800E6B168 /* TestViewController.xib in Resources */,
 				767812A01A80A71500CB4B08 /* tab_bar_1_selected@2x.png in Resources */,
@@ -2452,6 +2507,7 @@
 				7664BB971AAEEE8D00E59DF0 /* TicketNumsEdit1TableViewCell.xib in Resources */,
 				ED8C77CB1A930692009C8286 /* near_food_1@2x.png in Resources */,
 				76D364191AB9814B002A32CF /* com_submit@2x.png in Resources */,
+				767FBB501ABFAF6B00CC4D45 /* btn_near_filter@2x.png in Resources */,
 				764D60881A8AEBEE00B186A5 /* default_header@2x.png in Resources */,
 				76D364171AB94E66002A32CF /* UPayResultView.xib in Resources */,
 				ED8C78001A94D6F3009C8286 /* up_cn@2x.png in Resources */,
@@ -2544,6 +2600,7 @@
 				7664BAB21AA7F1AC00E59DF0 /* ShipLineItem.m in Sources */,
 				7664BAE81AA947B600E59DF0 /* MessageListViewController.m in Sources */,
 				767812901A80A00F00CB4B08 /* MessageTabViewController.m in Sources */,
+				767FBB4E1ABFA59B00CC4D45 /* NearFilterView.m in Sources */,
 				ED8C781F1A95F7BF009C8286 /* ShopMenuCollectionViewCell.m in Sources */,
 				ED2587481A7D1B4A008EB344 /* FMDatabasePool.m in Sources */,
 				ED2587491A7D1B4A008EB344 /* FMDatabaseQueue.m in Sources */,
@@ -2582,6 +2639,7 @@
 				767812BD1A80BCC700CB4B08 /* GCDAsyncSocket.m in Sources */,
 				76C87C931A8C3D8300843060 /* AboutIshekouViewController.m in Sources */,
 				ED2587551A7FA9D8008EB344 /* LoginViewController.m in Sources */,
+				767FBB3E1ABD038B00CC4D45 /* LogUtil.m in Sources */,
 				EDCA83231AAB45C500AD2FB3 /* MyActivity.m in Sources */,
 				ED2587721A8240BB008EB344 /* GridMainView.m in Sources */,
 				ED8C78511A970FF8009C8286 /* AboutIshekouHeaderView.m in Sources */,
@@ -2595,8 +2653,10 @@
 				764D605F1A89DDE500B186A5 /* ActivityItem.m in Sources */,
 				76D364011AB7BC28002A32CF /* MyTicketOrderItemStatis.m in Sources */,
 				ED8C785D1A973C3C009C8286 /* MsgTicketListViewController.m in Sources */,
+				767FBB3F1ABD038B00CC4D45 /* LogViewerController.m in Sources */,
 				ED2D491B1AAAC844007CC065 /* AFURLConnectionOperation.m in Sources */,
 				ED25870F1A7D1686008EB344 /* Util.m in Sources */,
+				76CF83591ABAD3D0001FFFCD /* TicketPaySuccssViewController.m in Sources */,
 				ED8C78311A96F149009C8286 /* ActivityDetailViewController.m in Sources */,
 				ED8C77BC1A92FD23009C8286 /* NearMenuCollectionViewCell.m in Sources */,
 				764D60461A88919200B186A5 /* PrivateViewController.m in Sources */,

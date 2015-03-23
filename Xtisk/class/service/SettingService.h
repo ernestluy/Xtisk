@@ -39,6 +39,10 @@
 
 @property(nonatomic)int badgeMsg;
 @property(nonatomic)int badgeTicket;
+
+@property(nonatomic)int filterSelectedIndex;
+
+
 +(SettingService *)sharedInstance;
 
 -(void)loginSucWithUser:(IUser *)tUser;

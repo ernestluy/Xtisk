@@ -46,9 +46,17 @@
     textFieldComfirm.placeholder = @"再次输入新密码";
     
     
+    UILabel *labNote = [[UILabel alloc]initWithFrame:CGRectMake(tRect.origin.x, CGRectGetMaxY(textFieldComfirm.frame)+10, tRect.size.width, 50)];
+    labNote.textColor = _rgb2uic(0x8da3ae, 1);
+    labNote.numberOfLines  = 0;
+    labNote.text = @"密码设置长度为6~20个字符，包含数字、字母、下划线等字符，字母区分大小写";
+    labNote.lineBreakMode = NSLineBreakByWordWrapping;
+    labNote.font = [UIFont systemFontOfSize:12];
+    [self.view addSubview:labNote];
+    
     UIButton *btnOrder = [UIButton buttonWithType:UIButtonTypeCustom];
 
-    btnOrder.frame = CGRectMake(tRect.origin.x, CGRectGetMaxY(textFieldComfirm.frame)+10, tRect.size.width, tfHeight);
+    btnOrder.frame = CGRectMake(tRect.origin.x, CGRectGetMaxY(labNote.frame)+10, tRect.size.width, tfHeight);
     [btnOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnOrder setTitle:@"确定" forState:UIControlStateNormal];
     [btnOrder setBackgroundImage:[UIImage imageNamed:@"login_submit"] forState:UIControlStateNormal];

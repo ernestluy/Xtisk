@@ -73,14 +73,14 @@
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.imageView.image = [UIImage imageNamed:[iconArr objectAtIndex:indexPath.row]];
         UILabel *tmpLabel = [CTLCustom getCusRightLabel:cRect];
-        [cell addSubview:tmpLabel];
+//        [cell addSubview:tmpLabel];
         tmpLabel.text = [detailArr objectAtIndex:indexPath.row];
         tmpLabel.textColor = defaultTextColor;
         if (0 == indexPath.row || 3 == indexPath.row) {
             cell.selectionStyle =  UITableViewCellSelectionStyleNone;
         }
         if (1 == indexPath.row || 2 == indexPath.row) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     
@@ -99,10 +99,10 @@
 {
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (1 == indexPath.row) {
-        NSString *telNum = [NSString stringWithFormat:@"tel://%@",[detailArr objectAtIndex:1]];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
-    }
+//    if (1 == indexPath.row) {
+//        NSString *telNum = [NSString stringWithFormat:@"tel://%@",[detailArr objectAtIndex:1]];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
+//    }
 }
 
 

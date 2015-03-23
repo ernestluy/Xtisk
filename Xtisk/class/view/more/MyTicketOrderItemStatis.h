@@ -13,5 +13,6 @@
     
 }
 
+
 -(void)setData:(MyTicketOrderDetail *)order;
 @end

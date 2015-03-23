@@ -16,6 +16,7 @@
 #import "PublicDefine.h"
 #import "SettingViewController.h"
 #import "SettingService.h"
+#import <AVFoundation/AVFoundation.h>
 @interface PrivateViewController ()
 {
     NSArray *titleArr0;
@@ -524,6 +525,22 @@
             [SVProgressHUD showErrorWithStatus:@"模拟器不支持拍照" duration:2];
             return;
         }
+        
+        NSString *mediaType = AVMediaTypeVideo;
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+        
+        if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+            
+            NSLog(@"相机权限受限");
+            //        [SVProgressHUD showErrorWithStatus:@"相机权限受限" duration:2];
+            NSString *strNote = @"相机访问权限受限,请按照以下步骤操作:\n 设置->i蛇口->相机->打开 ";
+            XT_SHOWALERT(strNote);
+            return;
+            
+        }
+        
+        
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     [self presentViewController:picker animated:YES completion:nil];

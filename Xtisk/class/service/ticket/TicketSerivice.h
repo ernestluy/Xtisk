@@ -30,8 +30,17 @@
 @property(nonatomic,strong)VoyageItem *toVoyageItem;
 @property(nonatomic,strong)VoyageItem *returnVoyageItem;
 
+@property(nonatomic,strong)NSMutableArray *   arrOrderSuc;  //下单成功的船票订单
+
+@property(nonatomic,strong)NSDate *tMinDate;
+@property(nonatomic,strong)NSDate *tMaxDate;
+
+@property(nonatomic,strong)NSDateFormatter *ticketDateFormatter;
+
 
 +(TicketSerivice *)sharedInstance;
+
+-(void)clearData;
 
 -(TicketOrder *)createTicketOrder;
 
