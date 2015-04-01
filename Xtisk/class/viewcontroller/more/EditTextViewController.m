@@ -36,7 +36,7 @@
         self.title = @"修改签名";
         self.labXhb.hidden = NO;
         self.tTextView.text = [SettingService sharedInstance].iUser.signature;
-        limitNum = 26;
+        limitNum = 32;
     }else if (tType == PrivateEditTextCom){
         self.title = @"企业";
         self.tTextView.text = [SettingService sharedInstance].iUser.enterprise;

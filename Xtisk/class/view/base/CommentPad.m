@@ -161,6 +161,10 @@
         
     }
 }
+-(void)clearData{
+    self.textView.text = @"";
+    labLimit.text = [NSString stringWithFormat:@"%d",limitNum];
+}
 
 #pragma mark - keyboard
 /*
@@ -218,6 +222,10 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)tv{
 //    NSLog(@"textViewDidChange");
+    if (tv.text.length > limitNum)
+    {
+        tv.text = [tv.text substringToIndex:limitNum];
+    }
     int dd = limitNum - (int)textView.text.length;
     labLimit.text = [NSString stringWithFormat:@"%d",dd];
     if (dd<0) {

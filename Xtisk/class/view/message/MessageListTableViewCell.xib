@@ -24,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hi,亲爱的小伙伴们" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fop-pq-Zxa">
-                        <rect key="frame" x="50" y="26" width="187" height="21"/>
+                        <rect key="frame" x="50" y="27" width="233" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                 <outlet property="labTime" destination="NKi-hx-1OM" id="cAg-ih-mZt"/>
                 <outlet property="labTitle" destination="9Cv-0f-vb3" id="fgD-G2-vnU"/>
             </connections>
-            <point key="canvasLocation" x="295" y="239"/>
+            <point key="canvasLocation" x="295" y="238"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -52,9 +52,12 @@
 #import "TicketOrderListItem.h"
 #import "TicketTradeInfo.h"
 #import "MsgPlaySound.h"
+#import "LogUtil.h"
 BMKMapManager* _mapManager;
 
 #define kNeedCheckAuthentication 1 // 授权开关
+
+#define authorityTicket  NO
 
 #ifndef UnicomBoxLocalizedStrings
 #define UnicomBoxLocalizedStrings(key) \
@@ -66,8 +69,22 @@ NSLocalizedStringFromTable(key, @"Localizable", nil)
 NSLocalizedStringFromTable(key, @"SipLocalizable", nil)
 #endif
 
-#define SERVICE_HOME @"116.7.243.122:10080/ipop_tms"//http://ip:port/ipop_tms
-#define RESOURSE_HOME @"http://116.7.243.122:10080/ipop_tms/"
+#define SERVICE_DIS  0
+
+#if SERVICE_DIS
+  #define SERVICE_HOME @"tms.ishekou.com"
+#else
+  #define SERVICE_HOME @"116.7.243.122:10080"
+
+#endif
+/*
+ 测试机后台
+ http://116.7.243.122:10080/
+ 正是环境
+ http://tms.ishekou.com/
+ */
+//#define SERVICE_HOME @"tms.ishekou.com"//@"116.7.243.122:10080/ipop_tms"//http://ip:port/ipop_tms
+#define RESOURSE_HOME [NSString stringWithFormat:@"http://%@/",SERVICE_HOME]
  #define MAX_PACKET_LEN 40000
 
 typedef void(^Block)(void);
@@ -115,6 +132,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 #define PathDocFile(tpath)      [NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),tpath]
 
 #define tPathTmpDir             [NSString stringWithFormat:@"%@/Documents/tmp",NSHomeDirectory()]
+
+#define PathCacheFile(tpath)		[NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),tpath]
 
 #define SEARCH_FONT_SIZE  14
 
@@ -248,8 +267,8 @@ typedef enum  {
 }TicketOrderDetailAction ;
 
 
-#define IshekouWXAppId     @"wxd930ea5d5a258f4f"
-#define IshekouWXAppSecret @"db426a9829e4b49a0dcac7b4162da6b6"
+#define IshekouWXAppId     @"wxe3a03153f3712ed6"//@"wxd930ea5d5a258f4f"
+#define IshekouWXAppSecret @"38d5dfc8128939d2f6deaa22b0382e53"//@"db426a9829e4b49a0dcac7b4162da6b6"
 #define UmengAppkey @"5211818556240bc9ee01db2f"
 #import "UMSocialControllerService.h"
 #import "UMSocialShakeService.h"
@@ -269,8 +288,9 @@ typedef enum  {
 
 #define DefaultImageMinSize 1000
 
-#define XT_CORNER_RADIUS  5
-#define XT_CELL_CORNER_RADIUS 8
+#define XT_CORNER_RADIUS  3
+#define XT_CELL_CORNER_RADIUS 5
+
 
 
 typedef enum  {
@@ -334,6 +354,8 @@ typedef enum  {
 
 #define tagWaitToPay  0
 #define tagHaveToPay  1
+
+
 
 
 

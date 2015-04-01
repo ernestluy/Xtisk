@@ -174,6 +174,7 @@
         [SVProgressHUD showErrorWithStatus:@"太多啦，删几个字吧！" duration:3];
         return;
     }
+    [commentPad hide];
     [SVProgressHUD showWithStatus:DefaultRequestPrompt];
     if (self.vcType == CommendVcStore) {//店铺评论
         [[[HttpService sharedInstance] getRequestStoreComments:self storeId:int2str(self.storeId) content:cPad.textView.text]startAsynchronous];
@@ -250,14 +251,35 @@
         cell.textLabel.textColor = [UIColor darkGrayColor];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
+    
 //    cell.labContent.backgroundColor = [UIColor yellowColor];
 //    CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath
     CGRect rect = [tv rectForRowAtIndexPath:indexPath];
     cell.labContent.frame = CGRectMake(27, 52, 274, rect.size.height - 52);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    
     CommentsItem *ci = [mComArr objectAtIndex:indexPath.row];
     [cell setDataWith:ci];
+    
+    
+    UIImage *tImg = [XTFileManager getCacheFolderFileWithUrlPath:ci.userImg];
+    if (!tImg) {
+        //down_img_small.png
+        cell.imgHeader.contentMode = DefaultImageViewInitMode;
+        cell.imgHeader.image = [UIImage imageNamed:@"down_img_small.png"];
+        AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:ci.userImg
+                                                                                       target:self
+                                                                                         type:HttpRequestType_Img_LoadDown];
+        request.tTag = (int)indexPath.row;
+        request.indexPath = indexPath;
+        [request startAsynchronous];
+    }else{
+        cell.imgHeader.contentMode =  DefaultImageViewContentMode;
+        cell.imgHeader.image = tImg;
+    }
+    
+    
     return cell;
     
     
@@ -298,7 +320,13 @@
                 }
                 NSLog(@"img.len:%d",(int)data.length);
                 UIImage *rImage = [UIImage imageWithData:data];
-                
+                CommentsItem *ci = [mComArr objectAtIndex:ir.indexPath.row];
+                [XTFileManager saveCacheFolderFileWithUrlPath:ci.userImg with:rImage];
+                DetailFoodCommendTableViewCell  * pc = (DetailFoodCommendTableViewCell * )[self.tTableView cellForRowAtIndexPath:ir.indexPath];
+                if (pc) {
+                    pc.imgHeader.contentMode = DefaultImageViewContentMode;
+                    pc.imgHeader.image = rImage;
+                }
                 
                 
             }else{
@@ -362,7 +390,8 @@
                     }
                     [SVProgressHUD showSuccessWithStatus:@"评价成功" duration:DefaultRequestDonePromptTime];
                     [commentPad hide];
-                    commentPad.textView.text = @"";
+                    [commentPad clearData];
+//                    commentPad.textView.text = @"";
                     [self.tTableView upToStartFlush];
                 }else{
                     [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];

@@ -22,7 +22,7 @@
     self =[super initWithServiceAPI:(NSString *)turl target:requestDelegate type:type];
     
     [self.urlRequest setValue:@"*" forHTTPHeaderField:@"Accept-Encoding"];
-    self.urlRequest.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+//    self.urlRequest.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     // this will make sure the request always returns the cached image
     
     

@@ -310,11 +310,30 @@
                 cell.textLabel.textColor = [UIColor darkGrayColor];
                 cell.textLabel.font = [UIFont systemFontOfSize:14];
             }
+            cell.imgHeader.layer.cornerRadius = cell.imgHeader.frame.size.width/2;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             CGRect rect = [tv rectForRowAtIndexPath:indexPath];
             cell.labContent.frame = CGRectMake(27, 52, 274, rect.size.height - 52);
             CommentsItem *ci = [comArr objectAtIndex:(indexPath.row - 1)];
             [cell setDataWith:ci];
+            
+            UIImage *tImg = [XTFileManager getCacheFolderFileWithUrlPath:ci.userImg];
+            if (!tImg) {
+                //down_img_small.png
+                cell.imgHeader.contentMode = DefaultImageViewInitMode;
+                cell.imgHeader.image = [UIImage imageNamed:@"down_img_small.png"];
+                AsyncImgDownLoadRequest *request = [[AsyncImgDownLoadRequest alloc]initWithServiceAPI:ci.userImg
+                                                                                               target:self
+                                                                                                 type:HttpRequestType_Img_LoadDown];
+                request.tTag = 2;
+                request.indexPath = indexPath;
+                [request startAsynchronous];
+            }else{
+                cell.imgHeader.contentMode =  DefaultImageViewContentMode;
+                cell.imgHeader.image = tImg;
+            }
+    
+            
             return cell;
         }
         
@@ -408,7 +427,13 @@
                         cell.imgHeader.contentMode = DefaultImageViewContentMode;
                     }
                 }else if (2 == ir.tTag){
-                    
+                    CommentsItem *ci = [comArr objectAtIndex:ir.indexPath.row];
+                    [XTFileManager saveCacheFolderFileWithUrlPath:ci.userImg with:rImage];
+                    DetailFoodCommendTableViewCell  * pc = (DetailFoodCommendTableViewCell * )[self.tTableView cellForRowAtIndexPath:ir.indexPath];
+                    if (pc) {
+                        pc.imgHeader.contentMode = DefaultImageViewContentMode;
+                        pc.imgHeader.image = rImage;
+                    }
                 }
                 
                 
@@ -460,6 +485,8 @@
                         self.mStoreItem.isFavorite = [[dic objectForKey:@"isFavorite"] boolValue];
                     }
                     [self setDataWithStoreInfo:self.mStoreItem];
+                    
+                    [SettingService sharedInstance].selectedStoreItem.favoritePeople = self.mStoreItem.favoritePeople;
                     NSString *strNote = @"点赞成功";
                     if (!self.mStoreItem.isFavorite) {
                         strNote = @"已经取消点赞";

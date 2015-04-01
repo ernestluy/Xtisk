@@ -183,6 +183,12 @@
 //            [[SettingService sharedInstance] PermissionBaiduMap];
 //            BaiduMapViewController *bv = [[BaiduMapViewController alloc] initWithLong:114.056 lat:22.552];
 //            [self.navigationController pushViewController:bv animated:YES];
+            
+            if (!authorityTicket) {
+                [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
+                return;
+            }
+            
             if (![[SettingService sharedInstance] isLogin]){
                 MyTicketViewController *mtc = [[MyTicketViewController alloc] init];
                 LoginViewController *lv = [[LoginViewController alloc]initWithVc:mtc];
@@ -208,11 +214,13 @@
             break;
         }
         case 2:{//分享
-            [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:@"http://code4app.com/"];
-            NSArray *tmpArr = @[UMShareToSina,UMShareToTencent,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite];
-            NSString *shareText = @"程序员最 傻逼 的事情就是：重复造轮子。我们不需要造轮子，我们应该将我们的聪明才智发挥到其他更 牛逼 的创意上去。所以，我们做了 Code4App。 http://code4app.com/";             //分享内嵌文字
+            NSString *tUrl = @"http://udm.ishekou.com:82/DownloadAction!toDownloadPage.action";
+            [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:tUrl];
+            NSArray *tmpArr = @[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,UMShareToTencent,UMShareToQzone];
+            NSString *shareText = @"为蛇口网谷企业员工，提供周边订餐服务，船票服务，周边美食，园区活动，拼车等服务";             //分享内嵌文字
             UIImage *shareImage = [UIImage imageNamed:@"index_header_icon"];          //分享内嵌图片
             
+            [Util snsShareInitDataWith:shareText url:tUrl];
             //调用快速分享接口
             [UMSocialSnsService presentSnsIconSheetView:self
                                                  appKey:UmengAppkey

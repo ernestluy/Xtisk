@@ -62,6 +62,7 @@ typedef enum HttpRequestType{
     
     HttpRequestType_XT_DEL_MYACTIVITY,
     
+    HttpRequestType_XT_TIME,
     
     HttpRequestType_XT_UPLOAD_DEVICE_TOKEN,
     HttpRequestType_XT_UPDATE_IMG,

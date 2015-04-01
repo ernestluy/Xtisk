@@ -16,7 +16,8 @@
 
 -(void)setData:(MyTicketOrderDetail*)order{
     IUser *tUser = [SettingService sharedInstance].iUser;
-    self.labCode.text = [NSString stringWithFormat:@"订单号:%d",order.orderId];
+    MyTicketItem *tItem = [order.ticketList objectAtIndex:0];
+    self.labCode.text = [NSString stringWithFormat:@"取票编号:%@",tItem.getId];
     self.labName.text = [NSString stringWithFormat:@"亲爱的%@,您已购",tUser.nickName];
     
     if (order.ticketList.count > 0) {

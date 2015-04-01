@@ -114,7 +114,7 @@
     theTextField.returnKeyType = UIReturnKeyNext;
     theTextField.clearButtonMode = YES;
     theTextField.placeholder = @"请输入";
-    theTextField.textColor = defaultTextGrayColor;
+    theTextField.textColor = defaultTextColor;
     theTextField.font = [UIFont systemFontOfSize:15];
     return theTextField;
 }

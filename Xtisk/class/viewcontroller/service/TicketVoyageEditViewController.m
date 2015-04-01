@@ -108,9 +108,9 @@
     self.title = @"选择航班";
     if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType) {
         if (TicketVoyageStepFirst == tStep) {
-            self.title = @"选择航班-起航";
+            self.title = @"选择航班-启程";
         }else if(TicketVoyageStepSecond == tStep){
-            self.title = @"选择航班-返航";
+            self.title = @"选择航班-返程";
         }
         
     }else if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){

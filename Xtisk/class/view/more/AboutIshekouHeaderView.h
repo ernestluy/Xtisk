@@ -10,4 +10,6 @@
 
 @interface AboutIshekouHeaderView : UIView
 
+
+@property(nonatomic,weak)IBOutlet UILabel *labVersion;
 @end

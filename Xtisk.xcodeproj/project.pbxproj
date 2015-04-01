@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7608EAFC1ACA52DF00211B2A /* activity_bottom_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7608EAFB1ACA52DF00211B2A /* activity_bottom_bar@2x.png */; };
 		760BF1DE1A8CA9FA0088DBA2 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 760BF1DD1A8CA9FA0088DBA2 /* libz.1.1.3.dylib */; };
 		760BF1E51A8CB7B60088DBA2 /* BaiduMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */; };
 		760BF1E61A8CB7B60088DBA2 /* BaiduMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760BF1E41A8CB7B60088DBA2 /* BaiduMapViewController.xib */; };
@@ -400,6 +401,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7608EAFB1ACA52DF00211B2A /* activity_bottom_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_bottom_bar@2x.png"; sourceTree = "<group>"; };
 		760BF1DD1A8CA9FA0088DBA2 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		760BF1E21A8CB7B60088DBA2 /* BaiduMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMapViewController.h; sourceTree = "<group>"; };
 		760BF1E31A8CB7B60088DBA2 /* BaiduMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduMapViewController.m; sourceTree = "<group>"; };
@@ -819,7 +821,7 @@
 		76D364141AB94E4F002A32CF /* UPayResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPayResultView.m; sourceTree = "<group>"; };
 		76D364161AB94E66002A32CF /* UPayResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UPayResultView.xib; sourceTree = "<group>"; };
 		76D364181AB9814B002A32CF /* com_submit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_submit@2x.png"; sourceTree = "<group>"; };
-		ED2586DB1A7D14A1008EB344 /* Xtisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xtisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED2586DB1A7D14A1008EB344 /* ishekou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ishekou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2586DF1A7D14A1008EB344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2586E01A7D14A1008EB344 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED2586E21A7D14A1008EB344 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1875,7 +1877,7 @@
 		ED2586DC1A7D14A1008EB344 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED2586DB1A7D14A1008EB344 /* Xtisk.app */,
+				ED2586DB1A7D14A1008EB344 /* ishekou.app */,
 				ED2586F41A7D14A1008EB344 /* XtiskTests.xctest */,
 			);
 			name = Products;
@@ -2053,6 +2055,7 @@
 		ED2587601A7FABF7008EB344 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				7608EAFB1ACA52DF00211B2A /* activity_bottom_bar@2x.png */,
 				767ACBEF1ABFB6F9006774D7 /* filter_title_line@2x.png */,
 				767FBB4F1ABFAF6B00CC4D45 /* btn_near_filter@2x.png */,
 				76D364181AB9814B002A32CF /* com_submit@2x.png */,
@@ -2261,7 +2264,7 @@
 			);
 			name = Xtisk;
 			productName = Xtisk;
-			productReference = ED2586DB1A7D14A1008EB344 /* Xtisk.app */;
+			productReference = ED2586DB1A7D14A1008EB344 /* ishekou.app */;
 			productType = "com.apple.product-type.application";
 		};
 		ED2586F31A7D14A1008EB344 /* XtiskTests */ = {
@@ -2358,6 +2361,7 @@
 				7678126A1A806C6000CB4B08 /* RegViewController.xib in Resources */,
 				764D60981A8AF41C00B186A5 /* login_rmb_no_selected@2x.png in Resources */,
 				ED2586EF1A7D14A1008EB344 /* LaunchScreen.xib in Resources */,
+				7608EAFC1ACA52DF00211B2A /* activity_bottom_bar@2x.png in Resources */,
 				ED8C77B11A91F8FE009C8286 /* default_header_gray@2x.png in Resources */,
 				764D60761A8AE38800B186A5 /* service_icon_near@2x.png in Resources */,
 				767812D31A81F9FC00CB4B08 /* 1-4.jpg in Resources */,
@@ -2847,7 +2851,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ishekou;
 				PROVISIONING_PROFILE = "ec525738-957d-4b11-b5f2-53c9e51f7e53";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2897,7 +2901,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ishekou;
 				PROVISIONING_PROFILE = "b7aaf1f3-0794-4be1-ada3-e75128b0a863";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

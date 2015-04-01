@@ -46,6 +46,8 @@
     UIView *footDoneView;
     
     BOOL isPaySuccss;
+    
+    UIButton *btnPay;
 }
 
 -(void)toPay;
@@ -83,7 +85,7 @@
         int startX = 15 + [[titleArr objectAtIndex:i] sizeWithFont:tFont].width + 5 ;
         CGRect tRect = CGRectMake(startX, 0.0f, [UIScreen mainScreen].bounds.size.width - startX - 1, 44.0);
         UILabel *tmpLab = [CTLCustom labelNormalWith:tRect];
-        tmpLab.textColor = defaultTextGrayColor;
+        tmpLab.textColor = defaultTextColor;
         if (i == 0) {
             labName = tmpLab;
         }else if (i == 1) {
@@ -154,6 +156,18 @@
     myTicketOrderStatis.frame = CGRectMake(0, 0, 0, 0);
     
     resultView = [UPayResultView UPayResultViewWithXib];
+    
+    btnPay = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnPay.frame = CGRectMake(0, 0, 80, 30);
+    [btnPay setTitle:@"继续支付" forState:UIControlStateNormal];
+    btnPay.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btnPay setTitleColor:listColorIng forState:UIControlStateNormal];
+    btnPay.backgroundColor = [UIColor clearColor];
+    btnPay.layer.borderWidth = 1;
+    btnPay.layer.borderColor = listColorIng.CGColor;
+    btnPay.layer.cornerRadius = XT_CORNER_RADIUS;
+    [btnPay addTarget:self action:@selector(toPay) forControlEvents:UIControlEventTouchUpInside];
+    
     [self flushUI];
 }
 
@@ -187,7 +201,8 @@
 }
 
 -(void)flushUI{
-    [myTicketOrderStatis setData:self.mOrderDetail];
+    [myTicketOrderStatis setData:self.mOrderDetail with:self.mOrderDetail.status];
+    
     
     labName.text = self.mOrderDetail.peopleInfo.name;
     labPhone.text = self.mOrderDetail.peopleInfo.phone;
@@ -196,11 +211,13 @@
     
     labStatus.text = self.mOrderDetail.orderStatus;
     if (TicketOrderDetailHis == self.payAction) {
-        if (self.mOrderDetail.tn && self.mOrderDetail.tn.length>0 && self.mOrderDetail.status == tagWaitToPay) {
-            tTableView.tableFooterView = footView;
-        }else{
-            tTableView.tableFooterView = nil;
-        }
+//        if (self.mOrderDetail.tn && self.mOrderDetail.tn.length>0 && self.mOrderDetail.status == tagWaitToPay) {
+//            tTableView.tableFooterView = footView;
+//        }else{
+//            tTableView.tableFooterView = nil;
+//        }
+        //支付在第一行
+        tTableView.tableFooterView = nil;
     }else if (TicketOrderDetailSeq == self.payAction){
         tTableView.tableFooterView = footView;
     }
@@ -265,13 +282,7 @@
         
         [[TicketSerivice sharedInstance] clearData];
         
-//        isPaySuccss = YES;
-//        tTableView.tableHeaderView = resultView;
-//        tTableView.tableFooterView = footDoneView;
-//        tTableView.contentOffset = CGPointMake(0, 0);
-//        [resultView setCode:int2str(self.mOrderDetail.orderId) res:YES];
-//
-//        
+        
         //完成后都要进入信息界面
         
         [self paySuccess];
@@ -279,19 +290,22 @@
     }else if ([PayFail isEqualToString:result]) {
         tTableView.tableHeaderView = resultView;
         if (TicketOrderDetailHis == self.payAction) {
-            tTableView.tableFooterView = footView;
-        }else if(TicketOrderDetailSeq == self.payAction){//footFailView只能适用于正常顺序购票
+            tTableView.tableFooterView = nil;
+        }else if (TicketOrderDetailSeq == self.payAction){//footFailView只能适用于正常顺序购票
             tTableView.tableFooterView = footFailView;
             tTableView.contentOffset = CGPointMake(0, 0);
         }
+        
         [resultView setCode:int2str(self.mOrderDetail.orderId) res:NO];
     }else if ([PayCancel isEqualToString:result]) {
         tTableView.tableHeaderView = nil;
         if (TicketOrderDetailHis == self.payAction) {
-            tTableView.tableFooterView = footView;
-        }else if(TicketOrderDetailSeq == self.payAction){
+            tTableView.tableFooterView = nil;
+        }else if (TicketOrderDetailSeq == self.payAction){
             tTableView.tableFooterView = footFailView;
         }
+        
+        
         [self showAlertMessage:@"您取消了支付"];
     }
     [tTableView reloadData];
@@ -374,6 +388,16 @@
             }else if (TicketOrderDetailSeq == self.payAction){
                 cell.hidden = YES;
             }
+            
+            //可以继续支付
+            if (self.mOrderDetail.tn && self.mOrderDetail.tn.length>0 && self.mOrderDetail.status == tagWaitToPay) {
+                cell.accessoryView = btnPay;
+            }else{
+                cell.accessoryView = nil;
+            }
+
+            
+            
             break;
         }
         case 1:{
@@ -451,7 +475,35 @@
     return 44.0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (TicketOrderDetailSeq == self.payAction){
+        if (1 == section) {
+            return 30;
+        }else if(3 == section){
+            return 30;
+        }
+    }
     return 0.5;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (TicketOrderDetailSeq == self.payAction){
+        CGRect bounds = [UIScreen mainScreen].bounds;
+        UILabel *labNote = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 30)];
+        labNote.textColor = listColorIng;
+        labNote.font = [UIFont systemFontOfSize:14];
+        labNote.backgroundColor = [UIColor clearColor];
+        labNote.textAlignment = NSTextAlignmentCenter;
+        if (1 == section) {
+            labNote.text = @"请核对您的购票信息";
+            return labNote;
+        }else if(3 == section){
+            labNote.text = @"请在10分钟之内完成支付";
+            return labNote;
+        }
+    }
+    
+    
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -500,7 +552,7 @@
                         //orderList
                         MyTicketOrderDetail *mDetail = [MyTicketOrderDetail getMyTicketOrderDetailWithDic:dic];
                         self.mOrderDetail = mDetail;
-                        [myTicketOrderStatis setData:self.mOrderDetail];
+                        [myTicketOrderStatis setData:self.mOrderDetail with:self.mOrderDetail.status];
                         
                         //test
 //                        [[TicketSerivice sharedInstance].arrOrderSuc addObject:self.mOrderDetail];

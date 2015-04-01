@@ -15,6 +15,8 @@
 @property(nonatomic,copy)NSString *activityId;//	String	否	评论所属活动ID
 @property(nonatomic,copy)NSString *storeId;//	String	否	评论所属店铺ID
 @property(nonatomic,copy)NSString *userName;//	String	否	评论者账号
+
+@property(nonatomic,copy)NSString *userImg;
 +(NSArray *)getCommentsItemsWithArr:(NSArray *)arr;
 
 -(int)getCellHeight;

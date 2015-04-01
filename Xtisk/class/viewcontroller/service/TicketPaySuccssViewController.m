@@ -64,7 +64,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.mOrderDetail) {
-        [resultView setCode:int2str(self.mOrderDetail.orderId) res:YES];
+        MyTicketItem *seat = [self.mOrderDetail.ticketList objectAtIndex:0];
+        [resultView setCode:seat.getId res:YES];
     }
 }
 

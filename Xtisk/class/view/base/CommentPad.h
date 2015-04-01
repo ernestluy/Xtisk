@@ -29,4 +29,6 @@
 -(void)exitPad:(id)sender;
 -(void)submit:(id)sender;
 
+-(void)clearData;
+
 @end

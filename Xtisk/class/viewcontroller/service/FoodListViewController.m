@@ -73,6 +73,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tTableView reloadData];
     self.title = self.categoryItem.categoryName;
     [self requestListData];
 }
@@ -183,6 +184,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     FoodDetailViewController *fdv = [[FoodDetailViewController alloc]init];
     fdv.mStoreItem = [mDataArr objectAtIndex:indexPath.row];
+    [SettingService sharedInstance].selectedStoreItem = fdv.mStoreItem;
     [self.navigationController pushViewController:fdv animated:YES];
     
 }

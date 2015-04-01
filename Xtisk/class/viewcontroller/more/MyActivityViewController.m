@@ -428,7 +428,7 @@
     
     ActivityDetailViewController *ac = [[ActivityDetailViewController alloc] init];
     MyActivity *ma = [allMyActivityArr objectAtIndex:indexPath.section];
-    
+    ac.titleShowType = 1;
     ac.mActivityItem = [ma aClone];
     [self.navigationController pushViewController:ac animated:YES];
 }

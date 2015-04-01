@@ -25,15 +25,21 @@ static TicketSerivice *instanceTicketService = nil;
 
 -(id)init{
     self = [super init];
+    self.ticketDateFormatter = [[NSDateFormatter alloc]init];
+    self.ticketDateFormatter.dateFormat = @"yyyy-MM-dd";
     self.arrOrderSuc = [NSMutableArray array];
     self.tMinDate = [NSDate date];
     self.tMaxDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([self.tMinDate timeIntervalSinceReferenceDate] + 15*OneDaySeconds)];
-    self.ticketDateFormatter = [[NSDateFormatter alloc]init];
-    self.ticketDateFormatter.dateFormat = @"yyyy-MM-dd";
+    
+    [self clearData];
     return self;
 }
 
 -(void)clearData{
+    NSString *strToday = [self.ticketDateFormatter stringFromDate:[NSDate date]];
+    NSDate *dateToday = [self.ticketDateFormatter dateFromString:strToday];
+    self.tMinDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([dateToday timeIntervalSinceReferenceDate] + OneDaySeconds)];
+    self.tMaxDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([self.tMinDate timeIntervalSinceReferenceDate] + 15*OneDaySeconds)];
     self.toVoyageItem = nil;
     self.returnVoyageItem = nil;
     self.ticketQueryType = TICKET_QUERY_ONE;

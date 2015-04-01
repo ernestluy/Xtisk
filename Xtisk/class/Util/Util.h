@@ -36,7 +36,12 @@
 
 +(NSString *)removeCChar:(NSString *)str;
 
++(NSString *)getTelText:(NSString *)str;
 
 -(int)compare:(NSDate *)fDate mid:(NSDate *)mDate last:(NSDate *)lDate;
 
+
++(BOOL)isMobileNumber:(NSString *)mobileNum;
+
++(void)snsShareInitDataWith:(NSString *)shareText url:(NSString *)tUrl;
 @end

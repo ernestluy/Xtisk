@@ -40,6 +40,9 @@
         ci.activityEndTime = [dic objectForKey:@"activityEndTime"];
         ci.status = [dic objectForKey:@"status"];
         ci.joinDate = [dic objectForKey:@"joinDate"];
+        
+        ci.activityBeginJoinTime = [dic objectForKey:@"activityBeginJoinTime"];
+        ci.activityEndJoinTime = [dic objectForKey:@"activityEndJoinTime"];
 
         [mArr addObject:ci];
     }

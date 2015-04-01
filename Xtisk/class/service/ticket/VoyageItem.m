@@ -8,6 +8,7 @@
 
 #import "VoyageItem.h"
 #import "SeatRankPrice.h"
+#import "TicketSerivice.h"
 @implementation VoyageItem
 
 -(id)init{
@@ -22,6 +23,9 @@
     for (int i = 0; i<self.DTSEATRANKPRICE.count; i++) {
         SeatRankPrice *sitem = [self.DTSEATRANKPRICE objectAtIndex:i];
         [sitem clearData];
+        if (0 == i) {
+            sitem.orderNum1 = 1;
+        }
     }
 }
 
@@ -89,6 +93,16 @@
             }
         }
     }
+}
+
++(int)compare:(VoyageItem *)fitem sitem:(VoyageItem *)sitem{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    NSDate *fDate = [formatter dateFromString:[NSString stringWithFormat:@"%@ %@",fitem.SETOFFDATE,fitem.SETOFFTIME]];
+    NSDate *sDate= [formatter dateFromString:[NSString stringWithFormat:@"%@ %@",sitem.SETOFFDATE,sitem.SETOFFTIME]];
+    NSComparisonResult r = [fDate compare:sDate];
+    
+    return r;
 }
 
 /*

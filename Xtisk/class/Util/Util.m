@@ -223,7 +223,7 @@
     }else{
         return listColorPayOver;
     }
-    return listColorPayOver;
+    return defaultTextColor;
 }
 
 +(NSString *)removeCChar:(NSString *)str{
@@ -243,6 +243,25 @@
     
 }
 
++(NSString *)getTelText:(NSString *)str{
+    if (!str) {
+        return nil;
+    }
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
+    str = [[str componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+//    NSMutableString *mStr = [NSMutableString string];
+//    for (int i = 0; i<str.length; i++) {
+//        NSRange range = {i,1};
+//        NSString *indexStr = [str substringWithRange:range];
+//        char *strc = (char *)[indexStr UTF8String];
+//        if (strlen(strc) == 1) {
+//            [mStr appendString:indexStr];
+//        }
+//    }
+//    return mStr;
+    return str;
+}
+
 
 -(int)compare:(NSDate *)fDate mid:(NSDate *)mDate last:(NSDate *)lDate{
     
@@ -253,6 +272,67 @@
 }
 
 
+//手机号码 11位  加0 12为 加86 13位
++(BOOL)isMobileNumber:(NSString *)mobileNum
+{
+    if (!mobileNum) {
+        return NO;
+    }
+    if (mobileNum.length < 11 || mobileNum.length > 13) {
+        return NO;
+    }
+    if (mobileNum.length == 11) {
+        NSString *strIndex = [mobileNum substringToIndex:1];
+        if (![strIndex isEqualToString:@"1"]) {
+            NSLog(@"11位");
+            return NO;
+        }
+    }
+    
+    if (mobileNum.length == 12) {
+        NSString *strIndex = [mobileNum substringToIndex:2];
+        if (![strIndex isEqualToString:@"01"]) {
+            NSLog(@"12位");
+            return NO;
+        }
+    }
+    
+    if (mobileNum.length == 13) {
+        NSString *strIndex = [mobileNum substringToIndex:3];
+        if (![strIndex isEqualToString:@"861"]) {
+            NSLog(@"13位");
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
++(void)snsShareInitDataWith:(NSString *)shareText url:(NSString *)tUrl{
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = shareText;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = tUrl;
+    [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb;
+    
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareText;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = tUrl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb;
+    
+    [UMSocialData defaultData].extConfig.wechatFavoriteData.title = shareText;
+    [UMSocialData defaultData].extConfig.wechatFavoriteData.url = tUrl;
+    [UMSocialData defaultData].extConfig.wechatFavoriteData.wxMessageType = UMSocialWXMessageTypeWeb;
+    
+    [UMSocialData defaultData].extConfig.sinaData.shareText = shareText;
+    [UMSocialData defaultData].extConfig.sinaData.urlResource.url = tUrl;
+    //tencentData
+    [UMSocialData defaultData].extConfig.tencentData.shareText = shareText;
+    [UMSocialData defaultData].extConfig.tencentData.urlResource.url = tUrl;
+    
+    [UMSocialData defaultData].extConfig.qzoneData.urlResource.url = tUrl;
+    [UMSocialData defaultData].extConfig.qzoneData.title = shareText;
+    [UMSocialData defaultData].extConfig.qzoneData.url = tUrl;
+    
+    
+}
 
 
 @end

@@ -20,6 +20,8 @@
 +(UIImage *)getTmpFolderFileWithPath:(NSString *)path;
 +(UIImage *)getTmpFolderFileWithUrlPath:(NSString *)path;
 +(void)saveTmpFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img;
++(UIImage *)getCacheFolderFileWithUrlPath:(NSString *)path;
++(void)saveCacheFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img;
 +(UIImage *)getDocFolderFileWithUrlPath:(NSString *)path;
 +(void)saveDocFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img;
 @end

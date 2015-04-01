@@ -26,6 +26,8 @@
         ci.activityId = [dic objectForKey:@"activityId"];
         ci.activityId = [dic objectForKey:@"storeId"];
         ci.userName = [dic objectForKey:@"userName"];
+        //userImg
+        ci.userImg = [dic objectForKey:@"userImg"];
         [mArr addObject:ci];
     }
     return mArr;
@@ -41,6 +43,6 @@
     if (allHeight < 110) {
         return 110;
     }
-    return size.height + startY;
+    return size.height + startY + 16;
 }
 @end

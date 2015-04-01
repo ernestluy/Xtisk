@@ -9,6 +9,7 @@
 #import "AboutIshekouViewController.h"
 #import "PublicDefine.h"
 #import "CTLCustom.h"
+#import "AboutIshekouHeaderView.h"
 #define ishekouCellId @"ishekouCellId"
 @interface AboutIshekouViewController ()
 {
@@ -25,10 +26,15 @@
     // Do any additional setup after loading the view from its nib.
     self.title =@"关于i蛇口";
     CGRect bounds = [UIScreen mainScreen].bounds;
-    
+    /*
+     联系电话：4009301979
+     微信公众号：iShekouABA
+     Email：skiz.service@cmhk.com
+     内容合作：maijiaming@cmhk.com
+     */
     titleArr = @[@"微信公众号",@"联系电话",@"内容合作",@"Email"];
     iconArr  = @[@"about_wechat",@"about_tel",@"about_coo",@"about_email"];
-    detailArr = @[@"175640827",@"13418884362",@"",@"ernest_luyi@163.com"];
+    detailArr = @[@"iShekouABA",@"4009301979",@"maijiaming@cmhk.com",@"skiz.service@cmhk.com"];
     
     int tableHeight = bounds.size.height - 64 - 70;
     tTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, tableHeight) style:UITableViewStyleGrouped];
@@ -40,6 +46,14 @@
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"AboutIshekouHeaderView" owner:self options:nil];
     UIView *tmpView = [nib objectAtIndex:0];
     tmpView.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+    AboutIshekouHeaderView *ais = (AboutIshekouHeaderView *)tmpView;
+    ais.labVersion.backgroundColor = _rgb2uic(0xf7f7f7, 1);
+    //获取系统info.plist文件中的键值对
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    //获取软件的版本号
+    NSString * version = [infoDict objectForKey:@"CFBundleVersion"];
+    ais.labVersion.text = @"1.1.0";
+    ais.labVersion.textColor = defaultTextGrayColor;
     tTableView.tableHeaderView = tmpView;
     
 }
@@ -67,13 +81,13 @@
     NSString *identifier = [NSString stringWithFormat:@"cell_%d",(int)indexPath.row];
     UITableViewCell * cell = [tv dequeueReusableCellWithIdentifier:identifier];
     if (cell ==nil) {
-        CGRect cRect = CGRectMake(tv.frame.size.width - 30 - 190, 0, 190.0, DEFAULT_CELL_HEIGHT);
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        CGRect cRect = CGRectMake(tv.frame.size.width - 15 - 190, 0, 190.0, DEFAULT_CELL_HEIGHT);
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         cell.textLabel.text = [titleArr objectAtIndex:indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.imageView.image = [UIImage imageNamed:[iconArr objectAtIndex:indexPath.row]];
         UILabel *tmpLabel = [CTLCustom getCusRightLabel:cRect];
-//        [cell addSubview:tmpLabel];
+        [cell addSubview:tmpLabel];
         tmpLabel.text = [detailArr objectAtIndex:indexPath.row];
         tmpLabel.textColor = defaultTextColor;
         if (0 == indexPath.row || 3 == indexPath.row) {
@@ -82,6 +96,15 @@
         if (1 == indexPath.row || 2 == indexPath.row) {
 //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        if (2 == indexPath.row) {
+            //获取系统info.plist文件中的键值对
+            NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+            //获取软件的版本号
+            NSString * version = [infoDict objectForKey:@"CFBundleVersion"];
+
+//            cell.detailTextLabel.text = version;
+        }
+        cell.selectionStyle =  UITableViewCellSelectionStyleNone;
     }
     
     return cell;

@@ -19,6 +19,9 @@
     labc.font = [UIFont systemFontOfSize:12];
     self.labContent.hidden = YES;
     self.labContent = labc;
+    
+    self.imgHeader.layer.cornerRadius = self.imgHeader.frame.size.width/2;
+    self.imgHeader.layer.masksToBounds = YES;
 }
 -(void)setDataWith:(CommentsItem *)ci{
     item = ci;

@@ -21,6 +21,8 @@
     CommentsItem *item;
 }
 
+@property(nonatomic,weak)IBOutlet UIImageView *imgHeader;
+
 @property(nonatomic,weak)IBOutlet UILabel *labName;
 @property(nonatomic,weak)IBOutlet UILabel *labContent;
 @property(nonatomic,weak)IBOutlet UILabel *labTime;

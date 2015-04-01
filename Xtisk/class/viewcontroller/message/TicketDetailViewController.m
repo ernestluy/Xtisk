@@ -60,7 +60,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [myTicketOrderStatis setData:self.mOrderDetail];
+    [myTicketOrderStatis setData:self.mOrderDetail with:1];
 }
 
 #pragma mark - UITableViewDataSource
@@ -94,7 +94,8 @@
             if (0 == indexPath.row) {
                 [cell addSubview:tv];
                 TicketDetailContentView *dc = (TicketDetailContentView*)tv;
-                dc.labCode.text = int2str(self.mOrderDetail.orderId);
+                MyTicketItem *tItem = [self.mOrderDetail.ticketList objectAtIndex:0];
+                dc.labCode.text = tItem.getId;
                 dc.labStatus.text = self.mOrderDetail.orderStatus;
                 
                 dc.labStatus.textColor = [Util getPayStatusColorWith:self.mOrderDetail.status];

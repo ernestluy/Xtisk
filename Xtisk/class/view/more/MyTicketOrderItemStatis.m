@@ -18,13 +18,13 @@
 }
 */
 
--(void)setData:(MyTicketOrderDetail *)order{
+-(void)setData:(MyTicketOrderDetail *)order with:(int)type{
     NSMutableDictionary *mDic = [NSMutableDictionary dictionary];
     
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-    UIFont *tFont = [UIFont systemFontOfSize:13];
+    UIFont *tFont = [UIFont systemFontOfSize:14];
     int startX  = 40;
     
     int inset = 15;
@@ -34,6 +34,23 @@
     int startY = detailY;
     int labHeight = 16;
     int labWidth = 240;
+    
+    //1 为显示
+    if (1 == order.status && 1 == type) {
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(startX, startY, labWidth, labHeight)];
+        lab.font = tFont;
+        [self addSubview:lab];
+        lab.text = @"取票编号:";
+        MyTicketItem *tItem = [order.ticketList objectAtIndex:0];
+        NSString *strValue = tItem.getId;
+        lab = [[UILabel alloc]initWithFrame:CGRectMake(startX + [lab.text sizeWithFont:lab.font].width + 5, startY, labWidth, labHeight)];
+        lab.font = tFont;
+        [self addSubview:lab];
+        lab.text = strValue;
+        lab.textColor = [UIColor redColor];
+        
+        startY += labHeight;
+    }
 
     NSMutableArray *mLineArr = [NSMutableArray array];
     for (int i = 0; i<order.ticketList.count; i++) {

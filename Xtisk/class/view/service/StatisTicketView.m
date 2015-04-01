@@ -16,7 +16,7 @@
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-    UIFont *tFont = [UIFont systemFontOfSize:13];
+    UIFont *tFont = [UIFont systemFontOfSize:14];
     int startX  = 40;
     if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
         startX = 10;

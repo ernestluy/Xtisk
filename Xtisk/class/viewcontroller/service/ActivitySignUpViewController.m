@@ -216,6 +216,20 @@
         return NO;
     }
     
+    //手机号码为11-13位
+    if (tfTel.text.length < 11) {
+        [SVProgressHUD showErrorWithStatus:@"手机号码为11-13位" duration:2];
+        return NO;
+    }
+    
+    if (tfTel.text.length > 0) {
+        BOOL b = [Util isMobileNumber:tfTel.text];
+        if (!b) {
+            [SVProgressHUD showErrorWithStatus:@"手机号码不正确" duration:2];
+            return NO;
+        }
+    }
+    
     if (tfEmail.text.length == 0) {// ||tfEmail.text.length>100
         [SVProgressHUD showErrorWithStatus:@"邮箱不能为空" duration:2];
         return NO;
@@ -298,6 +312,7 @@
     }
     return YES;
 }
+/*
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (tfEmail == textField) {
         if (range.location >= 100)
@@ -317,6 +332,26 @@
     }
     
     return YES;
+}
+ */
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    int limitNum = 20;
+    if (tfEmail == textField) {
+        tfEmail.text = [Util removeCChar:tfEmail.text];
+        limitNum = 60;
+    }else if (tfNme == textField){
+        limitNum = 40;
+    }else if (tfTel == textField){
+        
+        textField.text = [Util getTelText:textField.text];
+        limitNum = 13;
+    }
+    if(textField.text.length >= limitNum){
+        textField.text = [textField.text substringToIndex:limitNum];
+    }
+    
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -375,6 +410,7 @@
 //            theTextField.backgroundColor = [UIColor lightGrayColor];
             [cell addSubview:theTextField];
             //        theTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            [theTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             if (0 == indexPath.row) {
                 tfNme = theTextField;
             }else if (1 == indexPath.row) {

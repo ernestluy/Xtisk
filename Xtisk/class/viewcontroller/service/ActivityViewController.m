@@ -154,6 +154,7 @@
                 NSData *data = [request getResponseData];
                 if (!data || data.length <DefaultImageMinSize) {
                     NSLog(@"请求图片失败");
+                    NSString *strResult = [request getResponseStr];
                     [request requestAgain];
                     return;
                 }

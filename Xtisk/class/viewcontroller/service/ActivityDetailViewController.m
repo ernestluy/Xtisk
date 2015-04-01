@@ -17,6 +17,8 @@
 {
     NSTimer *timer;
     CommentPad *commentPad;
+    
+    NSTimer *uiTimer;
 }
 -(void)flushUIData;
 @end
@@ -28,6 +30,10 @@
     self = [super init];
     
     return self;
+}
+
+-(void)dealloc{
+    [self stopTimer];
 }
 
 - (void)viewDidLoad {
@@ -69,12 +75,16 @@
     commentPad = [[CommentPad alloc] init];
     
     
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    self.title = self.mActivityItem.activityTitle;
+    if (self.titleShowType == 0) {
+        self.title = self.mActivityItem.activityTitle;
+    }
+    self.title = @"活动详情";
     
     if (!isRequestSucMark) {
         [[[HttpService sharedInstance] getRequestActivityDetail:self activityId:int2str(self.mActivityItem.activityId)]startAsynchronous];
@@ -85,13 +95,14 @@
     [self flushUIData];
     
     
-    
+    [self startTimer];
     
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self judgeTimeOut];
+    [self stopTimer];
 }
 -(void)judgeTimeOut{
     if (timer) {
@@ -103,10 +114,83 @@
     [SVProgressHUD dismiss];
 }
 
+-(void)startTimer{
+    [self stopTimer];
+    uiTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(flushUIData) userInfo:nil repeats:YES];
+}
+
+-(void)stopTimer{
+    if (uiTimer) {
+        if ([uiTimer isValid]) {
+            [uiTimer invalidate];
+            uiTimer = nil;
+        }
+    }
+}
+
 
 -(void)flushUIData{
+    NSLog(@"flushUIData");
     [self.btnCommend setTitle:int2str(self.mActivityItem.reviews) forState:UIControlStateNormal];
     [self.btnPraise setTitle:int2str(self.mActivityItem.favorite) forState:UIControlStateNormal];
+    
+    self.btnSignUp.enabled = YES;
+    self.btnSignUp.hidden = NO;
+    self.btnSignUp.alpha = 1;
+    //是否允许报名
+    if (!self.mActivityItem.allowJoin){
+        [self.btnSignUp setTitle:@"不允许报名" forState:UIControlStateNormal];
+        self.btnSignUp.enabled = NO;
+        self.btnSignUp.alpha = DefaultEnableAlhpe;
+        
+        static NSDateFormatter *dateFormatter = nil;
+        if (dateFormatter == nil) {
+            dateFormatter = [[NSDateFormatter alloc] init];
+        }
+        
+        if (self.mActivityItem.activityBeginJoinTime) {
+            dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+            NSDate *nDate = nil;
+            if([SettingService sharedInstance].strTime){
+                nDate = [dateFormatter dateFromString:[SettingService sharedInstance].strTime];
+            }
+            if(nDate == nil){
+                nDate = [NSDate date];
+            }
+            
+            NSDate *bjDate = [dateFormatter dateFromString:self.mActivityItem.activityBeginJoinTime];
+            NSString *strLog = [NSString stringWithFormat:@"nDate:%@,joinTime:%@",[dateFormatter stringFromDate:nDate],self.mActivityItem.activityBeginJoinTime];
+            PRINT_LOG([strLog UTF8String]);
+            NSComparisonResult r = [nDate compare:bjDate];
+            if (bjDate == nil) {
+                PRINT_LOG("bjDate is nil.");
+            }
+            if (NSOrderedDescending == r) {
+                //当前时间比报名时间晚
+                PRINT_LOG("报名已结束");
+                [self.btnSignUp setTitle:@"报名已结束" forState:UIControlStateNormal];
+            }else{
+                PRINT_LOG("未到报名时间");
+                [self.btnSignUp setTitle:@"未到报名时间" forState:UIControlStateNormal];
+            }
+        }else{
+            PRINT_LOG("报名时间是空的");
+            self.btnSignUp.hidden = YES;
+        }
+//        if (!self.mActivityItem.isFull){
+//            [self.btnSignUp setTitle:@"报名已满" forState:UIControlStateNormal];
+//            self.btnSignUp.enabled = NO;
+//            self.btnSignUp.alpha = DefaultEnableAlhpe;
+//        }
+        
+        
+//        [@"2014-3-12" compare:@"2015-2-2"];
+        
+    }else if (self.mActivityItem.isJoin) {
+        [self.btnSignUp setTitle:@"查看报名信息" forState:UIControlStateNormal];
+    }else if (self.mActivityItem.allowJoin){
+        [self.btnSignUp setTitle:@"我要报名" forState:UIControlStateNormal];
+    }
     
     if (![[SettingService sharedInstance] isLogin]) {
         return;
@@ -123,8 +207,7 @@
     }
     
     //是否允许评论
-    self.btnSignUp.enabled = YES;
-    self.btnSignUp.alpha = 1;
+    
 //    if (self.mActivityItem.allowReview) {
 //        self.btnCommend.enabled = YES;
 //        self.btnCommend.alpha = 1.0;
@@ -133,20 +216,8 @@
 //        self.btnCommend.alpha = DefaultEnableAlhpe;
 //    }
     
-    //是否允许报名
-    if (self.mActivityItem.isJoin) {
-        [self.btnSignUp setTitle:@"查看报名信息" forState:UIControlStateNormal];
-    }else if (self.mActivityItem.allowJoin){
-        [self.btnSignUp setTitle:@"我要报名" forState:UIControlStateNormal];
-    }else if (!self.mActivityItem.allowJoin){
-        [self.btnSignUp setTitle:@"报名已结束" forState:UIControlStateNormal];
-        self.btnSignUp.enabled = NO;
-        self.btnSignUp.alpha = DefaultEnableAlhpe;
-    }else if (!self.mActivityItem.isFull){
-        [self.btnSignUp setTitle:@"报名已满" forState:UIControlStateNormal];
-        self.btnSignUp.enabled = NO;
-        self.btnSignUp.alpha = DefaultEnableAlhpe;
-    }
+    
+    
 }
 
 - (void)loadRemoteUrl:(NSString *)urlString
@@ -165,13 +236,16 @@
     }
     
     [UMSocialWechatHandler setWXAppId:IshekouWXAppId appSecret:IshekouWXAppSecret url:tUrl];
-    NSArray *tmpArr = @[UMShareToSina,UMShareToTencent,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite];
-    NSString *shareText = @"热门活动";             //分享内嵌文字
+    NSArray *tmpArr = @[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,UMShareToTencent,UMShareToQzone];
+    NSString *shareText = self.mActivityItem.activityTitle;             //分享内嵌文字
 //    UIImage *shareImage = [UIImage imageNamed:@"service_icon_near"];          //分享内嵌图片
     UIImage *shareImage = [XTFileManager getTmpFolderFileWithUrlPath:self.mActivityItem.activityPic];
     if (!shareImage) {
         shareImage = [UIImage imageNamed:@"index_header_icon"];
     }
+    
+    [Util snsShareInitDataWith:shareText url:tUrl];
+
     //调用快速分享接口
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UmengAppkey

@@ -124,6 +124,11 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self stopTimer];
+}
+
 -(void)stopTimer{
     if (timer) {
         if ([timer isValid]) {
@@ -172,7 +177,7 @@
 -(IBAction)getVerCodeAction:(id)sender{
     NSLog(@"getVerCodeAction");
     [self startCalTime];
-    AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:textFieldAc.text method:@"phone" smsCode:@""];
+    AsyncHttpRequest *aRequest = [[HttpService sharedInstance] getRequestSmsCode:self account:textFieldAc.text method:@"reg" smsCode:@""];//由phone改为reg，reg标识注册时获取验证码
     aRequest.iMark = VerifyCodeGet;
     [aRequest startAsynchronous];
 }
@@ -232,14 +237,15 @@
                     NSLog(@"请求成功");
                     if (request.iMark == VerifyCodeGet) {
                         NSLog(@"请求验证码成功");
-                        [SVProgressHUD showSuccessWithStatus:@"请求成功，请等待接收含有验证码的短信息" duration:1.5];
+                        [SVProgressHUD showSuccessWithStatus:@"请求成功，请等待接收含有验证码的短信息" duration:DefaultRequestDonePromptTime];
                     }else if (request.iMark == VerifyCodeJudge) {
                         NSLog(@"验证发送的验证码成功");
-                        [SVProgressHUD showSuccessWithStatus:@"验证成功" duration:0.8];
+                        [SVProgressHUD showSuccessWithStatus:@"验证成功" duration:1];
                         [self toNextStep];
                     }
                 }else{
-                    [SVProgressHUD showErrorWithStatus:br.msg duration:0.8];
+                    [self stopTimer];
+                    [SVProgressHUD showErrorWithStatus:br.msg duration:DefaultRequestDonePromptTime];
                 }
             }else if (HttpResponseTypeFailed == responseCode){
                 NSLog(@"请求验证码失败");

@@ -135,8 +135,8 @@
 
 #pragma mark - 4.3.6.4获取用户未读消息
 -(AsyncHttpRequest *)getRequestGetUserUnreadMsg:(id<AsyncHttpRequestDelegate>)delegate type:(NSString *)tType;
-
-
+#pragma mark - 获取服务器时间
+-(AsyncHttpRequest *)getRequestGetTime:(id<AsyncHttpRequestDelegate>)delegate;
 
 
 

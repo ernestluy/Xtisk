@@ -103,16 +103,26 @@
 }
 
 +(UIImage *)getTmpFolderFileWithPath:(NSString *)path{
+    if (path == nil) {
+        return nil;
+    }
     NSString *tp = PathTmpFile(path);
     return [UIImage imageWithContentsOfFile:tp];
 }
 +(UIImage *)getTmpFolderFileWithUrlPath:(NSString *)path{
+    if (path == nil) {
+        return nil;
+    }
     path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     NSString *tp = PathTmpFile(path);
     return [UIImage imageWithContentsOfFile:tp];
 }
+
 +(void)saveTmpFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img{
     if (!img) {
+        return;
+    }
+    if (path == nil) {
         return;
     }
     path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
@@ -120,14 +130,36 @@
     [XTFileManager writeImage:img toFileAtPath:tp];
 }
 
++(UIImage *)getCacheFolderFileWithUrlPath:(NSString *)path{
+    if (path == nil) {
+        return nil;
+    }
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathCacheFile(path);
+    return [UIImage imageWithContentsOfFile:tp];
+}
+
++(void)saveCacheFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img{
+    if (!img || !path) {
+        return;
+    }
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *tp = PathCacheFile(path);
+    [XTFileManager writeImage:img toFileAtPath:tp];
+}
+
+
 
 +(UIImage *)getDocFolderFileWithUrlPath:(NSString *)path{
+    if (path == nil) {
+        return nil;
+    }
     path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     NSString *tp = PathDocFile(path);
     return [UIImage imageWithContentsOfFile:tp];
 }
 +(void)saveDocFolderFileWithUrlPath:(NSString *)path with:(UIImage *)img{
-    if (!img) {
+    if (!img || !path) {
         return;
     }
     path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];

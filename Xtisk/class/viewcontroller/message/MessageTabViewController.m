@@ -152,6 +152,10 @@
         [self.navigationController pushViewController:mc animated:YES];
     }
     if (1 == indexPath.section &&  0 == indexPath.row) {
+        if (!authorityTicket) {
+            [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
+            return;
+        }
         if ([TicketSerivice sharedInstance].arrOrderSuc.count > 0) {
             [SettingService sharedInstance].badgeTicket = 0;
             MsgTicketListViewController *mt = [[MsgTicketListViewController alloc]init];

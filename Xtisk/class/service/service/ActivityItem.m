@@ -43,7 +43,8 @@
         ci.favorite = [[dic objectForKey:@"favorite"] intValue];
         ci.activityBeginTime = [dic objectForKey:@"activityBeginTime"];
         ci.activityEndTime = [dic objectForKey:@"activityEndTime"];
-        
+        ci.isFull = [[dic objectForKey:@"isFull"] boolValue];
+        ci.allowJoin = [[dic objectForKey:@"allowJoin"] boolValue];
         [mArr addObject:ci];
     }
     return mArr;

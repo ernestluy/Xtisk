@@ -27,7 +27,7 @@
         self.labReuslt.text = @"支付失败！";
         self.imgViewRes.image = [UIImage imageNamed:@"upay_fail"];
     }else{
-        self.labCode.text = code;
+        self.labCode.text = [NSString stringWithFormat:@"取票编号:%@",code];
         self.lab1.text = @"恭喜您！订单支付成功";
         self.labReuslt.text = @"(取票时请出示)";
         self.imgViewRes.image = [UIImage imageNamed:@"upay_success"];

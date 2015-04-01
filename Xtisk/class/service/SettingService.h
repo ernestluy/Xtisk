@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IUser.h"
 #import "PublicDefine.h"
+#import "StoreItem.h"
 @interface SettingService : NSObject<BMKGeneralDelegate>
 {
     
@@ -41,6 +42,12 @@
 @property(nonatomic)int badgeTicket;
 
 @property(nonatomic)int filterSelectedIndex;
+
+
+
+@property(nonatomic,strong)StoreItem *selectedStoreItem;
+
+@property(nonatomic,copy)NSString *strTime;
 
 
 +(SettingService *)sharedInstance;

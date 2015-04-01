@@ -14,5 +14,5 @@
 }
 
 
--(void)setData:(MyTicketOrderDetail *)order;
+-(void)setData:(MyTicketOrderDetail *)order with:(int)type;
 @end

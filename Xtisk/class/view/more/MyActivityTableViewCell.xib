@@ -72,7 +72,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cell_del_no_select.png" width="17" height="18"/>
+        <image name="cell_del_no_select.png" width="19" height="20"/>
         <image name="line_gray.png" width="1" height="1"/>
         <image name="right_arrow_gray.png" width="9" height="15"/>
     </resources>

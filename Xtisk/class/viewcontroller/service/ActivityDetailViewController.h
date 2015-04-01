@@ -18,6 +18,8 @@
 @property(nonatomic,weak)IBOutlet UIButton *btnPraise;
 @property(nonatomic,weak)IBOutlet UIButton *btnCommend;
 @property(nonatomic,strong)ActivityItem *mActivityItem;
+
+@property(nonatomic)int titleShowType;
 -(id)initWithType:(int)t;
 
 -(IBAction)toSignUp:(id)sender;

@@ -19,7 +19,7 @@
 //@property(nonatomic,copy)NSString *activityEndTime;//	Stirng	是	活动结束时间
 @property(nonatomic,copy)NSString *status;//	String	是	活动状态
 @property(nonatomic,copy)NSString *joinDate;//	String	否	用户报名时间
-//@property(nonatomic,copy)NSString *type;
+//@property(nonatomic,copy)NSString *type
 
 +(NSArray *)getMyActivitysWithArr:(NSArray *)arr;
 @end

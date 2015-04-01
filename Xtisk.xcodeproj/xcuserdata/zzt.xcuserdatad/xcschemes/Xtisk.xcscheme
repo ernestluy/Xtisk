@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ED2586DA1A7D14A1008EB344"
-               BuildableName = "Xtisk.app"
+               BuildableName = "ishekou.app"
                BlueprintName = "Xtisk"
                ReferencedContainer = "container:Xtisk.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED2586DA1A7D14A1008EB344"
-            BuildableName = "Xtisk.app"
+            BuildableName = "ishekou.app"
             BlueprintName = "Xtisk"
             ReferencedContainer = "container:Xtisk.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED2586DA1A7D14A1008EB344"
-            BuildableName = "Xtisk.app"
+            BuildableName = "ishekou.app"
             BlueprintName = "Xtisk"
             ReferencedContainer = "container:Xtisk.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED2586DA1A7D14A1008EB344"
-            BuildableName = "Xtisk.app"
+            BuildableName = "ishekou.app"
             BlueprintName = "Xtisk"
             ReferencedContainer = "container:Xtisk.xcodeproj">
          </BuildableReference>

@@ -141,6 +141,20 @@
         [SVProgressHUD showErrorWithStatus:@"电话不能为空" duration:DefaultRequestDonePromptTime];
         return;
     }
+    
+    //手机号码为11-13位
+    if (tfPhone.text.length < 11) {
+        [SVProgressHUD showErrorWithStatus:@"手机号码为11-13位" duration:2];
+        return;
+    }
+    if (tfPhone.text.length > 0) {
+        BOOL b = [Util isMobileNumber:tfPhone.text];
+        if (!b) {
+            [SVProgressHUD showErrorWithStatus:@"手机号码不正确" duration:2];
+            return;
+        }
+    }
+    
     if (tfCard.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"身份证后三位不能为空" duration:DefaultRequestDonePromptTime];
         return;
@@ -215,9 +229,10 @@
 {
     
     if (tfEmal == textField) {
-        if (tfEmal.text.length > 100)
+        tfEmal.text = [Util removeCChar:tfEmal.text];
+        if (tfEmal.text.length > 40)
         {
-            textField.text = [textField.text substringToIndex:100];
+            textField.text = [textField.text substringToIndex:40];
         }
         textField.text = [Util removeCChar:textField.text];
     }else if (tfName == textField){
@@ -226,11 +241,11 @@
             textField.text = [textField.text substringToIndex:20];
         }
     }else if (tfPhone == textField){
-        if (tfPhone.text.length > 11)
+        if (tfPhone.text.length > 13)
         {
-            textField.text = [textField.text substringToIndex:11];
+            textField.text = [textField.text substringToIndex:13];
         }
-        textField.text = [Util removeCChar:textField.text];
+        textField.text = [Util getTelText:textField.text];
     }else if (tfCard == textField){
         if (tfCard.text.length > 3)
         {
@@ -291,8 +306,12 @@
     
     nowTextField = textField;
     isInput = YES;
+    int originH = statisView.frame.size.height + 30;
+    if (nowTextField == tfEmal) {
+        originH = originH + 30;
+    }
     [UIView animateWithDuration:0.25 animations:^{
-        tTableView.contentOffset = CGPointMake(0, 120);
+        tTableView.contentOffset = CGPointMake(0, originH);
     }];
     return YES;
 }
@@ -367,11 +386,32 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 8;
+    if (0 == section) {
+        return 10;
+    }
+    return 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.2;
+    return 30;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    UILabel *labNote = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, bounds.size.width, 30)];
+    labNote.textColor = listColorIng;
+    labNote.font = [UIFont systemFontOfSize:14];
+    labNote.backgroundColor = [UIColor clearColor];
+    labNote.textAlignment = NSTextAlignmentCenter;
+    if (0 == section) {
+        labNote.text = @"请核对您的购票信息";
+        return labNote;
+    }else if(1 == section){
+        labNote.text = @"请填写个人资料";
+        return labNote;
+    }
+    return nil;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == indexPath.section) {
         return statisView.frame.size.height;

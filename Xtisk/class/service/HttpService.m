@@ -434,7 +434,7 @@ static HttpService *httpServiceInstance = nil;
     NSMutableString *mContentStr = [NSMutableString string];
     [mContentStr appendString:@"orderIds="];
     for (int i = 0; i<orderIds.count; i++) {
-        [mContentStr appendFormat:@"%@,",[orderIds objectAtIndex:i]];
+        [mContentStr appendFormat:@"%@;",[orderIds objectAtIndex:i]];
     }
     
     NSString *sendStr = [mContentStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -610,8 +610,13 @@ static HttpService *httpServiceInstance = nil;
     NSMutableString *mContentStr = [NSMutableString string];
     [mContentStr appendString:@"activityId="];
     for (int i = 0; i<ids.count; i++) {
-        [mContentStr appendFormat:@"%@,",[ids objectAtIndex:i]];
+        if (0 == i) {
+            [mContentStr appendFormat:@"%@",[ids objectAtIndex:i]];
+        }else{
+            [mContentStr appendFormat:@";%@",[ids objectAtIndex:i]];
+        }
     }
+    NSLog(@"mContentStr:%@",mContentStr);
     NSData *data = [Util strToData:mContentStr];
     [request appendPostData:data];
     [request setRequestMethod:@"POST"];
@@ -741,8 +746,16 @@ static HttpService *httpServiceInstance = nil;
     return request;
 }
 
-
-
+#pragma mark - 获取服务器时间
+-(AsyncHttpRequest *)getRequestGetTime:(id<AsyncHttpRequestDelegate>)delegate{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@/now",SERVICE_HOME];
+    AsyncHttpRequest *request = [[AsyncHttpRequest alloc]initWithServiceAPI:urlStr
+                                                                     target:delegate
+                                                                       type:HttpRequestType_XT_TIME];
+    
+    [request setRequestMethod:@"GET"];
+    return request;
+}
 
 
 

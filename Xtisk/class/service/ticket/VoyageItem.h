@@ -34,4 +34,6 @@
 -(void)clearData;
 
 +(NSArray *)getVoyageItemsWithArr:(NSArray *)arr;
+
++(int)compare:(VoyageItem *)fitem sitem:(VoyageItem *)sitem;
 @end

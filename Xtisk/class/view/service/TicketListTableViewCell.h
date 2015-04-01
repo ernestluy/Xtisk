@@ -13,9 +13,18 @@
     
 }
 @property(nonatomic,weak)IBOutlet UILabel *labSailTime;
-@property(nonatomic,weak)IBOutlet UILabel *labPtwy;
-@property(nonatomic,weak)IBOutlet UILabel *labTdwy;
-@property(nonatomic,weak)IBOutlet UILabel *labHhwy;
+
+@property(nonatomic,weak)IBOutlet UILabel *lab0Titel;
+@property(nonatomic,weak)IBOutlet UILabel *lab0Num;
+
+@property(nonatomic,weak)IBOutlet UILabel *lab1Titel;
+@property(nonatomic,weak)IBOutlet UILabel *lab1Num;
+
+@property(nonatomic,weak)IBOutlet UILabel *lab2Titel;
+@property(nonatomic,weak)IBOutlet UILabel *lab2Num;
+
+@property(nonatomic,weak)IBOutlet UILabel *lab3Titel;
+@property(nonatomic,weak)IBOutlet UILabel *lab3Num;
 
 
 -(void)setData:(VoyageItem*)item;

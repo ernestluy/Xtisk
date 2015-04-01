@@ -41,6 +41,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgHeader" destination="ku1-cQ-37P" id="jm0-6d-3Q8"/>
                 <outlet property="labContent" destination="r5G-0U-AQY" id="MaB-gE-Vmt"/>
                 <outlet property="labName" destination="aBL-YU-eSI" id="Ltx-DG-tsi"/>
                 <outlet property="labTime" destination="jtv-Cf-k4p" id="yb1-QL-AWy"/>

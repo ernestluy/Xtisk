@@ -15,5 +15,7 @@
 @property(nonatomic,weak)IBOutlet UILabel *labTitle;
 @property(nonatomic,weak)IBOutlet UILabel *labTime;
 
+@property(nonatomic,weak)IBOutlet UILabel *labStatus;
+
 -(void)setData:(ActivityItem *)item;
 @end

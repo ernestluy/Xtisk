@@ -142,9 +142,9 @@
     [super viewWillAppear:animated];
     if (TICKET_QUERY_RETURN == [TicketSerivice sharedInstance].ticketQueryType) {
         if (TicketVoyageStepFirst == tStep) {
-            self.title = @"航班信息-起航";
+            self.title = @"航班信息-启程";
         }else if(TicketVoyageStepSecond == tStep){
-            self.title = @"航班信息-返航";
+            self.title = @"航班信息-返程";
         }
         
     }else if (TICKET_QUERY_ONE == [TicketSerivice sharedInstance].ticketQueryType){
@@ -278,6 +278,21 @@
     NSLog(@"didSelect");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     VoyageItem *item = [voyageLines objectAtIndex:indexPath.row];
+    
+    if (self.tStep == TicketVoyageStepSecond) {
+        //‘返程票时间不能早于启程票’
+        VoyageItem *originItem = [TicketSerivice sharedInstance].toVoyageItem;
+        NSComparisonResult r = [VoyageItem compare:originItem sitem:item];
+        if (NSOrderedDescending == r) {
+            //前往时间较大，要修改返程时间
+            [SVProgressHUD showErrorWithStatus:@"返程票时间不能早于启程票" duration:2];
+            return;
+        }else if (NSOrderedAscending == r){
+            //时间顺序对，不做修改
+        }
+    }
+    
+    
     [item clearData];
     TicketVoyageEditViewController *tvv = [[TicketVoyageEditViewController alloc] init];
     tvv.tStep = self.tStep;

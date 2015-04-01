@@ -33,31 +33,31 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q43-hj-Zkp">
-                        <rect key="frame" x="65" y="25" width="42" height="21"/>
+                        <rect key="frame" x="62" y="25" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="头等位余:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXx-Kd-GVI">
-                        <rect key="frame" x="93" y="25" width="61" height="21"/>
+                        <rect key="frame" x="87" y="25" width="61" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMy-b1-w1f">
-                        <rect key="frame" x="148" y="25" width="42" height="21"/>
+                        <rect key="frame" x="139" y="25" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="特等位余:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKG-l9-c3s">
-                        <rect key="frame" x="176" y="25" width="58" height="21"/>
+                        <rect key="frame" x="165" y="25" width="58" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbl-zx-C5y">
-                        <rect key="frame" x="229" y="25" width="42" height="21"/>
+                        <rect key="frame" x="218" y="26" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -66,20 +66,37 @@
                         <rect key="frame" x="0.0" y="49" width="320" height="1"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开始预订" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VM-bv-OJy">
-                        <rect key="frame" x="251" y="14" width="69" height="21"/>
+                        <rect key="frame" x="251" y="4" width="69" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="特等位余:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGH-4f-Bcc">
+                        <rect key="frame" x="242" y="25" width="58" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="259-yj-ZKQ">
+                        <rect key="frame" x="294" y="25" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="labHhwy" destination="Qbl-zx-C5y" id="f6h-yx-tWQ"/>
-                <outlet property="labPtwy" destination="q43-hj-Zkp" id="OdF-bQ-uxB"/>
+                <outlet property="lab0Num" destination="q43-hj-Zkp" id="CTE-aW-dIO"/>
+                <outlet property="lab0Titel" destination="21i-Rf-gDz" id="bGA-Ig-xsn"/>
+                <outlet property="lab1Num" destination="kMy-b1-w1f" id="5pD-4h-4s7"/>
+                <outlet property="lab1Titel" destination="UXx-Kd-GVI" id="swE-qw-gd7"/>
+                <outlet property="lab2Num" destination="Qbl-zx-C5y" id="Pe5-O9-hKF"/>
+                <outlet property="lab2Titel" destination="jKG-l9-c3s" id="uIN-3R-OI7"/>
+                <outlet property="lab3Num" destination="259-yj-ZKQ" id="PfV-Ma-Nsx"/>
+                <outlet property="lab3Titel" destination="fGH-4f-Bcc" id="1aj-aj-Tp7"/>
                 <outlet property="labSailTime" destination="Tl2-ns-R8q" id="MXE-aa-waa"/>
-                <outlet property="labTdwy" destination="kMy-b1-w1f" id="EqU-vM-cQY"/>
             </connections>
-            <point key="canvasLocation" x="193.5" y="286"/>
+            <point key="canvasLocation" x="193.5" y="285"/>
         </tableViewCell>
     </objects>
     <resources>

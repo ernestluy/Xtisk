@@ -27,12 +27,24 @@
     NSArray *tRecommendList;
     
     NSMutableArray *tmpMarr;
+    
+    NSTimer *timerRequestTime;
 }
 
 
 @end
 
 @implementation IndexTabViewController
+
+
+-(void)dealloc{
+    if (timerRequestTime) {
+        if ([timerRequestTime isValid]) {
+            [timerRequestTime invalidate];
+            timerRequestTime = nil;
+        }
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +92,7 @@
     UIView *fourView = [[UIView alloc]initWithFrame:CGRectMake(0, nY, rect.size.width, fH)];
     fourView.backgroundColor = [UIColor whiteColor];
     NSArray *btnImgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_car_pool",@"service_icon_park_activity"];
-    NSArray *btnTitle = @[@"船票",@"周 边",@"拼 车",@"园区活动"];
+    NSArray *btnTitle = @[@"船 票",@"周 边",@"小猪巴士",@"园区活动"];
     
 
     
@@ -146,6 +158,8 @@
 //    [self.view addSubview:sc];
 //    [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
 //    [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
+    
+    timerRequestTime = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(requestServerTime) userInfo:nil repeats:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -161,6 +175,11 @@
         [tLyCollectionView upToStartFlush];
     }
 //    [[MsgPlaySound sharedInstance] playAll];
+}
+
+-(void)requestServerTime{
+    NSLog(@"请求系统时间");
+    [[[HttpService sharedInstance] getRequestGetTime:self]startAsynchronous];
 }
 
 
@@ -186,6 +205,10 @@
         case 0:{
 //            FoodDetailViewController *fc = [[FoodDetailViewController alloc]init];
 //            [self.navigationController pushViewController:fc animated:YES];
+            if (!authorityTicket) {
+                [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
+                return;
+            }
             TicketQueryViewController *tqv = [[TicketQueryViewController alloc] init];
             [self.navigationController pushViewController:tqv animated:YES];
             
@@ -201,7 +224,7 @@
         case 2:{
 //            XT_SHOWALERT(@"该功能暂不开放");
 //            [SVProgressHUD showWithStatus:@"该功能暂不开放"];
-            [SVProgressHUD showErrorWithStatus:@"即将上线，敬请期待！" duration:1.5];
+            [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
             
             break;
         }
@@ -237,10 +260,18 @@
     
     [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
 }
+- (void)flushUpEnd:(NSObject *)ly{
+    
+}
+
 - (void)startToFlushDown:(NSObject *)ly{
     [[[HttpService sharedInstance] getRequestPosterList:self] startAsynchronous];
     
     [[[HttpService sharedInstance] getRequestRecomList:self] startAsynchronous];
+}
+
+- (void)flushDownEnd:(NSObject *)ly{
+    
 }
 #pragma mark - GridMainViewDelegate
 - (void)gridMainView:(GridMainView *)mainView{
@@ -318,6 +349,22 @@
                 //XT_SHOWALERT(@"请求失败");
             }
             [tLyCollectionView flushDoneStatus:NO];
+        }
+        case HttpRequestType_XT_TIME:{
+            if ( HttpResponseTypeFinished == responseCode) {
+                BaseResponse *br = [[HttpService sharedInstance] dealResponseData:request.receviedData];
+                if (ResponseCodeSuccess == br.code) {
+                    NSLog(@"请求成功");
+                    //{"code":0,"msg":"","data":{"timestamp":1427432959689,"format":"2015-03-27 13:09:19"}}
+                    NSDictionary *dic = (NSDictionary *)br.data;
+                    if (dic) {
+                        [SettingService sharedInstance].strTime = [dic objectForKey:@"format"];
+                    }
+                    
+                }
+            }else{
+                
+            }
         }
         default:
             break;

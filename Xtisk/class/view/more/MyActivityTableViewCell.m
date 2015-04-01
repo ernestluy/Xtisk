@@ -42,20 +42,35 @@
     mAc = ac;
     self.labTitle.text = ac.activityTitle;
     NSString *str1 = @"";
+    NSString *str2 = @"";
     if (ac.joinDate.length>16) {
         str1 = [ac.joinDate substringToIndex:iMinIndex];
     }else{
         str1 = ac.joinDate;
     }
-    self.labSignUpTime.text = [NSString stringWithFormat:@"活动时间:%@",str1];
+    if (ac.activityBeginJoinTime.length>16) {
+        str1 = [ac.activityBeginJoinTime substringToIndex:iMinIndex];
+    }else{
+        str1 = ac.activityBeginJoinTime;
+    }
+    
+    
+    if (ac.activityEndJoinTime.length>16) {
+        str2 = [ac.activityEndJoinTime substringToIndex:iMinIndex];
+    }else{
+        str2 = ac.activityEndJoinTime;
+    }
+    
+    self.labSignUpTime.text = [NSString stringWithFormat:@"报名时间:%@ 至 %@",str1,str2];
     str1 = @"";
+    
     if (ac.activityBeginTime.length>16) {
         str1 = [ac.activityBeginTime substringToIndex:iMinIndex];
     }else{
         str1 = ac.activityBeginTime;
     }
     
-    NSString *str2 = @"";
+    
     if (ac.activityEndTime.length>16) {
         str2 = [ac.activityEndTime substringToIndex:iMinIndex];
     }else{

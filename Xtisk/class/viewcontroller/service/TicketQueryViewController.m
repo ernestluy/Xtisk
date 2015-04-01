@@ -475,7 +475,7 @@
             labelStartTime = [[UILabel alloc]initWithFrame:tRect];
             labelStartTime.textAlignment = NSTextAlignmentLeft;
             labelStartTime.textColor = defaultTextColor;
-            labelStartTime.text = [queryDateFormatter stringFromDate:[NSDate date]];
+            labelStartTime.text = [queryDateFormatter stringFromDate:[TicketSerivice sharedInstance].tMinDate];
             [cell addSubview:labelStartTime];
         }else if(1 == indexPath.section && 0 == indexPath.row){
             CGRect tRect = CGRectMake(20, 0, 200, TQV_HEIGHT);
@@ -483,7 +483,7 @@
             labelEndTime.textAlignment = NSTextAlignmentLeft;
             labelEndTime.textColor = defaultTextColor;
 //            UIFont *font = cell.textLabel.font;
-            labelEndTime.text = [queryDateFormatter stringFromDate:[NSDate date]];
+            labelEndTime.text = [queryDateFormatter stringFromDate:[TicketSerivice sharedInstance].tMinDate];
             [cell addSubview:labelEndTime];
         }
     }

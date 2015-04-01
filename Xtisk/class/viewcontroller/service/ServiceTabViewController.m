@@ -25,8 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     CGRect mRect = [UIScreen mainScreen].bounds;
-    NSArray *nameArr = @[@"船 票",@"周 边",@"园区活动"];
-    NSArray *imgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_park_activity"];
+    NSArray *nameArr = @[@"船 票",@"周 边",@"园区活动",@"小猪巴士"];
+    NSArray *imgArr = @[@"service_icon_ticket",@"service_icon_near",@"service_icon_park_activity",@"service_icon_car_pool"];
     
     NSMutableArray *mArr = [NSMutableArray array];
     for (int i = 0; i<nameArr.count; i++) {
@@ -53,6 +53,10 @@
     int tTag = (int)mView.tIndexPath.row;
     switch (tTag) {
         case XtServiceTicket:{
+            if (!authorityTicket) {
+                [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
+                return;
+            }
             [self.navigationController pushViewController:[[TicketQueryViewController alloc]init] animated:YES];
             break;
         }
@@ -67,8 +71,10 @@
             [self.navigationController pushViewController:ac animated:YES];
             break;
         }
-        default:
+        default:{
+            [SVProgressHUD showSuccessWithStatus:@"即将上线，敬请期待！" duration:2];
             break;
+        }
     }
     
 }
